@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon app.js",
-    "tailwind:css": "postcss styles/tailwind.css -o styles/global.css -w"
+    "tailwind:css": "postcss static/css/tailwind.css -o static/css/global.css -w"
   },
   "keywords": [],
   "author": "",

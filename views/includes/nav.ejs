@@ -1,3 +1,26 @@
+<% const nav = [
+    {
+        hash : '/',
+        name : 'Home'
+    },
+    {
+        hash : '/products',
+        name : 'Products'
+    },
+    {
+        hash : '/cart',
+        name : 'Cart'
+    },
+    {
+        hash : '/admin/product',
+        name : 'Add products'
+    },
+    {
+        hash : '/admin/add-product',
+        name : 'Admin products'
+    }
+] %>
+
 <header class="w-full shadow-lg bg-white dark:bg-gray-700 bg-purple-700 items-center h-16 rounded-2xl z-40">
     <div class="relative z-20 flex flex-col justify-center h-full px-3 mx-auto flex-center">
         <div class="relative items-center pl-1 flex w-full lg:max-w-68 sm:pr-2 sm:ml-0">
@@ -20,9 +43,9 @@
                     </div>
                 </div>
                 <div class="relative p-1 flex items-center justify-end w-1/4 ml-5 mr-4 sm:mr-0 sm:right-auto">
-                    <a href="#" class="block relative">
-                        <img alt="profil" src="https://images.pexels.com/photos/4336096/pexels-photo-4336096.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="mx-auto object-cover rounded-full h-10 w-10 ">
-                    </a>
+                    <% nav.forEach(route => { %>
+                        <a class="block mr-4 w-max font-bold <%= path === route.hash ? 'text-green-300' : 'text-white' %>" href="<%= route.hash %>"><%= route.name %></a>
+                    <% }) %>
                 </div>
             </div>
         </div>
