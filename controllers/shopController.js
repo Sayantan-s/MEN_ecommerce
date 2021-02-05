@@ -1,8 +1,12 @@
+const Product = require("../model/product");
+
 exports.getHome = ((req,res) => {
+    console.log(Product.fetchproducts());
     res
     .status(200)
-    .render('index',{
+    .render('shop/index',{
         title : 'Home',
-        path: req._parsedOriginalUrl.path
+        path: req._parsedOriginalUrl.path,
+        itemData : Product.fetchproducts()
     })
 })
