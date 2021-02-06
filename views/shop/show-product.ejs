@@ -5,29 +5,38 @@
         <% if(itemData.length > 0) {%>
             <div>
                 <% itemData.forEach(item => { %>
-                    <div class="shadow-lg rounded-2xl  bg-white w-64 m-auto p-2">
-                        <div class="relative overflow-hidden w-full p-4 h-36 m-auto transform scale-75">
-                            <img src="<%= item.image %>" alt="adidas" class="w-full h-full object-cover absolute top-0 left-0">
-                        </div>
-                        <div class="bg-yellow-200 m-3 p-4 rounded-lg">
-                            <p class="text-white text-xl font-bold ">
-                                <%= item.name %> 
-                            </p>
+                    <div class="shadow-md rounded-2xl bg-white w-96 h-auto m-auto px-4 py-3 flex flex-col">
+                       <div class="relative overflow-hidden w-full h-56 transform scale-75">
+                            <img 
+                            class="absolute top-0 left-0 w-full h-full object-cover"
+                            src="<%= item.image %>" 
+                            alt="<%= item.name %>">
+                       </div>
+                       <div class="p-2 bg-orange-light rounded-2xl">
+                            <h1 class="text-white font-bold">
+                                <%= item.name %>
+                            </h1> 
                             <p class="text-gray-50 text-xs">
                                 <%= item.des %>
                             </p>
-                            <div class="flex items-center justify-between ">
-                                <p class="text-white">
-                                    <%= item.price %>
-                                </p>
-                                <button type="button" class="w-10 h-10 text-base font-medium rounded-full text-white bg-black hover:bg-gray-700">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="mx-auto" fill="white" viewBox="0 0 1792 1792">
-                                        <path d="M1600 736v192q0 40-28 68t-68 28h-416v416q0 40-28 68t-68 28h-192q-40 0-68-28t-28-68v-416h-416q-40 0-68-28t-28-68v-192q0-40 28-68t68-28h416v-416q0-40 28-68t68-28h192q40 0 68 28t28 68v416h416q40 0 68 28t28 68z">
-                                        </path>
-                                    </svg>
-                                </button>
+                            <div class="flex justify-between items-end mt-4 font-extrabold">
+                                <h2>
+                                    &#x20B9; <%= item.price %>
+                                </h2>
+                                <div class="flex gap-1">
+                                    <a href="/product/<%= item.id %>" class="no-underline">
+                                        <button class="rounded-xl bg-black text-white py-2 px-4 text-xs font-bold">
+                                            Details
+                                        </button>
+                                   </a>
+                                   <a href="/product/<%= item.id %>" class="no-underline">
+                                        <button class="rounded-xl bg-black text-white py-2 px-4 text-xs font-bold">
+                                            Add to cart
+                                        </button>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
+                       </div>
                     </div>
                 <% }) %>
             </div>

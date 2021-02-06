@@ -1,14 +1,18 @@
 const express = require('express');
-const { getHome } = require('../controllers/shopController');
+const { getHome, getShopProducts, getOrders,getShopCart, getProductByID } = require('../controllers/shopController');
 
 const router = express.Router();
 
 
 router.get('/', getHome);
 
-router.get('/show-products');
+router.get('/products',getShopProducts);
 
-router.get('/cart');
+router.get('/product/:id',getProductByID);
+
+router.get('/cart',getShopCart);
+
+router.get('/order',getOrders);
 
 router.get('/checkout');
 

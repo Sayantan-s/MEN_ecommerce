@@ -1,12 +1,15 @@
-const colors = require('tailwindcss/colors')
-
+const { colors: defaultColors } = require('tailwindcss/defaultTheme')
 module.exports = {
   theme: {
     colors: {
-      gray: colors.coolGray,
-      blue: colors.lightBlue,
-      red: colors.rose,
-      pink: colors.fuchsia,
+      ...defaultColors,
+      transparent: 'transparent',
+      current: 'currentColor',
+      orange: {
+        light: '#F7CA7C',
+        med: '#F7A63E',
+        dark: '#F78D2C',
+      }
     },
     fontFamily: {
       sans: ['Graphik', 'sans-serif'],

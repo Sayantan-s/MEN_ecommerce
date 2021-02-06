@@ -1,3 +1,5 @@
+const EventEmitter = require('events');
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -10,7 +12,6 @@ const shop = require('./routes/shop');
 const admin = require('./routes/admin');
 const { error } = require('./controllers/errorController');
 
-
 const responseText = 'Hello I am listening';
 const PORT  = 3000;
 
@@ -21,6 +22,9 @@ app.set('view engine','ejs')
 app.use(bodyParser.urlencoded({ extended  : true }));
 app.use(express.static('static'));
 
+const Emitters = new EventEmitter();
+
+Emitters.setMaxListeners(100);
 
 app.use(shop);
 app.use('/admin',admin);

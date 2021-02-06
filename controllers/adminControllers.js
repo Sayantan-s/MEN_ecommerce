@@ -23,6 +23,5 @@ exports.postAdminProducts = ((req,res) => {
     const { item,price,img,desc } = req.body;
     const productItem = new Product(item,price,img,desc);
     productItem.save();
-    console.log(req.body);
     res.redirect('/'); 
 })
