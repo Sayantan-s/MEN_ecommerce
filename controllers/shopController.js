@@ -1,35 +1,50 @@
 const Product = require("../model/product");
 
 exports.getHome = ((req,res) => {
-    res
+    Product.fetchproducts(product => {
+        console.log(product)
+        res
+        .status(200)
+        .render('shop/index',{
+            title : 'Home',
+            path: req._parsedOriginalUrl.path,
+            itemData : product
+        })
+    })
+    /*res
     .status(200)
     .render('shop/index',{
         title : 'Home',
         path: req._parsedOriginalUrl.path,
         itemData : Product.fetchproducts()
-    })
+    })*/
 })
 
 
 
 exports.getShopProducts = ((req,res) => {
-    res
-    .status(200)
-    .render('shop/show-product',{
-        title : 'Products',
-        path: req._parsedOriginalUrl.path,
-        itemData : Product.fetchproducts()
+    Product.fetchproducts(product => {
+        res
+        .status(200)
+        .render('shop/show-product',{
+            title : 'Products',
+            path: req._parsedOriginalUrl.path,
+            itemData : product
+        })
     })
 })
 
 exports.getProductByID = ((req,res,next) => {
-    console.log(req.params.id);
-    res
-    .status(200)
-    .render('shop/product/each',{
-        title : 'IDproduct',
-        path : req._parsedOriginalUrl.path,
-        pageID : req.params.id
+    const id = req.params.id;
+    Product.findProductByID(id,item => {
+        res
+        .status(200)
+        .render('shop/product/each',{
+            title : `Product | ${id}`,
+            path : '/products',
+            pageID : id,
+            item
+        })
     })
 })
 

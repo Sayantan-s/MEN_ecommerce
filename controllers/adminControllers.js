@@ -10,12 +10,14 @@ exports.getAdminProducts = ((req,res) => {
 })
 
 exports.getAdminShowProducts = ((req,res) => {
-    res
-    .status(200)
-    .render('admin/show-product',{
-        title : 'Admin | product',
-        path :  req._parsedOriginalUrl.path,
-        itemData : Product.fetchproducts()
+    Product.fetchproducts(product => {
+        res
+        .status(200)
+        .render('admin/show-product',{
+            title : 'Admin | product',
+            path :  req._parsedOriginalUrl.path,
+            itemData : product
+        })
     })
 })
 
