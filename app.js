@@ -7,13 +7,22 @@ const path = require('path');
 
 const app = express();
 
-
+const db = require('./db/db');
 const shop = require('./routes/shop');
 const admin = require('./routes/admin');
 const { error } = require('./controllers/errorController');
 
 const responseText = 'Hello I am listening';
 const PORT  = 3000;
+
+db
+.execute('SELECT * FROM products')
+.then(res => {
+    console.log(res)
+})
+.catch(err => {
+    console.log(err);
+});
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine','ejs')
