@@ -3,9 +3,28 @@ const Product = require("../model/product");
 exports.getAdminProducts = ((req,res) => {
     res
     .status(200)
-    .render('admin/add-product',{
+    .render('admin/edit-product',{
         title : 'Admin | product',
         path :  req._parsedOriginalUrl.path,
+        edit : false
+    })
+})
+
+exports.getEditProducts = ((req,res) => {
+    const editMode = req.query.edit
+    const id = req.params.productID
+    if(!editMode){
+        return res.redirect('/');
+    }
+    Product.findProductByID(id,data => {
+        res
+        .status(200)
+        .render('admin/edit-product',{
+            title : 'Admin | UpdateProduct',
+            path :  '/admin/edit-product',
+            edit : editMode,
+            data
+        })
     })
 })
 
@@ -20,6 +39,8 @@ exports.getAdminShowProducts = ((req,res) => {
         })
     })
 })
+
+
 
 exports.postAdminProducts = ((req,res) => {
     const { item,price,img,desc } = req.body;

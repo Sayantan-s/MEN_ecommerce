@@ -1,14 +1,14 @@
-FROM node:14
+FROM node:latest
 
 WORKDIR /app
 
-COPY package.json /app
+COPY package.json .
 
 RUN npm i 
 
-COPY . /app
+COPY . .
 
-EXPOSE 3000
+EXPOSE 5000
 
 CMD ["npm","start"]
 

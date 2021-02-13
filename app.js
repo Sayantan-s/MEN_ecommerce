@@ -1,8 +1,9 @@
 const EventEmitter = require('events');
+const path = require('path');
+
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const path = require('path');
 
 
 const app = express();
@@ -13,7 +14,7 @@ const admin = require('./routes/admin');
 const { error } = require('./controllers/errorController');
 
 const responseText = 'Hello I am listening';
-const PORT  = 3000;
+const PORT  = 5000;
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine','ejs')

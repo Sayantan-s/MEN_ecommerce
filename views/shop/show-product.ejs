@@ -29,11 +29,12 @@
                                             Details
                                         </button>
                                    </a>
-                                   <a href="/products/<%= item.id %>" class="no-underline">
+                                   <form method="POST" action="/cart" >
                                         <button class="rounded-xl bg-black text-white py-2 px-4 text-xs font-bold">
                                             Add to cart
                                         </button>
-                                    </a>
+                                        <input type="hidden" name="productID" value="<%= item.id %>">
+                                    </form>
                                 </div>
                             </div>
                        </div>

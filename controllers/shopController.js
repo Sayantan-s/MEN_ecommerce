@@ -1,3 +1,4 @@
+const Cart = require("../model/cart");
 const Product = require("../model/product");
 
 exports.getHome = ((req,res) => {
@@ -11,13 +12,6 @@ exports.getHome = ((req,res) => {
             itemData : product
         })
     })
-    /*res
-    .status(200)
-    .render('shop/index',{
-        title : 'Home',
-        path: req._parsedOriginalUrl.path,
-        itemData : Product.fetchproducts()
-    })*/
 })
 
 
@@ -65,3 +59,11 @@ exports.getShopCart = ((req,res) => {
         path: req._parsedOriginalUrl.path,
     })
 })
+
+exports.postProductInCart = (req,res) => {
+    const { productID } = req.body;
+    Product.findProductByID(productID,product => {
+        Cart.addToCart(productID,product.price)
+    })
+    res.redirect('/cart');
+} 

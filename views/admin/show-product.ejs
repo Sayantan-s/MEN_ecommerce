@@ -14,7 +14,7 @@
                        </div>
                        <div class="p-2 bg-orange-light rounded-2xl">
                             <h1 class="text-white font-bold">
-                                <%= item.name %>
+                                <%= item.name %> <%= item.id %>
                             </h1> 
                             <p class="text-gray-50 text-xs">
                                 <%= item.des %>
@@ -29,7 +29,7 @@
                                             Details
                                         </button>
                                    </a>
-                                   <a href="/products/<%= item.id %>" class="no-underline">
+                                   <a href="/admin/edit-product/<%= item.id %>?edit=true" class="no-underline">
                                         <button class="rounded-xl bg-black text-white py-2 px-4 text-xs font-bold">
                                             Edit Products
                                         </button>
