@@ -28,6 +28,18 @@ exports.getEditProducts = ((req,res) => {
     })
 })
 
+exports.postEditProducts = (req,res) => {
+    const { item,price,img,desc,productID } = req.body;
+    const updatedProduct = new Product(item,price,img,desc,productID);
+    updatedProduct.save();
+    res.redirect('/admin/show-product');
+}
+
+exports.postDeleteProducts = (req,res) => {
+    console.log(req.body);
+    res.redirect('/admin/show-product');
+}
+
 exports.getAdminShowProducts = ((req,res) => {
     Product.fetchproducts(product => {
         res
@@ -44,7 +56,7 @@ exports.getAdminShowProducts = ((req,res) => {
 
 exports.postAdminProducts = ((req,res) => {
     const { item,price,img,desc } = req.body;
-    const productItem = new Product(item,price,img,desc);
+    const productItem = new Product(item,price,img,desc,null);
     productItem.save();
-    res.redirect('/'); 
+    res.redirect('/admin/show-product'); 
 })
