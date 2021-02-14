@@ -50,8 +50,6 @@ module.exports = class Product {
         })
     }
 
-    
-
     static fetchproducts(callback){
        getproductsfromFile(callback);
     }
@@ -61,6 +59,16 @@ module.exports = class Product {
             const product = products.find(prod => prod.id.toString() === id);
             console.log(product)
             callback(product); 
+        })
+    }
+
+    static delete(id){
+        getproductsfromFile(products => {
+            let updatedProducts = [...products]
+            updatedProducts = updatedProducts.filter(product => product.id != id);
+            fs.writeFile(file,JSON.stringify(updatedProducts),err => {
+                if (!err) console.log(`product->${id} successfully deleted!`) 
+            })
         })
     }
 }
