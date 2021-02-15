@@ -4,6 +4,7 @@
 
 const path = require('path')
 const fs  = require('fs');
+const Cart = require('./cart');
 
 const file = path.join(path.dirname(process.mainModule.filename),'db','cdb.json');
 
@@ -65,9 +66,12 @@ module.exports = class Product {
     static delete(id){
         getproductsfromFile(products => {
             let updatedProducts = [...products]
+            const delProduct = products.find(prod => prod.id == id)
             updatedProducts = updatedProducts.filter(product => product.id != id);
             fs.writeFile(file,JSON.stringify(updatedProducts),err => {
-                if (!err) console.log(`product->${id} successfully deleted!`) 
+                if (!err){
+                    Cart.deleteProduct(id,delProduct.price)
+                }
             })
         })
     }
