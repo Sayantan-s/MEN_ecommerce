@@ -1,15 +1,32 @@
 const Cart = require("../model/cart");
 const Product = require("../model/product");
 
+const mysql = require("mysql");
+
+const db = mysql.createPool({
+    host : 'localhost',
+    user : 'root',
+    database : 'node-ecom-sql',
+    password : ''
+})
+
 exports.getHome = ((req,res) => {
-    Product.fetchproducts(product => {
-        res
-        .status(200)
-        .render('shop/index',{
-            title : 'Home',
-            path: req._parsedOriginalUrl.path,
-            itemData : product
-        })
+    const SqlQuery = `INSERT INTO products (title,price,description,img) VALUES ('Lotto','5200','Wear the new venom','/images/image.png');`
+    db.query(SqlQuery,(err,data) => {
+        if(err){
+            console.log(err);
+        }
+        else{
+            Product.fetchproducts(product => {
+                res
+                .status(200)
+                .render('shop/index',{
+                    title : 'Home',
+                    path: req._parsedOriginalUrl.path,
+                    itemData : product
+                })
+            })
+        }
     })
 })
 
