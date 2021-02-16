@@ -57,7 +57,12 @@ module.exports = class Cart {
         })
     }
 
-    static fetchProductsInCart(){
-
+    static getProductsInCart(callback){
+        fs.readFile(filePath,(err,cartData) => {
+            if(err){
+                return callback(null)
+            }
+            return callback(JSON.parse(cartData));
+        })
     }
 }
