@@ -5,6 +5,7 @@
 const path = require('path')
 const fs  = require('fs');
 const Cart = require('./cart');
+const db = require('../db/connectToDB');
 
 const file = path.join(path.dirname(process.mainModule.filename),'db','cdb.json');
 
@@ -28,39 +29,24 @@ module.exports = class Product {
     }
 
     save(){
-        getproductsfromFile(products => {
-            if(this.id){
-                const existingProductIndex = products.findIndex(prod => prod.id == this.id);
-                const updatedProducts = [...products];
-                updatedProducts[existingProductIndex] = this;
-                fs.writeFile(file,JSON.stringify(updatedProducts),err => {
-                    if(!err){
-                        console.log("No error in updating!");
-                    }
-                    else console.log(err);
-                })
-            }
-            else{
-                this.id = ~~(Math.random()*2000);
-                products.push(this);
-                console.log(products);
-                fs.writeFile(file,JSON.stringify(products),err => {
-                    console.log(err);
-                })
-            }
-        })
+       const insertQuery = `INSERT INTO products (title,price,description,img) VALUES (?,?,?,?)`;
+       return db.execute(insertQuery,[this.name,this.price,this.des,this.image]);
     }
 
-    static fetchproducts(callback){
-       getproductsfromFile(callback);
+    static fetchproducts(){
+      // getproductsfromFile(callback);
+      const fetchQuery = `SELECT * FROM products`
+      return db.execute(fetchQuery);
     }
 
-    static findProductByID(id,callback){
-        getproductsfromFile(products => {
+    static findProductByID(id){
+       /*getproductsfromFile(products => {
             const product = products.find(prod => prod.id.toString() === id);
             console.log(product)
             callback(product); 
-        })
+        })*/
+        const queryByID = `SELECT * FROM products WHERE products.id = ?`
+        return db.execute(queryByID,[id])
     }
 
     static delete(id){

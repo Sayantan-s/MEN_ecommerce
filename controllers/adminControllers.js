@@ -59,6 +59,8 @@ exports.getAdminShowProducts = ((req,res) => {
 exports.postAdminProducts = ((req,res) => {
     const { item,price,img,desc } = req.body;
     const productItem = new Product(item,price,img,desc,null);
-    productItem.save();
-    res.redirect('/admin/show-product'); 
+    productItem
+    .save()
+    .then(_ => res.redirect('/'))
+    .catch(err => console.log(err));
 })

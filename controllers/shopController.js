@@ -1,59 +1,48 @@
 const Cart = require("../model/cart");
 const Product = require("../model/product");
 
-const mysql = require("mysql");
-
-const db = mysql.createPool({
-    host : 'localhost',
-    user : 'root',
-    database : 'node-ecom-sql',
-    password : ''
-})
-
 exports.getHome = ((req,res) => {
-    const SqlQuery = `INSERT INTO products (title,price,description,img) VALUES ('Lotto','5200','Wear the new venom','/images/image.png');`
-    db.query(SqlQuery,(err,data) => {
-        if(err){
-            console.log(err);
-        }
-        else{
-            Product.fetchproducts(product => {
-                res
-                .status(200)
-                .render('shop/index',{
-                    title : 'Home',
-                    path: req._parsedOriginalUrl.path,
-                    itemData : product
-                })
-            })
-        }
+    Product.fetchproducts()
+    .then(([data]) => {
+        res
+        .status(200)
+        .render('shop/index',{
+            title : 'Home',
+            path: req._parsedOriginalUrl.path,
+            itemData : data
+        })
     })
+    .catch(err => console.log(err))
 })
 
 
 
 exports.getShopProducts = ((req,res) => {
-    Product.fetchproducts(product => {
+    Product.fetchproducts()
+    .then(([data]) => {
         res
         .status(200)
         .render('shop/show-product',{
             title : 'Products',
             path: req._parsedOriginalUrl.path,
-            itemData : product
+            itemData : data
         })
     })
+    .catch(err => console.log(err));
 })
 
 exports.getProductByID = ((req,res,next) => {
-    const id = req.params.id;
-    Product.findProductByID(id,item => {
+    const { id } = req.params;
+    Product.findProductByID(id)
+    .then(([[product]]) => {
+        console.log(product)
         res
         .status(200)
         .render('shop/product/each',{
             title : `Product | ${id}`,
             path : '/products',
             pageID : id,
-            item
+            item : product
         })
     })
 })
