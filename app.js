@@ -11,6 +11,7 @@ const app = express();
 const shop = require('./routes/shop');
 const admin = require('./routes/admin');
 const { error } = require('./controllers/errorController');
+const ProductModel = require('./sql/models/product.model');
 
 const responseText = 'Hello I am listening';
 const PORT  = 5000;
@@ -30,7 +31,11 @@ app.use(shop);
 app.use('/admin',admin);
 app.use(error)
 
-
-app.listen(PORT,(req,res) => {
-    console.log(responseText);
-});
+ProductModel
+.sync()
+.then(res => {
+    app.listen(PORT,(req,res) => {
+        console.log(responseText);
+    });
+})
+.catch(err => console.log(err))

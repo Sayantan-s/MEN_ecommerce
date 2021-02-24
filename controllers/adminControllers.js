@@ -1,4 +1,5 @@
 const Product = require("../model/product");
+const ProductModel = require("../sql/models/product.model");
 
 exports.getAdminProducts = ((req,res) => {
     res
@@ -43,15 +44,18 @@ exports.postDeleteProducts = (req,res) => {
 }
 
 exports.getAdminShowProducts = ((req,res) => {
-    Product.fetchproducts(product => {
+    ProductModel
+    .findAll()
+    .then(products => {
         res
         .status(200)
         .render('admin/show-product',{
             title : 'Admin | product',
             path :  req._parsedOriginalUrl.path,
-            itemData : product
+            itemData : products
         })
     })
+    .catch(err => console.log(err))
 })
 
 

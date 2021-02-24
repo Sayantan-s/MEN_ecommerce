@@ -5,7 +5,7 @@
 const path = require('path')
 const fs  = require('fs');
 const Cart = require('./cart');
-const db = require('../db/connectToDB');
+const ProductModel = require('../sql/models/product.model');
 
 const file = path.join(path.dirname(process.mainModule.filename),'db','cdb.json');
 
@@ -29,14 +29,15 @@ module.exports = class Product {
     }
 
     save(){
-       const insertQuery = `INSERT INTO products (title,price,description,img) VALUES (?,?,?,?)`;
-       return db.execute(insertQuery,[this.name,this.price,this.des,this.image]);
+       /*const insertQuery = `INSERT INTO products (title,price,description,img) VALUES (?,?,?,?)`;
+       return db.execute(insertQuery,[this.name,this.price,this.des,this.image]);*/
     }
 
     static fetchproducts(){
-      // getproductsfromFile(callback);
+      /*getproductsfromFile(callback);
       const fetchQuery = `SELECT * FROM products`
-      return db.execute(fetchQuery);
+      return db.execute(fetchQuery);*/
+    
     }
 
     static findProductByID(id){
@@ -45,8 +46,8 @@ module.exports = class Product {
             console.log(product)
             callback(product); 
         })*/
-        const queryByID = `SELECT * FROM products WHERE products.id = ?`
-        return db.execute(queryByID,[id])
+        /*const queryByID = `SELECT * FROM products WHERE products.id = ?`
+        return db.execute(queryByID,[id])*/
     }
 
     static delete(id){

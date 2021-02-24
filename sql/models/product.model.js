@@ -3,7 +3,7 @@ const sequelize = require('../connectDB');
 
 const ProductModel = sequelize.define('product',{
     id : {
-        type : Sequelize.STRING,
+        type : Sequelize.INTEGER,
         autoIncrement : true,
         unique : true,
         allowNull : false,
@@ -21,7 +21,7 @@ const ProductModel = sequelize.define('product',{
         type : Sequelize.DOUBLE,
         allowNull : false
     },
-    desc : {
+    desc : { 
         type :Sequelize.TEXT,
         allowNull : false
     }

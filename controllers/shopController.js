@@ -1,15 +1,17 @@
 const Cart = require("../model/cart");
 const Product = require("../model/product");
+const ProductModel = require("../sql/models/product.model");
 
 exports.getHome = ((req,res) => {
-    Product.fetchproducts()
-    .then(([data]) => {
+    ProductModel
+    .findAll()
+    .then(products => {
         res
         .status(200)
         .render('shop/index',{
             title : 'Home',
             path: req._parsedOriginalUrl.path,
-            itemData : data
+            itemData : products
         })
     })
     .catch(err => console.log(err))
@@ -18,33 +20,39 @@ exports.getHome = ((req,res) => {
 
 
 exports.getShopProducts = ((req,res) => {
-    Product.fetchproducts()
-    .then(([data]) => {
+   ProductModel
+   .findAll()
+   .then(products => {
         res
         .status(200)
         .render('shop/show-product',{
             title : 'Products',
             path: req._parsedOriginalUrl.path,
-            itemData : data
+            itemData : products
         })
-    })
-    .catch(err => console.log(err));
+   })
+   .catch(err => console.log(err))
 })
 
 exports.getProductByID = ((req,res,next) => {
     const { id } = req.params;
-    Product.findProductByID(id)
-    .then(([[product]]) => {
-        console.log(product)
+    ProductModel
+    .findAll({
+        where : {
+            id : id
+        }
+    })
+    .then(product => {
         res
         .status(200)
         .render('shop/product/each',{
             title : `Product | ${id}`,
             path : '/products',
             pageID : id,
-            item : product
+            item : product[0]
         })
     })
+    .catch(err => console.log(err))
 })
 
 exports.getOrders = ((req,res) => {
