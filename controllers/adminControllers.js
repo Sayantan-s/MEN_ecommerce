@@ -17,16 +17,26 @@ exports.getEditProducts = ((req,res) => {
     if(!editMode){
         return res.redirect('/');
     }
-    Product.findProductByID(id,data => {
-        res
-        .status(200)
-        .render('admin/edit-product',{
-            title : 'Admin | UpdateProduct',
-            path :  '/admin/edit-product',
-            edit : editMode,
-            data
-        })
+    ProductModel
+    .findAll({
+        where : {
+            id : id
+        }
     })
+    .then(data => {
+        if(!data){
+            return res.redirect('/');
+        }
+        return  res
+                .status(200)
+                .render('admin/edit-product',{
+                    title : 'Admin | UpdateProduct',
+                    path :  '/admin/edit-product',
+                    edit : editMode,
+                    data
+                })
+    })
+    .catch(err => console.log(err))
 })
 
 exports.postEditProducts = (req,res) => {
@@ -62,9 +72,18 @@ exports.getAdminShowProducts = ((req,res) => {
 
 exports.postAdminProducts = ((req,res) => {
     const { item,price,img,desc } = req.body;
-    const productItem = new Product(item,price,img,desc,null);
-    productItem
+   // const productItem = new Product(item,price,img,desc,null);
+    ProductModel
+    .create({
+        name : item,
+        price : price,
+        img : img,
+        desc : desc
+    })
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+    /*productItem
     .save()
     .then(_ => res.redirect('/'))
-    .catch(err => console.log(err));
+    .catch(err => console.log(err));*/
 })
