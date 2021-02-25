@@ -23,8 +23,8 @@ exports.getEditProducts = ((req,res) => {
             id : id
         }
     })
-    .then(data => {
-        if(!data){
+    .then(products => {
+        if(!products){
             return res.redirect('/');
         }
         return  res
@@ -33,24 +33,52 @@ exports.getEditProducts = ((req,res) => {
                     title : 'Admin | UpdateProduct',
                     path :  '/admin/edit-product',
                     edit : editMode,
-                    data
+                    data : products[0]
                 })
     })
     .catch(err => console.log(err))
 })
 
 exports.postEditProducts = (req,res) => {
-    const { item,price,img,desc,productID } = req.body;
-    const updatedProduct = new Product(item,price,img,desc,productID);
-    updatedProduct.save();
-    res.redirect('/admin/show-product');
+    const { item,price,img,desc,productID } = req.body; 
+    console.log(req.body);
+
+    //const updatedProduct = new Product(item,price,img,desc,productID);
+    //updatedProduct.save();
+    ProductModel
+    .findAll({
+        where :{
+            id : productID
+        }
+    })
+    .then(products => {
+        products[0].name = item
+        products[0].desc = desc
+        products[0].img = img
+        products[0].price = price;
+        return products[0].save()
+    })
+    .then(res => {
+        console.log('Updated')
+        res.redirect('/admin/show-product');
+    })
+    .catch(err => console.log(err))
 }
 
 exports.postDeleteProducts = (req,res) => {
     const { productID } = req.body;
-    console.log(req.body);
-    Product.delete(productID);
-    res.redirect('/admin/show-product');
+   /* console.log(req.body);
+    Product.delete(productID);*/
+    ProductModel.destroy({
+        where : {
+            id : productID
+        }
+    })
+    .then(result => {
+        console.log("Deleted")
+        return res.redirect('/admin/show-product');
+    })
+    .catch(err => console.log(err));
 }
 
 exports.getAdminShowProducts = ((req,res) => {
@@ -70,7 +98,7 @@ exports.getAdminShowProducts = ((req,res) => {
 
 
 
-exports.postAdminProducts = ((req,res) => {
+exports.postAdminProducts = ((req,res,next) => {
     const { item,price,img,desc } = req.body;
    // const productItem = new Product(item,price,img,desc,null);
     ProductModel
@@ -80,7 +108,10 @@ exports.postAdminProducts = ((req,res) => {
         img : img,
         desc : desc
     })
-    .then(res => console.log(res))
+    .then(result => {
+        console.log("Posted")
+        res.redirect('/admin/show-product')
+    })
     .catch(err => console.log(err))
     /*productItem
     .save()
