@@ -12,6 +12,8 @@ const shop = require('./routes/shop');
 const admin = require('./routes/admin');
 const { error } = require('./controllers/errorController');
 const ProductModel = require('./sql/models/product.model');
+const User = require('./sql/models/user.model');
+const { sequelize } = require('./sql/connectDB');
 
 const responseText = 'Hello I am listening';
 const PORT  = 5000;
@@ -31,8 +33,13 @@ app.use(shop);
 app.use('/admin',admin);
 app.use(error)
 
+/*ProductModel.belongsTo(User,{
+    constraints : true,
+    onDelete : 'CASCADE'
+})*/
+
 ProductModel
-.sync()
+.sync({ force : true })
 .then(res => {
     app.listen(PORT,(req,res) => {
         console.log(responseText);
