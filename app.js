@@ -12,6 +12,7 @@ const app = express();
 const shop = require('./routes/shop');
 const admin = require('./routes/admin');
 const { error } = require('./controllers/errorController');
+const dbConnect = require('./db/db.connect');
 
 const responseText = 'Hello I am listening';
 const PORT  = 5000;
@@ -31,7 +32,9 @@ app.use(shop);
 app.use('/admin',admin);
 app.use(error)
 
-
-app.listen(PORT,(req,res) => {
-    console.log(responseText);
-});
+dbConnect(client => {
+    console.log(client);
+    app.listen(PORT,(req,res) => {
+        console.log(responseText);
+    });
+})
