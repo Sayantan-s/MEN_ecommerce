@@ -14,7 +14,7 @@
                        </div>
                        <div class="p-2 bg-orange-light rounded-2xl">
                             <h1 class="text-white font-bold">
-                                <%= item.name %> <%= item.id %>
+                                <%= item.name %> <%= item._id %>
                             </h1> 
                             <p class="text-gray-50 text-xs">
                                 <%= item.des %>
@@ -25,12 +25,12 @@
                                 </h2>
                                 <div class="flex gap-1">
                                     <form action="/admin/delete-product" method="POST">
-                                        <input type="hidden" value="<%= item.id %>" name="productID" >
+                                        <input type="hidden" value="<%= item._id %>" name="productID" >
                                         <button class="rounded-xl bg-black text-white py-2 px-4 text-xs font-bold">
                                             Delete
                                         </button>
                                    </form>
-                                   <a href="/admin/edit-product/<%= item.id %>?edit=true" class="no-underline">
+                                   <a href="/admin/edit-product/<%= item._id %>?edit=true" class="no-underline">
                                         <button class="rounded-xl bg-black text-white py-2 px-4 text-xs font-bold">
                                             Edit
                                         </button>

@@ -15,10 +15,10 @@ router.get('/show-product',getAdminShowProducts);
 
 router.post('/add-product',postAdminProducts);
 
-router.get('/edit-product/:productID',getEditProducts);
+/*router.get('/edit-product/:productID',getEditProducts);
 
 router.post('/edit-product',postEditProducts);
 
-router.post('/delete-product',postDeleteProducts)
+router.post('/delete-product',postDeleteProducts)*/
 
 module.exports = router;

@@ -12,7 +12,7 @@ const app = express();
 const shop = require('./routes/shop');
 const admin = require('./routes/admin');
 const { error } = require('./controllers/errorController');
-const dbConnect = require('./db/db.connect');
+const { dbConnect } = require('./db/db.connect');
 
 const responseText = 'Hello I am listening';
 const PORT  = 5000;
@@ -28,12 +28,11 @@ const Emitters = new EventEmitter();
 
 Emitters.setMaxListeners(100);
 
-app.use(shop);
 app.use('/admin',admin);
+app.use(shop);
 app.use(error)
 
-dbConnect(client => {
-    console.log(client);
+dbConnect(_ => {
     app.listen(PORT,(req,res) => {
         console.log(responseText);
     });

@@ -3,6 +3,7 @@ const Product = require("../model/product");
 
 exports.getHome = ((req,res) => {
     Product.fetchproducts(product => {
+        console.log(product);
         res
         .status(200)
         .render('shop/index',{
@@ -13,10 +14,9 @@ exports.getHome = ((req,res) => {
     })
 })
 
-
-
 exports.getShopProducts = ((req,res) => {
     Product.fetchproducts(product => {
+        console.log(product);
         res
         .status(200)
         .render('shop/show-product',{

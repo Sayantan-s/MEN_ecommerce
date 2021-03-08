@@ -44,6 +44,7 @@ exports.postDeleteProducts = (req,res) => {
 
 exports.getAdminShowProducts = ((req,res) => {
     Product.fetchproducts(product => {
+        console.log(product)
         res
         .status(200)
         .render('admin/show-product',{

@@ -24,7 +24,7 @@
                                     &#x20B9; <%= item.price %>
                                 </h2>
                                 <div class="flex gap-1">
-                                    <a href="/products/<%= item.id %>" class="no-underline">
+                                    <a href="/products/<%= item._id %>" class="no-underline">
                                         <button class="rounded-xl bg-black text-white py-2 px-4 text-xs font-bold">
                                             Details
                                         </button>
@@ -33,7 +33,7 @@
                                         <button class="rounded-xl bg-black text-white py-2 px-4 text-xs font-bold">
                                             Add to cart
                                         </button>
-                                        <input type="hidden" name="productID" value="<%= item.id %>">
+                                        <input type="hidden" name="productID" value="<%= item._id %>">
                                     </form>
                                 </div>
                             </div>

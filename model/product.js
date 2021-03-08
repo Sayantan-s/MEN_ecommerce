@@ -5,6 +5,7 @@
 const path = require('path')
 const fs  = require('fs');
 const Cart = require('./cart');
+const { getDb } = require('../db/db.connect');
 
 const file = path.join(path.dirname(process.mainModule.filename),'db','cdb.json');
 
@@ -28,7 +29,7 @@ module.exports = class Product {
     }
 
     save(){
-        getproductsfromFile(products => {
+        /*getproductsfromFile(products => {
             if(this.id){
                 const existingProductIndex = products.findIndex(prod => prod.id == this.id);
                 const updatedProducts = [...products];
@@ -48,11 +49,24 @@ module.exports = class Product {
                     console.log(err);
                 })
             }
-        })
+        })*/
+        return getDb()
+        .collection('product')
+        .insertOne(this)
+        .then(result => console.log(result))
+        .catch(err => console.log(err))
     }
 
     static fetchproducts(callback){
-       getproductsfromFile(callback);
+      return getDb()
+      .collection('product')
+      .find()
+      .toArray()
+      .then(product => 
+        {
+            return callback(product);
+        })
+        .catch(err =>console.log(err));
     }
 
     static findProductByID(id,callback){
