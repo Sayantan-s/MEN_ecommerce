@@ -70,11 +70,11 @@ module.exports = class Product {
     }
 
     static findProductByID(id,callback){
-        getproductsfromFile(products => {
+        /*getproductsfromFile(products => {
             const product = products.find(prod => prod.id.toString() === id);
             console.log(product)
             callback(product); 
-        })
+        })*/
     }
 
     static delete(id){
