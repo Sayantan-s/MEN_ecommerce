@@ -29,8 +29,8 @@ exports.getEditProducts = ((req,res) => {
 })
 
 exports.postEditProducts = (req,res) => {
-    const { item,price,img,desc,productID } = req.body;
-    const updatedProduct = new Product(item,price,img,desc,productID);
+    const { item,price,img,desc } = req.body;
+    const updatedProduct = new Product(item,price,img,desc);
     updatedProduct.save();
     res.redirect('/admin/show-product');
 }
@@ -59,7 +59,7 @@ exports.getAdminShowProducts = ((req,res) => {
 
 exports.postAdminProducts = ((req,res) => {
     const { item,price,img,desc } = req.body;
-    const productItem = new Product(item,price,img,desc,null);
+    const productItem = new Product(item,price,img,desc);
     productItem.save();
     res.redirect('/admin/show-product'); 
 })

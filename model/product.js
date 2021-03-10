@@ -20,12 +20,11 @@ const getproductsfromFile = callback => {
 }
 
 module.exports = class Product {
-    constructor(name,price,img,desc,id){
+    constructor(name,price,img,desc){
         this.name = name,
         this.price = price;
         this.image = img;
         this.des = desc;
-        this.id = id;
     }
 
     save(){
@@ -75,6 +74,18 @@ module.exports = class Product {
             console.log(product)
             callback(product); 
         })*/
+        //CHECK FINDONE ERROR TOMMOROW
+        return getDb()
+        .collection('product')
+        .findOne({_id: id },(err, data) => {
+            if(err){
+                console.log(err)
+            }
+            else{
+                console.log(data);
+                return callback(data)
+            }
+          });
     }
 
     static delete(id){

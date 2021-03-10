@@ -27,7 +27,7 @@ exports.getShopProducts = ((req,res) => {
     })
 })
 
-exports.getProductByID = ((req,res,next) => {
+exports.getProductByID = ((req,res) => {
     const id = req.params.id;
     Product.findProductByID(id,item => {
         res
