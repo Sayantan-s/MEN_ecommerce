@@ -6,6 +6,7 @@ const path = require('path')
 const fs  = require('fs');
 const Cart = require('./cart');
 const { getDb } = require('../db/db.connect');
+const { ObjectID } = require('bson');
 
 const file = path.join(path.dirname(process.mainModule.filename),'db','cdb.json');
 
@@ -77,15 +78,10 @@ module.exports = class Product {
         //CHECK FINDONE ERROR TOMMOROW
         return getDb()
         .collection('product')
-        .findOne({_id: id },(err, data) => {
-            if(err){
-                console.log(err)
-            }
-            else{
-                console.log(data);
-                return callback(data)
-            }
-          });
+        .findOne({ _id : new ObjectID(id) },(err,product) => {
+            console.log(product);
+            return callback(product);
+        })
     }
 
     static delete(id){
