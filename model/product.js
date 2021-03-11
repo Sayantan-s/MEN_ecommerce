@@ -21,11 +21,12 @@ const getproductsfromFile = callback => {
 }
 
 module.exports = class Product {
-    constructor(name,price,img,desc){
+    constructor(name,price,img,desc,id){
         this.name = name,
         this.price = price;
         this.image = img;
         this.des = desc;
+        this._id = id
     }
 
     save(){
@@ -50,10 +51,14 @@ module.exports = class Product {
                 })
             }
         })*/
-        return getDb()
-        .collection('product')
-        .insertOne(this)
-        .then(result => console.log(result))
+        let dbnew;
+        if(this._id){
+            dbnew = getDb().collection('product').updateOne({ _id : this._id },{$set : this})
+        }
+        else{
+            dbnew = getDb().collection('product').insertOne(this)
+        }
+        return dbnew.then(result => console.log(result))
         .catch(err => console.log(err))
     }
 

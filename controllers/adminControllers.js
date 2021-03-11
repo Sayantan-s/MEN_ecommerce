@@ -1,3 +1,4 @@
+const { ObjectID } = require("bson");
 const Product = require("../model/product");
 
 exports.getAdminProducts = ((req,res) => {
@@ -16,7 +17,7 @@ exports.getEditProducts = ((req,res) => {
     if(!editMode){
         return res.redirect('/');
     }
-    Product.findProductByID(id,data => {
+    return Product.findProductByID(id,data => {
         res
         .status(200)
         .render('admin/edit-product',{
@@ -29,8 +30,9 @@ exports.getEditProducts = ((req,res) => {
 })
 
 exports.postEditProducts = (req,res) => {
-    const { item,price,img,desc } = req.body;
-    const updatedProduct = new Product(item,price,img,desc);
+    const { item,price,img,desc,productID } = req.body;
+    console.log(req.body);
+    const updatedProduct = new Product(item,price,img,desc,new ObjectID(productID));
     updatedProduct.save();
     res.redirect('/admin/show-product');
 }
