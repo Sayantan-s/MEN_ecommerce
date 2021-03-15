@@ -1,7 +1,3 @@
-//let products = [];
-//const { v4 : { uuidv4 } } = require('uuid');
-
-
 const path = require('path')
 const fs  = require('fs');
 const Cart = require('./cart');
@@ -30,27 +26,6 @@ module.exports = class Product {
     }
 
     save(){
-        /*getproductsfromFile(products => {
-            if(this.id){
-                const existingProductIndex = products.findIndex(prod => prod.id == this.id);
-                const updatedProducts = [...products];
-                updatedProducts[existingProductIndex] = this;
-                fs.writeFile(file,JSON.stringify(updatedProducts),err => {
-                    if(!err){
-                        console.log("No error in updating!");
-                    }
-                    else console.log(err);
-                })
-            }
-            else{
-                this.id = ~~(Math.random()*2000);
-                products.push(this);
-                console.log(products);
-                fs.writeFile(file,JSON.stringify(products),err => {
-                    console.log(err);
-                })
-            }
-        })*/
         let dbnew;
         if(this._id){
             dbnew = getDb().collection('product').updateOne({ _id : this._id },{$set : this})
@@ -67,28 +42,19 @@ module.exports = class Product {
       .collection('product')
       .find()
       .toArray()
-      .then(product => 
-        {
-            return callback(product);
-        })
-        .catch(err =>console.log(err));
+      .then(product => callback(product))
+      .catch(err =>console.log(err));
     }
 
     static findProductByID(id,callback){
-        /*getproductsfromFile(products => {
-            const product = products.find(prod => prod.id.toString() === id);
-            console.log(product)
-            callback(product); 
-        })*/
-        //CHECK FINDONE ERROR TOMMOROW
         return getDb()
         .collection('product')
         .findOne({ _id : new ObjectID(id) },(err,product) => {
+            if(err) return console.log(err);
             console.log(product);
             return callback(product);
         })
     }
-
     static delete(id){
         getproductsfromFile(products => {
             let updatedProducts = [...products]
