@@ -3,12 +3,13 @@ const { getDb } = require('../db/db.connect');
 const { ObjectID } = require('bson');
 
 module.exports = class Product {
-    constructor(name,price,img,desc,id){
+    constructor(name,price,img,desc,id,adminId){
         this.name = name,
         this.price = price;
         this.image = img;
         this.des = desc;
         this._id = id ? new ObjectID(id) : null;
+        this.admin = adminId
     }
 
     save(){

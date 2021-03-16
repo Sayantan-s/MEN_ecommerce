@@ -1,5 +1,6 @@
 const EventEmitter = require('events');
 const path = require('path');
+const User = require('./model/user');
 
 
 const express = require('express');
@@ -13,6 +14,7 @@ const shop = require('./routes/shop');
 const admin = require('./routes/admin');
 const { error } = require('./controllers/errorController');
 const { dbConnect,getDb } = require('./db/db.connect');
+const { get } = require('./routes/shop');
 
 const responseText = 'Hello I am listening';
 const PORT  = 5000;
@@ -34,15 +36,22 @@ app.use((req,res,next) => {
     .toArray()
     .then(users => {
         if(users.length > 0){
-            console.log("Present")
+            User.findByID('60510ad6ceb21f67a34781d2',admin => {
+                const { isAdmin,_id } = admin
+                if(isAdmin){
+                    req.user =_id;
+                    next();
+                }
+                else next();
+            })
         }
-    
-        else console.log("Not Present");
+        else{
+            const newUser = new User('Nikemin','nike2021@ac.in',true);
+            newUser.createUser();
+            next();
+        }
     })
-    .catch(err => console.log(err));
-    req.body = {...req.body,user : "I am sharer!"}
-    next();
-   
+    .catch(err => console.log(err)); 
 })
 app.use('/admin',admin);
 app.use(shop);
