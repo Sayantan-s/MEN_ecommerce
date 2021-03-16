@@ -1,20 +1,6 @@
-const path = require('path')
-const fs  = require('fs');
 const Cart = require('./cart');
 const { getDb } = require('../db/db.connect');
 const { ObjectID } = require('bson');
-
-const file = path.join(path.dirname(process.mainModule.filename),'db','cdb.json');
-
-const getproductsfromFile = callback => {
-    fs.readFile(file,(error,data) => {
-        if(error){
-            console.log(error);
-            return callback([]);                
-        }
-        return callback(JSON.parse(data));
-   })
-}
 
 module.exports = class Product {
     constructor(name,price,img,desc,id){
@@ -22,7 +8,7 @@ module.exports = class Product {
         this.price = price;
         this.image = img;
         this.des = desc;
-        this._id = id
+        this._id = id ? new ObjectID(id) : null;
     }
 
     save(){
@@ -56,15 +42,14 @@ module.exports = class Product {
         })
     }
     static delete(id){
-        getproductsfromFile(products => {
-            let updatedProducts = [...products]
-            const delProduct = products.find(prod => prod.id == id)
-            updatedProducts = updatedProducts.filter(product => product.id != id);
-            fs.writeFile(file,JSON.stringify(updatedProducts),err => {
-                if (!err){
-                    Cart.deleteProduct(id,delProduct.price)
-                }
-            })
-        })
+       return getDb()
+       .collection('product')
+       .deleteOne({
+           _id : new ObjectID(id)
+       })
+       .then(_ => {
+           console.log(`${id} deleted.`)
+       })
+       .catch(err => console.log(err));
     }
 }
