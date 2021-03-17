@@ -1,6 +1,9 @@
 const { colors: defaultColors } = require('tailwindcss/defaultTheme')
 module.exports = {
   theme: {
+    flex: {
+      'layout' : '1 3 0%'
+    },
     colors: {
       ...defaultColors,
       transparent: 'transparent',
