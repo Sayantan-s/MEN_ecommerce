@@ -1,7 +1,7 @@
 <%- include('../includes/seo') %>
 <body>
     <%- include('../includes/nav') %>
-    <div class="w-11/12 mx-auto">
+    <div class="w-10/12 mx-auto">
         <% if(itemData.length > 0) {%>
             <div>
                 <% itemData.forEach(item => { %>
@@ -16,7 +16,7 @@
                             <h1 class="text-black font-medium text-lg tracking-wide">
                                 <%= item.name %> <%= item.des%>
                             </h1> 
-                            <div class="flex justify-between items-end mt-1 font-medium font-sans text-lg text-gray-400 tracking-normal">
+                            <div class="flex justify-between items-end mt-1 font-normal font-sans text-lg text-gray-400 tracking-normal">
                                 <h2>
                                     &#x20B9;<%= item.price %>
                                 </h2>
