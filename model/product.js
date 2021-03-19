@@ -18,7 +18,7 @@ module.exports = class Product {
             dbnew = getDb().collection('product').updateOne({ _id : this._id },{$set : this})
         }
         else{
-            dbnew = getDb().collection('product').insertOne(this)
+            dbnew = getDb().collection('product').insertOne(this)  
         }
         return dbnew.then(result => console.log(result))
         .catch(err => console.log(err))

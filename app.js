@@ -1,7 +1,5 @@
 const EventEmitter = require('events');
 const path = require('path');
-const User = require('./model/user');
-
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -12,9 +10,10 @@ const app = express();
 
 const shop = require('./routes/shop');
 const admin = require('./routes/admin');
+const User = require('./model/user');
 const { error } = require('./controllers/errorController');
 const { dbConnect,getDb } = require('./db/db.connect');
-const { get } = require('./routes/shop');
+const { ObjectID } = require('bson');
 
 const responseText = 'Hello I am listening';
 const PORT  = 5000;
@@ -37,12 +36,9 @@ app.use((req,res,next) => {
     .then(users => {
         if(users.length > 0){
             User.findByID('60510ad6ceb21f67a34781d2',admin => {
-                const { isAdmin,_id } = admin
-                if(isAdmin){
-                    req.user =_id;
-                    next();
-                }
-                else next();
+                const { userName,email,cart,isAdmin,_id } = admin
+                req.user = new User(userName, email, isAdmin, cart, new ObjectID(_id));
+                next();
             })
         }
         else{

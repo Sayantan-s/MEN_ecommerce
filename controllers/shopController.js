@@ -2,6 +2,7 @@ const Cart = require("../model/cart");
 const Product = require("../model/product");
 
 exports.getHome = ((req,res) => {
+    console.log(req.user);
     Product.fetchproducts(product => {
         res
         .status(200)
@@ -30,7 +31,7 @@ exports.getProductByID = ((req,res) => {
     Product.findProductByID(id,item => {
         res
         .status(200)
-        .render('shop/product/each',{
+        .render('dynamic/[product]',{
             title : `Product | ${id}`,
             path : '/products',
             pageID : id,
@@ -60,7 +61,7 @@ exports.getShopCart = ((req,res) => {
 exports.postProductInCart = (req,res) => {
     const { productID } = req.body;
     Product.findProductByID(productID,product => {
-        Cart.addToCart(productID,product.price)
+        req.user.addToCart(product);
+        return res.redirect('/cart');
     })
-    res.redirect('/cart');
 } 
