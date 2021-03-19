@@ -19,8 +19,23 @@ module.exports = class User {
         .catch(err => console.log(err));
     }
 
-    addToCart(item){ 
-        const updatedCart = { items : [ { itemID : new ObjectID(item._id),quantity : 1 } ] };
+    addToCart(item){
+        const cartItemIndex = this.cart.items.findIndex(product => product.itemID == item._id);
+
+        let newQuantity = 1;
+        const updatedCartItems = [...this.cart.items];
+
+        if(cartItemIndex > 0){
+            newQuantity = this.cart.items[cartItemIndex].newQuantity + 1;
+            updatedCartItems[cartItemIndex].newQuantity = newQuantity;
+        }
+        else{
+            updatedCartItems.push({
+                itemID : new ObjectID(item._id),
+                quantity : newQuantity
+            })
+        }
+        const updatedCart = { items : updatedCartItems };
         return getDb()
         .collection('user')
         .updateOne({
