@@ -1,7 +1,17 @@
 <%- include('../includes/seo') %>
 <body>
     <%- include('../includes/nav') %>
-    <h1>No thing in the cart!</h1>
+    <section class="w-full">
+        <div class="w-9/12 mx-auto">
+            <% if(cart) {%>
+               <% cart.forEach((item,id) => { %>
+                   <%- include('../includes/carProduct.ejs',{ item,id,cart }) %>
+               <% }) %>
+            <% } else { %>
+                <h1>There are no products in the cart!</h1>
+            <% } %>    
+        </div>
+    </section>
 </body>
 </html>
  
