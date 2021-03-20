@@ -20,14 +20,23 @@ module.exports = class User {
     }
 
     addToCart(item){
-        const cartItemIndex = this.cart.items.findIndex(product => product.itemID == item._id);
-
         let newQuantity = 1;
+        let updatedCartItems = [];
 
-        if(cartItemIndex >= 0){
-            const updatedCartItems = [...this.cart.items];
-            newQuantity = this.cart.items[cartItemIndex].newQuantity + 1;
-            updatedCartItems[cartItemIndex].newQuantity = newQuantity;
+        if(this.cart.items){
+            const cartItemIndex = this.cart.items.findIndex(product => product.itemID == item._id);
+            updatedCartItems = [...this.cart.items]
+
+            if(cartItemIndex >= 0){
+                newQuantity = this.cart.items[cartItemIndex].newQuantity + 1;
+                updatedCartItems[cartItemIndex].newQuantity = newQuantity;
+            }
+            else{
+                updatedCartItems.push({
+                    itemID : new ObjectID(item._id),
+                    quantity : newQuantity
+                })
+            }
         }
         else{
             updatedCartItems.push({
