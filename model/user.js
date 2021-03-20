@@ -54,6 +54,10 @@ module.exports = class User {
         {$set : { cart : updatedCart }})
     }
 
+    deleteFromCart(){
+        
+    }
+
     getCart(cb){
         const productId = this.cart.items.map(item => item.itemID);
         return getDb()

@@ -64,6 +64,15 @@ exports.getShopCart = ((req,res) => {
     })
 })
 
+exports.deleteProductFromCart = (req,res) => {
+    console.log(req.body);
+    return res
+    .status(200)
+    .json({
+        status : "Ok"
+    })
+}
+
 exports.postProductInCart = (req,res) => {
     const { productID } = req.body;
     Product.findProductByID(productID,product => {

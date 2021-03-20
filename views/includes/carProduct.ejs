@@ -14,7 +14,10 @@
     <h3>
         &#x20B9;<%= item.price %>
     </h3>
-    <button class="bg-gray-200 text-black w-14 h-14 font-semibold flex items-center rounded-xl justify-center">
+    <button
+    productId="<%= item._id %>"
+    id="delete-from-cart" 
+    class="bg-gray-200 text-black w-14 h-14 font-semibold flex items-center rounded-xl justify-center">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="26">
             <path fill="var(--ci-primary-color, currentColor)" d="M96,472a23.82,23.82,0,0,0,23.579,24H392.421A23.82,23.82,0,0,0,416,472V152H96Zm32-288H384V464H128Z" class="ci-primary"/>
             <rect width="32" height="200" x="168" y="216" fill="var(--ci-primary-color, currentColor)" class="ci-primary"/>
