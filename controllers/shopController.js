@@ -1,5 +1,6 @@
 const Cart = require("../model/cart");
 const Product = require("../model/product");
+const User = require("../model/user");
 
 exports.getHome = ((req,res) => {
     console.log(req.user);
@@ -50,11 +51,16 @@ exports.getOrders = ((req,res) => {
 })
 
 exports.getShopCart = ((req,res) => {
-    res
-    .status(200)
-    .render('shop/cart',{
-        title : 'Your Cart',
-        path: req._parsedOriginalUrl.path,
+    req.user
+    .getCart(products => {
+        console.log(products)
+        return res
+        .status(200)
+        .render('shop/cart',{
+            title : 'Your Cart',
+            path: req._parsedOriginalUrl.path,
+            cart : products
+        })  
     })
 })
 

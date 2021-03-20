@@ -23,13 +23,14 @@ module.exports = class User {
         let newQuantity = 1;
         let updatedCartItems = [];
 
-        if(this.cart.items){
-            const cartItemIndex = this.cart.items.findIndex(product => product.itemID == item._id);
+        if(this.cart){
+            const cartItemIndex = this.cart.items.findIndex(product => product.itemID.toString() === item._id.toString());
+            console.log(this.cart, item._id);
             updatedCartItems = [...this.cart.items]
 
             if(cartItemIndex >= 0){
-                newQuantity = this.cart.items[cartItemIndex].newQuantity + 1;
-                updatedCartItems[cartItemIndex].newQuantity = newQuantity;
+                newQuantity = this.cart.items[cartItemIndex].quantity + 1;
+                updatedCartItems[cartItemIndex].quantity = newQuantity;
             }
             else{
                 updatedCartItems.push({
@@ -51,6 +52,26 @@ module.exports = class User {
             _id : new ObjectID(this._id)
         },
         {$set : { cart : updatedCart }})
+    }
+
+    getCart(cb){
+        const productId = this.cart.items.map(item => item.itemID);
+        return getDb()
+        .collection('product')
+        .find({
+            _id : { $in :  productId}
+        })
+        .toArray()
+        .then(products => {
+            const prods = products.map(product => (
+                {
+                    ...product,
+                    quantity : this.cart.items.find(prod => prod.itemID.toString() === product._id.toString()).quantity
+                }
+            ))
+            return cb(prods)
+        })
+        .catch(err => console.log(err));
     }
 
     static findByID(id,cb){
