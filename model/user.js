@@ -23,9 +23,9 @@ module.exports = class User {
         const cartItemIndex = this.cart.items.findIndex(product => product.itemID == item._id);
 
         let newQuantity = 1;
-        const updatedCartItems = [...this.cart.items];
 
-        if(cartItemIndex > 0){
+        if(cartItemIndex >= 0){
+            const updatedCartItems = [...this.cart.items];
             newQuantity = this.cart.items[cartItemIndex].newQuantity + 1;
             updatedCartItems[cartItemIndex].newQuantity = newQuantity;
         }

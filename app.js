@@ -35,14 +35,14 @@ app.use((req,res,next) => {
     .toArray()
     .then(users => {
         if(users.length > 0){
-            User.findByID('6054dc5ddf89357396e92125',admin => {
+            User.findByID('60559358a74ef224df8ee26b',admin => {
                 const { userName,email,cart,isAdmin,_id } = admin
                 req.user = new User(userName, email, isAdmin, cart, new ObjectID(_id));
                 next();
             })
         }
         else{
-            const newUser = new User('Nikemin','nike2021@ac.in',true);
+            const newUser = new User('Nikemin','nike2021@ac.in',true,[]);
             newUser.createUser();
             next();
         }
