@@ -3,7 +3,6 @@ const Product = require("../model/product");
 const User = require("../model/user");
 
 exports.getHome = ((req,res) => {
-    console.log(req.user);
     Product.fetchproducts(product => {
         res
         .status(200)
@@ -53,7 +52,6 @@ exports.getOrders = ((req,res) => {
 exports.getShopCart = ((req,res) => {
     req.user
     .getCart(products => {
-        console.log(products)
         return res
         .status(200)
         .render('shop/cart',{
@@ -65,20 +63,17 @@ exports.getShopCart = ((req,res) => {
 })
 
 exports.deleteProductFromCart = (req,res) => {
-    console.log(req.user);
     const { id } = req.body;
-    req.user
-    .deleteFromCart(id);
-
-    return res
-    .status(200)
-    .redirect('/cart')
+    req.user.deleteFromCart(id);
+    return res.redirect('/cart')
 }
 
 exports.postProductInCart = (req,res) => {
     const { productID } = req.body;
     Product.findProductByID(productID,product => {
-        req.user.addToCart(product);
+        req.user.addToCart(product)
+        .then(_ => "ITEM is deleted")
+        .catch(err => console.log(err));
         return res.redirect('/cart');
     })
 } 

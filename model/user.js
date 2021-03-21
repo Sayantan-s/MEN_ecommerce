@@ -55,11 +55,18 @@ module.exports = class User {
     }
 
     deleteFromCart(id){
-       const updatedcart = this.cart.items.filter(item => {
-           item.itemID.toString() === id.toString();
-       });
+        const updatedCart = this.cart.items.filter(item => {
+            return item.itemID.toString() !== id.toString();
+        });
 
-       console.log(updatedcart);
+        return getDb()
+        .collection('user')
+        .updateOne({
+            _id : new ObjectID(this._id)
+        },
+        {
+            $set : { cart : updatedCart }
+        })
     }
 
     getCart(cb){
