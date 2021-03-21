@@ -1,17 +1,43 @@
-const deleteItemFromCart = document.querySelector('#delete-from-cart');
+const deleteItemFromCart = document.querySelectorAll('#delete-from-cart');
 
-const productId = deleteItemFromCart.getAttribute('productId');
+for(let i = 0; i < deleteItemFromCart.length; i++){
 
-deleteItemFromCart.onclick = async () => {
-    const response = await fetch(`/cart-delete`,{
-        method : 'POST',
-        headers : {
-            'Content-Type': 'application/json'
-        },
-        body : JSON.stringify({ id : productId })
-    });
+    const productId = deleteItemFromCart[i].getAttribute('productId');
 
-    const data = await response.json();
+    deleteItemFromCart[i].addEventListener('click',async() => {
+        try{
+            const response = await fetch('/cart-delete',{
+                method : 'POST',
+                headers : {
+                    'Content-Type': 'application/json',
+                },
+                body : JSON.stringify({ name : "Hello" })
+            })
+            console.log(response);
+            const data = await response.json();
+            console.log(data);
+          }
+          catch(error){
+            console.log(error);
+          }
+    })
 
-    console.log(data);
+    /*deleteItemFromCart[i].onclick = async() => {
+      try{
+        const response = await fetch('/cart-delete',{
+            method : 'POST',
+            headers : {
+                'Content-Type': 'application/json',
+            },
+            body : JSON.stringify({ name : "Hello" })
+        })
+        console.log(response);
+        const data = await response.json();
+        console.log(data);
+      }
+      catch(error){
+        console.log(error);
+      }
+    }*/
 }
+

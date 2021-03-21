@@ -54,8 +54,12 @@ module.exports = class User {
         {$set : { cart : updatedCart }})
     }
 
-    deleteFromCart(){
-        
+    deleteFromCart(id){
+       const updatedcart = this.cart.items.filter(item => {
+           item.itemID.toString() === id.toString();
+       });
+
+       console.log(updatedcart);
     }
 
     getCart(cb){

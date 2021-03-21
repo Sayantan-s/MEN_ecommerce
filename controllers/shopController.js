@@ -65,12 +65,14 @@ exports.getShopCart = ((req,res) => {
 })
 
 exports.deleteProductFromCart = (req,res) => {
-    console.log(req.body);
+    console.log(req.user);
+    const { id } = req.body;
+    req.user
+    .deleteFromCart(id);
+
     return res
     .status(200)
-    .json({
-        status : "Ok"
-    })
+    .redirect('/cart')
 }
 
 exports.postProductInCart = (req,res) => {
