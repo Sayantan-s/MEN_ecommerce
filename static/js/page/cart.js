@@ -21,23 +21,5 @@ for(let i = 0; i < deleteItemFromCart.length; i++){
             console.log(error);
           }
     })
-
-    /*deleteItemFromCart[i].onclick = async() => {
-      try{
-        const response = await fetch('/cart-delete',{
-            method : 'POST',
-            headers : {
-                'Content-Type': 'application/json',
-            },
-            body : JSON.stringify({ name : "Hello" })
-        })
-        console.log(response);
-        const data = await response.json();
-        console.log(data);
-      }
-      catch(error){
-        console.log(error);
-      }
-    }*/
 }
 

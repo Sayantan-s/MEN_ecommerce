@@ -19,6 +19,30 @@ module.exports = class User {
         .catch(err => console.log(err));
     }
 
+    getCart(cb){
+       if(this.cart){
+        const productId = this.cart.items.map(item => item.itemID);
+        return getDb()
+        .collection('product')
+        .find({
+            _id : { $in :  productId}
+        })
+        .toArray()
+        .then(products => {
+            const prods = products.map(product => (
+                {
+                    ...product,
+                    quantity : this.cart.items.find(prod => prod.itemID.toString() === product._id.toString()).quantity
+                }
+            ))
+            return cb(prods)
+        })
+        .catch(err => console.log(err));
+       }
+       else return cb({});
+    }
+
+
     addToCart(item){
         let newQuantity = 1;
         let updatedCartItems = [];
@@ -65,28 +89,10 @@ module.exports = class User {
             _id : new ObjectID(this._id)
         },
         {
-            $set : { cart : updatedCart }
+            $set : { cart : {
+                items : updatedCart
+            } }
         })
-    }
-
-    getCart(cb){
-        const productId = this.cart.items.map(item => item.itemID);
-        return getDb()
-        .collection('product')
-        .find({
-            _id : { $in :  productId}
-        })
-        .toArray()
-        .then(products => {
-            const prods = products.map(product => (
-                {
-                    ...product,
-                    quantity : this.cart.items.find(prod => prod.itemID.toString() === product._id.toString()).quantity
-                }
-            ))
-            return cb(prods)
-        })
-        .catch(err => console.log(err));
     }
 
     static findByID(id,cb){

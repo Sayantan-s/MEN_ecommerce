@@ -50,8 +50,7 @@ exports.getOrders = ((req,res) => {
 })
 
 exports.getShopCart = ((req,res) => {
-    req.user
-    .getCart(products => {
+    req.user.getCart(products => {
         return res
         .status(200)
         .render('shop/cart',{
@@ -74,6 +73,8 @@ exports.postProductInCart = (req,res) => {
         req.user.addToCart(product)
         .then(_ => "ITEM is deleted")
         .catch(err => console.log(err));
-        return res.redirect('/cart');
+        return res
+        .status(200)
+        .redirect('/cart');
     })
-} 
+}  

@@ -3,7 +3,7 @@
     <%- include('../includes/nav') %>
     <section class="w-full">
         <div class="w-9/12 mx-auto">
-            <% if(cart) {%>
+            <% if(cart.length > 0) {%>
                <% cart.forEach((item,id) => { %>
                    <%- include('../includes/carProduct.ejs',{ item,id,cart }) %>
                <% }) %>
