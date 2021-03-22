@@ -96,23 +96,44 @@ module.exports = class User {
     }
 
     addOrder(cb){
+        this.getCart(products => {
+            const order = {
+                items : products,
+                user : {
+                    id : new ObjectID(this._id),
+                    name : this.userName
+                }
+            }
+            return getDb()
+            .collection('orders')
+            .insertOne(order)
+            .then(_ => {
+                this.cart = {};
+                getDb()
+                .collection('user')
+                .updateOne({
+                    _id : new ObjectID(this._id)
+                },
+                { $set : {
+                    cart : {
+                        items : []
+                    }
+                } })
+                return cb(this._id);
+            })
+        })
+    }
+
+
+    getUserOrders(callback){
         return getDb()
         .collection('orders')
-        .insertOne(this.cart)
-        .then(_ => {
-            this.cart = {};
-            getDb()
-            .collection('user')
-            .updateOne({
-                _id : new ObjectID(this._id)
-            },
-            { $set : {
-                cart : {
-                    items : []
-                }
-            } })
-            return cb(this._id);
+        .find()
+        .toArray()
+        .then(orders => {
+            return callback(orders)
         })
+        .catch(err => console.log(err))
     }
 
     static findByID(id,cb){

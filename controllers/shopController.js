@@ -39,11 +39,14 @@ exports.getProductByID = ((req,res) => {
 })
 
 exports.getOrders = ((req,res) => {
-    res
-    .status(200)
-    .render('shop/order',{
-        title : 'Your orders',
-        path: req._parsedOriginalUrl.path,
+    req.user.getUserOrders(orders => {
+        console.log(orders)
+        return  res
+        .status(200)
+        .render('shop/order',{
+            title : 'Your orders',
+            path: req._parsedOriginalUrl.path,
+        })
     })
 })
 
