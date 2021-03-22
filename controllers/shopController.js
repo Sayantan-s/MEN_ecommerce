@@ -1,6 +1,4 @@
-const Cart = require("../model/cart");
 const Product = require("../model/product");
-const User = require("../model/user");
 
 exports.getHome = ((req,res) => {
     Product.fetchproducts(product => {
@@ -48,6 +46,17 @@ exports.getOrders = ((req,res) => {
         path: req._parsedOriginalUrl.path,
     })
 })
+
+exports.postOrders = (req,res) => {
+    req.user.addOrder(person => {
+        return  res
+        .status(200)
+        .json({
+            statusText : `${person}'s item is ordered!`
+        })
+    })
+  
+}
 
 exports.getShopCart = ((req,res) => {
     req.user.getCart(products => {

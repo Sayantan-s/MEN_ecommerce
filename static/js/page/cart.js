@@ -1,6 +1,20 @@
-const deleteItemFromCart = document.querySelectorAll('#delete-from-cart');
+const OrderFromCart = document.querySelector('#order-from-cart');
 
-for(let i = 0; i < deleteItemFromCart.length; i++){
+
+OrderFromCart.addEventListener('click',() => {
+    fetch('/orders',{
+        method : 'POST',
+        headers : {
+            'Content-Type': 'application/json',
+        },
+        body : JSON.stringify({ name : "Hello" })
+    })
+    .then(res => res.json())
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
+})
+
+/*for(let i = 0; i < deleteItemFromCart.length; i++){
 
     const productId = deleteItemFromCart[i].getAttribute('productId');
 
@@ -21,5 +35,6 @@ for(let i = 0; i < deleteItemFromCart.length; i++){
             console.log(error);
           }
     })
-}
+}*/
+
 

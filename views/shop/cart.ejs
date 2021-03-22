@@ -3,16 +3,23 @@
     <%- include('../includes/nav') %>
     <section class="w-full">
         <div class="w-9/12 mx-auto">
-            <% if(cart.length > 0) {%>
-               <% cart.forEach((item,id) => { %>
-                   <%- include('../includes/carProduct.ejs',{ item,id,cart }) %>
-               <% }) %>
-            <% } else { %>
-                <h1>There are no products in the cart!</h1>
-            <% } %>    
+            <div class="w-full">
+                <% if(cart.length > 0) {%>
+                    <% cart.forEach((item,id) => { %>
+                        <%- include('../includes/carProduct.ejs',{ item,id,cart }) %>
+                    <% }) %>
+                 <% } else { %>
+                     <h1>There are no products in the cart!</h1>
+                 <% } %>    
+            </div>
+            <button 
+            id="order-from-cart"
+            class="bg-gradient-to-br from-gray-900 to-black text-white px-5 py-3 font-semibold flex items-center tracking-wide uppercase rounded-lg shadow-md float-right">
+                Order now
+            </button>
         </div>
     </section>
-    <!--<script src="/js/page/cart.js"></script>!-->
+    <script src="/js/page/cart.js"></script>
 </body>
 </html>
  

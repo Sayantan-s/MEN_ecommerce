@@ -95,6 +95,26 @@ module.exports = class User {
         })
     }
 
+    addOrder(cb){
+        return getDb()
+        .collection('orders')
+        .insertOne(this.cart)
+        .then(_ => {
+            this.cart = {};
+            getDb()
+            .collection('user')
+            .updateOne({
+                _id : new ObjectID(this._id)
+            },
+            { $set : {
+                cart : {
+                    items : []
+                }
+            } })
+            return cb(this._id);
+        })
+    }
+
     static findByID(id,cb){
         return getDb()
         .collection('user')
