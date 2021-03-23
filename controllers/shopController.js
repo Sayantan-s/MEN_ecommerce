@@ -46,6 +46,7 @@ exports.getOrders = ((req,res) => {
         .render('shop/order',{
             title : 'Your orders',
             path: req._parsedOriginalUrl.path,
+            orders
         })
     })
 })

@@ -128,7 +128,9 @@ module.exports = class User {
     getUserOrders(callback){
         return getDb()
         .collection('orders')
-        .find()
+        .find({
+            "user.id" : new ObjectID(this._id)
+        })
         .toArray()
         .then(orders => {
             return callback(orders)

@@ -1,7 +1,54 @@
 <%- include('../includes/seo') %>
 <body>
     <%- include('../includes/nav') %>
-    <h1>No orders yet!</h1>
+    <section class="w-full">
+        <div class="w-9/12 mx-auto">
+            <% if(orders){ %>
+               <% orders.forEach((order,id) => { %>
+                <div class="w-full py-4 <%= id === orders.length - 1 ? "": "mb-6 border-b-2" %>">
+                    <h1 class="font-md text-xl text-gray-300">
+                        #Order <span class="text-gray-900"><%= order._id %></span>
+                    </h1>
+                    <div class="w-full mt-4">
+                        <% const ordersScaled = order.items.length > 2 ? order.items.slice(0,2) : order %>
+                        <% ordersScaled.items.forEach((item,id) => { %>
+                            <div class="flex justify-between items-center <%= id === ordersScaled.items.length - 1 ? "": "mb-4" %>">
+                                <div class="w-40 h-40">
+                                    <img 
+                                    class="object-cover w-full h-full"
+                                    src="<%= item.image %>"  
+                                    alt="<%= item.name %>">
+                                </div>
+                                <h1 class="font-normal text-lg overflow-ellipsis">
+                                    <%= [item.name,item.des].join(' ') %>
+                                </h1>
+                                <h2 class="font-normal text-lg overflow-ellipsis text-gray-400">
+                                    <%= item.quantity %>
+                                </h2>
+                                <h3>
+                                    &#x20B9;<%= item.price %>
+                                </h3>
+                                <button
+                                    id="delete-from-cart" 
+                                    class="text-gray-100 bg-gradient-to-br from-gray-900 to-black w-14 h-14 font-semibold flex items-center rounded-xl justify-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="26">
+                                            <path fill="var(--ci-primary-color, currentColor)" d="M96,472a23.82,23.82,0,0,0,23.579,24H392.421A23.82,23.82,0,0,0,416,472V152H96Zm32-288H384V464H128Z" class="ci-primary"/>
+                                            <rect width="32" height="200" x="168" y="216" fill="var(--ci-primary-color, currentColor)" class="ci-primary"/>
+                                            <rect width="32" height="200" x="240" y="216" fill="var(--ci-primary-color, currentColor)" class="ci-primary"/>
+                                            <rect width="32" height="200" x="312" y="216" fill="var(--ci-primary-color, currentColor)" class="ci-primary"/>
+                                            <path fill="var(--ci-primary-color, currentColor)" d="M328,88V40c0-13.458-9.488-24-21.6-24H205.6C193.488,16,184,26.542,184,40V88H64v32H448V88ZM216,48h80V88H216Z" class="ci-primary"/>
+                                          </svg>                              
+                                    </button>
+                            </div>
+                       <% }) %>
+                    </div>
+                </div>
+               <% }) %>
+            <% } else { %>
+                <h1>No orders yet!</h1>
+            <% } %>
+        </div>
+    </section>
 </body>
 </html>
  
