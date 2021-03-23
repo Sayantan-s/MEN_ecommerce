@@ -14,6 +14,7 @@ const User = require('./model/user');
 const { error } = require('./controllers/errorController');
 const { dbConnect,getDb } = require('./db/db.connect');
 const { ObjectID } = require('bson');
+const dbMongooseConnect = require('./db/db.mongoose.connect');
 
 const responseText = 'Hello I am listening';
 const PORT  = 5000;
@@ -54,7 +55,13 @@ app.use('/admin',admin);
 app.use(shop);
 app.use(error)
 
-dbConnect(_ => {
+/*dbConnect(_ => {
+    app.listen(PORT,(req,res) => {
+        console.log(responseText);
+    });
+})*/
+
+dbMongooseConnect(_ => {
     app.listen(PORT,(req,res) => {
         console.log(responseText);
     });
