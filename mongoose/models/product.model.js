@@ -24,9 +24,9 @@ const productSchema  = new Schema({
         required : true
     },
     gender : {
-        type : Boolean,
+        type : String,
         required : true
     }
 })
 
-module.exports = mongoose.model('Product', productSchema)
+module.exports = mongoose.model('Products', productSchema)

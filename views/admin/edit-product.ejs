@@ -1,45 +1,74 @@
 <%- include('../includes/seo') %>
 <body>
     <%- include('../includes/nav') %>
-    <form class="flex flex-col max-w-md px-4 py-8 bg-white rounded-lg shadow dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10" method="POST" action="/admin/<% if(edit) { %>edit-product<% } else { %>add-product<% } %>">
-        <!--<div class="flex w-full md:w-2/3 px-3 mb-3 md:mb-0 md:mr-6 bg-blueGray-100 rounded">
-          <svg class="h-6 w-6 my-auto text-blueGray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
-            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
-          </svg>
-          <input class="w-full pl-3 py-4 text-xs text-blueGray-400 font-semibold leading-none bg-blueGray-100 outline-none" type="text" placeholder="Type your e-mail" name="product">
-        </div>!-->
-        <div class="flex flex-col mb-2">
-          <div class=" relative ">
-            <input 
-            value="<% if(edit) { %> <%= data.name %> <% }%>"
-            name="item"
-            type="text" 
-            class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
-            placeholder="Shoe brand">
+    <form class="flex flex-col max-w-2xl px-4 py-8 bg-white rounded-lg shadow dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10" method="POST" action="/admin/<% if(edit) { %>edit-product<% } else { %>add-product<% } %>">
+        <div class="mb-2">
+          <div class="relative flex flex-col w-1/2 float-left px-2">
+              <label for="name" class="text-gray-800">
+                Brand Name
+              </label>
+              <input 
+              value="<% if(edit) { %> <%= data.name %> <% } %>"
+              name="name"
+              type="text" 
+              class="mt-2 rounded-lg border-transparent flex-1 appearance-none border border-gray-300 py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
+              placeholder="e.g. Nike Lebron">
           </div>
-          <div class=" relative ">
+          <div class="relative flex flex-col w-1/2 px-2">
+              <label for="tagname" class="text-gray-800">
+                Product Tagname
+              </label>
+              <input 
+              value="<% if(edit) { %> <%= data.name %> <% } %>"
+              name="tagname"
+              type="text" 
+              class="mt-2 rounded-lg border-transparent flex-1 appearance-none border border-gray-300 py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
+              placeholder="e.g. Pro Max...">
+          </div>
+          <div class="relative px-2 flex flex-col mt-3 w-1/2 float-left">
+            <label for="price" class="text-gray-800">
+              Price <span class="text-gray-400">(INR)</span>
+            </label>
             <input 
             value="<% if(edit) { %> <%= data.price %> <% }%>"
             name="price"
-            type="text" 
-            class="mt-3 rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
-            placeholder="Price">
+            type="numeric" 
+            class="mt-2 rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
+            placeholder="e.g. 5299">
           </div>
-          <div class=" relative ">
+          <div class="relative px-2 flex flex-col mt-3 w-1/2">
+            <label for="gender" class="text-gray-800">
+              Gender
+            </label>
+            <select 
+            name="gender"
+            class="mt-2 rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
+            >
+              <option value="Unisex">Unisex</option>
+              <option value="Men">Men</option>
+              <option value="Women">Women</option>
+          </select>
+          </div>
+          <div class="relative px-2 flex flex-col mt-3">
+            <label for="image" class="text-gray-800">
+              Product Image <span class="text-gray-400">(URL)</span>
+            </label>
             <input 
             value="<% if(edit) { %> <%= data.image %> <% }%>"
-            name="img"
+            name="image"
             type="text" 
-            class="mt-3 rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
-            placeholder="Image">
+            class="mt-2 rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
+            placeholder="e.g. https://staticimgs...">
           </div>
-          <div class=" relative ">
-            <textarea 
-            placeholder="Tag line"
-            name="desc"
-            class="mt-3 resize-none rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
-            >
+          <div class="relative px-2 flex flex-col mt-3">
+            <label for="description" class="text-gray-800">
+             Description
+            </label>
+            <textarea
+            class="mt-2 resize-none rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"   
+            rows="3" 
+            name="description"
+            placeholder="Add description of the product...!"></textarea>
             <% if(edit) { %> <%= data.des %> <% }%>
           </textarea>
           </div>
@@ -47,10 +76,10 @@
             <input type="hidden" value="<%= data._id %>" name="productID">
           <% } %>
         </div>
-        <div class="flex w-full my-4">
+        <div class="flex w-full my-4 px-2">
           <button 
           type="submit" 
-          class="py-2 px-4 bg-gradient-to-br from-gray-900 to-black focus:ring-offset-purple-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
+          class="uppercase py-2 px-4 bg-gradient-to-br from-gray-900 to-black focus:ring-offset-purple-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
           >
           <% if (edit) { %> Update product <% } else { %> Add product <% } %>
           </button>

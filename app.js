@@ -30,7 +30,7 @@ app.use(express.static('static'));
 const Emitters = new EventEmitter();
 Emitters.setMaxListeners(100);
 
-app.use((req,res,next) => {
+/*app.use((req,res,next) => {
     getDb()
     .collection('user')
     .find()
@@ -50,7 +50,8 @@ app.use((req,res,next) => {
         }
     })
     .catch(err => console.log(err)); 
-})
+})*/
+
 app.use('/admin',admin);
 app.use(shop);
 app.use(error)

@@ -1,5 +1,5 @@
 const { ObjectID } = require("bson");
-const Product = require("../model/product");
+const ProductModel = require("../mongoose/models/product.model");
 
 exports.getAdminProducts = ((req,res) => {
     res
@@ -45,23 +45,29 @@ exports.postDeleteProducts = (req,res) => {
 }
 
 exports.getAdminShowProducts = ((req,res) => {
-    Product.fetchproducts(product => {
-        console.log(product)
-        res
+    return ProductModel
+    .find()
+    .then(products => {
+        return res
         .status(200)
         .render('admin/show-product',{
             title : 'Admin | product',
             path :  req._parsedOriginalUrl.path,
-            itemData : product
+            itemData : products
         })
     })
+    .catch(err => console.log(err));
 })
 
 
 
 exports.postAdminProducts = ((req,res) => {
-    const { item,price,img,desc } = req.body;
-    const productItem = new Product(item,price,img,desc,null,req.user);
-    productItem.save();
-    res.redirect('/admin/show-product'); 
+    const Product = new ProductModel({...req.body})
+    return Product
+    .save()
+    .then(_ => {
+        console.log("product is saved to db")
+        return  res.redirect('/admin/show-product'); 
+    })
+    .catch(err => console.log(err));
 })
