@@ -1,33 +1,39 @@
-const Product = require("../model/product");
+const Product = require("../mongoose/models/product.model");
 
 exports.getHome = ((req,res) => {
-    Product.fetchproducts(product => {
-        res
-        .status(200)
-        .render('shop/index',{
-            title : 'Home',
-            path: req._parsedOriginalUrl.path,
-            itemData : product
-        })
+   Product
+   .find()
+   .then(products => {
+    return res
+    .status(200)
+    .render('shop/index',{
+        title : 'Home',
+        path: req._parsedOriginalUrl.path,
+        itemData : products
     })
+   }).catch(err => console.log(err))
 })
 
 exports.getShopProducts = ((req,res) => {
-    Product.fetchproducts(product => {
-        res
-        .status(200)
-        .render('shop/show-product',{
-            title : 'Products',
-            path: req._parsedOriginalUrl.path,
-            itemData : product
-        })
-    })
+   Product
+   .find()
+   .then(products => {
+       return  res
+       .status(200)
+       .render('shop/show-product',{
+           title : 'Products',
+           path: req._parsedOriginalUrl.path,
+           itemData : products
+       })
+   }).catch(err => console.log(err))
 })
 
 exports.getProductByID = ((req,res) => {
-    const id = req.params.id;
-    Product.findProductByID(id,item => {
-        res
+    const { id } = req.params;
+    Product
+    .findById(id)
+    .then(item => {
+        return  res
         .status(200)
         .render('dynamic/[product]',{
             title : `Product | ${id}`,
@@ -35,7 +41,7 @@ exports.getProductByID = ((req,res) => {
             pageID : id,
             item
         })
-    })
+    }).catch(err => console.log(err))
 })
 
 exports.getOrders = ((req,res) => {
