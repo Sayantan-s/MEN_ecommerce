@@ -17,8 +17,10 @@ exports.getEditProducts = ((req,res) => {
     if(!editMode){
         return res.redirect('/');
     }
-    return Product.findProductByID(id,data => {
-        res
+    return ProductModel
+    .findById(id)
+    .then(data => {
+        return res
         .status(200)
         .render('admin/edit-product',{
             title : 'Admin | UpdateProduct',
@@ -30,18 +32,27 @@ exports.getEditProducts = ((req,res) => {
 })
 
 exports.postEditProducts = (req,res) => {
-    const { item,price,img,desc,productID } = req.body;
-    console.log(req.body);
-    const updatedProduct = new Product(item,price,img,desc,new ObjectID(productID),req.user);
-    updatedProduct.save();
-    res.redirect('/admin/show-product');
+    const { productID,...otherProductSchema } = req.body;
+    return ProductModel
+    .findOneAndUpdate({
+        _id : productID
+    },{...otherProductSchema},err => {
+        if(err) console.log(err);
+        else{
+            console.log(`Product ${productID} is updated!`);
+            return res.redirect('/admin/show-product')
+        }
+    })
 }
 
 exports.postDeleteProducts = (req,res) => {
     const { productID } = req.body;
-    console.log(req.body); 
-    Product.delete(productID);
-    res.redirect('/admin/show-product');
+    ProductModel
+    .findByIdAndRemove(productID)
+    .then(_ => {
+        console.log(`${productID} product deleted`)
+        return res.redirect('/admin/show-product');
+    }).catch(err => console.log(err))
 }
 
 exports.getAdminShowProducts = ((req,res) => {

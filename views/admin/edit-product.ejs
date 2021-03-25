@@ -19,7 +19,7 @@
                 Product Tagname
               </label>
               <input 
-              value="<% if(edit) { %> <%= data.name %> <% } %>"
+              value="<% if(edit) { %> <%= data.tagname %> <% } %>"
               name="tagname"
               type="text" 
               class="mt-2 rounded-lg border-transparent flex-1 appearance-none border border-gray-300 py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
@@ -68,9 +68,11 @@
             class="mt-2 resize-none rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"   
             rows="3" 
             name="description"
-            placeholder="Add description of the product...!"></textarea>
-            <% if(edit) { %> <%= data.des %> <% }%>
-          </textarea>
+            placeholder="Add description of the product...!">
+              <% if(edit){ %>
+                  <%=  data.description %>
+                <% } %>
+            </textarea>
           </div>
           <% if (edit) { %>   
             <input type="hidden" value="<%= data._id %>" name="productID">
