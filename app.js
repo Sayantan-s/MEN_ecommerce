@@ -10,7 +10,7 @@ const app = express();
 
 const shop = require('./routes/shop');
 const admin = require('./routes/admin');
-const User = require('./model/user');
+const User = require('./mongoose/models/user.model');
 const { error } = require('./controllers/errorController');
 const { dbConnect,getDb } = require('./db/db.connect');
 const { ObjectID } = require('bson');
@@ -30,40 +30,35 @@ app.use(express.static('static'));
 const Emitters = new EventEmitter();
 Emitters.setMaxListeners(100);
 
-/*app.use((req,res,next) => {
-    getDb()
-    .collection('user')
-    .find()
-    .toArray()
-    .then(users => {
-        if(users.length > 0){
-            User.findByID('6058b76766bf4decaacfa0f2',admin => {
-                const { userName,email,cart,isAdmin,_id } = admin
-                req.user = new User(userName, email, isAdmin, cart, new ObjectID(_id));
-                next();
-            })
-        }
-        else{
-            const newUser = new User('Nikemin','nike2021@ac.in',true);
-            newUser.createUser();
-            next();
-        }
+app.use((req,res,next) => {
+    User.findByID('6058b76766bf4decaacfa0f2',admin => {
+        const { userName,email,cart,isAdmin,_id } = admin
+        req.user = new User(userName, email, isAdmin, cart, new ObjectID(_id));
+        next();
     })
-    .catch(err => console.log(err)); 
-})*/
+})
 
-app.use('/admin',admin);
+app.use('/admin',admin)
 app.use(shop);
 app.use(error)
 
-/*dbConnect(_ => {
-    app.listen(PORT,(req,res) => {
-        console.log(responseText);
-    });
-})*/
-
 dbMongooseConnect(_ => {
     app.listen(PORT,(req,res) => {
+        User
+        .findOne()
+        .then(user => {
+            if(!user){
+                const admin = new User({
+                    fullName : 'NikeAdmin',
+                    email : 'nikead@ac.in',
+                    cart : {
+                        items : []
+                    }
+                })
+                admin.save()
+            }
+        })
+        .catch(err => console.log(err))
         console.log(responseText);
     });
 })
