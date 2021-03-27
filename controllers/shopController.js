@@ -3,6 +3,7 @@ const Product = require("../mongoose/models/product.model");
 exports.getHome = ((req,res) => {
    Product
    .find()
+   .select('name tagname price image')
    .then(products => {
     return res
     .status(200)
@@ -17,6 +18,7 @@ exports.getHome = ((req,res) => {
 exports.getShopProducts = ((req,res) => {
    Product
    .find()
+   .select('name tagname image price')
    .then(products => {
        return  res
        .status(200)
@@ -88,12 +90,11 @@ exports.deleteProductFromCart = (req,res) => {
 
 exports.postProductInCart = (req,res) => {
     const { productID } = req.body;
-    Product.findProductByID(productID,product => {
-        req.user.addToCart(product)
-        .then(_ => "ITEM is deleted")
-        .catch(err => console.log(err));
+    return Product.findById(productID)
+    .then(product => {
+        req.user.addToCart(product._id)
         return res
         .status(200)
-        .redirect('/cart');
+        .redirect('/');
     })
 }  

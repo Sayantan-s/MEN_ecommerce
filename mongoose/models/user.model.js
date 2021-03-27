@@ -16,6 +16,7 @@ const UserModel = new Schema({
             {
                 productID : {
                     type : Schema.Types.ObjectId,
+                    ref: 'Products',
                     required : true
                 },
                 quantity : {
@@ -26,5 +27,27 @@ const UserModel = new Schema({
         ]
     }
 })
+
+UserModel.methods.addToCart = itemId => {
+    let updatedCartItems = [];
+    let quantity = 1;
+   if(this.cart){
+        const itemTobeUpdatedIndex = this.cart.items.findIndex(item => {
+            return item.productID.toString() === itemId.toString() 
+        })
+        console.log(itemTobeUpdatedIndex)
+   }
+   else{
+        updatedCartItems.push({
+            productID : itemId,
+            quantity
+        })
+   }
+
+   const updatedCart = {  items : updatedCartItems  };
+
+   return this.save()
+
+}
 
 module.exports = mongoose.model('User', UserModel)

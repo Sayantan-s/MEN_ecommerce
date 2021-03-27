@@ -1,4 +1,3 @@
-const { ObjectID } = require("bson");
 const ProductModel = require("../mongoose/models/product.model");
 
 exports.getAdminProducts = ((req,res) => {
@@ -73,7 +72,7 @@ exports.getAdminShowProducts = ((req,res) => {
 
 
 exports.postAdminProducts = ((req,res) => {
-    const Product = new ProductModel({...req.body})
+    const Product = new ProductModel({...req.body,userId : req.user}) //Mongoose will take only req.user._id from req.user
     return Product
     .save()
     .then(_ => {

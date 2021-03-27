@@ -12,8 +12,6 @@ const shop = require('./routes/shop');
 const admin = require('./routes/admin');
 const User = require('./mongoose/models/user.model');
 const { error } = require('./controllers/errorController');
-const { dbConnect,getDb } = require('./db/db.connect');
-const { ObjectID } = require('bson');
 const dbMongooseConnect = require('./db/db.mongoose.connect');
 
 const responseText = 'Hello I am listening';
@@ -31,11 +29,11 @@ const Emitters = new EventEmitter();
 Emitters.setMaxListeners(100);
 
 app.use((req,res,next) => {
-    User.findByID('6058b76766bf4decaacfa0f2',admin => {
-        const { userName,email,cart,isAdmin,_id } = admin
-        req.user = new User(userName, email, isAdmin, cart, new ObjectID(_id));
+    User.findById('605e29b8d3da90f2eb6dd06c')
+    .then(user => {
+        req.user = user;
         next();
-    })
+    }).catch(err => console.log(err));
 })
 
 app.use('/admin',admin)
@@ -43,22 +41,22 @@ app.use(shop);
 app.use(error)
 
 dbMongooseConnect(_ => {
+    User
+    .findOne()
+    .then(user => {
+        if(!user){
+            const admin = new User({
+                fullName : 'NikeAdmin',
+                email : 'nikead@ac.in',
+                cart : {
+                    items : []
+                }
+            })
+            admin.save()
+        }
+    })
+    .catch(err => console.log(err))  
     app.listen(PORT,(req,res) => {
-        User
-        .findOne()
-        .then(user => {
-            if(!user){
-                const admin = new User({
-                    fullName : 'NikeAdmin',
-                    email : 'nikead@ac.in',
-                    cart : {
-                        items : []
-                    }
-                })
-                admin.save()
-            }
-        })
-        .catch(err => console.log(err))
         console.log(responseText);
     });
 })
