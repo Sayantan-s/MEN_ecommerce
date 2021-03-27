@@ -28,25 +28,27 @@ const UserModel = new Schema({
     }
 })
 
-UserModel.methods.addToCart = itemId => {
+UserModel.methods.addToCart = item => {
     let updatedCartItems = [];
     let quantity = 1;
    if(this.cart){
-        const itemTobeUpdatedIndex = this.cart.items.findIndex(item => {
-            return item.productID.toString() === itemId.toString() 
+        const itemTobeUpdatedIndex = this.cart.items.findIndex(product => {
+            return product.productID.toString() === item._id.toString() 
         })
         console.log(itemTobeUpdatedIndex)
    }
    else{
         updatedCartItems.push({
-            productID : itemId,
+            productID : item._id,
             quantity
         })
    }
 
    const updatedCart = {  items : updatedCartItems  };
 
-   return this.save()
+   this.cart = updatedCart
+
+   console.log(this);
 
 }
 

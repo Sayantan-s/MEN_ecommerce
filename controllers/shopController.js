@@ -92,9 +92,13 @@ exports.postProductInCart = (req,res) => {
     const { productID } = req.body;
     return Product.findById(productID)
     .then(product => {
-        req.user.addToCart(product._id)
-        return res
-        .status(200)
-        .redirect('/');
+        console.log(product)
+        req.user
+        .addToCart(product,_ => {
+            console.log(product._id + "has been updated!");
+            return res
+            .status(200)
+            .redirect('/');
+        })
     })
 }  
