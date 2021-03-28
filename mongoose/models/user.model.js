@@ -28,28 +28,36 @@ const UserModel = new Schema({
     }
 })
 
-UserModel.methods.addToCart = item => {
+UserModel.methods.addToCart = (item,id) => {
     let updatedCartItems = [];
-    let quantity = 1;
+    let newQuantity = 1;
    if(this.cart){
-        const itemTobeUpdatedIndex = this.cart.items.findIndex(product => {
-            return product.productID.toString() === item._id.toString() 
-        })
-        console.log(itemTobeUpdatedIndex)
+        if(this.cart.items.length > 0){
+            const itemTobeUpdatedIndex = this.cart.items.findIndex(product => {
+                return product.productID.toString() === item._id.toString() 
+            })
+            console.log(itemTobeUpdatedIndex)
+        }
    }
    else{
         updatedCartItems.push({
             productID : item._id,
-            quantity
+            quantity : newQuantity
         })
    }
 
    const updatedCart = {  items : updatedCartItems  };
 
-   this.cart = updatedCart
+   console.log(this)
 
-   console.log(this);
-
+   return mongoose.model('User').updateOne({
+       _id : id
+   },{
+       cart : updatedCart
+   })
+   .then(_ => console.log("Product has been updated"))
+   .catch(err => console.log(err))
 }
+
 
 module.exports = mongoose.model('User', UserModel)
