@@ -28,36 +28,37 @@ const UserModel = new Schema({
     }
 })
 
-UserModel.methods.addToCart = (item,id) => {
-    let updatedCartItems = [];
+UserModel.methods.addToCart = function(item){
+    const itemTobeUpdatedIndex = this.cart.items.findIndex(product => {
+        return product.productID.toString() === item._id.toString() 
+    })
+    let updatedCartItems = [...this.cart.items];
     let newQuantity = 1;
-   if(this.cart){
-        if(this.cart.items.length > 0){
-            const itemTobeUpdatedIndex = this.cart.items.findIndex(product => {
-                return product.productID.toString() === item._id.toString() 
-            })
-            console.log(itemTobeUpdatedIndex)
-        }
-   }
-   else{
+    if(itemTobeUpdatedIndex >= 0){
+        newQuantity = this.cart.items[itemTobeUpdatedIndex].quantity + 1;
+        updatedCartItems[itemTobeUpdatedIndex].quantity = newQuantity;
+    }
+    else{
         updatedCartItems.push({
             productID : item._id,
             quantity : newQuantity
         })
-   }
+    }
 
    const updatedCart = {  items : updatedCartItems  };
 
-   console.log(this)
+   this.cart = updatedCart
 
-   return mongoose.model('User').updateOne({
-       _id : id
-   },{
-       cart : updatedCart
-   })
-   .then(_ => console.log("Product has been updated"))
-   .catch(err => console.log(err))
+   return this.save()
+} 
+
+
+UserModel.methods.deleteFromCart = function(id){
+    const updatedCartItems = this.cart.items.filter(item => {
+        return item.productID.toString() !== id.toString();
+    })
+    this.cart.items = updatedCartItems
+    this.save();
 }
-
 
 module.exports = mongoose.model('User', UserModel)

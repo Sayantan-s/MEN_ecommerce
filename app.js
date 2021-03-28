@@ -29,21 +29,9 @@ const Emitters = new EventEmitter();
 Emitters.setMaxListeners(100);
 
 app.use((req,res,next) => {
-    User.findById('605e29b8d3da90f2eb6dd06c')
+    User.findById('606038d8440f5954f858829f')
     .then(user => {
-        req.user = user;
-        next();
-    }).catch(err => console.log(err));
-})
-
-app.use('/admin',admin)
-app.use(shop);
-app.use(error)
-
-dbMongooseConnect(_ => {
-    User
-    .findOne()
-    .then(user => {
+        console.log(user)
         if(!user){
             const admin = new User({
                 fullName : 'NikeAdmin',
@@ -54,8 +42,16 @@ dbMongooseConnect(_ => {
             })
             admin.save()
         }
-    })
-    .catch(err => console.log(err))  
+        req.user = user;
+        next();
+    }).catch(err => console.log(err));
+})
+
+app.use('/admin',admin)
+app.use(shop);
+app.use(error)
+
+dbMongooseConnect(_ => {
     app.listen(PORT,(req,res) => {
         console.log(responseText);
     });

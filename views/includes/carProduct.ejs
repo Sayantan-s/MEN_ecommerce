@@ -5,8 +5,11 @@
         src="<%= item.image %>"  
         alt="<%= item.name %>">
     </div>
-    <h1 class="font-normal text-lg overflow-ellipsis">
-        <%= [item.name,item.des].join(' ') %>
+    <h1 class="text-lg overflow-ellipsis font-medium">
+        <%= item.name %>
+        <span class="font-normal text-gray-500">
+            <%= item.tagname %>
+        </span>
     </h1>
     <h2 class="font-normal text-lg overflow-ellipsis text-gray-400">
         <%= item.quantity %>
