@@ -61,4 +61,12 @@ UserModel.methods.deleteFromCart = function(id){
     this.save();
 }
 
+UserModel.methods.clearCart = function(){
+    this.cart = {
+        items : []
+    }
+
+    this.save();
+}
+
 module.exports = mongoose.model('User', UserModel)

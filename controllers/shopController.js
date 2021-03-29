@@ -1,6 +1,9 @@
+const Order = require("../mongoose/models/order.model");
 const Product = require("../mongoose/models/product.model");
+const User = require("../mongoose/models/user.model");
 
 exports.getHome = ((req,res) => {
+    console.log(req.user);
    Product
    .find()
    .select('name tagname price image')
@@ -47,27 +50,56 @@ exports.getProductByID = ((req,res) => {
 })
 
 exports.getOrders = ((req,res) => {
-    req.user.getUserOrders(orders => {
+    console.log(req.user)
+    return Order.find({'user.userId' : req.user._id})
+    .then(orders => {
         console.log(orders)
-        return  res
+        res
         .status(200)
         .render('shop/order',{
             title : 'Your orders',
             path: req._parsedOriginalUrl.path,
-            orders
+            orders: orders
         })
     })
+    .catch(err => console.log(err));
 })
 
 exports.postOrders = (req,res) => {
-    req.user.addOrder(person => {
+    req.user
+    .populate('cart.items')
+    .execPopulate()
+    .then(result => {  
+        const { fullName,_id } = req.user
+        const prodIDs = result.cart.items.map(i => i.productID)
+        Product
+        .find({
+            _id : { $in : prodIDs }
+        })
+        .select('image name tagname price')
+        .then(prs => {
+            const newProducts = prs.map(prod => ({
+                product : {...prod._doc},
+                quantity : result.cart.items.find(p => p.productID.toString() === prod._id.toString()).quantity
+            })) 
+            const order = new Order({
+                user : {
+                    name : fullName,
+                    userId : _id
+                },
+               products : newProducts
+            })
+            return order.save()
+        })
+        .then(_ => req.user.clearCart())
+        .catch(err => console.log(err))
+    }).then(_ => {
         return  res
         .status(200)
         .json({
-            statusText : `${person}'s item is ordered!`
+            statusText : `item is ordered!`     
         })
-    })
-  
+    }).catch(err => console.log(err))  
 }
 
 exports.getShopCart = ((req,res) => {

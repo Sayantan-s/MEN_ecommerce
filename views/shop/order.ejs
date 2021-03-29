@@ -10,23 +10,23 @@
                         #Order <span class="text-gray-900"><%= order._id %></span>
                     </h1>
                     <div class="w-full mt-4">
-                        <% const ordersScaled = order.items.length > 2 ? order.items.slice(0,2) : order %>
-                        <% ordersScaled.items.forEach((item,id) => { %>
-                            <div class="flex justify-between items-center <%= id === ordersScaled.items.length - 1 ? "": "mb-4" %>">
+                        <% const ordersScaled = order.products.length > 2 ? order.products.slice(0,2) : order.products %>
+                        <% ordersScaled.forEach((item,id) => { %>
+                            <div class="flex justify-between items-center <%= id === ordersScaled.length - 1 ? "": "mb-4" %>">
                                 <div class="w-40 h-40">
                                     <img 
                                     class="object-cover w-full h-full"
-                                    src="<%= item.image %>"  
-                                    alt="<%= item.name %>">
+                                    src="<%= item.product.image %>"  
+                                    alt="<%= item.product.name %>">
                                 </div>
                                 <h1 class="font-normal text-lg overflow-ellipsis">
-                                    <%= [item.name,item.des].join(' ') %>
+                                    <%= item.product.name %> <span class="font-light text-gray-600"><%= item.product.tagname %></span>
                                 </h1>
                                 <h2 class="font-normal text-lg overflow-ellipsis text-gray-400">
                                     <%= item.quantity %>
                                 </h2>
                                 <h3>
-                                    &#x20B9;<%= item.price %>
+                                    &#x20B9;<%= item.product.price %>
                                 </h3>
                                 <button
                                     id="delete-from-cart" 
