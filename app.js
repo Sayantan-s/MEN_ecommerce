@@ -10,9 +10,11 @@ const app = express();
 
 const shop = require('./routes/shop');
 const admin = require('./routes/admin');
+const auth = require('./routes/auth');
 const User = require('./mongoose/models/user.model');
 const { error } = require('./controllers/errorController');
 const dbMongooseConnect = require('./db/db.mongoose.connect');
+const session = require('express-session');
 
 const responseText = 'Hello I am listening';
 const PORT  = 5000;
@@ -24,6 +26,7 @@ app.set('view engine','ejs')
 app.use(bodyParser.urlencoded({ extended  : true }));
 app.use(bodyParser.json());
 app.use(express.static('static'));
+app.use(session({ secret : 'its secret!',resave : false, saveUninitialized: false }))
 
 const Emitters = new EventEmitter();
 Emitters.setMaxListeners(100);
@@ -47,6 +50,7 @@ app.use((req,res,next) => {
     }).catch(err => console.log(err));
 })
 
+app.use(auth)
 app.use('/admin',admin)
 app.use(shop);
 app.use(error)

@@ -3,7 +3,7 @@ const Product = require("../mongoose/models/product.model");
 const User = require("../mongoose/models/user.model");
 
 exports.getHome = ((req,res) => {
-    console.log(req.user);
+    console.log(req.session.isLoggedIn);
    Product
    .find()
    .select('name tagname price image')
