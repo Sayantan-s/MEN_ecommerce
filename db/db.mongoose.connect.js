@@ -1,9 +1,7 @@
 const mongoose = require('mongoose');
 
-//mongodb+srv://sayan:Sayantan@123@sayantan.zc13y.mongodb.net/Sayantan?retryWrites=true&w=majority
-
 module.exports = callback => {
-    mongoose.connect(`mongodb+srv://sayan:Sayantan@123@sayantan.zc13y.mongodb.net/Sayantan?retryWrites=true&w=majority`,{
+    mongoose.connect(process.env.MONGODB_URI,{
         useNewUrlParser : true,
         useUnifiedTopology : true,
         useFindAndModify : true

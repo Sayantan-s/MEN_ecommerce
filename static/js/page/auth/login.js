@@ -8,16 +8,19 @@ document.querySelector('.form').addEventListener('submit',async(eve)=> {
     for(let [key,value] of formdata.entries()){
         data = {...data, [key] : value}
     }
-    const res = await fetch('/login',{
-        method:'POST',
-        headers : {
-            'Content-Type': 'application/json'
-        },
-        body : JSON.stringify(data)
-    })
-
-    const status = await res.json();
-
-    console.log(status);
-
+    try{
+        const res = await fetch('/login',{
+            method:'POST',
+            headers : {
+                'Content-Type': 'application/json'
+            },
+            body : JSON.stringify(data)
+        })
+    
+        const status = await res.json();
+    
+        console.log(status);
+    
+    }
+    catch(e){  console.log(e)  }
 })

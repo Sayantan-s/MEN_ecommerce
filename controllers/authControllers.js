@@ -1,20 +1,38 @@
+const User = require("../mongoose/models/user.model");
+
 exports.getLogin = (req,res) => {
+    console.log(req.session);
     res
     .render('auth/login',{
         title : 'Login',
         path: req._parsedOriginalUrl.path,
-        isAuthenticated: true 
+        isAuth : req.session.isLoggedIn
     })
 }
 
 exports.postLogin = (req,res) => {
     const { email } = req.body;
     if(email.trim() !== ''){
-        //res.setHeader('Set-Cookie','isAuthenticated=true')
-        req.session.isLoggedIn = true;
-        return res.json({
-            status : 'Authentication successfull'
-        })
+       User.findById('6061f4b4bc69ff8a7d35cec7')
+       .then(user => {
+            if(!user){
+                const admin = new User({
+                    fullName : 'NikeAdmin',
+                    email : 'nikead@ac.in',
+                    cart : {
+                        items : []
+                    }
+                })
+                admin.save()
+            }
+            req.session.isLoggedIn = true;
+            req.session.user = user;
+            return res.json({
+                status : 'Authentication successfull'
+            })
+       })
     }
     return res.json({ status : 'Invalid Email!' })
 }
+
+ //res.setHeader('Set-Cookie','isAuthenticated=true')

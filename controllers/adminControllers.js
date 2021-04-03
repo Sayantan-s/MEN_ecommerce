@@ -6,8 +6,9 @@ exports.getAdminProducts = ((req,res) => {
     .render('admin/edit-product',{
         title : 'Admin | product',
         path :  req._parsedOriginalUrl.path,
-        edit : false
-    })
+        edit : false,
+        isAuth : req.session.isLoggedIn
+    })  
 })
 
 exports.getEditProducts = ((req,res) => {
@@ -25,6 +26,7 @@ exports.getEditProducts = ((req,res) => {
             title : 'Admin | UpdateProduct',
             path :  '/admin/edit-product',
             edit : editMode,
+            isAuth : req.session.isLoggedIn,
             data
         })
     })
@@ -63,7 +65,8 @@ exports.getAdminShowProducts = ((req,res) => {
         .render('admin/show-product',{
             title : 'Admin | product',
             path :  req._parsedOriginalUrl.path,
-            itemData : products
+            itemData : products,
+            isAuth : req.session.isLoggedIn
         })
     })
     .catch(err => console.log(err));
@@ -72,7 +75,7 @@ exports.getAdminShowProducts = ((req,res) => {
 
 
 exports.postAdminProducts = ((req,res) => {
-    const Product = new ProductModel({...req.body,userId : req.user}) //Mongoose will take only req.user._id from req.user
+    const Product = new ProductModel({...req.body,userId : req.session.user}) //Mongoose will take only req.user._id from req.user
     return Product
     .save()
     .then(_ => {
