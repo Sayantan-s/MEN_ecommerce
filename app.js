@@ -12,7 +12,8 @@ const admin = require('./routes/admin');
 const auth = require('./routes/auth');
 const { error } = require('./controllers/errorController');
 const dbMongooseConnect = require('./db/db.mongoose.connect');
-const sessions = require('./db/sessions');
+//const sessions = require('./db/sessions');
+const User = require('./mongoose/models/user.model');
 
 const responseText = 'Hello I am listening';
 const PORT  =  process.env.PORT || 3000;
@@ -20,20 +21,53 @@ const PORT  =  process.env.PORT || 3000;
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine','ejs')
 
+const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
+
+const store = new MongoDBStore({
+    uri : 'mongodb+srv://sayan:Sayantan@123@sayantan.zc13y.mongodb.net/Sayantan',
+    collection : 'sessions'
+})
+
 
 app.use(bodyParser.urlencoded({ extended  : true }));
 app.use(bodyParser.json());
 app.use(express.static('static'));
-app.use(sessions)
+app.use(session({
+    secret: 'ssh! secret',
+    resave: false,
+    saveUninitialized : false,
+    store
+}))
 
 const Emitters = new EventEmitter();
 Emitters.setMaxListeners(100);
 
+app.use((req, res, next) => {
+    if(!req.session.user) return next();
+    User.findById(req.session.user._id)
+    .then(user => {
+        if(!user){
+            const admin = new User({
+                fullName : 'NikeAdmin',
+                email : 'nikead@ac.in',
+                cart : {
+                    items : []
+                }
+            })
+            admin.save()
+        }
+        req.user = user;
+        req.heyBro = "Hey!"
+        next();
+    }).catch(err => console.log(err));
+})
 
-app.use(auth)
 app.use('/admin',admin)
 app.use(shop);
+app.use(auth);
 app.use(error)
+
 
 dbMongooseConnect(_ => {
     app.listen(PORT,(req,res) => {
