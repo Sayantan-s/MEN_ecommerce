@@ -15,6 +15,8 @@ exports.postLogin = (req,res) => {
     if(email.trim() !== ''){
        User.findById('6061f4b4bc69ff8a7d35cec7')
        .then(user => {
+            req.session.user = user;
+            req.session.isLoggedIn = true;
             return res.json({
                 status : 'Authentication successfull'
             })

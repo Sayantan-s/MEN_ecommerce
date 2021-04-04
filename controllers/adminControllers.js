@@ -7,7 +7,6 @@ exports.getAdminProducts = ((req,res) => {
         title : 'Admin | product',
         path :  req._parsedOriginalUrl.path,
         edit : false,
-        isAuth : req.session.isLoggedIn
     })  
 })
 
@@ -26,7 +25,6 @@ exports.getEditProducts = ((req,res) => {
             title : 'Admin | UpdateProduct',
             path :  '/admin/edit-product',
             edit : editMode,
-            isAuth : req.session.isLoggedIn,
             data
         })
     })
@@ -72,10 +70,10 @@ exports.getAdminShowProducts = ((req,res) => {
     .catch(err => console.log(err));
 })
 
-
+ 
 
 exports.postAdminProducts = ((req,res) => {
-    const Product = new ProductModel({...req.body,userId : req.session.user}) //Mongoose will take only req.user._id from req.user
+    const Product = new ProductModel({...req.body,userId : req.user}) //Mongoose will take only req.user._id from req.user
     return Product
     .save()
     .then(_ => {

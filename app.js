@@ -12,7 +12,7 @@ const admin = require('./routes/admin');
 const auth = require('./routes/auth');
 const { error } = require('./controllers/errorController');
 const dbMongooseConnect = require('./db/db.mongoose.connect');
-//const sessions = require('./db/sessions');
+const sessions = require('./db/sessions');
 const User = require('./mongoose/models/user.model');
 
 const responseText = 'Hello I am listening';
@@ -21,24 +21,10 @@ const PORT  =  process.env.PORT || 3000;
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine','ejs')
 
-const session = require('express-session');
-const MongoDBStore = require('connect-mongodb-session')(session);
-
-const store = new MongoDBStore({
-    uri : 'mongodb+srv://sayan:Sayantan@123@sayantan.zc13y.mongodb.net/Sayantan',
-    collection : 'sessions'
-})
-
-
 app.use(bodyParser.urlencoded({ extended  : true }));
 app.use(bodyParser.json());
 app.use(express.static('static'));
-app.use(session({
-    secret: 'ssh! secret',
-    resave: false,
-    saveUninitialized : false,
-    store
-}))
+app.use(sessions)
 
 const Emitters = new EventEmitter();
 Emitters.setMaxListeners(100);
@@ -74,3 +60,12 @@ dbMongooseConnect(_ => {
         console.log(responseText);
     });
 })
+
+/*  <% if(!isAuth) { %>
+                    <% if(route.name === 'Admin Products' || route.name === 'Add Products') { %>
+                        <% return; %>
+                    <% } %>
+                    <a class="block mr-4 w-max font-medium tracking-wide uppercase <%= path === route.hash ? 'text-gray-300' : 'text-black' %>" href="<%= route.hash %>"><%= route.name %></a>
+                <% } else {%>
+                    <a class="block mr-4 w-max font-medium tracking-wide uppercase <%= path === route.hash ? 'text-gray-300' : 'text-black' %>" href="<%= route.hash %>"><%= route.name %></a>
+                <% } %>*/
