@@ -61,11 +61,4 @@ dbMongooseConnect(_ => {
     });
 })
 
-/*  <% if(!isAuth) { %>
-                    <% if(route.name === 'Admin Products' || route.name === 'Add Products') { %>
-                        <% return; %>
-                    <% } %>
-                    <a class="block mr-4 w-max font-medium tracking-wide uppercase <%= path === route.hash ? 'text-gray-300' : 'text-black' %>" href="<%= route.hash %>"><%= route.name %></a>
-                <% } else {%>
-                    <a class="block mr-4 w-max font-medium tracking-wide uppercase <%= path === route.hash ? 'text-gray-300' : 'text-black' %>" href="<%= route.hash %>"><%= route.name %></a>
-                <% } %>*/
+/* */

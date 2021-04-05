@@ -17,9 +17,11 @@ document.querySelector('.form').addEventListener('submit',async(eve)=> {
             body : JSON.stringify(data)
         })
     
-        const status = await res.json();
+        const { status } = await res.json();
     
         console.log(status);
+
+        if(status === "Authentication successfull") return window.location.href = "/"
     
     }
     catch(e){  console.log(e)  }

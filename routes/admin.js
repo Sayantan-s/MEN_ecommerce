@@ -6,16 +6,18 @@ const { getAdminProducts,
     postEditProducts, 
     postDeleteProducts } = require('../controllers/adminControllers');
 
+const isAuth = require('../middleware/isAuth');
+
 const router = express.Router();
 
 
-router.get('/add-product',getAdminProducts);
+router.get('/add-product',isAuth,getAdminProducts);
 
-router.get('/show-product',getAdminShowProducts);
+router.get('/show-product',isAuth,getAdminShowProducts);
 
 router.post('/add-product',postAdminProducts);
 
-router.get('/edit-product/:productID',getEditProducts);
+router.get('/edit-product/:productID',isAuth,getEditProducts);
 
 router.post('/edit-product',postEditProducts);
 

@@ -33,27 +33,43 @@
         </svg>
         <div class="relative p-1 flex items-center justify-end w-max ml-5 mr-4 sm:mr-0 sm:right-auto">
             <% nav.forEach(route => { %>
-                <a class="block mr-4 w-max font-medium tracking-wide uppercase <%= path === route.hash ? 'text-gray-300' : 'text-black' %>" href="<%= route.hash %>"><%= route.name %></a>
+                <% if(!isAuth) { %>
+                    <% if(route.name === 'Admin Products' || route.name === 'Add Products') { %>
+                        <% return; %>
+                    <% } %>
+                    <a class="block mr-4 w-max font-medium tracking-wide uppercase <%= path === route.hash ? 'text-gray-300' : 'text-black' %>" href="<%= route.hash %>"><%= route.name %></a>
+                <% } else {%>
+                    <a class="block mr-4 w-max font-medium tracking-wide uppercase <%= path === route.hash ? 'text-gray-300' : 'text-black' %>" href="<%= route.hash %>"><%= route.name %></a>
+                <% } %>
             <% }) %>
         </div> 
         <div class="flex">
-            <a href="/login"> 
-                <button class="bg-gradient-to-br from-gray-900 to-black text-white px-5 py-2 font-semibold flex items-center tracking-wide uppercase rounded-lg shadow-md">
-                    <span class="font-sans">
-                        Login
-                    </span>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="fill-current text-white w-7 ml-2">
-                        <polygon fill="var(--ci-primary-color, currentColor)" points="359.873 121.377 337.246 144.004 433.243 240.001 16 240.001 16 240.002 16 272.001 16 272.002 433.24 272.002 337.246 367.996 359.873 390.623 494.498 256 359.873 121.377" class="ci-primary"/>
-                    </svg>
-                </button>
-            </a>
-            <form action="/logout" method="POST">
+            <% if(!isAuth) { %>
+                <a href="/signup"> 
+                    <button class="h-full bg-gray-200 text-black px-5 py-2 font-semibold flex items-center tracking-wide uppercase rounded-lg">
+                        <span class="font-sans">
+                            Sign Up
+                        </span>
+                    </button>
+                </a>
+                <a href="/login"> 
+                    <button class="ml-4  bg-gradient-to-br from-gray-900 to-black text-white px-5 py-2 font-semibold flex items-center tracking-wide uppercase rounded-lg shadow-md">
+                        <span class="font-sans">
+                            Login
+                        </span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="fill-current text-white w-7 ml-2">
+                            <polygon fill="var(--ci-primary-color, currentColor)" points="359.873 121.377 337.246 144.004 433.243 240.001 16 240.001 16 240.002 16 272.001 16 272.002 433.24 272.002 337.246 367.996 359.873 390.623 494.498 256 359.873 121.377" class="ci-primary"/>
+                        </svg>
+                    </button>
+                </a>
+            <% } %>
+            <% if(isAuth) { %>
+                <form action="/logout" method="POST" class="h-full">
                 <button class="bg-gradient-to-br from-gray-900 to-black text-white px-5 py-2 font-semibold flex items-center tracking-wide uppercase rounded-lg shadow-md">
                     Log out
                 </button>     
             </form>
+            <% } %>
         </div>
    </div>
 </header>
-
-/*

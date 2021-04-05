@@ -1,5 +1,6 @@
 const express = require('express');
 const { getHome, getShopProducts, getOrders,getShopCart, getProductByID, postProductInCart, deleteProductFromCart, postOrders } = require('../controllers/shopController');
+const isAuth = require('../middleware/isAuth');
 
 const router = express.Router();
 
@@ -10,13 +11,13 @@ router.get('/products',getShopProducts);
 
 router.get('/products/:id',getProductByID);
 
-router.get('/cart',getShopCart);
+router.get('/cart',isAuth,getShopCart);
 
 router.post('/cart',postProductInCart);
 
 router.post('/cart-delete',deleteProductFromCart)
 
-router.get('/orders',getOrders);
+router.get('/orders',isAuth,getOrders);
 
 router.post('/orders',postOrders);
 

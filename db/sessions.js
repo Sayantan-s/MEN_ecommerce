@@ -7,7 +7,7 @@ const store = new MongoDBStore({
 })
 
 module.exports = session({
-    secret: 'ssh! secret',
+    secret: 'new secret!',
     resave: false,
     saveUninitialized : false,
     store

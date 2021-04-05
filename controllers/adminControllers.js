@@ -7,6 +7,7 @@ exports.getAdminProducts = ((req,res) => {
         title : 'Admin | product',
         path :  req._parsedOriginalUrl.path,
         edit : false,
+        isAuth : req.session.isLoggedIn
     })  
 })
 
@@ -25,6 +26,7 @@ exports.getEditProducts = ((req,res) => {
             title : 'Admin | UpdateProduct',
             path :  '/admin/edit-product',
             edit : editMode,
+            isAuth : req.session.isLoggedIn,
             data
         })
     })
