@@ -1,3 +1,5 @@
+const bcrypt = require('bcryptjs');
+
 const User = require("../mongoose/models/user.model");
 
 exports.getLogin = (req,res) => {
@@ -11,18 +13,26 @@ exports.getLogin = (req,res) => {
 }
 
 exports.postLogin = (req,res) => {
-    const { email } = req.body;
+    const { email,password } = req.body;
     if(email.trim() !== ''){
-       return User.findById('6061f4b4bc69ff8a7d35cec7')
+       return User.findOne({  email })
        .then(user => {
-            req.session.isLoggedIn = true;
-            req.session.user = user;
-            req.session.save(_ => {
-                return res.json({
-                    status : 'Authentication successfull'
+            if(!user) return res.redirect('/login');
+            bcrypt
+            .compare(password,user.password)
+            .then(matched => {
+                if(!matched) return res.status(404).json({status : 'Invalid Password!'});
+                req.session.isLoggedIn = true;
+                req.session.user = user;
+                req.session.save(_ => {
+                    return res.json({
+                        status : 'Authentication successfull'
+                    })
                 })
             })
-          
+            .catch(err => {
+                if(err) return res.redirect('/login');
+            })
        })
        .catch(err => console.log(err));
     }
@@ -47,21 +57,25 @@ exports.getSignUp = (req,res) => {
 }
 
 exports.postSignUp = (req,res) => {
-    const { name,email } = req.body;
-    console.log(req.body);
-    return User.findOne({ email })
+    const { name,email,password } = req.body;
+    User.findOne({ email })
     .then(user => {
-       if(user) return res.redirect('/signup');
-       const newUser = new User({
-           fullName: name,
-           email,
-           cart : { items : [] }
-       })
-       newUser.save();
+        if(user) return res.redirect('/signup');
+        return bcrypt.hash(password,12)
+        .then(hashedPassword => {
+            const newUser = new User({
+                fullName: name,
+                email,
+                password : hashedPassword,
+                cart : { items : [] }
+            })
+            return newUser.save()
+        }).catch(err => console.log(err));
     })
-    .then(_ => {
+    .then(user => {
+        req.session.user = user
         req.session.isLoggedIn = true;
-        req.session.save(_ => {
+        req.session.save(_ => { 
             res.redirect('/');
         })
     })

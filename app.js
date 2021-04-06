@@ -3,6 +3,7 @@ const path = require('path');
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const csrf = require('csurf');
 require('dotenv').config();
 
 const app = express();
@@ -17,18 +18,22 @@ const User = require('./mongoose/models/user.model');
 
 const responseText = 'Hello I am listening';
 const PORT  =  process.env.PORT || 3000;
+const Emitters = new EventEmitter();
+Emitters.setMaxListeners(100);
+
+const middlewares = [
+    express.urlencoded({ extended : true }),
+    express.json(),
+    express.static('static'),
+    sessions,
+    csrf()
+]
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine','ejs')
 
-app.use(bodyParser.urlencoded({ extended  : true }));
-app.use(bodyParser.json());
-app.use(express.static('static'));
-app.use(sessions)
 
-const Emitters = new EventEmitter();
-Emitters.setMaxListeners(100);
-
+app.use(middlewares)
 app.use((req, res, next) => {
     if(!req.session.user) return next();
     User.findById(req.session.user._id)
@@ -44,7 +49,6 @@ app.use((req, res, next) => {
             admin.save()
         }
         req.user = user;
-        req.heyBro = "Hey!"
         next();
     }).catch(err => console.log(err));
 })
@@ -61,4 +65,3 @@ dbMongooseConnect(_ => {
     });
 })
 
-/* */

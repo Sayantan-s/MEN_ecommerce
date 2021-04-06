@@ -22,6 +22,7 @@ document.querySelector('.form').addEventListener('submit',async(eve)=> {
         console.log(status);
 
         if(status === "Authentication successfull") return window.location.href = "/"
+        else return window.location.href="/login"
     
     }
     catch(e){  console.log(e)  }
