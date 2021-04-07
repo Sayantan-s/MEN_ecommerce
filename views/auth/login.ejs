@@ -23,6 +23,7 @@
             class="mt-2 rounded-lg border-transparent flex-1 appearance-none border border-gray-300 py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" 
             placeholder="e.g. Enter passoword with characters...">
         </div>
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
         <button 
             type="submit" 
             class="mt-4 uppercase py-2 px-4 bg-gradient-to-br from-gray-900 to-black focus:ring-offset-purple-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">

@@ -52,7 +52,8 @@ exports.getSignUp = (req,res) => {
     .render('auth/signup',{
         title : 'Signup',
         path: req._parsedOriginalUrl.path,
-        isAuth : false
+        isAuth : false,
+        //csrfToken : req.csrfToken()
     })
 }
 
@@ -61,7 +62,7 @@ exports.postSignUp = (req,res) => {
     User.findOne({ email })
     .then(user => {
         if(user) return res.redirect('/signup');
-        return bcrypt.hash(password,12)
+        bcrypt.hash(password,12)
         .then(hashedPassword => {
             const newUser = new User({
                 fullName: name,
@@ -73,6 +74,7 @@ exports.postSignUp = (req,res) => {
         }).catch(err => console.log(err));
     })
     .then(user => {
+        console.log(user)
         req.session.user = user
         req.session.isLoggedIn = true;
         req.session.save(_ => { 

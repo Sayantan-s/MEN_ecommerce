@@ -65,9 +65,10 @@
             <% } %>
             <% if(isAuth) { %>
                 <form action="/logout" method="POST" class="h-full">
-                <button class="bg-gradient-to-br from-gray-900 to-black text-white px-5 py-2 font-semibold flex items-center tracking-wide uppercase rounded-lg shadow-md">
-                    Log out
-                </button>     
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <button class="bg-gradient-to-br from-gray-900 to-black text-white px-5 py-2 font-semibold flex items-center tracking-wide uppercase rounded-lg shadow-md">
+                        Log out
+                    </button>     
             </form>
             <% } %>
         </div>

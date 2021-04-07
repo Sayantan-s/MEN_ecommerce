@@ -18,39 +18,12 @@
                 </p>
            </div>
            <form action="/cart" method="POST">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 <input type="hidden" name="productID" value="<%= item._id %>">
                 <button class="bg-gradient-to-br from-gray-900 to-black text-white px-5 py-2 font-semibold flex items-center tracking-wide rounded-lg shadow-md">
                     Add to cart
                 </button>
            </form>
-            <!--<div class="shadow-md rounded-2xl bg-white w-96 h-auto m-auto px-4 py-3 flex flex-col">
-               
-                <div class="p-2 bg-orange-light rounded-2xl">
-                     <h1 class="text-white font-bold">
-                         <%= item.name %>
-                     </h1> 
-                     <p class="text-gray-50 text-xs">
-                         <%= item.des %>
-                     </p>
-                     <div class="flex justify-between items-end mt-4 font-extrabold">
-                         <h2>
-                             &#x20B9; <%= item.price %>
-                         </h2>
-                         <div class="flex gap-1">
-                             <a href="/products/<%= item.id %>" class="no-underline">
-                                 <button class="rounded-xl bg-black text-white py-2 px-4 text-xs font-bold">
-                                     Delete
-                                 </button>
-                            </a>
-                            <a href="/products/<%= item.id %>" class="no-underline">
-                                 <button class="rounded-xl bg-black text-white py-2 px-4 text-xs font-bold">
-                                     Edit
-                                 </button>
-                             </a>
-                         </div>
-                     </div>
-                </div>
-             </div> !-->
         <% } else { %>
             <div>Not getting perfect data.</div>
         <% }%>

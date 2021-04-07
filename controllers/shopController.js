@@ -13,7 +13,7 @@ exports.getHome = ((req,res) => {
         title : 'Home',
         path: req._parsedOriginalUrl.path,
         itemData : products,
-        isAuth : req.session.isLoggedIn
+        isAuth : req.session.isLoggedIn,
     })
    }).catch(err => console.log(err))
 })
@@ -71,7 +71,7 @@ exports.postOrders = (req,res) => {
     .populate('cart.items')
     .execPopulate()
     .then(result => {  
-        const { fullName,_id } = req.user
+        const { email,_id } = req.user
         const prodIDs = result.cart.items.map(i => i.productID)
         Product
         .find({
@@ -85,7 +85,7 @@ exports.postOrders = (req,res) => {
             })) 
             const order = new Order({
                 user : {
-                    name : fullName,
+                    email,
                     userId : _id
                 },
                products : newProducts
@@ -95,11 +95,7 @@ exports.postOrders = (req,res) => {
         .then(_ => req.user.clearCart())
         .catch(err => console.log(err))
     }).then(_ => {
-        return  res
-        .status(200)
-        .json({
-            statusText : `item is ordered!`     
-        })
+        return  res.redirect('/orders')
     }).catch(err => console.log(err))  
 }
 

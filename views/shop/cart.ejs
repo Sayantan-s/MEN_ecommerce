@@ -12,11 +12,15 @@
                      <h1>There are no products in the cart!</h1>
                  <% } %>    
             </div>
-            <button 
-            id="order-from-cart"
-            class="bg-gradient-to-br from-gray-900 to-black text-white px-5 py-3 font-semibold flex items-center tracking-wide uppercase rounded-lg shadow-md float-right">
-                Order now
-            </button>
+            <form method="POST" action="/orders">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <button 
+                csrfToken=<%= csrfToken %>
+                id="order-from-cart"
+                class="bg-gradient-to-br from-gray-900 to-black text-white px-5 py-3 font-semibold flex items-center tracking-wide uppercase rounded-lg shadow-md float-right">
+                    Order now
+                </button>
+            </form>
         </div>
     </section>
     <script src="/js/page/cart.js"></script>
