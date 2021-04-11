@@ -18,11 +18,10 @@ document.querySelector('.form').addEventListener('submit',async(eve)=> {
         })
     
         const { status } = await res.json();
-    
-        console.log(status);
+
 
         if(status === "Authentication successfull") return window.location.href = "/"
-        else return window.location.href="/login"
+        else return window.location.reload();
     
     }
     catch(e){  console.log(e)  }

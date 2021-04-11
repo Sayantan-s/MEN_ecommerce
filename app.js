@@ -2,7 +2,6 @@ const EventEmitter = require('events');
 const path = require('path');
 
 const express = require('express');
-const bodyParser = require('body-parser');
 const csrf = require('csurf');
 require('dotenv').config();
 
@@ -26,7 +25,8 @@ const middlewares = [
     express.json(),
     express.static('static'),
     sessions,
-    csrf()
+    csrf(),
+    require('connect-flash')()
 ]
 
 app.set('views', path.join(__dirname, 'views'));
@@ -38,23 +38,13 @@ app.use((req, res, next) => {
     if(!req.session.user) return next();
     User.findById(req.session.user._id)
     .then(user => {
-        if(!user){
-            const admin = new User({
-                fullName : 'NikeAdmin',
-                email : 'nikead@ac.in',
-                cart : {
-                    items : []
-                }
-            })
-            admin.save()
-        }
         req.user = user;
         next();
     }).catch(err => console.log(err));
 })
 
 app.use((req,res,next) => {
-    res.locals.isAuthenticated = req.session.isLoggedIn;
+    res.locals.isAuth = req.session.isLoggedIn;
     res.locals.csrfToken = req.csrfToken();
     next();
 })

@@ -3,25 +3,32 @@ const bcrypt = require('bcryptjs');
 const User = require("../mongoose/models/user.model");
 
 exports.getLogin = (req,res) => {
-    console.log(req.session);
+    const errorMessage = req.flash('error');
     res
     .render('auth/login',{
         title : 'Login',
         path: req._parsedOriginalUrl.path,
-        isAuth : false
+        isAuth : false,
+        error : errorMessage.length > 0 ? errorMessage[0] : null
     })
 }
 
 exports.postLogin = (req,res) => {
     const { email,password } = req.body;
     if(email.trim() !== ''){
-       return User.findOne({  email })
+       return User.findOne({ email })
        .then(user => {
-            if(!user) return res.redirect('/login');
+            if(!user) {
+                req.flash('error', 'Invalid email!');
+                return res.status(404).json({status : 'Invalid Email!'});
+            }
             bcrypt
             .compare(password,user.password)
             .then(matched => {
-                if(!matched) return res.status(404).json({status : 'Invalid Password!'});
+                if(!matched) {
+                    req.flash('error', 'Invalid password!');
+                    return res.status(404).json({status : 'Invalid Password!'});
+                }
                 req.session.isLoggedIn = true;
                 req.session.user = user;
                 req.session.save(_ => {
@@ -31,7 +38,10 @@ exports.postLogin = (req,res) => {
                 })
             })
             .catch(err => {
-                if(err) return res.redirect('/login');
+                if(err){
+                    req.flash('error', 'Invalid user!');
+                    return res.status(404).json({status : 'Invalid Password!'});
+                }
             })
        })
        .catch(err => console.log(err));

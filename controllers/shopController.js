@@ -13,7 +13,6 @@ exports.getHome = ((req,res) => {
         title : 'Home',
         path: req._parsedOriginalUrl.path,
         itemData : products,
-        isAuth : req.session.isLoggedIn,
     })
    }).catch(err => console.log(err))
 })
@@ -29,7 +28,6 @@ exports.getShopProducts = ((req,res) => {
            title : 'Products',
            path: req._parsedOriginalUrl.path,
            itemData : products,
-           isAuth : req.session.isLoggedIn
        })
    }).catch(err => console.log(err))
 })
@@ -45,8 +43,7 @@ exports.getProductByID = ((req,res) => {
             title : `Product | ${id}`,
             path : '/products',
             pageID : id,
-            item,
-            isAuth : req.session.isLoggedIn
+            item
         })
     }).catch(err => console.log(err))
 })
@@ -59,8 +56,7 @@ exports.getOrders = ((req,res) => {
         .render('shop/order',{
             title : 'Your orders',
             path: req._parsedOriginalUrl.path,
-            orders: orders,
-            isAuth : req.session.isLoggedIn
+            orders: orders
         })
     })
     .catch(err => console.log(err));

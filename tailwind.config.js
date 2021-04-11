@@ -15,7 +15,7 @@ module.exports = {
       }
     },
     fontFamily: {
-      sans: ['Inter', 'sans-serif'],
+      sans: ['Lexend', 'sans-serif'],
     },
     extend: {
       spacing: {
