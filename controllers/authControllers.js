@@ -1,5 +1,4 @@
 const bcrypt = require('bcryptjs');
-
 const User = require("../mongoose/models/user.model");
 
 exports.getLogin = (req,res) => {
@@ -72,7 +71,7 @@ exports.postSignUp = (req,res) => {
     User.findOne({ email })
     .then(user => {
         if(user) return res.redirect('/signup');
-        bcrypt.hash(password,12)
+        return bcrypt.hash(password,12)
         .then(hashedPassword => {
             const newUser = new User({
                 fullName: name,
@@ -84,7 +83,7 @@ exports.postSignUp = (req,res) => {
         }).catch(err => console.log(err));
     })
     .then(user => {
-        console.log(user)
+        if(!user) return res.redirect('/signup');
         req.session.user = user
         req.session.isLoggedIn = true;
         req.session.save(_ => { 
@@ -92,4 +91,13 @@ exports.postSignUp = (req,res) => {
         })
     })
     .catch(err => console.log(err));
+}
+
+exports.getResetPass = (req,res) => {
+    const errorMessage = req.flash('error');
+    res.render('auth/reset',{
+        title : 'Signup',
+        path: '/reset password',
+        error : errorMessage.length > 0 ? errorMessage[0] : null
+    })
 }

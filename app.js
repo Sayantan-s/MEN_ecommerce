@@ -1,5 +1,6 @@
 const EventEmitter = require('events');
 const path = require('path');
+const crypto = require('crypto')
 
 const express = require('express');
 const csrf = require('csurf');
@@ -54,9 +55,8 @@ app.use(shop);
 app.use(auth);
 app.use(error)
 
-
 dbMongooseConnect(_ => {
-    app.listen(PORT,(req,res) => {
+    app.listen(PORT,_ => {
         console.log(responseText);
     });
 })
