@@ -1,5 +1,14 @@
 const bcrypt = require('bcryptjs');
 const User = require("../mongoose/models/user.model");
+const crypto = require('crypto');
+const nodemailer = require('nodemailer');
+const sgTransporter = require('nodemailer-sendgrid-transport');
+
+const transporter = nodemailer.createTransport(sgTransporter({
+    auth : {
+        api_key : process.env.SENDGRID_API_KEY
+    }
+}))
 
 exports.getLogin = (req,res) => {
     const errorMessage = req.flash('error');
@@ -14,7 +23,7 @@ exports.getLogin = (req,res) => {
 
 exports.postLogin = (req,res) => {
     const { email,password } = req.body;
-    if(email.trim() !== ''){
+    if(email.trim() !== ''){ 
        return User.findOne({ email })
        .then(user => {
             if(!user) {
@@ -100,4 +109,43 @@ exports.getResetPass = (req,res) => {
         path: '/reset password',
         error : errorMessage.length > 0 ? errorMessage[0] : null
     })
+}
+
+exports.postResetPass = (req,res) => {
+    const { email } = req.body
+    crypto.randomBytes(32,(err,buffer) => {
+        if(err) {
+            console.log(err);
+            return res.redirect('/reset');
+        }
+        const token = buffer.toString('hex');
+        User.findOne({
+            email
+        },(err,user) => {
+            if(err) {
+                console.log(err);
+                res.redirect('/reset');
+            }
+            user.resetToken = token;
+            user.resetTokenExpiration = Date.now() + (60 * 60 * 1000)
+            return user.save();
+        })    
+        .then(_ => {
+            res.redirect('/');
+            transporter.sendMail({
+                to: email,
+                from : 'sayantans.it2018@nsec.ac.in',
+                subject: 'Password reset',
+                html : `<div>
+                      <h1>You requested a password reset</h1>
+                      <p>Click the <a href="http://localhost:4000/reset/${token}"> link </a> for a new password</p>  
+                    <div>`
+            })
+        })
+        .catch(err => console.log(err));
+    })
+}
+
+exports.getPassReset = (req,res) => {
+    return res.status(200)
 }

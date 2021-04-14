@@ -2,7 +2,7 @@
 
 <body>
     <%- include('../includes/nav.ejs') %>
-    <form class="flex flex-col max-w-lg rounded-lg shadow p-5 relative form">
+    <form class="flex flex-col max-w-lg rounded-lg shadow p-5 relative form" action="/reset" method="POST">
         <% if(error){ %>
             <div class="fixed bottom-2 left-1/2 p-4 font-semibold bg-red-100 text-lg text-red-500 max-w-md rounded-xl text-center">
                 <p><%= error %></p>
