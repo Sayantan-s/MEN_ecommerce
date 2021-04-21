@@ -1,0 +1,12 @@
+{
+    "products" : {
+        "shoes" : { 
+            "_id":"605b678d873d4e690ac9e518",
+            "name":"Nike Cosmic",
+            "tagname":"Unity 'Space Hippie'",
+            "price":"3599",
+            "gender":"Men",
+            "image":"  https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/f869354f-ed97-4fc7-b43e-e8d4bd3390af/cosmic-unity-space-hippie-basketball-shoe-B3qDKv.jpg  ","description":"              \r\n                                \r\n                  The Nike Cosmic Unity 'Space Hippie' is trash that helps keep you fresh, giving you back the energy you need to let your game do the talking when it counts. We built a sleek and comfortable silhouette with sustainability in mind. It's made from at least 25% recycled material by weight and comes equipped with a partially recycled Air Zoom Strobel designed to help you be efficient off the dribble or effective on defense. This is trash, transformed into a tool for basketball players to get a little more out of their game while taking a little less from the planet"
+        }
+    }
+}
