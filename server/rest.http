@@ -1,0 +1,17 @@
+POST http://localhost:5000/auth/register
+Content-Type: application/json
+
+{
+    "fullname" : "Sayantan",
+    "username" : "icegeek_07",
+    "email" : "sssamanta789@gmail.com",
+    "password" : "sayaN1ssds",
+    "confirmpassword" : "sayaN1ssds"
+}
+
+###
+POST http://localhost:5000/auth/login
+
+
+###
+POST http://localhost:5000/auth/logout
