@@ -3,6 +3,8 @@ import { DB_URI } from '../config'
 
 const uri = DB_URI
 
+const db = mongoose.connection;
+
 export default (callback) => {
     mongoose.connect(
         uri,
@@ -12,9 +14,18 @@ export default (callback) => {
             useNewUrlParser: true,
             useFindAndModify: true
         }
-      ).then(_ => {
-          console.log("Connected to Mongodb through mongoose")
-          return callback();
-      })
-      .catch(err => console.log(err))
+      )
+    db.on('error',err => console.log(err));
+    db.once('open',_ => {
+        console.log('DB connected...');
+        return callback();
+    })
+    db.on('disconnected',_=>{
+        return console.log('Disconnected from mongo!!');
+    })
+
+    process.on('SIGINT',async() => {
+        await db.close();
+        process.exit(0);
+    })
 }
