@@ -1,12 +1,14 @@
 import { useEffect } from 'react'
-const usePortal = () => {
+const usePortal = (rootname) => {
 
     useEffect(() => {
-        const newRoot  = document.createElement('div');
-        newRoot.className="modals"
-        const rootElement = document.getElementById('root');
-        document.body.insertBefore(newRoot,rootElement)
-    },[])
+       if(!document.getElementById(rootname)){
+            const newRoot  = document.createElement('div');
+            newRoot.id= rootname;
+            const rootElement = document.getElementById('root');
+            document.body.insertBefore(newRoot,rootElement)
+       }
+    },[rootname])
 }
 
 export default usePortal;

@@ -1,11 +1,16 @@
 import React from 'react'
 
-const Box = ({ children,...otherProps }) => {
+const Box = ({ children,as,...otherProps }) => {
+    const Eletype = as;
     return (
-        <div className="w-10/12 mx-auto" {...otherProps}>
+        <Eletype className="w-10/12 mx-auto" {...otherProps}>
             { children }
-        </div>
+        </Eletype>
     )
+}
+
+Box.defaultProps = {
+    as : 'div'
 }
 
 export default Box;

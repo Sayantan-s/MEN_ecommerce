@@ -31,11 +31,12 @@ const Navbar = () => {
                         as={Anchor}>
                           Catagories
                       </Popover.Button>
-                      <Popover.Panel as={motion.div} className="absolute z-10 bg-gray-50 p-4 shadow-xl rounded-xl flex items-center">
+                      <Popover.Panel as={motion.div} className="absolute z-10 bg-gray-50 p-4 shadow-md rounded-2xl flex items-center">
                           {
                             ['Clothing', 'Accessories', 'Shoes'].map(product => {
                               const link = product.toLowerCase();
                               return <Anchor
+                              className="mx-2"
                               key={link} 
                               to={`/${link}`}>
                                 {product}
@@ -50,7 +51,6 @@ const Navbar = () => {
           </div>
           <div>
             <Anchor 
-            className="bg-gray-800 leading-1 py-2 px-4 rounded-lg shadow-sm text-gray-50 flex items-center"
             to="/admin">
               <span className="h-max">
                 Admin

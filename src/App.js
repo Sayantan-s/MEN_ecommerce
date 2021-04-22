@@ -1,5 +1,5 @@
 import { Layout } from "layout";
-import { Collections, Home } from "pages";
+import { Admin, Collections, Home } from "pages";
 import { useEffect } from "react";
 import { BrowserRouter as Switch,Route } from 'react-router-dom'
 
@@ -13,8 +13,9 @@ function App() {
   return (
    <Layout>
       <Switch>
-        <Route path="/" component={Home} exact />
-        <Route path="/dashboard" component={Collections} />
+        <Route path="/" component={Home} exact/>
+        <Route path="/dashboard" component={Collections}/>
+        <Route path="/admin" component={Admin}/>
       </Switch>
    </Layout>
   );
