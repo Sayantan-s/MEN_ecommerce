@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Greycliff CF';
+    src: local('Greycliff CF Extra Bold'), local('Greycliff-CF-Extra-Bold'),
+        url('GreycliffCF-ExtraBold.woff2') format('woff2'),
+        url('GreycliffCF-ExtraBold.woff') format('woff'),
+        url('GreycliffCF-ExtraBold.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
+  }

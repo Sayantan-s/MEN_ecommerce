@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Greycliff CF';
+    src: local('Greycliff CF Demi Bold'), local('Greycliff-CF-Demi-Bold'),
+        url('GreycliffCF-DemiBold.woff2') format('woff2'),
+        url('GreycliffCF-DemiBold.woff') format('woff'),
+        url('GreycliffCF-DemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+  }
