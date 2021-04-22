@@ -3,8 +3,14 @@
       ["module-resolver", {
         "root": ["./src"],
         "alias": {
-          "test": "./test",
-          "underscore": "lodash"
+          "components" : "./components",
+          "data" : "./data",
+          "api" : "./api",
+          "pages" : "./pages",
+          "hooks" : "./components/hooks",
+          "elements" : "./components/elements",
+          "store" : "./store",
+          "styles" : "./styles"
         }
       }]
     ]

@@ -6,8 +6,8 @@
       "data" : ["./data"],
       "api" : ["./api"],
       "pages" : ["./pages"],
-      "hooks" : ["./components/hooks"],
-      "elements" : ["./components/elements"],
+      "hooks" : ["./components/hooks/*"],
+      "elements" : ["./components/elements/*"],
       "store" : ["./store"],
       "styles" : ["./styles"]
     }

@@ -1,4 +1,4 @@
-import Dashboard from './Dashboard'
+import Collections from './Collections'
 import Home from './Home'
 
-export { Dashboard, Home }
+export { Collections, Home }
