@@ -8,7 +8,7 @@ import React from 'react'
 const Navbar = () => {
     return (
       <header>
-        <Disclosure as={motion.nav} className="w-10/12 mx-auto flex items-center justify-between">
+        <Disclosure as={motion.nav} className="flex items-center justify-between w-10/12 mx-auto">
           <Logo />
           <div className="flex">
             <Anchor 
@@ -51,10 +51,12 @@ const Navbar = () => {
           </div>
           <div>
             <Anchor 
+            className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 rounded-lg shadow-sm font-medium text-white bg-gray-900 hover:bg-gray-700"
             to="/admin">
-              <span className="h-max">
+              <span>
                 Admin
               </span>
+              <LineLock className="stroke-current stroke-4" width={15}/>
             </Anchor>
           </div>
         </Disclosure>

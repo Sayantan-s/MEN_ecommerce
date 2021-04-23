@@ -7,9 +7,9 @@
       "api" : ["./api"],
       "pages" : ["./pages"],
       "hooks" : ["./components/hooks/*"],
-      "elements" : ["./components/elements/*"],
       "store" : ["./store"],
       "styles" : ["./styles"]
     }
-  }
+  },
+  "exclude": ["node_modules"]
 }

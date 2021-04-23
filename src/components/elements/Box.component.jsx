@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import React from 'react'
 
 const Box = ({ children,as,...otherProps }) => {
@@ -10,7 +11,7 @@ const Box = ({ children,as,...otherProps }) => {
 }
 
 Box.defaultProps = {
-    as : 'div'
+    as : motion.div
 }
 
 export default Box;
