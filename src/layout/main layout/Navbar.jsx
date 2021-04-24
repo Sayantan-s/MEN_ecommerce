@@ -1,7 +1,8 @@
-import { Disclosure, Popover } from '@headlessui/react'
+import { Disclosure } from '@headlessui/react'
 import { LineLock } from 'assets/Icons'
 import Logo from 'assets/Logo'
 import Anchor from 'components/elements/Anchor.component'
+import Dropdown from 'components/elements/Dropdown.component'
 import { motion } from 'framer-motion'
 import React from 'react'
 
@@ -21,42 +22,18 @@ const Navbar = () => {
             to="/collections">
               Collections
             </Anchor>
-            <Popover>
-              {
-                ({ open }) => {
-                  return <>
-                      <Popover.Button 
-                        to="#"
-                        className="uppercase focus:outline-none" 
-                        as={Anchor}>
-                          Catagories
-                      </Popover.Button>
-                      <Popover.Panel as={motion.div} className="absolute z-10 bg-gray-50 p-4 shadow-md rounded-2xl flex items-center">
-                          {
-                            ['Clothing', 'Accessories', 'Shoes'].map(product => {
-                              const link = product.toLowerCase();
-                              return <Anchor
-                              className="mx-2"
-                              key={link} 
-                              to={`/${link}`}>
-                                {product}
-                              </Anchor>
-                            })
-                          }
-                      </Popover.Panel>
-                  </>
-                }
-              }
-            </Popover>
+            <Dropdown 
+            btnname="Categories"
+            data={['Clothing', 'Accessories', 'Shoes']}/>
           </div>
           <div>
             <Anchor 
-            className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 rounded-lg shadow-sm font-medium text-white bg-gray-900 hover:bg-gray-700"
+            className="ml-8 whitespace-nowrap inline-flex  px-4 py-2 rounded-lg shadow-sm font-medium text-white bg-gray-900 hover:bg-gray-700"
             to="/admin">
-              <span>
+              <LineLock className="stroke-current mr-1" width={24}/>
+              <span className="transform translate-y-0">
                 Admin
               </span>
-              <LineLock className="stroke-current stroke-4" width={15}/>
             </Anchor>
           </div>
         </Disclosure>
