@@ -5,7 +5,7 @@ const Button = ({ children,type, ...otherprops }) => {
     let styles;
     switch(type){
         case 'primary' : 
-            styles = '';
+            styles = 'bg-gray-900 text-gray-50 px-4 py-3 rounded-lg font-semibold uppercase flex text-md';
             break;
         case 'secondary' : 
             styles = '';

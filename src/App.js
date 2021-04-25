@@ -13,9 +13,15 @@ function App() {
   return (
    <Layout>
       <Switch>
-        <Route path="/" component={Home} exact />
-        <Route path="/collections" component={Collections}/>
-        <Route path="/admin" component={Admin}/>
+        <Route path="/" exact>
+            <Home />
+        </Route>
+        <Route path="/collections">
+            <Collections />
+        </Route>
+        <Route path="/admin">
+            <Admin />
+        </Route>
       </Switch>
    </Layout>
   );
