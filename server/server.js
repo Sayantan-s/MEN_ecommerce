@@ -23,7 +23,7 @@ app.use((req,res,next) => {
 })
 
 app.use((err,req,res,next) => {
-    const statusCode = err.status || 500;
+    const statusCode = err.status || 500; 
     return res
     .status(statusCode)
     .send({
@@ -34,5 +34,5 @@ app.use((err,req,res,next) => {
 
 init_mongodb(_ => app.listen(PORT,_=> console.log("Server is live....")))
 
-
+ 
  
