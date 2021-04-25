@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion';
 import React from 'react'
 
-const Box = ({ children,as, ...otherProps }) => {
+const Box = ({ children,as,className, ...otherProps }) => {
     const Eletype = as;
     return (
-        <Eletype className="w-10/12 mx-auto" {...otherProps}>
+        <Eletype className={`w-10/12 mx-auto ${className}`} {...otherProps}>
             { children }
         </Eletype>
     )
