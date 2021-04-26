@@ -3,7 +3,7 @@ import { Youtube } from 'assets/Icons'
 import { Facebook } from 'assets/Icons'
 import { Twitter } from 'assets/Icons'
 import Logo from 'assets/Logo'
-import Box from 'components/elements/Box.component'
+import { Box } from 'components'
 import React from 'react'
 import { Link } from 'react-router-dom'
 

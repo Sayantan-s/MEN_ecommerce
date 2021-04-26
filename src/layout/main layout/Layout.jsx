@@ -1,5 +1,4 @@
-import Box from 'components/elements/Box.component'
-import { motion } from 'framer-motion'
+import { AnimateSharedLayout } from 'framer-motion'
 import React from 'react'
 import Footer from './Footer'
 import Navbar from './Navbar'
@@ -8,11 +7,9 @@ const Layout = ({children}) => {
     return (
         <>
             <Navbar />
-               <Box 
-               className="min-h-screen"
-               as={motion.main}>
+                <AnimateSharedLayout>
                     {children}
-               </Box>
+                </AnimateSharedLayout>
             <Footer />
         </>
     )

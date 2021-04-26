@@ -1,10 +1,11 @@
+import { Page } from 'components'
 import React from 'react'
 
 const Home = () => {
     return (
-        <div>
-            Hello Home  
-        </div>
+       <Page>
+           Home
+       </Page>
     )
 }
 

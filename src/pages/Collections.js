@@ -1,10 +1,11 @@
+import { Page } from 'components'
 import React from 'react'
 
 const Collections = () => {
     return (
-        <div>
+        <Page>
             Collections
-        </div>
+        </Page>
     )
 }
 

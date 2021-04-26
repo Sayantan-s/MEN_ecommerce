@@ -1,10 +1,11 @@
+import { Page } from 'components'
 import React from 'react'
 
 const Admin = () => {
     return (
-        <div>
-            Hello dmin
-        </div>
+       <Page>
+           Home...
+       </Page>
     )
 }
 

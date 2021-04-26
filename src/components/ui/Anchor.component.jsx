@@ -1,11 +1,11 @@
 import React, { forwardRef } from 'react'
 import { NavLink } from 'react-router-dom'
 
-const Anchor = ({ to, children, activeClassName,className,...otherProps  },ref) => {
+const Link = ({ to, children, activeClassName,className,...otherProps  },ref) => {
     return (
       <NavLink 
       ref={ref}
-      className={`uppercase ${className} font-semibold`}
+      className={`uppercase ${className} font-semibold tracking-widest`}
       to={to} 
       activeClassName={activeClassName} 
       {...otherProps}>
@@ -14,4 +14,4 @@ const Anchor = ({ to, children, activeClassName,className,...otherProps  },ref) 
     )
 }
 
-export default forwardRef(Anchor)
+export default forwardRef(Link)

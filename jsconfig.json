@@ -6,7 +6,7 @@
       "data" : ["./data"],
       "api" : ["./api"],
       "pages" : ["./pages"],
-      "hooks" : ["./components/hooks/*"],
+      "hooks" : ["./hooks"],
       "store" : ["./store"],
       "styles" : ["./styles"]
     }

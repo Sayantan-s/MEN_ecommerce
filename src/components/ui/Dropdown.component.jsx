@@ -1,6 +1,6 @@
 import { Popover, Transition } from '@headlessui/react';
 import React, { Fragment } from 'react'
-import { Anchor } from '.';
+import { Link } from '..';
 
 const Dropdown = ({ data,btnname }) => {
     return (
@@ -10,8 +10,8 @@ const Dropdown = ({ data,btnname }) => {
             return <>
                 <Popover.Button 
                   to="#"
-                  className="uppercase focus:outline-none" 
-                  as={Anchor}>
+                  className="uppercase focus:outline-none mx-3" 
+                  as={Link}>
                     {btnname}
                 </Popover.Button>
                 <Transition
@@ -31,12 +31,12 @@ const Dropdown = ({ data,btnname }) => {
                             {
                                 data.map(product => {
                                     const link = product.toLowerCase();
-                                        return <Anchor
+                                        return <Link
                                                 className="mx-2"
                                                 key={link} 
                                                 to={`/${link}`}>
                                                 {product}
-                                            </Anchor>
+                                            </Link>
                                 })
                             }
                     </Popover.Panel>
