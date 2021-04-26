@@ -35,10 +35,7 @@ const Navbar = () => {
             to="/admin"
            className="bg-gray-900 text-gray-50 px-4 py-3 rounded-lg font-semibold uppercase flex text-md"
             >
-            <LineLock className="h-5 w-5 text-gray-50 stroke-current stroke-2 mr-1"/>
-             <span>
-               Admin
-             </span>
+                Admin
             </Anchor>
             <Button moreStyles="relative">
               <WishList className="w-7 h-7 text-gray-900 stroke-2"/>
