@@ -5,7 +5,7 @@ const Link = ({ to, children, activeClassName,className,...otherProps  },ref) =>
     return (
       <NavLink 
       ref={ref}
-      className={`uppercase ${className} font-semibold tracking-widest`}
+      className={`uppercase ${className} font-semibold tracking-wider`}
       to={to} 
       activeClassName={activeClassName} 
       {...otherProps}>

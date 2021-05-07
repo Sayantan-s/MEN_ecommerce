@@ -13,31 +13,34 @@ const Navbar = () => {
           <Logo />
           <div className="flex">
             <Link 
-            className="mx-3"
-            to="/">
-              Home
+              className="mx-3 text-gray-400"
+              activeClassName="text-gray-700"
+              to="/">
+                Home
             </Link>
             <Link 
-            className="mx-3"
-            to="/collections">
-              Collections
+              className="mx-3 text-gray-400"
+              to="/collections">
+                Collections
             </Link>
             <Dropdown 
-            btnname="Categories"
-            data={['Clothing', 'Accessories', 'Shoes']}/>
+              btnclassName="text-gray-400"
+              btnname="Categories"
+              data={['Clothing', 'Accessories', 'Shoes']}
+            />
           </div>
           <div className="flex">
             <Link
             to="/admin"
-           className="bg-gray-900 text-gray-50 px-4 py-3 rounded-lg font-semibold uppercase flex text-md"
+           className="bg-gray-900 text-gray-50 px-4 py-3 rounded-lg font-semibold uppercase flex text-md mr-6"
             >
                 Admin
             </Link>
-            <Button moreStyles="relative">
+            <Button moreStyles="relative mx-2">
               <WishList className="w-7 h-7 text-gray-900 stroke-2"/>
               <div className="bg-red-400 rounded-full w-2 h-2 absolute top-1 -right-1"/>
             </Button>
-            <Button moreStyles="relative">
+            <Button moreStyles="relative mx-2">
               <Cart className="w-7 h-7 text-gray-900 stroke-2"/>
               <div className="bg-red-400 rounded-full w-2 h-2 absolute top-1 -right-1"/>
             </Button>

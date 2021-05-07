@@ -4,7 +4,11 @@ import React from 'react'
 const Home = () => {
     return (
        <Page>
-           Home
+           <img 
+                width="60%"
+                src="/cover.png" 
+                alt="nike_banner" 
+           />
        </Page>
     )
 }

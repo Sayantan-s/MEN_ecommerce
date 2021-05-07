@@ -2,7 +2,7 @@ import { Popover, Transition } from '@headlessui/react';
 import React, { Fragment } from 'react'
 import { Link } from '..';
 
-const Dropdown = ({ data,btnname }) => {
+const Dropdown = ({ data, btnname, btnclassName, btnActiveClassName }) => {
     return (
         <Popover>
         {
@@ -10,7 +10,8 @@ const Dropdown = ({ data,btnname }) => {
             return <>
                 <Popover.Button 
                   to="#"
-                  className="uppercase focus:outline-none mx-3" 
+                  className={`uppercase focus:outline-none mx-3 ${btnclassName}`}
+                  activeClassName={btnActiveClassName} 
                   as={Link}>
                     {btnname}
                 </Popover.Button>
