@@ -13,7 +13,7 @@ function App() {
   return (
    <Layout>
       <Switch>
-        <Route path="/" exact>
+        <Route path="/">
             <Home />
         </Route>
         <Route path="/collections">
