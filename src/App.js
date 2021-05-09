@@ -7,7 +7,7 @@ function App() {
 
   useEffect(() => {
     const rootElement = document.getElementById('root');
-    rootElement.className = "overflow-x-hidden font-body font-normal text-gray-400";
+    rootElement.className = "overflow-x-hidden font-body font-normal text-gray-400 bg-gray-50";
   },[])
 
   return (

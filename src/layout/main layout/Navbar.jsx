@@ -8,7 +8,7 @@ import { Button, Dropdown, Link } from 'components'
 
 const Navbar = () => {
     return (
-      <header>
+      <header className="fixed w-full z-50 shadow-sm bg-gray-50">
         <Disclosure as={motion.nav} className="flex items-center justify-between w-10/12 mx-auto">
           <Logo />
           <div className="flex">
@@ -32,7 +32,7 @@ const Navbar = () => {
           <div className="flex">
             <Link
             to="/admin"
-           className="bg-gray-900 text-gray-50 px-4 py-3 rounded-lg font-semibold uppercase flex text-md mr-6"
+           className="bg-gray-900 text-gray-50 px-4 py-3 rounded-lg font-semibold uppercase flex text-md mx-2"
             >
                 Admin
             </Link>
