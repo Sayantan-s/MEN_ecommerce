@@ -8,7 +8,7 @@ import { Button, Dropdown, Link } from 'components'
 
 const Navbar = () => {
     return (
-      <header className="fixed w-full z-50 shadow-sm bg-gray-50">
+      <header className="fixed w-full z-50 shadow-sm bg-gray-50" id="navbar">
         <Disclosure as={motion.nav} className="flex items-center justify-between w-10/12 mx-auto">
           <Logo />
           <div className="flex">
@@ -20,6 +20,7 @@ const Navbar = () => {
             </Link>
             <Link 
               className="mx-3 text-gray-400"
+              activeClassName="text-gray-700"
               to="/collections">
                 Collections
             </Link>
