@@ -12,15 +12,17 @@ function App() {
   return (
     <>
       <Navbar />
-      <Route path="/" exact>
-        <Home />
-      </Route>
-      <Route path="/collections">
-        <Collections />
-      </Route>
-      <Route path="/admin">
-        <Admin />
-      </Route>
+      <Switch>
+        <Route path="/" exact>
+          <Home />
+        </Route>
+        <Route path="/collectives">
+          <Collections />
+        </Route>
+        <Route path="/admin">
+          <Admin />
+        </Route>
+      </Switch>
       <Footer />
     </>
   );

@@ -1,10 +1,12 @@
-import { Page } from 'components'
+import { Page, Link } from 'components'
 import React from 'react'
 
 const Admin = () => {
     return (
        <Page>
-           Admin...
+          <Link to="/admin-products">
+              Admin products
+          </Link>
        </Page>
     )
 }

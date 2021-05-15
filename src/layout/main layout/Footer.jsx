@@ -54,7 +54,7 @@ const Footer = () => {
                                 return <div
                                 className={`${id !== 0 && 'ml-28'}`} 
                                 key={headers}>
-                                    <h2 className="font-semibold text-lg">
+                                    <h2 className="font-medium text-lg">
                                         {headers}
                                     </h2>
                                     <div className="flex flex-col mt-3">

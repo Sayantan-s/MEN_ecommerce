@@ -15,7 +15,7 @@ const Navbar = () => {
   console.log(isAuthenticated)
 
     return (
-      <header className="fixed w-full z-50 shadow-sm bg-gray-50" id="navbar">
+      <header className="fixed w-full z-50 border-b-2 border-gray-200 bg-gray-50" id="navbar">
         <Disclosure as={motion.nav} className="flex items-center justify-between w-10/12 mx-auto">
           <Logo />
           <div className="flex">
@@ -28,8 +28,14 @@ const Navbar = () => {
             <Link 
               className="mx-3 text-gray-400"
               activeClassName="text-gray-700"
-              to="/collections">
-                Collections
+              to="/shop">
+                Shop
+            </Link>
+            <Link 
+              className="mx-3 text-gray-400"
+              activeClassName="text-gray-700"
+              to="/collectives">
+                Collectives
             </Link>
             <Dropdown 
               btnclassName="text-gray-400"

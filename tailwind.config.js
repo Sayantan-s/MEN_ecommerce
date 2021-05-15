@@ -8,13 +8,6 @@ module.exports = {
         body: ['gc'],
       }
     },
-    fontWeight : {
-      light: 200,
-      normal: 400,
-      semibold: 600,
-      bold: 700,
-      extrabold: 900,
-    }
   },
   variants: {
     extend: {},
