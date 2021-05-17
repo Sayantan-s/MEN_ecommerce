@@ -2,7 +2,7 @@ import { AUTHENTICATING, AUTHENTICATION_FAILED, AUTHENTICATION_SUCCESSFULL } fro
 
 const authState = {
     loading : false,
-    isAuthenticated : false,
+    isAuthenticated : true,
     error : false
 }
 

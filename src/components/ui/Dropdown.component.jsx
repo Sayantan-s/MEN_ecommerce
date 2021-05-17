@@ -10,7 +10,7 @@ const Dropdown = ({ data, btnname, btnclassName, btnActiveClassName }) => {
             return <>
                 <Popover.Button 
                   to="#"
-                  className={`uppercase focus:outline-none mx-3 ${btnclassName}`}
+                  className={`uppercase focus:outline-none mx-3 text-lg ${btnclassName}`}
                   activeClassName={btnActiveClassName} 
                   as={Link}>
                     {btnname}

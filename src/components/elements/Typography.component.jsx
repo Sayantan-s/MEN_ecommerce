@@ -26,7 +26,7 @@ const Typography = ({ as, children, className, ...otherProps }) => {
             styles = "text-md font-medium"
             break; 
         case motion.p :
-            styles = "text-base font-normal"
+            styles = "text-base font-medium"
             break;
         default : 
             styles = "text-base"

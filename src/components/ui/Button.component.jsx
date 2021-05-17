@@ -8,10 +8,13 @@ const Button = ({ children,type,moreStyles, ...otherprops }) => {
             styles = 'bg-gray-900 text-gray-50 px-4 py-3 rounded-lg font-bold uppercase flex text-md';
             break;
         case 'secondary' : 
-            styles = '';
+            styles = 'bg-gray-200 text-gray-900 px-4 py-3 rounded-lg font-bold uppercase flex text-md';
             break;
-        case 'transparent' : 
-            styles = '';
+        case 'outline' : 
+            styles = 'text-gray-900 border-2 border-gray-900 px-4 py-2 rounded-lg font-bold uppercase flex text-md';
+            break;
+        case 'transparent':
+            styles = "text-gray-900 px-4 py-3 rounded-lg font-bold uppercase flex text-md"
             break;
         default: 
             styles = '';

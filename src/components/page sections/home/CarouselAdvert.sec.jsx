@@ -27,8 +27,8 @@ const CarouselAdvert = () => {
                     src={'https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/914a7bef-5a79-4777-b79a-1d985e671ed5/pro-long-sleeve-top-83nNWW.png'}
                 />
                 <Box className="ml-10 mt-6">
-                    <Typography as={motion.h1} className="text-gray-900">
-                        In these times <br /> we got you
+                    <Typography as={motion.h2} className="text-gray-900 leading-tight uppercase">
+                        In these times,<br />got this for you!
                     </Typography>
                     <Typography as={motion.h4} className="text-gray-700 my-8">
                         Nike Pro <span className="font-normal">Men's Long-Sleeve Top</span>

@@ -1,11 +1,28 @@
 import React, { forwardRef } from 'react'
 import { NavLink } from 'react-router-dom'
 
-const Link = ({ to, children, activeClassName,className,...otherProps  },ref) => {
+const Link = ({ to, children, activeClassName,className, type,...otherProps  },ref) => {
+  let styles;
+  switch(type){
+    case 'primary' : 
+        styles = 'bg-gray-900 text-gray-50 px-4 py-3 rounded-lg font-bold uppercase flex text-md';
+        break;
+    case 'secondary' : 
+        styles = 'bg-gray-200 text-gray-900 px-4 py-3 rounded-lg font-bold uppercase flex text-md';
+        break;
+    case 'outline' : 
+        styles = 'text-gray-900 outline px-4 py-2 rounded-lg font-bold uppercase flex text-md';
+        break;
+    case 'transparent':
+        styles = "text-gray-400 mx-4 py-3 rounded-lg font-bold uppercase flex text-md"
+        break;
+    default: 
+        styles = '';
+    }
     return (
       <NavLink 
       ref={ref}
-      className={`uppercase font-semibold ${className} tracking-wider`}
+      className={`${styles} ${className}`}
       to={to} 
       activeClassName={activeClassName} 
       {...otherProps}>

@@ -38,7 +38,7 @@ const Footer = () => {
         }
     ]
     return (
-       <footer className="w-screen bg-gray-900 text-gray-50 py-14">
+       <footer className="w-screen bg-black text-gray-50 py-14">
            <Box>
                <div className="flex">
                    <div className="flex flex-col justify-between">
