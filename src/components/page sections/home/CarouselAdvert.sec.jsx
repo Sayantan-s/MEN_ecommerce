@@ -14,14 +14,13 @@ const CarouselAdvert = () => {
         infinite: true,
         speed: 1000,
         slidesToShow: 2,
-        slidesToScroll: 5,
-        swipe: true,
-        arrows : false,
-        draggable: true
+        slidesToScroll: 1,
+        swipeToSlide: true,
+        arrows : false
       };
     
     return (
-            <Box className="flex w-full my-20">
+            <Box className="flex w-full my-10">
                  <Image
                     alt={'nike'}
                     className="w-6/12" 

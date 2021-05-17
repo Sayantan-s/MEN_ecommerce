@@ -1,9 +1,11 @@
 import { Box } from 'components'
-import React from 'react'
+import React, { forwardRef } from 'react'
 
-const Image = ({ src, alt, className, ...otherProps }) => {
+const Image = ({ src, alt, className, ...otherProps },ref) => {
     return (
-        <Box className={`relative overflow-hidden ${className}`} {...otherProps}>
+        <Box
+        ref={ref} 
+        className={`relative overflow-hidden ${className}`} {...otherProps}>
             <img 
                 className="absolute top-0 left-0 object-cover object-center w-full h-full"
                 src={src} 
@@ -13,4 +15,4 @@ const Image = ({ src, alt, className, ...otherProps }) => {
     )
 }
 
-export default Image
+export default forwardRef(Image)

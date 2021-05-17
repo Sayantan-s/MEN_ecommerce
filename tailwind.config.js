@@ -9,6 +9,7 @@ module.exports = {
         body: ['gc'],
       },
       spacing: {
+        '112': '36rem',
         '128': '40rem',
         '144': '44rem',
         '160': '48rem',

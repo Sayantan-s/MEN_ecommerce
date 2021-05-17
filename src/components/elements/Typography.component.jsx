@@ -14,7 +14,7 @@ const Typography = ({ as, children, className, ...otherProps }) => {
             styles = "text-6xl font-bold"
             break;
         case motion.h3 :
-            styles = "text-4xl font-semibold"
+            styles = "text-5xl font-semibold"
             break;  
         case motion.h4 :
             styles = "text-3xl font-semibold"
@@ -34,7 +34,7 @@ const Typography = ({ as, children, className, ...otherProps }) => {
     return (
       <Box 
         {...otherProps}
-        className={`${styles} ${className}`} 
+        className={`${className} ${styles}`} 
         as={as}>
             {children}
       </Box>

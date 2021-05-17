@@ -59,7 +59,7 @@ const Navbar = () => {
                 Admin
             </Link>
             <Button
-            className="bg-gray-900 text-gray-50 px-4 py-3 rounded-lg font-semibold uppercase flex text-md mx-2"
+            type="primary"
             >
                 Logout
             </Button>
