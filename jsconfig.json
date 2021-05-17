@@ -8,7 +8,7 @@
       "pages" : ["./pages"],
       "hooks" : ["./hooks"],
       "store" : ["./store"],
-      "styles" : ["./styles"]
+      "styles" : ["./styles"],
     }
   },
   "exclude": ["node_modules"]

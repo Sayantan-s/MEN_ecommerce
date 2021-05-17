@@ -3,7 +3,7 @@ import React, { forwardRef } from 'react'
 
 const Box = ({ children, as , className, ...otherProps },ref) => {
     const styles = className || 'w-10/12 mx-auto'
-    const Eletype = motion.div || as; 
+    const Eletype = as || motion.div; 
     return (
         <Eletype
         ref={ref}

@@ -4,7 +4,7 @@ const Page = ({ children,as,className, ...otherProps }) => {
     return (
         <Box 
             as={motion.section}
-            className={`w-10/12 mx-auto min-h-screen ${className}`}
+            className={`w-10/12 mx-auto ${className}`}
             {...otherProps}
         >
             { children }

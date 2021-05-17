@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import React from 'react'
 import { Cart } from 'assets/Icons'
 import { WishList } from 'assets/Icons'
-import { Button, Dropdown, Link } from 'components'
+import { Box, Button, Dropdown, Link } from 'components'
 import { useSelector } from 'react-redux'
 
 
@@ -15,10 +15,10 @@ const Navbar = () => {
   console.log(isAuthenticated)
 
     return (
-      <header className="fixed w-full z-50 border-b-2 border-gray-200 bg-gray-50" id="navbar">
+      <header className="w-full bg-gray-50">
         <Disclosure as={motion.nav} className="flex items-center justify-between w-10/12 mx-auto">
           <Logo />
-          <div className="flex">
+          <div className="flex ml-20">
             <Link 
               className="mx-3 text-gray-400"
               activeClassName="text-gray-700"
@@ -43,7 +43,7 @@ const Navbar = () => {
               data={['Clothing', 'Accessories', 'Shoes']}
             />
           </div>
-          <div className="flex">
+          <Box className="flex">
             <Button moreStyles="relative mx-2">
               <WishList className="w-7 h-7 text-gray-900 stroke-2"/>
               <div className="bg-red-400 rounded-full w-2 h-2 absolute top-1 -right-1"/>
@@ -63,7 +63,7 @@ const Navbar = () => {
             >
                 Logout
             </Button>
-          </div>
+          </Box>
         </Disclosure>
       </header>
     )
