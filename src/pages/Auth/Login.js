@@ -1,10 +1,10 @@
 import React from 'react'
-import { Box } from 'components'
+import { Page } from 'components'
 const Login = () => {
-    return (
-        <Box className="w-full">
+    return(
+        <Page className="w-full">
 
-        </Box>
+        </Page>
     )
 }
 

@@ -1,4 +1,4 @@
-import { Navbar, Footer } from "layout";
+import { Layout } from "layout";
 import { Admin, Collections, Home, Login, Register } from "pages";
 import { useEffect } from "react";
 import { BrowserRouter as Switch,Route } from 'react-router-dom'
@@ -22,8 +22,7 @@ function App() {
   },[])
 
   return (
-    <>
-      <Navbar />
+   <Layout>
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/collectives" component={Collections} />
@@ -31,8 +30,7 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
       </Switch>
-      <Footer />
-    </>
+   </Layout>
   );
 }
 

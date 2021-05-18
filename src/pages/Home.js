@@ -8,7 +8,7 @@ import JordanStory from 'components/page sections/home/JordanStory.sec';
 
 const Home = () => {
     return (
-       <Page>
+       <Page className="min-h-screen">
           <HomeHeader />
           <CarouselAdvert />
           <JordanStory />

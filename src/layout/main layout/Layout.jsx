@@ -1,4 +1,4 @@
-import { AnimateSharedLayout } from 'framer-motion'
+import { AnimatePresence } from 'framer-motion'
 import React from 'react'
 import Footer from './Footer'
 import Navbar from './Navbar'
@@ -7,9 +7,9 @@ const Layout = ({children}) => {
     return (
         <>
             <Navbar />
-                <AnimateSharedLayout>
+                <AnimatePresence>
                     {children}
-                </AnimateSharedLayout>
+                </AnimatePresence>
             <Footer />
         </>
     )
