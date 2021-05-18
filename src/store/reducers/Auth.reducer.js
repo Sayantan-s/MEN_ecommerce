@@ -2,11 +2,11 @@ import { AUTHENTICATING, AUTHENTICATION_FAILED, AUTHENTICATION_SUCCESSFULL } fro
 
 const authState = {
     loading : false,
-    isAuthenticated : true,
+    isAuthenticated : false,
     error : false
 }
 
-export default (state = authState, { type, payload }) => {
+const AuthReducer = (state = authState, { type, payload }) => {
     switch(type) {
         case AUTHENTICATING :
             return {
@@ -32,3 +32,5 @@ export default (state = authState, { type, payload }) => {
         default: return state;
     }
 }
+
+export default AuthReducer;

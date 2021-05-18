@@ -14,7 +14,7 @@ const Link = ({ to, children, activeClassName,className, type,...otherProps  },r
         styles = 'text-gray-900 outline px-4 py-2 rounded-lg font-bold uppercase flex text-md';
         break;
     case 'transparent':
-        styles = "text-gray-400 mx-4 py-3 rounded-lg font-bold uppercase flex text-md"
+        styles = "text-gray-400 py-3 rounded-lg font-bold uppercase flex text-md"
         break;
     default: 
         styles = '';

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import React from 'react'
 
-const Button = ({ children,type,moreStyles, ...otherprops }) => {
+const Button = ({ children,type,className, ...otherprops }) => {
     let styles;
     switch(type){
         case 'primary' : 
@@ -22,7 +22,7 @@ const Button = ({ children,type,moreStyles, ...otherprops }) => {
     return (
        <motion.button 
        whileTap={{ scale : 0.98 }}
-       className={`${styles} ${moreStyles} focus:outline-none`} {...otherprops}>
+       className={`${styles} ${className} focus:outline-none`} {...otherprops}>
            {children}
        </motion.button>
     )

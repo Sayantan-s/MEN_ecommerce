@@ -12,48 +12,38 @@ const Navbar = () => {
 
   const { isAuthenticated } =  useSelector(state => state.AuthReducer);
 
+  const NavLinks = [ 
+      'Home',
+      'Shop',
+      'Collectives',
+      'Orders',
+      'New'
+   ]
+
     return (
       <header className="w-full bg-gray-50">
         <Disclosure as={motion.nav} className="flex items-center justify-between w-10/12 mx-auto">
           <Logo />
           <div className="flex ml-20">
-            <Link 
-              type="transparent"
-              activeClassName="text-gray-700"
-              to="/">
-                Home
-            </Link>
-            <Link 
-              type="transparent"
-              activeClassName="text-gray-700"
-              to="/shop">
-                Shop
-            </Link>
-            <Link 
-              type="transparent"
-              activeClassName="text-gray-700"
-              to="/collectives">
-                Collectives
-            </Link>
-            <Link 
-              type="transparent"
-              activeClassName="text-gray-700"
-              to="/collectives">
-                Orders
-            </Link>
-            <Link 
-              type="transparent"
-              activeClassName="text-gray-700"
-              to="/collectives">
-                New
-            </Link>
+            {
+              NavLinks.map((link,id) => (
+                  <Link 
+                    key={id}
+                    type="transparent"
+                    className="mx-4"
+                    activeClassName="text-gray-700"
+                    to={link === 'Home' ? '/' : `/${link.toLowerCase()}`}>
+                      {link}
+                  </Link>
+              ))
+            }
           </div>
           <Box className="flex">
-            <Button moreStyles="relative mx-2">
+            <Button className="relative mx-2">
               <WishList className="w-7 h-7 text-gray-900 stroke-2"/>
               <div className="bg-red-400 rounded-full w-2 h-2 absolute top-1 -right-1"/>
             </Button>
-            <Button moreStyles="relative mx-2">
+            <Button className="relative mx-2">
               <Cart className="w-7 h-7 text-gray-900 stroke-2"/>
               <div className="bg-red-400 rounded-full w-2 h-2 absolute top-1 -right-1"/>
             </Button>
@@ -62,19 +52,20 @@ const Navbar = () => {
               <>
                   <Link
                   to="/admin"
-                  type="transparent"
+                  type="secondary"
                   className="mx-2 text-gray-900"
                   >
                       Admin
                   </Link>
                   <Button
                   type="primary"
+                  className="ml-1"
                   >
                       Logout
                   </Button>
               </> :
                <Link
-               to="/admin"
+               to="/register"
                type="primary"
                className="mx-2"
                >
