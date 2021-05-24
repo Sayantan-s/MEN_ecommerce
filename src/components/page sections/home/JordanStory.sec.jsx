@@ -5,10 +5,10 @@ import { motion } from 'framer-motion'
 const JordanStory = () => {
     return (
        <Box className="w-full flex my-24">
-           <Typography as={motion.h2} className="w-1/12 leading-tight">
+           <Typography as={motion.h2} className=" leading-tight">
                 01
            </Typography>
-           <Typography as={motion.h2} className="uppercase text-gray-900 w-max leading-tight ml-4">
+           <Typography as={motion.h2} className="uppercase text-gray-900 leading-tight ml-16">
                 a little story <br /> of why jordan ?
            </Typography>
            <Typography as={motion.p} className="ml-60 w-5/12 uppercase">

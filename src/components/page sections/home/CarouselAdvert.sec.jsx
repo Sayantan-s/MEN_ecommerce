@@ -38,7 +38,7 @@ const CarouselAdvert = () => {
                         The Nike Pro Top gives you a long-sleeve layer for cool conditions. 
                         Lightweight, stretchy fabric with Dri-FIT Technology helps keep you comfortable while you train.
                     </Typography>
-                    <Button type="primary" moreStyles="mt-8">
+                    <Button type="primary" moreStyles="my-8">
                         Shop Now
                     </Button>
                     <Box className="w-full">
