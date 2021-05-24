@@ -31,7 +31,7 @@ const CarouselAdvert = () => {
                         In these times,<br />got this for you!
                     </Typography>
                     <Typography as={motion.h4} className="text-gray-700 my-8">
-                        Nike Pro <span className="font-normal">Men's Long-Sleeve Top</span>
+                        Nike Pro <span className="font-light">Men's Long-Sleeve Top</span>
                     </Typography>
                     <Typography as={motion.p} className="my-6 max-w-2xl">
                         Save up to 40% on new markdowns. Quantities are limited.

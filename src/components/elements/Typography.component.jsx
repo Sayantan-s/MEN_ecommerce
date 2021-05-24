@@ -34,7 +34,7 @@ const Typography = ({ as, children, className, ...otherProps }) => {
     return (
       <Box 
         {...otherProps}
-        className={`${className} ${styles}`} 
+        className={`${styles} ${className}`} 
         as={as}>
             {children}
       </Box>

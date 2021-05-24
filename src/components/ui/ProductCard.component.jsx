@@ -14,10 +14,10 @@ const ProductCard = ({ name, tagname, price, image }) => {
                 className="w-full h-80" 
                 src={image}
             />
-            <Typography as={motion.h5} className="text-gray-700 font-bold mt-4 truncate"> 
-                {name} <span className="font-normal">{tagname}</span>
+            <Typography as={motion.h5} className="text-gray-700 font-semibold mt-4 truncate"> 
+                {name} <span className="font-light">{tagname}</span>
             </Typography>
-            <Typography as={motion.h6} className="font-semibold">
+            <Typography as={motion.h6} className="font-normal">
                 ${price}
             </Typography>
        </Box>

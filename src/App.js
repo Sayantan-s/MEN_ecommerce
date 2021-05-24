@@ -1,29 +1,20 @@
 import { Layout } from "layout";
 import { Admin, Collections, Home, Login, Register } from "pages";
 import { useEffect } from "react";
-import { BrowserRouter as Switch,Route } from 'react-router-dom'
-import LocomotiveScroll from 'locomotive-scroll'
-import '../node_modules/locomotive-scroll/src/locomotive-scroll.scss'
+import { BrowserRouter as Switch,Route, useLocation } from 'react-router-dom'
 
 function App() {
 
   useEffect(() => {
     const rootElement = document.getElementById('root');
-    rootElement.className = "overflow-x-hidden font-body font-normal text-gray-400 bg-gray-50";
+    rootElement.className = "overflow-x-hidden font-body font-light text-gray-400 bg-gray-50";
   },[])
 
-  useEffect(() => {
-    let root =  document.querySelector('#root');
-    root.setAttribute('data-scroll-container','')
-    new LocomotiveScroll({
-      el : root,
-      smooth : true,
-    })
-  },[])
+  const location = useLocation();
 
   return (
    <Layout>
-      <Switch>
+      <Switch location={location} key={location.pathname}>
         <Route exact path="/" component={Home} />
         <Route exact path="/collectives" component={Collections} />
         <Route path="/admin" component={Admin} />

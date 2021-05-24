@@ -5,16 +5,16 @@ const Link = ({ to, children, activeClassName,className, type,...otherProps  },r
   let styles;
   switch(type){
     case 'primary' : 
-        styles = 'bg-gray-900 text-gray-50 px-4 py-3 rounded-lg font-bold uppercase flex text-md';
+        styles = 'bg-gray-900 text-gray-50 px-4 py-3 rounded-lg font-semibold uppercase flex text-md';
         break;
     case 'secondary' : 
-        styles = 'bg-gray-200 text-gray-900 px-4 py-3 rounded-lg font-bold uppercase flex text-md';
+        styles = 'bg-gray-200 text-gray-900 px-4 py-3 rounded-lg font-semibold uppercase flex text-md';
         break;
     case 'outline' : 
-        styles = 'text-gray-900 outline px-4 py-2 rounded-lg font-bold uppercase flex text-md';
+        styles = 'text-gray-900 border-2 text-gray-900 px-4 py-3 rounded-lg font-semibold uppercase flex text-md items-center';
         break;
     case 'transparent':
-        styles = "text-gray-400 py-3 rounded-lg font-bold uppercase flex text-md"
+        styles = "text-gray-400 py-3 rounded-lg font-semibold uppercase flex text-md"
         break;
     default: 
         styles = '';

@@ -6,9 +6,10 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        body: ['gc'],
+        body: ['Poppins', 'sans-serif'],
       },
       spacing: {
+        'mini': '1px',
         '112': '36rem',
         '128': '40rem',
         '144': '44rem',
@@ -16,11 +17,11 @@ module.exports = {
       }
     },
     fontWeight : {
-      light: 300,
-      normal: 400,
-      semibold: 500,
-      bold: 600,
-      extrabold: 700,
+      light: 400,
+      normal: 500,
+      semibold: 600,
+      bold: 700,
+      extrabold: 800,
     }
   },
   variants: {

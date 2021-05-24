@@ -52,7 +52,7 @@ const Navbar = () => {
               <>
                   <Link
                   to="/admin"
-                  type="secondary"
+                  type="outline"
                   className="mx-2 text-gray-900"
                   >
                       Admin

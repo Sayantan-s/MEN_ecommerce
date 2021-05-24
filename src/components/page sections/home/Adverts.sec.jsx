@@ -17,7 +17,7 @@ const Adverts = () => {
                     />
                 </Box>
                 <Box className="absolute bottom-10 left-10 z-50">
-                    <Typography as={motion.h3} className="text-gray-50 font-bold leading-tight">
+                    <Typography as={motion.h3} className="text-gray-50 font-light leading-tight">
                         Summer must haves:<br />
                         The Classics.
                     </Typography>
@@ -35,7 +35,7 @@ const Adverts = () => {
                     />
                 </Box>
                 <Box className="absolute bottom-10 left-10 z-50">
-                    <Typography as={motion.h3} className="text-gray-50 font-bold leading-tight">
+                    <Typography as={motion.h3} className="text-gray-50 font-light leading-tight">
                         Kim Jones Favors<br />
                         the Air Max 95.
                     </Typography>

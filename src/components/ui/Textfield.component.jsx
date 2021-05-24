@@ -31,7 +31,7 @@ const TextField = ({
 
     return (
        <Box className={`my-2 ${half ? 'w-1/2' : 'w-full'} ${className}`}>
-            {labelName && <label className="text-gray-900 font-semibold text-lg">{labelName}</label>}
+            {labelName && <label className="text-gray-900 font-normal text-lg">{labelName}</label>}
              <Box className={`flex items-center ${styles}`}>
                 {inputEle}
                 {Icon && <Icon className="h-5 w-5"/>}
