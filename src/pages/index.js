@@ -1,7 +1,12 @@
 import Collections from './Collections'
 import Home from './Home'
-import Admin from './Admin'
+
 import Login from './Auth/Login'
 import Register from './Auth/Register'
 
-export { Collections, Home, Admin, Login, Register } 
+import AddProduct from './Admin/Add-product'
+import AdminProduct from './Admin/Admin-product'
+
+import PageNotFound from './Error/404'
+
+export { Collections, Home, Login, Register, PageNotFound, AddProduct, AdminProduct } 

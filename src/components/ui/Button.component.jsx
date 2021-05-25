@@ -21,7 +21,7 @@ const Button = ({ children,type,className, ...otherprops }) => {
     }
     return (
        <motion.button 
-       whileTap={{ scale : 0.98 }}
+       whileTap={{ scale : 0.99 }}
        className={`${styles} ${className} focus:outline-none`} {...otherprops}>
            {children}
        </motion.button>

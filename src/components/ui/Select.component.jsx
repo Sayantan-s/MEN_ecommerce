@@ -1,75 +1,52 @@
-import { Fragment, useState } from 'react'
-import { Listbox, Transition } from '@headlessui/react'
-import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
+import { useState } from 'react'
+import { Listbox } from '@headlessui/react'
+import { AnimatePresence, motion } from 'framer-motion'
 
 const people = [
-  { name: 'Wade Cooper' },
-  { name: 'Arlene Mccoy' },
-  { name: 'Devon Webb' },
-  { name: 'Tom Cook' },
-  { name: 'Tanya Fox' },
-  { name: 'Hellen Schmidt' },
+  { id: 1, name: 'Unisex', unavailable: false },
+  { id: 2, name: 'Men', unavailable: false },
+  { id: 3, name: 'Women', unavailable: false },
 ]
 
-export default function Example() {
-  const [selected, setSelected] = useState(people[0])
+const Select = ({ className, data }) => {
+  const [selectedPerson, setSelectedPerson] = useState(people[0]);
 
   return (
-    <div className="w-72 fixed top-16">
-      <Listbox value={selected} onChange={setSelected}>
-        <div className="relative mt-1">
-          <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm">
-            <span className="block truncate">{selected.name}</span>
-            <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-              <SelectorIcon
-                className="w-5 h-5 text-gray-400"
-                aria-hidden="true"
-              />
-            </span>
+    <Listbox value={selectedPerson} onChange={setSelectedPerson} className={`w-full relative ${className}`} as={motion.div}>
+      {
+        ({ open }) => (
+          <>
+          <Listbox.Button
+            whileTap={{ scale : 0.99 }}
+            as={motion.button} 
+            className="focus:outline-none w-full text-left rounded-2xl p-4 border-2 border-gray-200">{selectedPerson.name}
           </Listbox.Button>
-          <Transition
-            as={Fragment}
-            leave="transition ease-in duration-100"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            <Listbox.Options className="absolute w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-              {people.map((person, personIdx) => (
+          <AnimatePresence>
+            {open && (<Listbox.Options  
+            as={motion.ul}
+            initial={{ height : 0, opacity : 0 }}
+            animate={{ height : "auto",opacity : 1 }}
+            exit={{ opacity : 0 }}
+            className="absolute py-1 mt-2 bg-gray-50 shadow-lg w-full rounded-xl">
+              {(data || people).map((person) => (
                 <Listbox.Option
-                  key={personIdx}
-                  className={({ active }) =>
-                    `${active ? 'text-amber-900 bg-amber-100' : 'text-gray-900'}
-                          cursor-default select-none relative py-2 pl-10 pr-4`
-                  }
+                  as={motion.li}
+                  key={person.id}
                   value={person}
+                  disabled={person.unavailable}
+                  className="cursor-pointer px-4 py-2"
                 >
-                  {({ selected, active }) => (
-                    <>
-                      <span
-                        className={`${
-                          selected ? 'font-medium' : 'font-normal'
-                        } block truncate`}
-                      >
-                        {person.name}
-                      </span>
-                      {selected ? (
-                        <span
-                          className={`${
-                            active ? 'text-amber-600' : 'text-amber-600'
-                          }
-                                absolute inset-y-0 left-0 flex items-center pl-3`}
-                        >
-                          <CheckIcon className="w-5 h-5" aria-hidden="true" />
-                        </span>
-                      ) : null}
-                    </>
-                  )}
+                  {person.name}
                 </Listbox.Option>
               ))}
             </Listbox.Options>
-          </Transition>
-        </div>
-      </Listbox>
-    </div>
+            )}
+          </AnimatePresence>
+          </>
+        )
+      }
+    </Listbox>
   )
 }
+
+export default Select

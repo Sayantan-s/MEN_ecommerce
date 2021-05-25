@@ -1,12 +1,11 @@
 import React from 'react'
-import { Page,Typography, Box, TextField, Button, Link } from 'components'
+import { Typography, Box, FormField, Button, Link } from 'components'
 import { motion } from 'framer-motion'
 import { useForm } from 'hooks'
 import { AtSymbolIcon, EyeIcon, UserCircleIcon, UserIcon } from '@heroicons/react/outline'
-import { ChevronRightIcon } from '@heroicons/react/solid'
 
 const Register = () => {
-    const [form, onChangeHandler] = useForm({
+    const [form, onChangeHandler, onSubmitHandler ] = useForm({
         name : {
             as : 'input',
             ElementConfig : {
@@ -60,42 +59,23 @@ const Register = () => {
     })
 
     return (
-       <Page className="flex min-h-screen items-baseline">
-            <Box className="w-1/2 mt-20">
-                    <Typography as={motion.h1} className="font-extrabold text-gray-900">
-                        If you can dream it,
-                        <br />
-                        You can do it.
-                    </Typography>
-                    <Typography as={motion.h6} className="mt-20 font-bold text-gray-900">
-                        YOUR ACCOUNT FOR EVERYTHING NIKE
-                    </Typography>
-                    <Typography as={motion.p} className="max-w-sm my-2 text-gray-400">
-                    A new initiative by Nike to feature and celebrate all of its products in one place. 
-                    </Typography>
-                    <Button className="mt-8 text-gray-400 w-max" type="transparent">
-                        <span>
-                            Know more
-                        </span>
-                        <ChevronRightIcon className="h-6 w-6 text-gray-900 fill-current"/>
-                    </Button>
-            </Box>
-            <Box className="w-1/2">
-                <Typography as={motion.h6} className="text-gray-300 uppercase font-semibold">
+       <>
+         <Typography as={motion.h6} className="text-gray-300 uppercase font-semibold">
                    Join for free.
                 </Typography>
                 <Typography as={motion.h2} className="my-2 text-gray-900 font-semibold">
                    Sign in to Nike.
                 </Typography>
                 <Typography as={motion.p} className="max-w-lg mt-6 text-gray-400 flex items-center">
-                    Already a user?&nbsp;&nbsp;<Link type="transparent" className="text-gray-900" to="/login">Login</Link>
+                    Already a user?&nbsp;&nbsp;<Link type="transparent" className="text-gray-900" to="/auth/login">Login</Link>
                 </Typography>
                 <Box 
                     as={motion.form} 
+                    onSubmit={onSubmitHandler}
                     className="mt-4">
                         {
                             form.map(({ key, data },id) => (
-                                <TextField
+                                <FormField
                                         key={key}
                                         half={key !== "name" ? true : false}
                                         className={`float-left ${id !== 0 && id % 2 === 0 ? 'pl-2' : ''} ${id !== 0 && id % 2 !== 0 ? 'pr-2' : ''} ${(id === form.length - 1 || id === form.length - 2) ? 'pb-6' : '' }`}
@@ -124,8 +104,7 @@ const Register = () => {
                             Sign up with Google
                         </span>
                 </Button>
-            </Box>
-       </Page>
+       </>
     )
 }
 

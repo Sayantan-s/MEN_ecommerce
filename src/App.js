@@ -1,5 +1,5 @@
-import { Layout } from "layout";
-import { Admin, Collections, Home, Login, Register } from "pages";
+import { Layout, AuthLayout } from "layout";
+import { Admin, Collections, Home, Login, Register, AddProduct, AdminProduct } from "pages";
 import { useEffect } from "react";
 import { BrowserRouter as Switch,Route, useLocation } from 'react-router-dom'
 
@@ -17,9 +17,20 @@ function App() {
       <Switch location={location} key={location.pathname}>
         <Route exact path="/" component={Home} />
         <Route exact path="/collectives" component={Collections} />
-        <Route path="/admin" component={Admin} />
-        <Route path="/login" component={Login} />
-        <Route path="/register" component={Register} />
+        <Route path="/auth/:path">
+          <AuthLayout>
+            <Switch>
+              <Route path="/auth/login" component={Login} />
+              <Route path="/auth/register" component={Register} />
+            </Switch>
+          </AuthLayout>
+        </Route>
+        <Route path="/admin/:path">
+          <Switch>
+            <Route path="/admin/add-product" component={AddProduct} />
+            <Route path="/admin/products" component={AdminProduct} />
+          </Switch>
+        </Route>
       </Switch>
    </Layout>
   );

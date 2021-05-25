@@ -18,13 +18,27 @@ const useForm = (formState) => {
             })
         }
         onChangeHandler = eve => {
-            const { name, value, type } = eve.target;
+            const { name, value } = eve.target;
             return setForm(prevState => ({
                 ...prevState,
                 [name] : { ...prevState[name],value }
             }))
         }
-        return [ formArray, onChangeHandler ]
+
+        const onSubmitHandler = eve => {
+            eve.preventDefault();
+            let data = {};
+            const formData = new FormData(eve.target);
+            for(let [key, value] of formData.entries()){
+                data = {
+                    ...data,
+                    [key] : value
+                }
+            }
+            console.log(data);
+        }
+
+        return [ formArray, onChangeHandler, onSubmitHandler ]
     }
 
     onChangeHandler = eve => setForm(eve.target.value);

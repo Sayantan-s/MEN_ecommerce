@@ -51,7 +51,7 @@ const Navbar = () => {
               isAuthenticated ? 
               <>
                   <Link
-                  to="/admin"
+                  to="/admin/add-product"
                   type="outline"
                   className="mx-2 text-gray-900"
                   >
@@ -65,7 +65,7 @@ const Navbar = () => {
                   </Button>
               </> :
                <Link
-               to="/register"
+               to="/auth/register"
                type="primary"
                className="mx-2"
                >
