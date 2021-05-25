@@ -1,15 +1,15 @@
 {
-  "compilerOptions": {
-    "baseUrl": "src",
-    "paths": {
-      "components" : ["./components"],
-      "data" : ["./data"],
-      "api" : ["./api"],
-      "pages" : ["./pages"],
-      "hooks" : ["./hooks"],
-      "store" : ["./store"],
-      "styles" : ["./styles"]
-    }
-  },
-  "exclude": ["node_modules"]
+    "compilerOptions": {
+        "baseUrl": "src",
+        "paths": {
+            "components": ["./components"],
+            "data": ["./data"],
+            "api": ["./api"],
+            "pages": ["./pages"],
+            "hooks": ["./hooks"],
+            "store": ["./store"],
+            "styles": ["./styles"]
+        }
+    },
+    "exclude": ["node_modules"]
 }

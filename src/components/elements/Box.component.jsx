@@ -1,17 +1,14 @@
 import { motion } from 'framer-motion';
-import React, { forwardRef } from 'react'
+import React, { forwardRef } from 'react';
 
-const Box = ({ children, as , className, ...otherProps },ref) => {
-    const styles = className || 'w-10/12 mx-auto'
-    const Eletype = as || motion.div; 
+const Box = ({ children, as, className, ...otherProps }, ref) => {
+    const styles = className || 'w-10/12 mx-auto';
+    const Eletype = as || motion.div;
     return (
-        <Eletype
-        ref={ref}
-        className={styles} 
-        {...otherProps}>
-            { children }
+        <Eletype ref={ref} className={styles} {...otherProps}>
+            {children}
         </Eletype>
-    )
-}
+    );
+};
 
 export default forwardRef(Box);

@@ -16,34 +16,29 @@ import { Error as DBError } from 'mongoose';
  */
 
 export function handleError(response, error) {
-  if (
-    error instanceof SyntaxError ||
-    error instanceof ReferenceError ||
-    error instanceof TypeError ||
-    error instanceof DBError
-  ) {
-    return parseAndSend(
-      response,
-      false,
-      500,
-      'Oops! Something went wrong. Please try again later.'
-    );
-  } else if (
-    error instanceof NotFoundError ||
-    error instanceof AlreadyExistError ||
-    error instanceof BadRequestError
-  ) {
-    logger.warn(error);
-    return parseAndSend(response, false, error.statusCode, error.message);
-  } else if (error instanceof AuthError || error instanceof JsonWebTokenError) {
-    return parseAndSend(
-      response,
-      false,
-      error.statusCode || 403,
-      error.message
-    );
-  } else {
-    logger.error(error);
-    return parseAndSend(response, false, 400, error.message || error.msg);
-  }
+    if (
+        error instanceof SyntaxError ||
+        error instanceof ReferenceError ||
+        error instanceof TypeError ||
+        error instanceof DBError
+    ) {
+        return parseAndSend(
+            response,
+            false,
+            500,
+            'Oops! Something went wrong. Please try again later.'
+        );
+    } else if (
+        error instanceof NotFoundError ||
+        error instanceof AlreadyExistError ||
+        error instanceof BadRequestError
+    ) {
+        logger.warn(error);
+        return parseAndSend(response, false, error.statusCode, error.message);
+    } else if (error instanceof AuthError || error instanceof JsonWebTokenError) {
+        return parseAndSend(response, false, error.statusCode || 403, error.message);
+    } else {
+        logger.error(error);
+        return parseAndSend(response, false, 400, error.message || error.msg);
+    }
 }

@@ -1,49 +1,49 @@
-import { useState } from "react"
+import { useState } from 'react';
 
 const useForm = (formState) => {
     const [form, setForm] = useState(formState);
     let onChangeHandler;
-    if(typeof form === 'object'){
+    if (typeof form === 'object') {
         let formArray = [];
-        for(let i in form){
+        for (let i in form) {
             formArray.push({
-                key : i,
-                data : {
+                key: i,
+                data: {
                     ...form[i],
-                    ElementConfig : {
+                    ElementConfig: {
                         ...form[i].ElementConfig,
-                        name : i
+                        name: i
                     }
                 }
-            })
+            });
         }
-        onChangeHandler = eve => {
+        onChangeHandler = (eve) => {
             const { name, value } = eve.target;
-            return setForm(prevState => ({
+            return setForm((prevState) => ({
                 ...prevState,
-                [name] : { ...prevState[name],value }
-            }))
-        }
+                [name]: { ...prevState[name], value }
+            }));
+        };
 
-        const onSubmitHandler = eve => {
+        const onSubmitHandler = (eve) => {
             eve.preventDefault();
             let data = {};
             const formData = new FormData(eve.target);
-            for(let [key, value] of formData.entries()){
+            for (let [key, value] of formData.entries()) {
                 data = {
                     ...data,
-                    [key] : value
-                }
+                    [key]: value
+                };
             }
             console.log(data);
-        }
+        };
 
-        return [ formArray, onChangeHandler, onSubmitHandler ]
+        return [formArray, onChangeHandler, onSubmitHandler];
     }
 
-    onChangeHandler = eve => setForm(eve.target.value);
-    
-    return [ form, onChangeHandler ];
-}
+    onChangeHandler = (eve) => setForm(eve.target.value);
 
-export default useForm
+    return [form, onChangeHandler];
+};
+
+export default useForm;

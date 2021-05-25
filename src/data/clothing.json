@@ -1,39 +1,39 @@
 {
-    "data" : [
-        { 
-            "_id":"605b678d873d4e690ac9e518",
-            "name":"Nike Jordan",
-            "tagname":"Dri-FIT Zion",
-            "price":"3995",
-            "image":"https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/9c049f38-7a00-4c20-962a-f2ee9a0374af/jordan-dri-fit-zion-hoodie-LDCsLV.png"
+    "data": [
+        {
+            "_id": "605b678d873d4e690ac9e518",
+            "name": "Nike Jordan",
+            "tagname": "Dri-FIT Zion",
+            "price": "3995",
+            "image": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/9c049f38-7a00-4c20-962a-f2ee9a0374af/jordan-dri-fit-zion-hoodie-LDCsLV.png"
         },
-        { 
-            "_id":"605b678d873d4e690ac9e519",
-            "name":"Nike Sportswear",
-            "tagname":"Tech Fleece",
-            "price":"6397",
-            "image":"https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/3a20c742-6262-47c4-9704-9872cb03ef2e/sportswear-tech-fleece-pullover-hoodie-64bvBq.png"
+        {
+            "_id": "605b678d873d4e690ac9e519",
+            "name": "Nike Sportswear",
+            "tagname": "Tech Fleece",
+            "price": "6397",
+            "image": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/3a20c742-6262-47c4-9704-9872cb03ef2e/sportswear-tech-fleece-pullover-hoodie-64bvBq.png"
         },
-        { 
-            "_id":"605b678d873d4e690ac9e520",
-            "name":"PSG",
-            "tagname":"Repel",
-            "price":"5995",
-            "image":"https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/2fa28ad3-693b-4c33-81f2-f96c7ae6e0c9/paris-saint-germain-repel-graphic-football-jacket-hKF52F.png"
+        {
+            "_id": "605b678d873d4e690ac9e520",
+            "name": "PSG",
+            "tagname": "Repel",
+            "price": "5995",
+            "image": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/2fa28ad3-693b-4c33-81f2-f96c7ae6e0c9/paris-saint-germain-repel-graphic-football-jacket-hKF52F.png"
         },
-        { 
-            "_id":"605b678d873d4e690ac9e521",
-            "name":"Jordan Jumpman",
-            "tagname":"Classics",
-            "price":"3995",
-            "image":"https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/ae5ac729-43b2-4154-8220-8c43bb2beff7/jordan-jumpman-classics-fleece-crew-sweatshirt-5Xm8tf.png"
+        {
+            "_id": "605b678d873d4e690ac9e521",
+            "name": "Jordan Jumpman",
+            "tagname": "Classics",
+            "price": "3995",
+            "image": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/ae5ac729-43b2-4154-8220-8c43bb2beff7/jordan-jumpman-classics-fleece-crew-sweatshirt-5Xm8tf.png"
         },
-        { 
-            "_id":"605b678d873d4e690ac9e522",
-            "name":"Nike",
-            "tagname":"'Just do it'",
-            "price":"2333",
-            "image":"https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/c1d228fa-4111-455b-9d76-b19ded9ba5ae/just-do-it-basketball-t-shirt-JJbBrF.png"
+        {
+            "_id": "605b678d873d4e690ac9e522",
+            "name": "Nike",
+            "tagname": "'Just do it'",
+            "price": "2333",
+            "image": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/c1d228fa-4111-455b-9d76-b19ded9ba5ae/just-do-it-basketball-t-shirt-JJbBrF.png"
         }
     ]
 }

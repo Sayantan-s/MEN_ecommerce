@@ -1,12 +1,8 @@
-import { Page } from 'components'
-import React from 'react'
+import { Page } from 'components';
+import React from 'react';
 
 const Collections = () => {
-    return (
-        <Page>
-            Collections
-        </Page>
-    )
-}
+    return <Page>Collections</Page>;
+};
 
-export default Collections
+export default Collections;

@@ -1,3 +1,3 @@
-import Clothing from './clothing.json'
+import Clothing from './clothing.json';
 
-export { Clothing }
+export { Clothing };

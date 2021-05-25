@@ -1,17 +1,17 @@
 import http from 'http';
 
-class CustomError extends Error{
-    constructor(status, msg){
+class CustomError extends Error {
+    constructor(status, msg) {
         this.status = status;
-        this.message = msg; 
+        this.message = msg;
     }
 
-    static newError(statusCode){
+    static newError(statusCode) {
         const errorMsg = http.STATUS_CODES[statusCode];
         return { statusCode, errorMsg };
     }
 
-    static alreadyExists(){
+    static alreadyExists() {
         return CustomError.newError(409);
     }
 }

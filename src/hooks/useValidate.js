@@ -1,7 +1,3 @@
-
-
-const useValidate = () => {
-    
-}
+const useValidate = () => {};
 
 export default useValidate;
