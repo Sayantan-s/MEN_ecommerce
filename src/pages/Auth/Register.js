@@ -3,6 +3,10 @@ import { Typography, Box, FormField, Button, Link } from 'components';
 import { motion } from 'framer-motion';
 import { useForm } from 'hooks';
 import { AtSymbolIcon, EyeIcon, UserCircleIcon, UserIcon } from '@heroicons/react/outline';
+import Profile from 'assets/icons/Profile';
+import User from 'assets/icons/User';
+import Mail from 'assets/icons/Mail';
+import Show from 'assets/icons/Show';
 
 const Register = () => {
     const [form, onChangeHandler, onSubmitHandler] = useForm({
@@ -13,7 +17,7 @@ const Register = () => {
                 placeholder: 'e.g. Jacob Doe'
             },
             value: '',
-            icon: UserCircleIcon,
+            icon: Profile,
             labelName: 'Full Name'
         },
         username: {
@@ -23,7 +27,7 @@ const Register = () => {
                 placeholder: 'e.g. JakeDoe67'
             },
             value: '',
-            icon: UserIcon,
+            icon: User,
             labelName: 'Username'
         },
         email: {
@@ -33,7 +37,7 @@ const Register = () => {
                 placeholder: 'e.g. sssamanta789@gmail.com'
             },
             value: '',
-            icon: AtSymbolIcon,
+            icon: Mail,
             labelName: 'Email Address'
         },
         password: {
@@ -43,7 +47,7 @@ const Register = () => {
                 placeholder: 'e.g. Enter password with characters...'
             },
             value: '',
-            icon: EyeIcon,
+            icon: Show,
             labelName: 'Password'
         },
         confirmPassword: {
@@ -53,7 +57,7 @@ const Register = () => {
                 placeholder: 'e.g. 6 - 7 characters atleast...'
             },
             value: '',
-            icon: EyeIcon,
+            icon: Show,
             labelName: 'Confirm password'
         }
     });

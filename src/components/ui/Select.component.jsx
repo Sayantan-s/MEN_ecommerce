@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Listbox } from '@headlessui/react';
 import { AnimatePresence, motion } from 'framer-motion';
+import ChevronDown from 'assets/icons/ChevronDown';
 
 const people = [
     { id: 1, name: 'Unisex', unavailable: false },
@@ -12,31 +13,30 @@ const Select = ({ className, data }) => {
     const [selectedPerson, setSelectedPerson] = useState(people[0]);
 
     const selectAnimation = {
-        from : {
+        from: {
             height: 0,
             opacity: 0
         },
         to: {
-            height: "auto",
+            height: 'auto',
             opacity: 1,
             transition: {
-                type: "spring",
                 staggerChildren: 0.08,
-                when: "beforeChildren"
+                when: 'beforeChildren'
             }
         }
-    }
+    };
 
     const selectOptionAnimation = {
-        from : {
+        from: {
             y: 20,
             opacity: 0
         },
-        to : {
+        to: {
             y: 0,
             opacity: 1
         }
-    }
+    };
 
     return (
         <Listbox
@@ -49,8 +49,9 @@ const Select = ({ className, data }) => {
                     <Listbox.Button
                         whileTap={{ scale: 0.99 }}
                         as={motion.button}
-                        className="focus:outline-none w-full text-left rounded-2xl p-4 border-2 border-gray-200">
-                        {selectedPerson.name}
+                        className="focus:outline-none w-full text-left rounded-2xl p-4 border-2 border-gray-200 flex items-center justify-between">
+                        <span>{selectedPerson.name}</span>
+                        <ChevronDown className="h-5 w-5" />
                     </Listbox.Button>
                     <AnimatePresence>
                         {open && (
@@ -58,9 +59,8 @@ const Select = ({ className, data }) => {
                                 style={{ originX: 0.5 }}
                                 as={motion.ul}
                                 variants={selectAnimation}
-                                initial={"from"}
-                                animate={"to"}
-                                exit={{ opacity: 0 }}
+                                initial={'from'}
+                                animate={'to'}
                                 className="absolute py-1 mt-2 bg-gray-50 shadow-md w-full rounded-xl overflow-hidden">
                                 {(data || people).map((person) => (
                                     <Listbox.Option

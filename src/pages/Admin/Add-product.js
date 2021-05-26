@@ -91,7 +91,7 @@ const AddProduct = () => {
                     </Box>
                 </Box>
             </Box>
-            <Box className="w-1/2">Product details</Box>
+            <Box className="w-1/2 ml-10">Product details</Box>
         </Page>
     );
 };

@@ -1,19 +1,23 @@
 import { Box, Select } from 'components';
 import { motion } from 'framer-motion';
 import React from 'react';
+import { forwardRef } from 'react';
 
-const FormField = ({
-    as,
-    ElementConfig,
-    value,
-    onChange,
-    children,
-    className,
-    icon: Icon,
-    labelName,
-    half,
-    ...otherInpProps
-}) => {
+const FormField = (
+    {
+        as,
+        ElementConfig,
+        value,
+        onChange,
+        children,
+        className,
+        icon: Icon,
+        labelName,
+        half,
+        ...otherInpProps
+    },
+    fileRef
+) => {
     let inputEle = null;
 
     const styles = 'w-full rounded-2xl p-4 border-2 border-gray-200 font-semibold';
@@ -42,7 +46,20 @@ const FormField = ({
             );
             break;
         case 'select':
-            inputEle = <Select classname="my-2" />;
+            inputEle = <Select className="my-2" />;
+            break;
+        case 'file':
+            inputEle = (
+                <>
+                    <input
+                        ref={fileRef}
+                        className={`${inputStyles} hidden`}
+                        {...ElementConfig}
+                        value={value}
+                        onChange={onChange}
+                    />
+                </>
+            );
             break;
         default:
             inputEle = (
@@ -64,7 +81,7 @@ const FormField = ({
                 <>
                     <Box className={`flex items-center mt-2 ${styles}`}>
                         {inputEle}
-                        {Icon && <Icon className="h-5 w-5" />}
+                        {Icon && <Icon className="h-6 w-6 stroke-current text-gray-400" />}
                     </Box>
                 </>
             )}
@@ -72,4 +89,4 @@ const FormField = ({
     );
 };
 
-export default FormField;
+export default forwardRef(FormField);

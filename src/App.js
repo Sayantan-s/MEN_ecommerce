@@ -18,7 +18,7 @@ function App() {
                 <Route exact path="/collectives" component={Collections} />
                 <Route path="/auth/:path">
                     <AuthLayout>
-                        <Switch>
+                        <Switch location={location} key={location.pathname}>
                             <Route path="/auth/login" component={Login} />
                             <Route path="/auth/register" component={Register} />
                         </Switch>

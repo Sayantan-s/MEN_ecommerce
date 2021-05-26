@@ -25,7 +25,7 @@ module.exports = {
     ],
     rules: {
         'prettier/prettier': ['error', {}, { usePrettierrc: true }],
-        'no-var' : 'off',
-        'react/react-in-jsx-scope' : 'off'
+        'no-var': 'off',
+        'react/react-in-jsx-scope': 'off'
     }
 };

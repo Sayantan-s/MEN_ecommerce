@@ -5,8 +5,8 @@ import { ChevronRightIcon } from '@heroicons/react/solid';
 
 const AuthLayout = ({ children }) => {
     return (
-        <Page className="flex items-baseline">
-            <Box className="w-1/2 mt-20">
+        <Page className="flex items-baseline py-24">
+            <Box className="w-1/2">
                 <Typography as={motion.h1} className="font-extrabold text-gray-900">
                     If you can dream it,
                     <br />

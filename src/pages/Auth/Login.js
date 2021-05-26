@@ -1,8 +1,9 @@
 import React from 'react';
 import { Typography, Box, FormField, Button, Link } from 'components';
-import { AtSymbolIcon, EyeIcon } from '@heroicons/react/outline';
 import { motion } from 'framer-motion';
 import { useForm } from 'hooks';
+import User from 'assets/icons/User';
+import Show from 'assets/icons/Show';
 
 const Login = () => {
     const [form, onChangeHandler, onSubmitHandler] = useForm({
@@ -13,7 +14,7 @@ const Login = () => {
                 placeholder: 'e.g. sssamanta789@gmail.com'
             },
             value: '',
-            icon: AtSymbolIcon,
+            icon: User,
             labelName: 'Username or Email Address'
         },
         password: {
@@ -23,14 +24,14 @@ const Login = () => {
                 placeholder: 'e.g. Enter password with characters...'
             },
             value: '',
-            icon: EyeIcon,
+            icon: Show,
             labelName: 'Password'
         }
     });
     return (
         <>
-            <Typography as={motion.h3} className="my-2 text-gray-900 font-normal">
-                Welcome back, <span className="text-gray-300 font-light">Sayantan</span>.
+            <Typography as={motion.h3} className="my-2 text-gray-900 ">
+                Welcome back, <span className="text-gray-300">Sayantan</span>.
             </Typography>
             <Typography as={motion.p} className="max-w-lg mt-2 text-gray-400 flex items-center">
                 Dont't have an account?&nbsp;&nbsp;
