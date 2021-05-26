@@ -6,7 +6,7 @@ import {
 
 const authState = {
     loading: false,
-    isAuthenticated: true,
+    isAuthenticated: false,
     error: false
 };
 

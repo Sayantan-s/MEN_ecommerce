@@ -11,6 +11,33 @@ const people = [
 const Select = ({ className, data }) => {
     const [selectedPerson, setSelectedPerson] = useState(people[0]);
 
+    const selectAnimation = {
+        from : {
+            height: 0,
+            opacity: 0
+        },
+        to: {
+            height: "auto",
+            opacity: 1,
+            transition: {
+                type: "spring",
+                staggerChildren: 0.08,
+                when: "beforeChildren"
+            }
+        }
+    }
+
+    const selectOptionAnimation = {
+        from : {
+            y: 20,
+            opacity: 0
+        },
+        to : {
+            y: 0,
+            opacity: 1
+        }
+    }
+
     return (
         <Listbox
             value={selectedPerson}
@@ -28,13 +55,16 @@ const Select = ({ className, data }) => {
                     <AnimatePresence>
                         {open && (
                             <Listbox.Options
+                                style={{ originX: 0.5 }}
                                 as={motion.ul}
-                                initial={{ height: 0, opacity: 0 }}
-                                animate={{ height: 'auto', opacity: 1 }}
+                                variants={selectAnimation}
+                                initial={"from"}
+                                animate={"to"}
                                 exit={{ opacity: 0 }}
-                                className="absolute py-1 mt-2 bg-gray-50 shadow-lg w-full rounded-xl">
+                                className="absolute py-1 mt-2 bg-gray-50 shadow-md w-full rounded-xl overflow-hidden">
                                 {(data || people).map((person) => (
                                     <Listbox.Option
+                                        variants={selectOptionAnimation}
                                         as={motion.li}
                                         key={person.id}
                                         value={person}

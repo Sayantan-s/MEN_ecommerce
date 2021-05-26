@@ -60,19 +60,19 @@ const Register = () => {
 
     return (
         <>
-            <Typography as={motion.h6} className="text-gray-300 uppercase font-semibold">
-                Join for free.
+            <Typography as={motion.h3} className="my-2 text-gray-900 font-semibold">
+                Welcome
             </Typography>
-            <Typography as={motion.h2} className="my-2 text-gray-900 font-semibold">
-                Sign in to Nike.
+            <Typography as={motion.h3} className="mt-2 text-gray-300 font-light">
+                Get started by <br /> creating your account.
             </Typography>
-            <Typography as={motion.p} className="max-w-lg mt-6 text-gray-400 flex items-center">
+            <Typography as={motion.p} className="max-w-lg mt-2 text-gray-400 flex items-center">
                 Already a user?&nbsp;&nbsp;
                 <Link type="transparent" className="text-gray-900" to="/auth/login">
                     Login
                 </Link>
             </Typography>
-            <Box as={motion.form} onSubmit={onSubmitHandler} className="mt-4">
+            <Box as={motion.form} onSubmit={onSubmitHandler} className="mt-6">
                 {form.map(({ key, data }, id) => (
                     <FormField
                         key={key}

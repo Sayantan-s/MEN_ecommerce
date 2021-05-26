@@ -29,16 +29,16 @@ const Login = () => {
     });
     return (
         <>
-            <Typography as={motion.h3} className="my-2 text-gray-900 font-semibold">
-                Welcome back, <span className="text-gray-300">Sayantan</span>.
+            <Typography as={motion.h3} className="my-2 text-gray-900 font-normal">
+                Welcome back, <span className="text-gray-300 font-light">Sayantan</span>.
             </Typography>
-            <Typography as={motion.p} className="max-w-lg mt-6 text-gray-400 flex items-center">
+            <Typography as={motion.p} className="max-w-lg mt-2 text-gray-400 flex items-center">
                 Dont't have an account?&nbsp;&nbsp;
                 <Link type="transparent" className="text-gray-900" to="/auth/register">
                     Signup
                 </Link>
             </Typography>
-            <Box as={motion.form} onSubmit={onSubmitHandler} className="mt-4">
+            <Box as={motion.form} onSubmit={onSubmitHandler} className="mt-6">
                 {form.map(({ key, data }, id) => (
                     <FormField
                         key={key}
