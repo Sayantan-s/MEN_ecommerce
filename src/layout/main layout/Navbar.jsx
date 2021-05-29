@@ -1,19 +1,29 @@
 import { Disclosure } from '@headlessui/react';
 import Logo from 'assets/Logo';
 import { motion } from 'framer-motion';
-import React from 'react';
+import React, { useRef } from 'react';
 import { Cart } from 'assets/Icons';
 import { WishList } from 'assets/Icons';
 import { Box, Button, Link } from 'components';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { GOT_NAV_VALUE } from 'store/types/getNavValue';
 
 const Navbar = () => {
     const { isAuthenticated } = useSelector((state) => state.AuthReducer);
 
     const NavLinks = ['Home', 'Shop', 'Collectives', 'Orders', 'New'];
 
+    const navBarRef = useRef(null);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch({ type : GOT_NAV_VALUE, payload : navBarRef.current.offsetHeight})
+    },[])
+
     return (
-        <header className="w-full bg-gray-50">
+        <header className="w-full bg-gray-50 fixed border-b-2 border-gray-200" ref={navBarRef}>
             <Disclosure
                 as={motion.nav}
                 className="flex items-center justify-between w-10/12 mx-auto">

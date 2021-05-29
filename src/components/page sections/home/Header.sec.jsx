@@ -4,8 +4,8 @@ import { motion } from 'framer-motion';
 
 const Header = () => {
     return (
-        <Box className="w-full mt-16">
-            <Typography as={motion.h2} className="text-center text-gray-900 leading-tight">
+        <Box className="w-full">
+            <Typography as={motion.h2} className="text-center text-gray-900 leading-tight pt-8">
                 NIKE AIR ZOOM PEGASUS 38
                 <br />
                 Your Workhorse With Wings is here,

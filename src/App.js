@@ -1,6 +1,6 @@
 import { Layout, AuthLayout } from 'layout';
 import { Admin, Collections, Home, Login, Register, AddProduct, AdminProduct } from 'pages';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { BrowserRouter as Switch, Route, useLocation } from 'react-router-dom';
 
 function App() {
