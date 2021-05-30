@@ -1,4 +1,4 @@
-import { Box, Select } from 'components';
+import { Box, FileUpload, Select } from 'components';
 import { motion } from 'framer-motion';
 import React from 'react';
 import { forwardRef } from 'react';
@@ -49,17 +49,7 @@ const FormField = (
             inputEle = <Select className="my-2" />;
             break;
         case 'file':
-            inputEle = (
-                <>
-                    <input
-                        ref={fileRef}
-                        className={`${inputStyles} hidden`}
-                        {...ElementConfig}
-                        value={value}
-                        onChange={onChange}
-                    />
-                </>
-            );
+            inputEle = <FileUpload value={value} />
             break;
         default:
             inputEle = (
