@@ -49,7 +49,7 @@ const FormField = (
             inputEle = <Select className="my-2" />;
             break;
         case 'file':
-            inputEle = <FileUpload value={value} />
+            inputEle = <FileUpload onChange={onChange} ElementConfig={ElementConfig} {...otherInpProps} />
             break;
         default:
             inputEle = (
@@ -65,7 +65,7 @@ const FormField = (
     return (
         <Box className={`my-2 ${half ? 'w-1/2' : 'w-full'} ${className}`}>
             {labelName && <label className="text-gray-900 font-normal text-lg">{labelName}</label>}
-            {as === 'dropdown' || as === 'select' ? (
+            {as === 'dropdown' || as === 'select' || as === 'file' ? (
                 inputEle
             ) : (
                 <>

@@ -43,6 +43,15 @@ const AddProduct = () => {
             value: '',
             labelName: 'Gender'
         },
+        file: {
+            as: 'file',
+            ElementConfig: {
+                type: 'file',
+                accept : 'image/*'
+            },
+            btnName : 'Upload cover',
+            button : 'secondary'
+        },
         productDetails: {
             as: 'textarea',
             ElementConfig: {

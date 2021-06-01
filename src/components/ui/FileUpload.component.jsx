@@ -1,6 +1,7 @@
+import { Button } from 'components';
 import React, { useRef } from 'react'
 
-const FileUpload = ({ value, onChange, ElementConfig, btnName }) => {
+const FileUpload = ({ onChange, ElementConfig, btnName, button }) => {
     const fileRef = useRef(null);
     const TriggerHanlder = eve =>{
         eve.preventDefault();
@@ -13,10 +14,9 @@ const FileUpload = ({ value, onChange, ElementConfig, btnName }) => {
                 type="file"
                 className={`hidden`}
                 {...ElementConfig}
-                value={value}
                 onChange={onChange}
             />
-            <Button onClick={TriggerHanlder}>
+            <Button onClick={TriggerHanlder} type={button} className={'w-full'}>
                 {btnName}
             </Button>
     </>
