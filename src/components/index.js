@@ -11,4 +11,16 @@ import Box from './elements/Box.component';
 import Page from './elements/Page.component';
 import Typography from './elements/Typography.component';
 
-export { Link, Button, Dropdown, Box, Page, Typography, Image, ProductCard, FormField, Select, FileUpload };
+export {
+    Link,
+    Button,
+    Dropdown,
+    Box,
+    Page,
+    Typography,
+    Image,
+    ProductCard,
+    FormField,
+    Select,
+    FileUpload
+};

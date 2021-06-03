@@ -1,3 +1,5 @@
+import ImageIcon from 'assets/icons/ImageIcon';
+import Upload from 'assets/icons/Upload';
 import { Page, Box, Typography, FormField, Button, Select } from 'components';
 import { motion } from 'framer-motion';
 import { useForm } from 'hooks';
@@ -43,14 +45,31 @@ const AddProduct = () => {
             value: '',
             labelName: 'Gender'
         },
-        file: {
+        cover: {
             as: 'file',
             ElementConfig: {
                 type: 'file',
-                accept : 'image/*'
+                accept: 'image/*'
             },
-            btnName : 'Upload cover',
-            button : 'secondary'
+            btnName: <>
+                <span className="mr-2">Upload cover image</span>
+                <Upload />
+            </>,
+            button: 'secondary',
+            half: true,
+            styles : 'pr-2'
+        },
+        otherimg: {
+            as: 'file',
+            ElementConfig: {
+                type: 'file',
+                accept: 'image/*',
+                multiple : true
+            },
+            btnName: 'Add more images',
+            button: 'primary',
+            half: true,
+            styles : 'pl-2'
         },
         productDetails: {
             as: 'textarea',
@@ -62,6 +81,7 @@ const AddProduct = () => {
             labelName: 'Product Details'
         }
     });
+    console.log(form);
     return (
         <Page className="flex">
             <Box className="w-1/2">
@@ -89,7 +109,9 @@ const AddProduct = () => {
                                     id !== 0 && data.half && id % 2 === 0 ? 'pl-2' : ''
                                 } ${id !== 0 && data.half && id % 2 !== 0 ? 'pr-2' : ''} ${
                                     id === form.length - 1 ? 'pb-6' : ''
-                                }`}
+                                }
+                                ${data.as === 'file' && data.styles}
+                            `}
                                 {...data}
                                 onChange={onChangeHandler}
                             />

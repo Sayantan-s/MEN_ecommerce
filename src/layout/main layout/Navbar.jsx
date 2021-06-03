@@ -19,8 +19,8 @@ const Navbar = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch({ type : GOT_NAV_VALUE, payload : navBarRef.current.offsetHeight})
-    },[])
+        dispatch({ type: GOT_NAV_VALUE, payload: navBarRef.current.offsetHeight });
+    }, []);
 
     return (
         <header className="w-full bg-gray-50 fixed border-b-2 border-gray-200 z-50" ref={navBarRef}>
