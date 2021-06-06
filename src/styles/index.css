@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.layout{
+    max-width : 1440px;
+}
+
 body,
 html {
     -webkit-font-smoothing: antialiased;

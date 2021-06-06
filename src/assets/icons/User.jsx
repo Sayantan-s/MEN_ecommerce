@@ -6,7 +6,7 @@ const User = ({ className }) => {
             className={className}
             viewBox="0 0 24 24"
             version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
+            xmlns="http://www.w3.org/2000/svg" 
             xmlnsXlink="http://www.w3.org/1999/xlink">
             <title>Iconly/Light-Outline/2 User</title>
             <g
