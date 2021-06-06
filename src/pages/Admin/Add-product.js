@@ -1,8 +1,6 @@
 import { UploadIcon } from '@heroicons/react/outline';
 import { ArrowRightIcon } from '@heroicons/react/solid';
-import ImageIcon from 'assets/icons/ImageIcon';
-import Upload from 'assets/icons/Upload';
-import { Page, Box, Typography, FormField, Button, Select, Image } from 'components';
+import { Page, Box, Typography, FormField, Button, Image } from 'components';
 import { motion } from 'framer-motion';
 import { useForm } from 'hooks';
 import React, { useState } from 'react';
@@ -128,21 +126,31 @@ const AddProduct = () => {
             </Box>
             <Box className="w-1/2 ml-10">
                 <Box className="w-full my-20">
-                    <Typography as={motion.h3} className="text-gray-900 font-normal flex items-center">
-                        <span>
-                            Product details
-                        </span>
-                        <ArrowRightIcon className="h-12 w-12 ml-1 transform -rotate-45"/>
+                    <Typography
+                        as={motion.h3}
+                        className="text-gray-900 font-normal flex items-center">
+                        <span>Product details</span>
+                        <ArrowRightIcon className="h-12 w-12 ml-1 transform -rotate-45" />
                     </Typography>
-                    <Box className="w-full mt-10">
+                    <Box className="w-full mt-6">
                         <Box className="w-full flex">
-                            <Image src={`https://air.jordan.com/wp-content/uploads/2021/03/Zion_Zion1_Gallery_${imgId}.jpg`} alt='jordan_img' className="w-10/12 h-96"/>
+                            <Image
+                                src={`https://air.jordan.com/wp-content/uploads/2021/03/Zion_Zion1_Gallery_${imgId}.jpg`}
+                                alt="jordan_img"
+                                className="w-10/12 h-96"
+                            />
                             <Box className="w-2/12 ml-2 flex flex-col">
-                                {
-                                    [4,5,6,8].map((imgno,id) => (
-                                        <Image src={`https://air.jordan.com/wp-content/uploads/2021/03/Zion_Zion1_Gallery_${imgno}.jpg`} alt={'jordan_img' + id} className={`w-full h-1/4 cursor-pointer ${id !== 0 && 'mt-2'}`} key={id} onClick={() => setId(imgno)}/>
-                                    ))
-                                }                            
+                                {[4, 5, 6, 8].map((imgno, id) => (
+                                    <Image
+                                        src={`https://air.jordan.com/wp-content/uploads/2021/03/Zion_Zion1_Gallery_${imgno}.jpg`}
+                                        alt={'jordan_img' + id}
+                                        className={`w-full h-1/4 cursor-pointer ${
+                                            id !== 0 && 'mt-2'
+                                        }`}
+                                        key={id}
+                                        onClick={() => setId(imgno)}
+                                    />
+                                ))}
                             </Box>
                         </Box>
                     </Box>
