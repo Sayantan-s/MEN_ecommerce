@@ -24,7 +24,8 @@ const AddProduct = () => {
             },
             value: '',
             labelName: 'Tagname',
-            half: true
+            half: true,
+            styles : 'pr-2'
         },
         price: {
             as: 'input',
@@ -34,7 +35,8 @@ const AddProduct = () => {
             },
             value: '',
             labelName: 'Price',
-            half: true
+            half: true,
+            styles : 'pl-2'
         },
         gender: {
             as: 'select',
@@ -81,7 +83,6 @@ const AddProduct = () => {
             labelName: 'Product Details'
         }
     });
-    console.log(form);
     return (
         <Page className="flex">
             <Box className="w-1/2">
@@ -106,11 +107,9 @@ const AddProduct = () => {
                             <FormField
                                 key={key}
                                 className={`float-left ${
-                                    id !== 0 && data.half && id % 2 === 0 ? 'pl-2' : ''
-                                } ${id !== 0 && data.half && id % 2 !== 0 ? 'pr-2' : ''} ${
                                     id === form.length - 1 ? 'pb-6' : ''
                                 }
-                                ${data.as === 'file' && data.styles}
+                                ${data.half && data.styles}
                             `}
                                 {...data}
                                 onChange={onChangeHandler}
