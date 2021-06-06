@@ -49,7 +49,14 @@ const FormField = (
             inputEle = <Select className="my-2" />;
             break;
         case 'file':
-            inputEle = <FileUpload onChange={onChange} ElementConfig={ElementConfig} icon={Icon} {...otherInpProps} />
+            inputEle = (
+                <FileUpload
+                    onChange={onChange}
+                    ElementConfig={ElementConfig}
+                    icon={Icon}
+                    {...otherInpProps}
+                />
+            );
             break;
         default:
             inputEle = (
