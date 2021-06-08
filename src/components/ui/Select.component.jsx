@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Listbox } from '@headlessui/react';
 import { AnimatePresence, motion } from 'framer-motion';
-import ChevronDown from 'assets/icons/ChevronDown';
+import { ArrowSmDownIcon } from '@heroicons/react/solid';
+import { ChevronDoubleDownIcon, ChevronDownIcon } from '@heroicons/react/outline';
 
 const people = [
     { id: 1, name: 'Unisex', unavailable: false },
@@ -47,11 +48,10 @@ const Select = ({ className, data }) => {
             {({ open }) => (
                 <>
                     <Listbox.Button
-                        whileTap={{ scale: 0.99 }}
                         as={motion.button}
                         className="focus:outline-none w-full text-left rounded-2xl p-4 border-2 border-gray-200 flex items-center justify-between">
                         <span>{selectedPerson.name}</span>
-                        <ChevronDown className="h-5 w-5" />
+                        <ChevronDownIcon className={`w-5 h-5 stroke-2 transform transition-transform duration-200 ${open ? `rotate-180`: 'rotate-0'}`} />
                     </Listbox.Button>
                     <AnimatePresence>
                         {open && (

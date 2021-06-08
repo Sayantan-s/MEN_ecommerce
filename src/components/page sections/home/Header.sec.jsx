@@ -22,9 +22,3 @@ const Header = () => {
 };
 
 export default Header;
-
-/*  ZION ON THE JORDAN ZION 1
-                <br />
-                WATCH ZION WILLIAMSON DETAIL
-                <br />
-                BEHIND HIS FIRST SIGNATURE SHOE.*/

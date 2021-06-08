@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-.layout{
-    max-width : 1440px;
+.layout {
+    max-width: 1440px;
 }
 
 body,

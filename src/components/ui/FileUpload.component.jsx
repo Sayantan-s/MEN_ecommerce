@@ -11,7 +11,7 @@ const FileUpload = ({ onChange, ElementConfig, btnName, button, className, ...ot
     const onChangeHandler = (eve, cb) => {
         const file = eve.target.files[0];
         return cb(file);
-    }
+    };
     return (
         <>
             <input
@@ -19,7 +19,7 @@ const FileUpload = ({ onChange, ElementConfig, btnName, button, className, ...ot
                 type="file"
                 className={`hidden`}
                 {...ElementConfig}
-                onChange={eve => onChangeHandler(eve,onChange())}
+                onChange={(eve) => onChangeHandler(eve, onChange())}
             />
             <Button onClick={TriggerHanlder} type={button} className={'w-full'} {...otherProps}>
                 {btnName}
