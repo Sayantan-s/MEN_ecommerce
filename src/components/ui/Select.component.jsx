@@ -51,7 +51,11 @@ const Select = ({ className, data }) => {
                         as={motion.button}
                         className="focus:outline-none w-full text-left rounded-2xl p-4 border-2 border-gray-200 flex items-center justify-between">
                         <span>{selectedPerson.name}</span>
-                        <ChevronDownIcon className={`w-5 h-5 stroke-2 transform transition-transform duration-200 ${open ? `rotate-180`: 'rotate-0'}`} />
+                        <ChevronDownIcon
+                            className={`w-5 h-5 stroke-2 transform transition-transform duration-200 ${
+                                open ? `rotate-180` : 'rotate-0'
+                            }`}
+                        />
                     </Listbox.Button>
                     <AnimatePresence>
                         {open && (
