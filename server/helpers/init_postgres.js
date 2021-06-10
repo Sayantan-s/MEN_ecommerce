@@ -9,6 +9,8 @@ const client  = new Pool({
     database : DB_DATABASE
 })
 
+const db = client;
+
 client.on("connect",() => {
     console.log(`Connected to db --> ${DB_DATABASE}`);
 })
@@ -23,7 +25,7 @@ client.on('error', (err) => {
 })
 
 process.on("SIGINT",async() => {
-    await client.close();
+    await client.end();
     console.log("Disconnected!!");
 }) 
 
@@ -31,4 +33,4 @@ const connection = async(cb) => {
     await client.connect();
     return cb()
 }
-export default connection
+export { connection, db }
