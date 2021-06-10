@@ -13,7 +13,6 @@ const signUpValidaton = Joi.object({
 });
 
 const loginValidaton = Joi.object({
-    username: Joi.string().alphanum().required().min(6).max(20),
 
     email: Joi.string().email().required(),
 

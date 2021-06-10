@@ -2,7 +2,6 @@ import { PORT } from './config';
 import express from 'express';
 import morgan from 'morgan';
 import authRoute from './routes/auth.route';
-import init_mongodb from './helpers/init_mongodb';
 
 const app = express();
 
@@ -26,4 +25,4 @@ app.use((err, req, res, next) => {
     });
 });
 
-init_mongodb((_) => app.listen(PORT, (_) => console.log('Server is live....')));
+app.listen(PORT, (_) => console.log('Server is live....'));

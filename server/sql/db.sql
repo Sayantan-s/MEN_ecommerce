@@ -1,0 +1,6 @@
+CREATE DATABASE nike_redes;
+
+CREATE TABLE SHOES(
+    _id SERIAL PRIMARY KEY NOT NULL,
+    description TEXT NOT NULL
+)
