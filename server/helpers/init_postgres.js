@@ -22,6 +22,11 @@ client.on('error', (err) => {
     process.exit(-1)
 })
 
+process.on("SIGINT",async() => {
+    await client.close();
+    console.log("Disconnected!!");
+}) 
+
 const connection = async(cb) => {
     await client.connect();
     return cb()
