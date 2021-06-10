@@ -2,6 +2,7 @@ import { PORT } from './config';
 import express from 'express';
 import morgan from 'morgan';
 import authRoute from './routes/auth.route';
+import connection from './helpers/init_postgres';
 
 const app = express();
 
@@ -15,7 +16,7 @@ app.use((req, res, next) => {
     const error = new Error('Page not found!');
     error.status = 404;
     next(error);
-});
+}); 
 
 app.use((err, req, res, next) => {
     const statusCode = err.status || 500;
@@ -25,4 +26,6 @@ app.use((err, req, res, next) => {
     });
 });
 
-app.listen(PORT, (_) => console.log('Server is live....'));
+connection(() => {
+    app.listen(PORT, (_) => console.log('Server is live....' + PORT));
+}) 

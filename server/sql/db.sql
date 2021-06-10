@@ -1,6 +1,6 @@
-CREATE DATABASE nike_redes;
+CREATE DATABASE nike;
 
-CREATE TABLE SHOES(
+CREATE TABLE product(
     _id SERIAL PRIMARY KEY NOT NULL,
     description TEXT NOT NULL
 )
