@@ -1,7 +1,7 @@
 import { Pool } from 'pg';
 import { DB_DATABASE, DB_HOST, DB_PASSWORD, DB_PORT, DB_USER } from '../config';
 
-const client  = new Pool({
+const db  = new Pool({
     host : DB_HOST,
     port : DB_PORT,
     user : DB_USER,
@@ -9,25 +9,28 @@ const client  = new Pool({
     database : DB_DATABASE
 })
 
-const db = client;
-
-client.on("connect",() => {
-    console.log(`Connected to db --> ${DB_DATABASE}`);
-})
-
-client.on('error', (err) => {
+db.on('error', (err) => {
     console.error('Unexpected error on idle client', err)
     process.exit(-1)
 })
 
+const connection = async(cb) => {
+    const client = await db.connect();
+    try {
+        return cb();
+    } catch (error) {
+        new Error('Failed to connected to the database!');
+    }
+    finally{
+        client.release();
+    }
+}
+
 process.on("SIGINT",async() => {
-    await client.end();
+    await db.end();
     console.log("Disconnected!!");
     process.exit(0);
 }) 
 
-const connection = async(cb) => {
-    await client.connect();
-    return cb()
-}
+
 export { connection, db }
