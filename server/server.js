@@ -1,7 +1,7 @@
 import { PORT } from './config';
 import express from 'express';
 import morgan from 'morgan';
-import authRoute from './routes/auth.route';
+import authRoute from './routes/auth.routes';
 import { connection } from './helpers/init_postgres';
 import productRoutes from './routes/product.routes';
 

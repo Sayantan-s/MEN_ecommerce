@@ -14,7 +14,7 @@ router.route('/logout').delete(async (req, res, next) => {
 });
 
 router.route('/refresh').post(async (req, res, next) => {
-    res.send({ message: 'Hello from logout' });
+    res.send({ message: 'Hello from refresh!' });
 });
 
 export default router;

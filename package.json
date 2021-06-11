@@ -26,13 +26,14 @@
         "web-vitals": "^1.0.1"
     },
     "scripts": {
-        "start": "concurrently 'npm run dev' && 'cd server nodemon server.js'",
+        "start": "concurrently 'npm run dev' 'cd server && npm start'",
         "dev": "DISABLE_ESLINT_PLUGIN=true craco start",
         "build": "craco build",
         "test": "craco test",
         "eject": "react-scripts eject",
         "lint": "eslint --fix .",
-        "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
+        "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
+        "serverdeps" : "cd server && npm i"
     },
     "eslintConfig": {
         "extends": [

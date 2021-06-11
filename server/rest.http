@@ -18,6 +18,9 @@ POST http://localhost:5000/auth/logout
 
 
 ###
+GET http://localhost:5000/api/products
+
+###
 POST http://localhost:5000/api/products
 Content-Type: application/json
 
@@ -28,12 +31,11 @@ Content-Type: application/json
     "price" : 7495,
     "description" : "The radiance lives on in the Nike Air Force 1 '07, the b-ball OG that puts a fresh spin on what you know best: durably stitched overlays, clean finishes and the perfect amount of flash to make you shine.",
     "gender" : "male",
-    "coverImg" : "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/4f37fca8-6bce-43e7-ad07-f57ae3c13142/air-force-1-07-shoe-WrLlWX.png",
-    "descImg" : [
+    "cover" : "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/4f37fca8-6bce-43e7-ad07-f57ae3c13142/air-force-1-07-shoe-WrLlWX.png",
+    "otherimages" : [
         "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/15bcd4d6-2636-4e9d-8b90-47d556a2cc0a/air-force-1-07-shoe-WrLlWX.png",
         "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/1241c085-a703-49dd-8a84-5694d5fd8feb/air-force-1-07-shoe-WrLlWX.png",
         "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/c9e622c0-f478-4ffb-8def-fc11280e45bf/air-force-1-07-shoe-WrLlWX.png"
     ],
-    "adminName" : "nikemin@ac.in"
-
+    "admin" : "nikemin@ac.in"
 }
