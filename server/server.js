@@ -7,7 +7,7 @@ import productRoutes from './routes/product.routes';
 
 const app = express();
 
-const middlewares = [morgan('combined'), express.urlencoded({ extended: true }), express.json()];
+const middlewares = [morgan('combined'), express.json()];
 
 app.use(middlewares);
 

@@ -15,10 +15,6 @@ client.on("connect",() => {
     console.log(`Connected to db --> ${DB_DATABASE}`);
 })
 
-client.on("end", () => {
-    console.log(`Disconnected from db --> ${DB_DATABASE}`);
-})
-
 client.on('error', (err) => {
     console.error('Unexpected error on idle client', err)
     process.exit(-1)
@@ -27,6 +23,7 @@ client.on('error', (err) => {
 process.on("SIGINT",async() => {
     await client.end();
     console.log("Disconnected!!");
+    process.exit(0);
 }) 
 
 const connection = async(cb) => {
