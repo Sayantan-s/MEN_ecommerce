@@ -1,22 +1,28 @@
-import Joi from 'joi';
+import joi from 'joi'
 
-const signUpValidaton = Joi.object({
-    fullname: Joi.string().required(),
+const register_validator = joi.object({
+    img : joi.string(),
+    fullName : joi.string().required(),
+    username : joi.string().required().min(8).max(20).error(err => {
+        err.forEach(error => {
+            switch(error.code){
+                case 'any.empty':
+                    error.message = `Please don't leave it empty`;
+                    break;
+                case "string.min":
+                    error.message = `Value should have at least ${error.local.limit} characters!`;
+                    break;
+                case "string.max":
+                    error.message = `Value should have at most ${error.local.limit} characters!`;
+                    break;
+                default:
+                    break;
+            }
+        })
+    }),
+    email : joi.string().required(),
+    password : joi.string().required(),
+    confirmpassword : joi.ref('password')
+})
 
-    username: Joi.string().required().min(6).max(20),
-
-    email: Joi.string().email().required(),
-
-    password: Joi.string().required().min(7).max(15),
-
-    confirmpassword: Joi.ref('password')
-});
-
-const loginValidaton = Joi.object({
-
-    email: Joi.string().email().required(),
-
-    password: Joi.string().required().min(7).max(15)
-});
-
-export { signUpValidaton, loginValidaton };
+export { register_validator }

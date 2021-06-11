@@ -4,10 +4,11 @@ import Footer from './Footer';
 import Navbar from './Navbar';
 
 const Layout = ({ children }) => {
+
     return (
         <>
             <Navbar />
-            <AnimatePresence>{children}</AnimatePresence>
+                <AnimatePresence>{children}</AnimatePresence>
             <Footer />
         </>
     );

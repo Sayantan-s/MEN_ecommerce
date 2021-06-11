@@ -18,7 +18,7 @@ router
 
     const values = Object.values(req.body);
 
-    const query  = `INSERT INTO product(${columns.join(',')}) VALUES(${values.map((_,id) => `$${id + 1}`) }) RETURNING *`;
+    const query  = `INSERT INTO product(${columns.join(',')}) VALUES(${values.map((_,id) => `$${id + 1}`) })`;
 
     const { rows } = await db.query(query, values);
 

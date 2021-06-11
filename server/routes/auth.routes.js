@@ -1,5 +1,4 @@
 const router = require('express').Router();
-import { signUpValidaton, loginValidaton } from '../validators/auth.validator';
 
 router.route('/register').post(async (req, res, next) => {
   res.send({ message : 'Hello from register!' })
