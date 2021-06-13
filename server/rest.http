@@ -25,17 +25,20 @@ POST http://localhost:5000/api/products
 Content-Type: application/json
 
 {
-    "catagory" : "clothing",
-    "name" : "Nike Jordan",
-    "tagname" : "AJ4 Graphic",
-    "price" : 4295,
-    "description" : "The Jordan AJ4 Graphic Fleece Pullover Hoodie uses a midweight French terry that's softly brushed on the inside. Bold colour-blocking and graphics, plus a toggle on the hood drawcord drive distinction.",
-    "gender" : "male",
-    "cover" : "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/40a19cdc-f195-437d-ab54-c8c93479e35e/jordan-aj4-graphic-fleece-pullover-hoodie-9JhxcD.png",
-    "otherimages" : [
-        "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/32996740-baeb-490a-8b30-c4478001229f/jordan-aj4-graphic-fleece-pullover-hoodie-9JhxcD.png",
-        "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/370440db-0f8a-4b7f-b439-151e6e8dfc3a/jordan-aj4-graphic-fleece-pullover-hoodie-9JhxcD.png",
-        "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/f2e9ce17-9602-4b1c-8498-20e13c16213b/jordan-aj4-graphic-fleece-pullover-hoodie-9JhxcD.png"
-    ],
-    "admin" : "nikemin@ac.in"
+   "catagory": "clothing",
+        "name": "Nike Jordan",
+        "tagname": "PSG",
+        "price": 4797,
+        "description": "Take your Paris pride street-side in the Paris Saint-Germain Warm-up Jacket. Made from woven fabric with cut-and-sew panels, it features a print inspired by the Parisian football club's 4th kit. An authentic Paris Saint-Germain club crest and an iridescent jock tag link back to the collection.",
+        "gender": "Women",
+        "cover": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/ba9d90e9-1ade-4cc5-89be-970f4ef3c93c/paris-saint-germain-warm-up-jacket-8ZQJw0.png",
+        "otherimages": [
+          "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/73dd681c-ff02-480e-8458-a756a2635dd0/paris-saint-germain-warm-up-jacket-8ZQJw0.png",
+          "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/0d307b61-e3b1-482e-b538-c7b7880a2ef1/paris-saint-germain-warm-up-jacket-8ZQJw0.png",
+          "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/df7cd929-2d3d-40c0-8312-c652028aaaf7/paris-saint-germain-warm-up-jacket-8ZQJw0.png"
+        ],
+        "admin": "nikemin@ac.in",
+        "tags" : ["nike", "clothing", "women", "psg", "jordan"]
 }
+
+// "tags" : ["nike", "air", "shoes"]

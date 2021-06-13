@@ -7,7 +7,7 @@ const router = express.Router();
 router
     .route('/products')
     .get(async (req, res, next) => {
-        const { rows } = await db.query('SELECT * FROM product');
+        const { rows } = await db.query('SELECT * FROM products');
 
         res.status(200).send({ data : rows });
     })
@@ -19,7 +19,7 @@ router
 
         const values = Object.values(body);
 
-        const check_query = `SELECT * FROM product WHERE name = $1 AND tagname = $2`;
+        const check_query = `SELECT * FROM products WHERE name = $1 AND tagname = $2`;
 
         const response = await db.query(check_query,[body.name, body.tagname])
 
@@ -29,7 +29,7 @@ router
             return next(CustomError.alreadyExists('Product already exists'))
         }
 
-        const query = `INSERT INTO product(${columns.join(',')}) VALUES(${values.map(
+        const query = `INSERT INTO products(${columns.join(',')}) VALUES(${values.map(
             (_, id) => `$${id + 1}`
         )}) RETURNING *`;
         
@@ -37,5 +37,9 @@ router
 
         res.status(201).send({ data : rows });
     });
+
+router.get('/trendy-cloth', async(req, res, next) => {
+    
+})
 
 export default router;
