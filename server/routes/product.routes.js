@@ -39,7 +39,9 @@ router
     });
 
 router.get('/trendy-cloth', async(req, res, next) => {
-    
+    const { rows } = await db.query('SELECT cover, name, tagname, price, _id FROM products WHERE catagory = $1 ORDER BY RANDOM() LIMIT 5', ["clothing"]);
+
+    res.status(200).send({ data : rows });
 })
 
 export default router;

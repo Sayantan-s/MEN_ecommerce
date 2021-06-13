@@ -4,10 +4,11 @@ import morgan from 'morgan';
 import authRoute from './routes/auth.routes';
 import { connection } from './helpers/init_postgres';
 import productRoutes from './routes/product.routes';
+import cors from 'cors';
 
 const app = express();
 
-const middlewares = [morgan('dev'), express.json()];
+const middlewares = [morgan('dev'), express.json(), cors({ origin : 'http://localhost:3000' })];
 
 app.use(middlewares);
 

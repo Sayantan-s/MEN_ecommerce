@@ -27,18 +27,22 @@ Content-Type: application/json
 {
    "catagory": "clothing",
         "name": "Nike Jordan",
-        "tagname": "PSG",
-        "price": 4797,
-        "description": "Take your Paris pride street-side in the Paris Saint-Germain Warm-up Jacket. Made from woven fabric with cut-and-sew panels, it features a print inspired by the Parisian football club's 4th kit. An authentic Paris Saint-Germain club crest and an iridescent jock tag link back to the collection.",
-        "gender": "Women",
-        "cover": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/ba9d90e9-1ade-4cc5-89be-970f4ef3c93c/paris-saint-germain-warm-up-jacket-8ZQJw0.png",
+        "tagname": "PSG Strike",
+        "price": 3995,
+        "description": "Warm up in the Paris Saint-Germain Strike Tracksuit Jacket. It's made from smooth, slightly stretchy fabric that moves sweat from your skin to help keep you dry.",
+        "gender": "male",
+        "cover": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/06d6e7c4-099a-477d-8a37-b2504cf8eaa6/paris-saint-germain-strike-knit-football-tracksuit-jacket-r3SM3R.png",
         "otherimages": [
-          "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/73dd681c-ff02-480e-8458-a756a2635dd0/paris-saint-germain-warm-up-jacket-8ZQJw0.png",
-          "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/0d307b61-e3b1-482e-b538-c7b7880a2ef1/paris-saint-germain-warm-up-jacket-8ZQJw0.png",
-          "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/df7cd929-2d3d-40c0-8312-c652028aaaf7/paris-saint-germain-warm-up-jacket-8ZQJw0.png"
+          "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/6688fcb9-2c3f-4563-88be-7780724fb45e/paris-saint-germain-strike-knit-football-tracksuit-jacket-r3SM3R.png",
+          "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/66ca6aea-b9a7-493c-b892-e9732228159a/paris-saint-germain-strike-knit-football-tracksuit-jacket-r3SM3R.png",
+          "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/40915232-a581-4960-ae94-264aaf6e9a6e/paris-saint-germain-strike-knit-football-tracksuit-jacket-r3SM3R.png"
         ],
         "admin": "nikemin@ac.in",
-        "tags" : ["nike", "clothing", "women", "psg", "jordan"]
+        "tags" : ["nike", "clothing", "men", "jordan", "psg"]
 }
 
+###
+GET http://localhost:5000/api/trendy-cloth
+
 // "tags" : ["nike", "air", "shoes"]
+///
