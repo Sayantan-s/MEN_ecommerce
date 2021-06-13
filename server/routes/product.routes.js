@@ -9,13 +9,9 @@ router
     .get(async (req, res, next) => {
         const { rows } = await db.query('SELECT * FROM product');
 
-        const error = CustomError.newError(406);
-
-        console.log(error);
-
         res.status(200).send({ data : rows });
     })
-    .post(async (req, res) => {
+    .post(async (req, res, next) => {
 
         const { body } = req;
 
@@ -23,21 +19,23 @@ router
 
         const values = Object.values(body);
 
-        const check_query = `SELECT * FROM product WHERE name="Nike Air"`;
+        const check_query = `SELECT * FROM product WHERE name = $1 AND tagname = $2`;
 
-        console.log(check_query)
+        const response = await db.query(check_query,[body.name, body.tagname])
 
-        const response = await db.query(check_query)
+        console.log(Boolean(response.rows.length))
 
-        console.log(response.rows)
+        if(Boolean(response.rows.length)){
+            return next(CustomError.alreadyExists('Product already exists'))
+        }
 
-        /*const query = `INSERT INTO product(${columns.join(',')}) VALUES(${values.map(
+        const query = `INSERT INTO product(${columns.join(',')}) VALUES(${values.map(
             (_, id) => `$${id + 1}`
         )}) RETURNING *`;
         
-        const { rows } = await db.query(query, values);*/
+        const { rows } = await db.query(query, values);
 
-        //res.status(201).send({ data : rows });
+        res.status(201).send({ data : rows });
     });
 
 export default router;

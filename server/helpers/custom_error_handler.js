@@ -12,8 +12,8 @@ class CustomError extends Error {
         return { statusCode, errorMsg };
     }
 
-    static alreadyExists() {
-        return CustomError.newError(409);
+    static alreadyExists(message) {
+        return CustomError.newError(409, message);
     }
 }
 
