@@ -38,8 +38,35 @@ router
         res.status(201).send({ data : rows });
     });
 
+router
+.route('/products/:id')
+.get(async(req, res, next) => {
+    console.log(req.params)
+
+    const { id } = req.params;
+
+    const [ name, tagname ] = id.split('-');
+
+    const query = `SELECT name, tagname, price, cover, otherimages, gender, description 
+    FROM products 
+    WHERE name = $1 AND tagname = $2`;
+
+    const { rows } = await db.query(query,[name, tagname]);
+
+    if(!rows.length){
+        return next(CustomError.alreadyExists('Product is not present'));
+    }
+
+    res.status(200).send({ data : rows });
+})
+
 router.get('/trendy-cloth', async(req, res, next) => {
-    const { rows } = await db.query('SELECT cover, name, tagname, price, _id FROM products WHERE catagory = $1 ORDER BY RANDOM() LIMIT 5', ["clothing"]);
+    const { rows } = await db.query(`
+        SELECT cover, name, tagname, price, _id 
+        FROM products 
+        WHERE catagory = $1 
+        ORDER BY RANDOM() LIMIT 5`, 
+    ["clothing"]);
 
     res.status(200).send({ data : rows });
 })

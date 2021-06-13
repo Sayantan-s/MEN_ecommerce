@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Typography, Button, Image, ProductCard } from 'components';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 import { motion } from 'framer-motion';
-import { Clothing } from 'data';
+import http from 'utils/http';
+
 const CarouselAdvert = () => {
     var settings = {
         dots: false,
@@ -17,6 +18,15 @@ const CarouselAdvert = () => {
         swipeToSlide: true,
         arrows: false
     };
+
+    const [ trendState, setTrend ] = useState([]);
+
+    useEffect(() => {
+        (async() => {
+            const { data } = await http.get('api/trendy-cloth');
+            setTrend(data)
+        })()
+    },[])
 
     return (
         <Box className="flex w-full my-10">
@@ -45,13 +55,13 @@ const CarouselAdvert = () => {
                     Shop Now
                 </Button>
                 <Box className="w-full">
-                    <Slider {...settings} className="mt-6 w-144">
-                        {Clothing.data.map(({ _id, ...data }) => (
+                     <Slider {...settings} className="mt-6 w-144">
+                        {trendState.data?.map(({ _id, ...data }) => (
                             <div key={_id}>
                                 <ProductCard {...data} />
                             </div>
                         ))}
-                    </Slider>
+                        </Slider>
                 </Box>
             </Box>
         </Box>
