@@ -1,20 +1,11 @@
 class Query {
+    insert() {}
 
-    insert(){
+    fetch() {}
 
-    }
+    update() {}
 
-    fetch(){
-        
-    }
-
-    update(){
-
-    }
-
-    delete(){
-
-    }
+    delete() {}
 }
 
 export default Query;

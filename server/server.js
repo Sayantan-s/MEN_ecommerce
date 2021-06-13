@@ -7,18 +7,18 @@ import productRoutes from './routes/product.routes';
 
 const app = express();
 
-const middlewares = [morgan('combined'), express.json()];
+const middlewares = [morgan('dev'), express.json()];
 
 app.use(middlewares);
 
-app.use('/auth', authRoute);
-app.use('/api', productRoutes)
+app.use('/auth', authRoute); 
+app.use('/api', productRoutes);
 
 app.use((req, res, next) => {
     const error = new Error('Page not found!');
     error.status = 404;
     next(error);
-}); 
+});
 
 app.use((err, req, res, next) => {
     const statusCode = err.status || 500;
@@ -30,4 +30,4 @@ app.use((err, req, res, next) => {
 
 connection(() => {
     app.listen(PORT, (_) => console.log('Server is live....' + PORT));
-}) 
+});

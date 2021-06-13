@@ -2,12 +2,13 @@ import http from 'http';
 
 class CustomError extends Error {
     constructor(status, msg) {
+        super();
         this.status = status;
         this.message = msg;
     }
 
-    static newError(statusCode) {
-        const errorMsg = http.STATUS_CODES[statusCode];
+    static newError(statusCode, message) {
+        const errorMsg = message || http.STATUS_CODES[statusCode];
         return { statusCode, errorMsg };
     }
 

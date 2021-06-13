@@ -16,11 +16,9 @@ const Select = ({ className, data }) => {
     const selectAnimation = {
         from: {
             height: 0,
-            opacity: 0
         },
         to: {
             height: 'auto',
-            opacity: 1,
             transition: {
                 staggerChildren: 0.08,
                 when: 'beforeChildren'

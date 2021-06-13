@@ -1,11 +1,11 @@
 const router = require('express').Router();
 
 router.route('/register').post(async (req, res, next) => {
-  res.send({ message : 'Hello from register!' })
+    res.send({ message: 'Hello from register!' });
 });
 
 router.route('/login').post(async (req, res, next) => {
-    res.send({ message : 'Hello from login!' })
+    res.send({ message: 'Hello from login!' });
 });
 
 router.route('/logout').delete(async (req, res, next) => {

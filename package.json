@@ -33,7 +33,7 @@
         "eject": "react-scripts eject",
         "lint": "eslint --fix .",
         "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
-        "serverdeps" : "cd server && npm i"
+        "serverdeps": "cd server && npm i"
     },
     "eslintConfig": {
         "extends": [
