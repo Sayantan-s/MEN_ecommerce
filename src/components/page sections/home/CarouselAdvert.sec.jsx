@@ -19,14 +19,14 @@ const CarouselAdvert = () => {
         arrows: false
     };
 
-    const [ trendState, setTrend ] = useState([]);
+    const [trendState, setTrend] = useState([]);
 
     useEffect(() => {
-        (async() => {
+        (async () => {
             const { data } = await http.get('api/trendy-cloth');
-            setTrend(data)
-        })()
-    },[])
+            setTrend(data);
+        })();
+    }, []);
 
     return (
         <Box className="flex w-full my-10">
@@ -55,13 +55,13 @@ const CarouselAdvert = () => {
                     Shop Now
                 </Button>
                 <Box className="w-full">
-                     <Slider {...settings} className="mt-6 w-144">
+                    <Slider {...settings} className="mt-6 w-144">
                         {trendState.data?.map(({ _id, ...data }) => (
                             <div key={_id}>
                                 <ProductCard {...data} />
                             </div>
                         ))}
-                        </Slider>
+                    </Slider>
                 </Box>
             </Box>
         </Box>

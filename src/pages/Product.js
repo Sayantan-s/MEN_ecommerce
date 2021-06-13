@@ -4,15 +4,14 @@ import { useParams } from 'react-router-dom';
 import http from 'utils/http';
 
 const Product = () => {
-
     const params = useParams();
 
     useEffect(() => {
-        (async() => {
+        (async () => {
             const { data } = await http.get(`/api/products/${params.id}`);
             console.log(data);
-        })()
-    },[])
+        })();
+    }, []);
 
     return <Page>Product</Page>;
 };

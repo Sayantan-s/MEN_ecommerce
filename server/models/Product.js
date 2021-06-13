@@ -1,5 +1,16 @@
 class Product {
-    constructor(catagory, name, tagname, price, description, gender, coverImg, descImg, adminName, tags) {
+    constructor(
+        catagory,
+        name,
+        tagname,
+        price,
+        description,
+        gender,
+        coverImg,
+        descImg,
+        adminName,
+        tags
+    ) {
         this.catagory = catagory;
         this.name = name;
         this.tagname = tagname;
@@ -9,6 +20,6 @@ class Product {
         this.coverImg = coverImg;
         this.descImg = descImg;
         this.adminName = adminName;
-        this.tags = tags
+        this.tags = tags;
     }
 }

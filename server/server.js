@@ -8,11 +8,11 @@ import cors from 'cors';
 
 const app = express();
 
-const middlewares = [morgan('dev'), express.json(), cors({ origin : 'http://localhost:3000' })];
+const middlewares = [morgan('dev'), express.json(), cors({ origin: 'http://localhost:3000' })];
 
 app.use(middlewares);
 
-app.use('/auth', authRoute); 
+app.use('/auth', authRoute);
 app.use('/api', productRoutes);
 
 app.use((req, res, next) => {

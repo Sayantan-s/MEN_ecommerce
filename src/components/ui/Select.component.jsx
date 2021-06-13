@@ -15,7 +15,7 @@ const Select = ({ className, data }) => {
 
     const selectAnimation = {
         from: {
-            height: 0,
+            height: 0
         },
         to: {
             height: 'auto',
