@@ -5,7 +5,9 @@ import { motion } from 'framer-motion';
 const Header = () => {
     return (
         <Box className="w-full">
-            <Typography as={motion.h2} className="text-center text-gray-900 leading-tight pt-8">
+            <Typography
+                as={motion.h2}
+                className="text-center text-gray-900 font-bold leading-none tracking-wide pt-8">
                 INTRODUCING THE JORDAN ZION
                 <br />
                 Your Workhorse With Wings is here,

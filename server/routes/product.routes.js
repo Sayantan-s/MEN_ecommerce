@@ -42,7 +42,11 @@ router.route('/products/:id').get(async (req, res, next) => {
 
     const { id } = req.params;
 
-    const [name, tagname] = id.split('-');
+    const [name, tagname] = (() => {
+        let [first, ...rest] = id.split('-');
+        rest = rest.join('-');
+        return [first, rest];
+    })();
 
     const query = `SELECT name, tagname, price, cover, otherimages, gender, description 
     FROM products 
@@ -54,7 +58,7 @@ router.route('/products/:id').get(async (req, res, next) => {
         return next(CustomError.alreadyExists('Product is not present'));
     }
 
-    res.status(200).send({ data: rows });
+    res.status(200).send({ data: rows[0] });
 });
 
 router.get('/trendy-cloth', async (req, res, next) => {

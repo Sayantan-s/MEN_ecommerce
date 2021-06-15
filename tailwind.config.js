@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 module.exports = {
     mode: 'jit',
     purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
@@ -5,7 +7,7 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                body: ['Poppins', 'sans-serif']
+                body: ['Euclid Circular A', 'sans-serif']
             },
             spacing: {
                 mini: '1px',
@@ -16,15 +18,22 @@ module.exports = {
             }
         },
         fontWeight: {
-            light: 400,
-            normal: 500,
+            light: 300,
+            normal: 400,
+            regular: 500,
             semibold: 600,
-            bold: 700,
-            extrabold: 800
+            bold: 700
         }
     },
     variants: {
-        extend: {}
+        extend: {
+            fontFamily: {
+                sans: ['Euclid Circular A', ...defaultTheme.fontFamily.sans]
+            }
+        }
     },
-    plugins: []
+    plugins: [],
+    corePlugins: {
+        //lineHeight: false,
+    }
 };
