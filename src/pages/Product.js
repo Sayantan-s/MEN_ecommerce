@@ -7,6 +7,7 @@ import http from 'utils/http';
 import Typography from 'components/elements/Typography.component';
 import { motion } from 'framer-motion';
 import GenerateRandom from 'utils/generateRandom';
+import { useSelect } from 'hooks';
 
 const Product = () => {
     const { id } = useParams();
@@ -14,6 +15,12 @@ const Product = () => {
     const [productData, setData] = useState({});
 
     const [lightBox, setLightBox] = useState('');
+
+    const [options, select, setSelect] = useSelect([
+        { id: 1, name: 'Unisex', disabled: false },
+        { id: 2, name: 'Men', disabled: false },
+        { id: 3, name: 'Women', disabled: false }
+    ])
 
     const [orderState, setOrder] = useState({
         gender: '',
@@ -41,7 +48,7 @@ const Product = () => {
 
     const { otherimages, gender, catagory, name, tagname, price, description } = productData;
 
-    console.log(GenerateRandom.byDate());
+    console.log(select);
 
     return (
         <Page>
@@ -86,13 +93,7 @@ const Product = () => {
                     <Typography as={motion.p} className="text-gray-800 max-w-2xl mt-10">
                         {description}
                     </Typography>
-                    <Select
-                        data={
-                            ({ id: 1, name: 'Unisex', unavailable: false },
-                            { id: 2, name: 'Men', unavailable: false },
-                            { id: 3, name: 'Women', unavailable: false })
-                        }
-                    />
+                    <Select data={options} select={select} onSelect={setSelect} />
                 </ContentSection>
             </Box>
         </Page>
