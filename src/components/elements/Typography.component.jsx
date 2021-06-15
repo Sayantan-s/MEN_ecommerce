@@ -19,16 +19,16 @@ const Typography = ({ as, children, className, ...otherProps }) => {
             styles = 'text-3xl font-semibold';
             break;
         case motion.h5:
-            styles = 'text-xl font-medium';
+            styles = 'text-xl font-regular';
             break;
         case motion.h6:
-            styles = 'text-md font-medium';
+            styles = 'text-md font-regular';
             break;
         case motion.p:
-            styles = 'text-base font-medium';
+            styles = 'text-base font-normal';
             break;
         default:
-            styles = 'text-base';
+            styles = 'text-normal';
     }
     return (
         <Box {...otherProps} className={`${styles} ${className}`} as={as}>

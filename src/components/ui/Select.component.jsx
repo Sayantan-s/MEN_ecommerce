@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { Listbox } from '@headlessui/react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowSmDownIcon } from '@heroicons/react/solid';
-import { ChevronDoubleDownIcon, ChevronDownIcon } from '@heroicons/react/outline';
+import { ChevronDownIcon } from '@heroicons/react/outline';
 
 const people = [
     { id: 1, name: 'Unisex', unavailable: false },
@@ -11,7 +10,7 @@ const people = [
 ];
 
 const Select = ({ className, data }) => {
-    const [selectedPerson, setSelectedPerson] = useState(people[0]);
+    const [selectedPerson, setSelectedPerson] = useState(data[0]);
 
     const selectAnimation = {
         from: {
@@ -64,7 +63,7 @@ const Select = ({ className, data }) => {
                                 initial={'from'}
                                 animate={'to'}
                                 className="absolute py-1 mt-2 bg-gray-50 shadow-md w-full rounded-xl overflow-hidden">
-                                {(data || people).map((person) => (
+                                {(data.map((person) => (
                                     <Listbox.Option
                                         variants={selectOptionAnimation}
                                         as={motion.li}
