@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Listbox } from '@headlessui/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronDownIcon } from '@heroicons/react/outline';

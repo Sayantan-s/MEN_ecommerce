@@ -16,7 +16,7 @@ const useCounter = ({
         switch(type.toUpperCase()){
             case "INCREMENT":
                 if(limit){
-                    if(limitCheck && counter <= limit[1]){
+                    if(limitCheck && counter < limit[1]){
                         return setCounter(prev => prev + incrementBy);
                     }
                     return setDisable(true);
