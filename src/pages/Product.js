@@ -25,7 +25,7 @@ const Product = () => {
         start: 0,
         incrementBy: 1,
         decrementBy: 1,
-        limit : [0, 150]
+        limit: [0, 150]
     });
 
     const [options, select, setSelect] = useSelect([
@@ -57,17 +57,19 @@ const Product = () => {
 
     const { otherimages, gender, catagory, name, tagname, price, description, _id } = productData;
 
-    const handleAddToCart = async() => {
-        const { data } = await http({
-            method : 'POST',
-            url : '/api/orders',
-            data : {
-                _id,
-                size: select.name,
-                quantity: counter
-            }
-        })
-        
+    const handleAddToCart = async () => {
+        if (counter > 0) {
+            const { data } = await http({
+                method: 'POST',
+                url: '/api/orders',
+                data: {
+                    _id,
+                    size: select.name,
+                    quantity: counter
+                }
+            });
+        }
+        console.log('Please add something as quantity!');
     };
 
     return (
@@ -124,24 +126,29 @@ const Product = () => {
                         className="text-gray-800 mt-10 max-w-2xl line-clamp-3">
                         {description}
                     </Typography>
-                    <Box className="flex w-full mt-14 items-center justify-between max-w-2xl">
+                    <Box className="flex w-full mt-6 items-center justify-between max-w-2xl">
+                        <Box className="flex items-center justify-between max-w-sm w-3/5">
+                            <Box
+                                as={motion.span}
+                                className="text-gray-300 font-semibold text-xl uppercase whitespace-nowrap w-max">
+                                choose Qty.
+                            </Box>
+                            <Size className="text-2xl font-semibold text-gray-900 flex items-center">
+                                <Button onClick={() => handleCount('DECREMENT')}>
+                                    <ChevronDownIcon className="w-7 h-7" />
+                                </Button>
+                                <span className="w-12 text-center">{counter}</span>
+                                <Button onClick={() => handleCount('INCREMENT')}>
+                                    <ChevronUpIcon className="w-7 h-7" />
+                                </Button>
+                            </Size>
+                        </Box>
                         <Select
                             data={options}
                             value={select}
                             onChange={setSelect}
-                            className="w-3/5 mr-4"
+                            className="w-2/5 ml-4"
                         />
-                        <Box className="flex items-center justify-between max-w-sm justify-self-end">
-                            <Size className="text-4xl font-semibold text-gray-900 flex items-center">
-                                <Button onClick={() => handleCount('INCREMENT')}>
-                                    <ChevronUpIcon className="w-10 h-10" />
-                                </Button>
-                                <span className="w-12 text-center">{counter}</span>
-                                <Button onClick={() => handleCount('DECREMENT')}>
-                                    <ChevronDownIcon className="w-10 h-10" />
-                                </Button>
-                            </Size>
-                        </Box>
                     </Box>
                     <Button type="primary" className="w-full py-5 mt-14" onClick={handleAddToCart}>
                         add to cart

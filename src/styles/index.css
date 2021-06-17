@@ -15,7 +15,7 @@
         background-color: transparent;
     }
     .scrollbar::-webkit-scrollbar-thumb {
-        background-color: #D1D5DB;
+        background-color: #d1d5db;
         border-radius: 2rem;
         overflow: hidden;
     }

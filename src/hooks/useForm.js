@@ -18,11 +18,11 @@ const useForm = (formState) => {
             });
         }
         onChangeHandler = (eve, data) => {
-            switch(data.as){
+            switch (data.as) {
                 case 'select':
-                    console.log(data.value)
-                    return data.handler
-                default : 
+                    console.log(data.value);
+                    return data.handler;
+                default:
                     const { name, value } = eve.target;
                     return setForm((prevState) => ({
                         ...prevState,

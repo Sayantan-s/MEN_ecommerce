@@ -71,26 +71,55 @@ router.get('/trendy-cloth', async (req, res, next) => {
 });
 
 router
-.route('/orders')
-.get(async(req, res, next) => {
+    .route('/orders')
+    .get(async (req, res, next) => {
+        try {
+            const { rows } = await db.query(
+                `SELECT order_id, product_id, cover, name, tagname, catagory, description, size, gender, quantity, price, tags, orders.created_at, orders.updated_at FROM products
+                JOIN orders ON products._id = orders.product_id ORDER BY orders.created_at`
+            );
+            return res.send({ data: rows });
+        } catch (error) {
+            next(error);
+        }
+    })
+    .post(async (req, res, next) => {
+        const { _id } = req.body;
+        try {
+            const { rows } = await db.query(
+                `
+            SELECT cover, name, tagname, price
+            FROM products 
+            WHERE _id = $1 
+            `,
+                [_id]
+            );
+            if (rows.length) {
+                const values = Object.values(req.body);
 
-})
-.post(async(req,res, next) => {
-    const { _id, gender, size } = req.body;
-    const { rows } = await db.query(
-        `
-        SELECT cover, name, tagname, price
-        FROM products 
-        WHERE _id = $1 
-        `,
-        [_id]
-    );
-    if(rows.length){
-        const query = `
-            INSERT catagory,name,tagname,price,description,gender,cover,tags
-        `        
-    }
-    res.send({ message : req.body })
-})
+                const query = `
+                INSERT INTO orders(
+                    product_id,
+                    size,
+                    quantity
+                ) VALUES(
+                    ${values.map((_, id) => `$${id + 1}`)}
+                )
+                RETURNING *
+            `;
+                try {
+                    const res = await db.query(query, values);
+
+                    console.log(res);
+
+                    return res.send({ message: 'OK' });
+                } catch (error) {
+                    next(error);
+                }
+            }
+        } catch (error) {
+            next(error);
+        }
+    });
 
 export default router;
