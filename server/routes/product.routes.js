@@ -44,7 +44,7 @@ router.route('/products/:id').get(async (req, res, next) => {
 
     const [name, tagname] = id.split('_');
 
-    const query = `SELECT name, tagname, price, cover, otherimages, gender, description, catagory 
+    const query = `SELECT name, tagname, price, cover, otherimages, gender, description, catagory, _id
     FROM products 
     WHERE name = $1 AND tagname = $2`;
 

@@ -38,15 +38,11 @@ const AddProduct = () => {
             half: true,
             styles: 'pl-2'
         },
-        gender: {
+        /* gender: {
             as: 'select',
-            ElementConfig: {
-                type: 'password',
-                placeholder: 'e.g. Enter password with characters...'
-            },
             value: '',
             labelName: 'Gender'
-        },
+        }, */
         cover: {
             as: 'file',
             ElementConfig: {

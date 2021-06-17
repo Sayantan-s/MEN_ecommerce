@@ -1,7 +1,7 @@
 import { Layout, AuthLayout } from 'layout';
 import { Collections, Home, Login, Register, AddProduct, AdminProduct, Product } from 'pages';
 import { useEffect } from 'react';
-import { BrowserRouter as Switch, Route, useLocation } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 function App() {
     useEffect(() => {
@@ -9,17 +9,15 @@ function App() {
         rootElement.className = 'overflow-x-hidden font-body font-light text-gray-400 bg-gray-50';
     }, []);
 
-    const location = useLocation();
-
     return (
         <Layout>
-            <Switch location={location} key={location.pathname}>
+            <Switch>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/collectives" component={Collections} />
                 <Route path="/collectives/product/:id" component={Product} />
                 <Route path="/auth/:path">
                     <AuthLayout>
-                        <Switch location={location} key={location.pathname}>
+                        <Switch>
                             <Route path="/auth/login" component={Login} />
                             <Route path="/auth/register" component={Register} />
                         </Switch>

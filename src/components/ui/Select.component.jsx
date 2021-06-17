@@ -2,7 +2,7 @@ import { Listbox } from '@headlessui/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronDownIcon } from '@heroicons/react/outline';
 
-const Select = ({ className, data, select, onSelect }) => {
+const Select = ({ className, data, value, onChange }) => {
     const selectAnimation = {
         from: {
             height: 0
@@ -29,8 +29,8 @@ const Select = ({ className, data, select, onSelect }) => {
 
     return (
         <Listbox
-            value={select}
-            onChange={onSelect}
+            value={value}
+            onChange={onChange}
             className={`w-full relative ${className}`}
             as={motion.div}>
             {({ open }) => (

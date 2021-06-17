@@ -9,9 +9,8 @@ import Typography from 'components/elements/Typography.component';
 import { motion } from 'framer-motion';
 import { useCounter, useSelect } from 'hooks';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
-import  { HeartIcon as HeartFilled } from '@heroicons/react/solid';
-import {  HeartIcon } from '@heroicons/react/outline';
-
+import { HeartIcon as HeartFilled } from '@heroicons/react/solid';
+import { HeartIcon } from '@heroicons/react/outline';
 
 const Product = () => {
     const { id } = useParams();
@@ -20,27 +19,28 @@ const Product = () => {
 
     const [lightBox, setLightBox] = useState('');
 
-    const [ isWishlisted, setWishlisted ] = useState(false);
+    const [isWishlisted, setWishlisted] = useState(false);
 
-    const [ counter, handleCount ] = useCounter({
-        start : 3,
-        incrementBy : 0.5,
-        decrementBy : 0.5,
-        limit : [3, 9]
-    })
+    const [counter, handleCount] = useCounter({
+        start: 3,
+        incrementBy: 0.5,
+        decrementBy: 0.5,
+        limit: [3, 9]
+    });
 
     const [options, select, setSelect] = useSelect([
         { id: 1, name: 'Unisex', disabled: false },
         { id: 2, name: 'Men', disabled: false },
         { id: 3, name: 'Women', disabled: false }
-    ])
+    ]);
 
     const [orderState, setOrder] = useState({
+        _id: '',
         gender: '',
         size: ''
     });
 
-    useEffect(() => { 
+    useEffect(() => {
         (async () => {
             const {
                 data: { data }
@@ -59,9 +59,17 @@ const Product = () => {
 
     const handleLightBox = (img) => setLightBox(img);
 
-    const { otherimages, gender, catagory, name, tagname, price, description } = productData;
+    const { otherimages, gender, catagory, name, tagname, price, description, _id } = productData;
 
-    console.log(select);
+    const handleAddToCart = () => {
+        setOrder({
+            _id,
+            gender: select.name,
+            size: counter.toFixed(1)
+        });
+    };
+
+    console.log(orderState);
 
     return (
         <Page>
@@ -81,12 +89,14 @@ const Product = () => {
                     </Box>
                 </ImageSection>
                 <ContentSection className="w-1/2 ml-10 relative">
-                    <Button className="absolute right-0 bg-red-50 p-2 rounded-full" onClick={() => setWishlisted(!isWishlisted)}>
-                        {
-                            isWishlisted ? 
-                            <HeartFilled className="w-8 h-8 text-red-500 fill-current"/> : 
-                            <HeartIcon className="w-8 h-8 text-red-500 stroke-current"/>
-                        }
+                    <Button
+                        className="absolute right-0 bg-red-50 p-2 rounded-full"
+                        onClick={() => setWishlisted(!isWishlisted)}>
+                        {isWishlisted ? (
+                            <HeartFilled className="w-8 h-8 text-red-500 fill-current" />
+                        ) : (
+                            <HeartIcon className="w-8 h-8 text-red-500 stroke-current" />
+                        )}
                     </Button>
                     <Typography
                         as={motion.h5}
@@ -110,25 +120,36 @@ const Product = () => {
                             ).toFixed(2)}
                         </span>
                     </Typography>
-                    <Typography as={motion.p} className="text-gray-800 mt-10">
+                    <Typography
+                        as={motion.p}
+                        className="text-gray-800 mt-10 max-w-2xl line-clamp-3">
                         {description}
                     </Typography>
                     <Box className="flex w-full mt-4 items-center">
-                        <Select data={options} select={select} onSelect={setSelect} className="w-1/3"/>
+                        <Select
+                            data={options}
+                            value={select}
+                            onChange={setSelect}
+                            className="w-1/3"
+                        />
                         <Box className="flex items-center justify-between w-2/3 ml-4 max-w-sm">
-                            <Box className="text-xl text-gray-900 font-semibold uppercase">choose size</Box>
+                            <Box className="text-xl text-gray-900 font-semibold uppercase">
+                                choose size
+                            </Box>
                             <Size className="text-4xl font-semibold text-gray-900 flex flex-col items-center">
-                                <Button onClick={() => handleCount("INCREMENT")}>
-                                    <ChevronUpIcon className="w-10 h-10"/>
+                                <Button onClick={() => handleCount('INCREMENT')}>
+                                    <ChevronUpIcon className="w-10 h-10" />
                                 </Button>
                                 <span>{counter.toFixed(1)}</span>
-                                <Button onClick={() => handleCount("DECREMENT")}>
-                                    <ChevronDownIcon className="w-10 h-10"/>
+                                <Button onClick={() => handleCount('DECREMENT')}>
+                                    <ChevronDownIcon className="w-10 h-10" />
                                 </Button>
                             </Size>
                         </Box>
                     </Box>
-                    <Button type="primary" className="w-full py-5 mt-14">add to cart</Button>
+                    <Button type="primary" className="w-full py-5 mt-14" onClick={handleAddToCart}>
+                        add to cart
+                    </Button>
                 </ContentSection>
             </Box>
         </Page>

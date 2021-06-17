@@ -7,7 +7,7 @@ const Header = () => {
         <Box className="w-full">
             <Typography
                 as={motion.h2}
-                className="text-center text-gray-900 font-bold leading-none tracking-wide pt-8">
+                className="text-center text-gray-900 font-bold leading-none tracking-wide pt-8 uppercase">
                 INTRODUCING THE JORDAN ZION
                 <br />
                 Your Workhorse With Wings is here,

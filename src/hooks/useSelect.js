@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 const useSelect = (data) => {
-    if (Array.isArray(data)){
+    if (Array.isArray(data)) {
         const [select, setSelect] = useState(data[0]);
 
         return [data, select, setSelect];
