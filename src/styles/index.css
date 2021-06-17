@@ -2,6 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+    .scrollbar {
+        scrollbar-color: red white;
+        scrollbar-width: thin;
+    }
+    .scrollbar::-webkit-scrollbar {
+        width: 5px;
+        overflow: hidden;
+    }
+    .scrollbar::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+    .scrollbar::-webkit-scrollbar-thumb {
+        background-color: #D1D5DB;
+        border-radius: 2rem;
+        overflow: hidden;
+    }
+}
+
 body,
 html {
     -webkit-font-smoothing: antialiased;

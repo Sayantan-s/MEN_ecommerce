@@ -22,23 +22,19 @@ const Product = () => {
     const [isWishlisted, setWishlisted] = useState(false);
 
     const [counter, handleCount] = useCounter({
-        start: 3,
-        incrementBy: 0.5,
-        decrementBy: 0.5,
-        limit: [3, 9]
+        start: 0,
+        incrementBy: 1,
+        decrementBy: 1,
+        limit : [0, 150]
     });
 
     const [options, select, setSelect] = useSelect([
-        { id: 1, name: 'Unisex', disabled: false },
-        { id: 2, name: 'Men', disabled: false },
-        { id: 3, name: 'Women', disabled: false }
+        { id: 1, name: 'sm', disabled: false },
+        { id: 2, name: 'md', disabled: false },
+        { id: 3, name: 'lg', disabled: false },
+        { id: 4, name: 'xl', disabled: false },
+        { id: 5, name: 'xxl', disabled: false }
     ]);
-
-    const [orderState, setOrder] = useState({
-        _id: '',
-        gender: '',
-        size: ''
-    });
 
     useEffect(() => {
         (async () => {
@@ -62,14 +58,17 @@ const Product = () => {
     const { otherimages, gender, catagory, name, tagname, price, description, _id } = productData;
 
     const handleAddToCart = async() => {
-        setOrder({
-            _id,
-            gender: select.name,
-            size: counter.toFixed(1)
-        });
+        const { data } = await http({
+            method : 'POST',
+            url : '/api/orders',
+            data : {
+                _id,
+                size: select.name,
+                quantity: counter
+            }
+        })
+        
     };
-
-    console.log(orderState);
 
     return (
         <Page>
@@ -88,7 +87,7 @@ const Product = () => {
                         ))}
                     </Box>
                 </ImageSection>
-                <ContentSection className="w-1/2 ml-10 relative">
+                <ContentSection className="w-5/12 ml-10 relative">
                     <Button
                         className="absolute right-0 bg-red-50 p-2 rounded-full"
                         onClick={() => setWishlisted(!isWishlisted)}>
@@ -125,22 +124,19 @@ const Product = () => {
                         className="text-gray-800 mt-10 max-w-2xl line-clamp-3">
                         {description}
                     </Typography>
-                    <Box className="flex w-full mt-4 items-center">
+                    <Box className="flex w-full mt-14 items-center justify-between max-w-2xl">
                         <Select
                             data={options}
                             value={select}
                             onChange={setSelect}
-                            className="w-1/3"
+                            className="w-3/5 mr-4"
                         />
-                        <Box className="flex items-center justify-between w-2/3 ml-4 max-w-sm">
-                            <Box className="text-xl text-gray-900 font-semibold uppercase">
-                                choose size
-                            </Box>
-                            <Size className="text-4xl font-semibold text-gray-900 flex flex-col items-center">
+                        <Box className="flex items-center justify-between max-w-sm justify-self-end">
+                            <Size className="text-4xl font-semibold text-gray-900 flex items-center">
                                 <Button onClick={() => handleCount('INCREMENT')}>
                                     <ChevronUpIcon className="w-10 h-10" />
                                 </Button>
-                                <span>{counter.toFixed(1)}</span>
+                                <span className="w-12 text-center">{counter}</span>
                                 <Button onClick={() => handleCount('DECREMENT')}>
                                     <ChevronDownIcon className="w-10 h-10" />
                                 </Button>

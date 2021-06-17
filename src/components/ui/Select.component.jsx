@@ -53,7 +53,7 @@ const Select = ({ className, data, value, onChange }) => {
                                 variants={selectAnimation}
                                 initial={'from'}
                                 animate={'to'}
-                                className="absolute py-1 mt-2 bg-gray-50 shadow-md w-full rounded-xl overflow-hidden">
+                                className="absolute py-1 mt-2 bg-gray-50 shadow-md w-full rounded-xl">
                                 {data.map((option) => (
                                     <Listbox.Option
                                         variants={selectOptionAnimation}

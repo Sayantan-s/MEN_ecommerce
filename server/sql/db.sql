@@ -17,6 +17,24 @@ CREATE TABLE products(
     PRIMARY KEY(_id) 
 );
 
+CREATE TABLE orders(
+    order_id uuid NOT NULL DEFAULT uuid_generate_v4(),
+    catagory VARCHAR(50) NOT NULL,
+    name VARCHAR(150) NOT NULL,
+    tagname VARCHAR(150) NOT NULL,
+    price MONEY NOT NULL,
+    description TEXT NOT NULL,
+    gender VARCHAR(20) NOT NULL,
+    size DECIMAL NOT NULL,
+    cover TEXT NOT NULL,
+    quantity NUMERIC NOT NULL
+    tags VARCHAR[] NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY(order_id),
+    UNIQUE(order_id)
+);
+
 CREATE TABLE public.users(
     _id uuid NOT NULL DEFAULT uuid_generate_v4(),
     img TEXT NOT NULL,

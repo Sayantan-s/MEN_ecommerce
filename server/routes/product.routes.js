@@ -76,7 +76,21 @@ router
 
 })
 .post(async(req,res, next) => {
-    console.log(req.body)
+    const { _id, gender, size } = req.body;
+    const { rows } = await db.query(
+        `
+        SELECT cover, name, tagname, price
+        FROM products 
+        WHERE _id = $1 
+        `,
+        [_id]
+    );
+    if(rows.length){
+        const query = `
+            INSERT catagory,name,tagname,price,description,gender,cover,tags
+        `        
+    }
+    res.send({ message : req.body })
 })
 
 export default router;

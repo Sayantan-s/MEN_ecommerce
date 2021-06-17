@@ -9,7 +9,7 @@ function App() {
         rootElement.className = 'overflow-x-hidden font-body font-light text-gray-400 bg-gray-50';
     }, []);
 
-console.log(process.env)
+    console.log(process.env)
     
     return (
         <Layout>
