@@ -17,12 +17,18 @@ const useForm = (formState) => {
                 }
             });
         }
-        onChangeHandler = (eve) => {
-            const { name, value } = eve.target;
-            return setForm((prevState) => ({
-                ...prevState,
-                [name]: { ...prevState[name], value }
-            }));
+        onChangeHandler = (eve, data) => {
+            switch(data.as){
+                case 'select':
+                    console.log(data.value)
+                    return data.handler
+                default : 
+                    const { name, value } = eve.target;
+                    return setForm((prevState) => ({
+                        ...prevState,
+                        [name]: { ...prevState[name], value }
+                    }));
+            }
         };
 
         const onSubmitHandler = (eve) => {

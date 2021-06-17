@@ -2,10 +2,17 @@ import { UploadIcon } from '@heroicons/react/outline';
 import { ArrowRightIcon } from '@heroicons/react/solid';
 import { Page, Box, Typography, FormField, Button, Image } from 'components';
 import { motion } from 'framer-motion';
-import { useForm } from 'hooks';
+import { useForm, useSelect } from 'hooks';
 import React, { useState } from 'react';
 
 const AddProduct = () => {
+
+    const [data, select, setSelect] = useSelect([
+        { id: 1, name: 'Unisex', disabled: false },
+        { id: 2, name: 'Men', disabled: false },
+        { id: 3, name: 'Women', disabled: false }
+    ])
+
     const [form, onChangeHandler, onSubmitHandler] = useForm({
         productName: {
             as: 'input',
@@ -38,11 +45,13 @@ const AddProduct = () => {
             half: true,
             styles: 'pl-2'
         },
-        /* gender: {
+        gender: {
             as: 'select',
-            value: '',
+            data : data,
+            value: select,
+            hanlder : setSelect,
             labelName: 'Gender'
-        }, */
+        },
         cover: {
             as: 'file',
             ElementConfig: {
@@ -111,7 +120,7 @@ const AddProduct = () => {
                                 ${data.half && data.styles}
                             `}
                                 {...data}
-                                onChange={onChangeHandler}
+                                onChange={eve => onChangeHandler(eve, data)}
                             />
                         ))}
                         <Button type="primary" className="w-full">

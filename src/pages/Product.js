@@ -61,7 +61,7 @@ const Product = () => {
 
     const { otherimages, gender, catagory, name, tagname, price, description, _id } = productData;
 
-    const handleAddToCart = () => {
+    const handleAddToCart = async() => {
         setOrder({
             _id,
             gender: select.name,

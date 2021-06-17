@@ -46,7 +46,7 @@ const FormField = (
             );
             break;
         case 'select':
-            inputEle = <Select className="my-2" {...otherInpProps} onChange={onChange} />;
+            inputEle = <Select className="my-2" {...otherInpProps} value={value} onChange={onChange} />;
             break;
         case 'file':
             inputEle = (

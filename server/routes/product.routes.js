@@ -70,4 +70,13 @@ router.get('/trendy-cloth', async (req, res, next) => {
     res.status(200).send({ data: rows });
 });
 
+router
+.route('/orders')
+.get(async(req, res, next) => {
+
+})
+.post(async(req,res, next) => {
+    console.log(req.body)
+})
+
 export default router;
