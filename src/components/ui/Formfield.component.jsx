@@ -12,6 +12,7 @@ const FormField = (
         children,
         className,
         icon: Icon,
+        tertiary = true,
         labelName,
         half,
         ...otherInpProps
@@ -22,7 +23,7 @@ const FormField = (
 
     const styles = 'w-full p-4 border-b-2 border-gray-200 font-semibold';
 
-    const inputStyles = 'w-full h-full focus:outline-none bg-transparent';
+    const inputStyles = `w-full h-full focus:outline-none bg-transparent ${tertiary ? 'order-2' : 'order-1'}`;
 
     switch (as) {
         case 'input':
@@ -80,7 +81,7 @@ const FormField = (
                 <>
                     <Box className={`flex items-center mt-2 ${styles}`}>
                         {inputEle}
-                        {Icon && <Icon className="h-6 w-6 stroke-current text-gray-400" />}
+                        {Icon && <Icon className={`h-6 w-6 stroke-current text-gray-400 ${tertiary ? 'order-1 ml-3' : 'order-2 mr-3'}`} />}
                     </Box>
                 </>
             )}

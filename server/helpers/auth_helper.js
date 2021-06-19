@@ -1,9 +1,8 @@
 import bcrypt from 'bcrypt';
-import { HASHING_SALT } from '../config/index';
 
 class AuthUtils {
     static async hashPassword(password) {
-        return await bcrypt.hash(password, +HASHING_SALT);
+        return await bcrypt.hash(password, 12);
     }
 
     static async validatePassword(password, hash) {

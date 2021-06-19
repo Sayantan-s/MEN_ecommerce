@@ -11,6 +11,8 @@ import Box from './elements/Box.component';
 import Page from './elements/Page.component';
 import Typography from './elements/Typography.component';
 
+import Search from './ui/Search.component';
+
 export {
     Link,
     Button,
@@ -22,5 +24,6 @@ export {
     ProductCard,
     FormField,
     Select,
-    FileUpload
+    FileUpload,
+    Search
 };

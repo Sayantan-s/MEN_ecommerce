@@ -6,12 +6,6 @@ import { useForm, useSelect } from 'hooks';
 import React, { useState } from 'react';
 
 const AddProduct = () => {
-    const [data, select, setSelect] = useSelect([
-        { id: 1, name: 'Unisex', disabled: false },
-        { id: 2, name: 'Men', disabled: false },
-        { id: 3, name: 'Women', disabled: false }
-    ]);
-
     const [form, onChangeHandler, onSubmitHandler] = useForm({
         productName: {
             as: 'input',
@@ -43,13 +37,6 @@ const AddProduct = () => {
             labelName: 'Price',
             half: true,
             styles: 'pl-2'
-        },
-        gender: {
-            as: 'select',
-            data: data,
-            value: select,
-            hanlder: setSelect,
-            labelName: 'Gender'
         },
         cover: {
             as: 'file',
@@ -119,7 +106,7 @@ const AddProduct = () => {
                                 ${data.half && data.styles}
                             `}
                                 {...data}
-                                onChange={(eve) => onChangeHandler(eve, data)}
+                                onChange={onChangeHandler}
                             />
                         ))}
                         <Button type="primary" className="w-full">

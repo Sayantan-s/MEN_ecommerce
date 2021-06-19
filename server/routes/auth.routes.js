@@ -1,11 +1,17 @@
+import AuthUtils from '../helpers/auth_helper';
 import { register_validator } from '../validators/auth.validator';
 
 const router = require('express').Router();
 
 router.route('/register').post(async (req, res, next) => {
     try {
-        const { error, ...data } = await register_validator.validateAsync(req.body);
-        console.log(data);
+        const { error, password, ...data } = await register_validator.validateAsync(req.body);
+        if (error) {
+            next(error);
+        }
+
+        const hashedPassword = await AuthUtils.hashPassword(password);
+
         res.send({ message: 'Hello from register!' });
     } catch (error) {
         console.log(error);

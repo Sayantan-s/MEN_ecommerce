@@ -1,3 +1,4 @@
+import { AnimatedRoutes } from 'animations';
 import { Layout, AuthLayout } from 'layout';
 import { Collections, Home, Login, Register, AddProduct, AdminProduct, Product } from 'pages';
 import { useEffect } from 'react';
@@ -11,7 +12,7 @@ function App() {
 
     return (
         <Layout>
-            <Switch>
+            <AnimatedRoutes>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/collectives" component={Collections} />
                 <Route path="/collectives/product/:id" component={Product} />
@@ -29,7 +30,7 @@ function App() {
                         <Route path="/admin/products" component={AdminProduct} />
                     </Switch>
                 </Route>
-            </Switch>
+            </AnimatedRoutes>
         </Layout>
     );
 }

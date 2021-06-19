@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import React, { useRef } from 'react';
 import { Cart } from 'assets/Icons';
 import { WishList } from 'assets/Icons';
-import { Box, Button, Link } from 'components';
+import { Box, Button, Link, Search } from 'components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { GOT_NAV_VALUE } from 'store/types/getNavValue';
@@ -12,7 +12,7 @@ import { GOT_NAV_VALUE } from 'store/types/getNavValue';
 const Navbar = () => {
     const { isAuthenticated } = useSelector((state) => state.AuthReducer);
 
-    const NavLinks = ['Home', 'Shop', 'Collectives', 'Orders', 'New'];
+    const NavLinks = ['Home','Collectives','Newbies'];
 
     const navBarRef = useRef(null);
 
@@ -28,6 +28,7 @@ const Navbar = () => {
                 as={motion.nav}
                 className="flex items-center justify-between w-10/12 mx-auto">
                 <Logo />
+                <Search />
                 <div className="flex ml-20">
                     {NavLinks.map((link, id) => (
                         <Link
