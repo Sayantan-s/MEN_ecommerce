@@ -1,4 +1,4 @@
-import { PORT } from './config';
+import { CLIENT, PORT } from './config';
 import express from 'express';
 import morgan from 'morgan';
 import authRoute from './routes/auth.routes';
@@ -8,7 +8,7 @@ import cors from 'cors';
 
 const app = express();
 
-const middlewares = [morgan('dev'), express.json(), cors({ origin: 'http://localhost:3000' })];
+const middlewares = [morgan('dev'), express.json(), cors({ origin: CLIENT })];
 
 app.use(middlewares);
 

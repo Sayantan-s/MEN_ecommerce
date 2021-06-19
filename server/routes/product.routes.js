@@ -76,7 +76,7 @@ router
         try {
             const { rows } = await db.query(
                 `SELECT order_id, product_id, cover, name, tagname, catagory, description, size, gender, quantity, price, tags, orders.created_at, orders.updated_at FROM products
-                JOIN orders ON products._id = orders.product_id ORDER BY orders.created_at`
+                JOIN orders ON orders.product_id = products._id ORDER BY orders.created_at`
             );
             return res.send({ data: rows });
         } catch (error) {

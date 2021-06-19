@@ -20,7 +20,7 @@ const FormField = (
 ) => {
     let inputEle = null;
 
-    const styles = 'w-full rounded-2xl p-4 border-2 border-gray-200 font-semibold';
+    const styles = 'w-full p-4 border-b-2 border-gray-200 font-semibold';
 
     const inputStyles = 'w-full h-full focus:outline-none bg-transparent';
 
