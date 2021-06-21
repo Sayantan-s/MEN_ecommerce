@@ -9,7 +9,7 @@ class CustomError extends Error {
 
     static newError(statusCode, message) {
         const errorMsg = message || http.STATUS_CODES[statusCode];
-        return { statusCode, errorMsg };
+        return new CustomError(statusCode, errorMsg);
     }
 
     static alreadyExists(message) {

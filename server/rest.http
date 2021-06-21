@@ -49,7 +49,7 @@ GET http://localhost:5000/api/products/Nike Air-Icon Clash
 //Nike Air-Icon Clash
 
 ###
-GET http://localhost:5000/api/trendy-cloth
+GET http://localhost:5000/api/trendy-cloh
 
 // "tags" : ["nike", "air", "shoes"]
 ///
