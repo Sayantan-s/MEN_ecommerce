@@ -30,7 +30,7 @@ CREATE TABLE orders(
 
 CREATE TABLE public.users(
     _id uuid NOT NULL DEFAULT uuid_generate_v4(),
-    img TEXT NOT NULL,
+    img TEXT,
     fullname VARCHAR(200) NOT NULL,
     username VARCHAR(20) NOT NULL,
     email VARCHAR(150) NOT NULL UNIQUE,

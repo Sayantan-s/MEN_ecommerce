@@ -6,12 +6,32 @@ class User {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.img = img || null;
-        this._id = id || null;
+        this.img = img;
+        this._id = id;
     }
 
     async save(){
-        console.log(this);
+        let validData = [];
+        for(let i in this){
+            if(!this[i]){
+                continue;
+            }
+            validData.push(this[i]);
+        }
+        const query = `
+            INSERT INTO users
+            (${new Array(validData.length).fill('FOO').map((_,i) => (
+                `${Object.keys(this)[i]}`
+            )).join(',')})
+            VALUES
+            (${validData.map((_,id) => (
+                `$${id + 1}`
+            ))})
+            RETURNING *
+        `
+        const { rows } = await db.query(query, validData);
+
+        console.log(rows[0]);
     }
 
     static async findOne(options){

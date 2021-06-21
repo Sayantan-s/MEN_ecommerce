@@ -8,9 +8,8 @@ const router = require('express').Router();
 router.route('/register').post(async (req, res, next) => {
     try {
         const { error, password, fullname, username, email } = await register_validator.validateAsync(req.body);
-        if (error) {
-            next(error);
-        }
+        if (error)
+            return next(error);
 
         const hashedPassword = await AuthUtils.hashPassword(password);
         
@@ -19,11 +18,16 @@ router.route('/register').post(async (req, res, next) => {
         if(userExists)
             return next(CustomError.newError(401, 'You already have an account!'));
 
-        console.log(userExists);
+        const user = new User(fullname, username, email, hashedPassword);
 
+        await user.save();
+
+        const accessToken = AuthUtils.generate_JWT({
+            payload : {  }
+        })
+         
         res.send({ message: 'Hello from register!' });
     } catch (error) {
-        console.log(error);
         next(error);
     }
 });
