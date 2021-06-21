@@ -12,7 +12,7 @@ class CustomError extends Error {
         return new CustomError(statusCode, errorMsg);
     }
 
-    static alreadyExists(message) {
+    static alreadyExists(message = "Invalid email/password!") {
         return CustomError.newError(409, message);
     }
 }
