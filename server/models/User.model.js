@@ -14,8 +14,7 @@ class User {
         console.log(this);
     }
 
-    static async exists(options){
-
+    static async findOne(options){
         const keys = Object.keys(options);
         const values = Object.values(options);
 
@@ -27,7 +26,16 @@ class User {
         `
         const { rows } = await db.query(query,values);
 
-        return !!rows.length;
+        if(rows[0] === undefined) return {};
+
+        return rows[0];
+    }
+
+    static async exists(options){
+
+        const rows = await User.findOne(options);
+
+        return !!Object.keys(rows).length;
     }
 }
 

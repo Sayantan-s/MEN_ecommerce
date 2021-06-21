@@ -16,8 +16,8 @@ router.route('/register').post(async (req, res, next) => {
         
         const userExists = await User.exists({ email });
 
-        if(!userExists)
-            next(CustomError.newError(''))
+        if(userExists)
+            return next(CustomError.newError(401, 'You already have an account!'));
 
         console.log(userExists);
 
