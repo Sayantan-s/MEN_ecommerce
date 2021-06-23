@@ -58,7 +58,7 @@ const CarouselAdvert = () => {
                     <Slider {...settings} className="mt-6 w-144">
                         {trendState.data?.map(({ _id, ...data }) => (
                             <div key={_id}>
-                                <ProductCard {...data} />
+                                <ProductCard {...data} className="w-80"/>
                             </div>
                         ))}
                     </Slider>

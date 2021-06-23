@@ -24,11 +24,11 @@ const Navbar = () => {
 
     return (
         <header className="w-full bg-gray-50 fixed border-b-2 border-gray-200 z-50" ref={navBarRef}>
-            <Disclosure
+            <Box 
+                isLayout
                 as={motion.nav}
                 className="flex items-center justify-between w-10/12 mx-auto">
                 <Logo />
-                <Search />
                 <div className="flex ml-20">
                     {NavLinks.map((link, id) => (
                         <Link
@@ -68,7 +68,7 @@ const Navbar = () => {
                         </Link>
                     )}
                 </Box>
-            </Disclosure>
+            </Box>
         </header>
     );
 };

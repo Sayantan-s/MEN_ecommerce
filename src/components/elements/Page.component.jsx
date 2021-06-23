@@ -4,12 +4,10 @@ import { Box } from '..';
 const Page = ({ children, as, className, full, ...otherProps }) => {
     const { navHeightReducer } = useSelector((state) => state);
 
-    console.log(navHeightReducer);
-
     return (
         <Box
             as={motion.section}
-            className={`mt-[82px] ${full ? 'w-full' : 'w-10/12'} mx-auto min-h-screen h-auto ${
+            className={`mt-[${navHeightReducer}px] ${full ? 'w-full' : 'w-10/12'} mx-auto min-h-screen h-auto ${
                 className && className
             }`}
             {...otherProps}>
