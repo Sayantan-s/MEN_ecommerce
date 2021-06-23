@@ -12,7 +12,7 @@ import { GOT_NAV_VALUE } from 'store/types/getNavValue';
 const Navbar = () => {
     const { isAuthenticated } = useSelector((state) => state.AuthReducer);
 
-    const NavLinks = ['Home','Collectives','Newbies'];
+    const NavLinks = ['Home', 'Collectives', 'Newbies'];
 
     const navBarRef = useRef(null);
 

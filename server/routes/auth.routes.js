@@ -7,33 +7,40 @@ const router = require('express').Router();
 
 router.route('/register').post(async (req, res, next) => {
     try {
-        const { error, password, fullname, username, email } = await register_validator.validateAsync(req.body);
-        if (error)
-            return next(error);
+        const { error, password, fullname, username, email } =
+            await register_validator.validateAsync(req.body);
+
+        if (error) return next(error);
 
         const hashedPassword = await AuthUtils.hashPassword(password);
-        
+
         const userExists = await User.exists({ email });
 
-        if(userExists)
-            return next(CustomError.newError(401, 'You already have an account!'));
+        if (userExists) return next(CustomError.newError(401, 'You already have an account!'));
 
-        const user = new User(fullname, username, email, hashedPassword);
+        const user = await new User(fullname, username, email, hashedPassword).save();
 
-        await user.save();
+        const accessToken = await AuthUtils.generate_JWT({
+            payload: {
+                _id: user._id,
+                username: user.username
+            }
+        });
 
-        const accessToken = AuthUtils.generate_JWT({
-            payload : {  }
-        })
-         
-        res.send({ message: 'Hello from register!' });
+        res.send({ accessToken });
     } catch (error) {
         next(error);
     }
 });
 
 router.route('/login').post(async (req, res, next) => {
-    res.send({ message: 'Hello from login!' });
+    console.log(req.body);
+    try {
+
+        res.send({ message: 'Hello from login!' });
+    } catch (error) {
+        next(error);
+    }
 });
 
 router.route('/logout').delete(async (req, res, next) => {

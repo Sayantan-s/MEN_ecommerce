@@ -14,4 +14,8 @@ const register_validator = joi.object({
     confirmpassword: joi.ref('password')
 });
 
+const login_validator = joi.object({
+    
+})
+
 export { register_validator };

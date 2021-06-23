@@ -17,7 +17,7 @@ const useForm = (formState) => {
                 }
             });
         }
-        onChangeHandler = eve => {
+        onChangeHandler = (eve) => {
             const { name, value } = eve.target;
             return setForm((prevState) => ({
                 ...prevState,
