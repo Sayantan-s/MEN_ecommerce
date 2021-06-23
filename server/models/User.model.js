@@ -33,12 +33,14 @@ class User {
         return rows[0];
     }
 
-    static async findOne(options,constraints = '*' ) {
+    static async findOne(options, constraints = '*') {
         const keys = Object.keys(options);
         const values = Object.values(options);
 
-        const queryConstraints = (constraints !== '*' || constraints.split(' ').length !== 1) && constraints.split(' ').join(',')   
- 
+        const queryConstraints =
+            (constraints !== '*' || constraints.split(' ').length !== 1) &&
+            constraints.split(' ').join(',');
+
         const query = `
             SELECT ${queryConstraints} FROM users 
             WHERE ${keys.map((key, id) => {

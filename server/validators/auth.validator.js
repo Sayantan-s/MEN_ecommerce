@@ -10,13 +10,13 @@ const register_validator = joi.object({
         'string.max': `username should have a maximum length of {#limit}`
     }),
     email: joi.string().required().email(),
-    password: joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).required(),
+    password: joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).min(8).max(15).required(),
     confirmpassword: joi.ref('password')
 });
 
 const login_validator = joi.object({
     email: joi.string().required().email(),
     password: joi.string().required()
-})
+});
 
 export { register_validator, login_validator };

@@ -1,3 +1,4 @@
+import { REFRESHTOKEN_SECRET } from '../config';
 import AuthUtils from '../helpers/auth_helper';
 import CustomError from '../helpers/custom_error_handler';
 import User from '../models/User.model';
@@ -27,7 +28,16 @@ router.route('/register').post(async (req, res, next) => {
             }
         });
 
-        res.send({ accessToken });
+        const refreshToken = await AuthUtils.generate_JWT({
+            payload : {
+                _id: user._id,
+                username: user.username
+            },
+            expiry : '1yr',
+            SECRET : REFRESHTOKEN_SECRET
+        })
+
+        res.send({ accessToken, refreshToken });
     } catch (error) {
         next(error);
     }
@@ -35,7 +45,6 @@ router.route('/register').post(async (req, res, next) => {
 
 router.route('/login').post(async (req, res, next) => {
     try {
-
         const { error, email, password } = await login_validator.validateAsync(req.body);
 
         if (error) {
@@ -44,15 +53,13 @@ router.route('/login').post(async (req, res, next) => {
 
         const user = await User.findOne({ email }, 'email password username _id');
 
-        console.log(user)
-
-        if(!(!!user)){
-            return next(CustomError.newError(401, 'Invalid email/password!'))
+        if (!!!user) {
+            return next(CustomError.newError(401, 'Invalid email/password!'));
         }
 
         const isPasswordValid = await AuthUtils.verifyPassword(password, user.password);
 
-        if(!isPasswordValid){
+        if (!isPasswordValid) {
             return next(CustomError.newError(401, 'Invalid email/password!'));
         }
 
@@ -63,8 +70,16 @@ router.route('/login').post(async (req, res, next) => {
             }
         });
 
-        res.send({ accessToken });
+        const refreshToken = await AuthUtils.generate_JWT({
+            payload : {
+                _id: user._id,
+                username: user.username
+            },
+            expiry : '1yr',
+            SECRET : REFRESHTOKEN_SECRET
+        })
 
+        res.send({ accessToken, refreshToken });
     } catch (error) {
         next(error);
     }

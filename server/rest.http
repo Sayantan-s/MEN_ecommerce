@@ -3,10 +3,10 @@ Content-Type: application/json
 
 {
     "fullname" : "Sayantan",
-    "username" : "sdsjsjdhsjdhs",
+    "username" : "icegeekSam",
     "email" : "sssamanta789@gmail.com",
-    "password" : "sayaN1ssds",
-    "confirmpassword" : "sayaN1ssds"
+    "password" : "jimpamzee",
+    "confirmpassword" : "jimpamzee"
 }
 
 ###
@@ -15,7 +15,7 @@ Content-Type: application/json
 
 {
     "email" : "sssamanta789@gmail.com",
-    "password" : "sayaN1ssds"
+    "password" : "jimpamzee"
 }
 
 
