@@ -33,19 +33,19 @@ class User {
         return rows[0];
     }
 
-    static async findOne(options) {
+    static async findOne(options,constraints = '*' ) {
         const keys = Object.keys(options);
         const values = Object.values(options);
 
+        const queryConstraints = (constraints !== '*' || constraints.split(' ').length !== 1) && constraints.split(' ').join(',')   
+ 
         const query = `
-            SELECT * FROM users 
+            SELECT ${queryConstraints} FROM users 
             WHERE ${keys.map((key, id) => {
                 return `${key} = $${id + 1}`;
             })}
         `;
         const { rows } = await db.query(query, values);
-
-        if (rows[0] === undefined) return {};
 
         return rows[0];
     }
@@ -53,7 +53,7 @@ class User {
     static async exists(options) {
         const rows = await User.findOne(options);
 
-        return !!Object.keys(rows).length;
+        return !!rows;
     }
 }
 

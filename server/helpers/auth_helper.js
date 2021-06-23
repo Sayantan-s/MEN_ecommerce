@@ -7,7 +7,7 @@ class AuthUtils {
         return await bcrypt.hash(password, 12);
     }
 
-    static async validatePassword(password, hash) {
+    static async verifyPassword(password, hash) {
         return await bcrypt.compare(password, hash);
     }
 
