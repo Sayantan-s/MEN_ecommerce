@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import { ACCESSTOKEN_SECRET } from '../config';
+import { ACCESSTOKEN_SECRET, REFRESHTOKEN_SECRET } from '../config';
 import jwt from 'jsonwebtoken';
 
 class AuthUtils {
@@ -11,12 +11,24 @@ class AuthUtils {
         return await bcrypt.compare(password, hash);
     }
 
-    static async generate_JWT({ payload, expiry = '120s', SECRET = ACCESSTOKEN_SECRET }) {
-        return await jwt.sign(payload, SECRET, { expiresIn: expiry });
+    static generate_JWT({ payload, expiry = '120s', SECRET = ACCESSTOKEN_SECRET }) {
+        return jwt.sign(payload, SECRET, { expiresIn: expiry });
     }
 
-    static async verify_JWT({ token, SECRET = ACCESSTOKEN_SECRET }) {
-        return await jwt.verify(token, SECRET);
+    static verify_JWT({ token, SECRET = ACCESSTOKEN_SECRET }) {
+        return jwt.verify(token, SECRET);
+    }
+
+    static async createTokens({ payload }) {
+        const accessToken = await AuthUtils.generate_JWT({ payload });
+
+        const refreshToken = await AuthUtils.generate_JWT({
+            payload,
+            expiry: '1yr',
+            SECRET: REFRESHTOKEN_SECRET
+        });
+
+        return { accessToken, refreshToken };
     }
 }
 

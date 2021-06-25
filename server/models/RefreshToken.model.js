@@ -1,6 +1,3 @@
-class RefreshToken{
-    
-
-}
+class RefreshToken {}
 
 export default RefreshToken;

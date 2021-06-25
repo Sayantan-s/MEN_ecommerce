@@ -2,7 +2,7 @@ import React from 'react';
 import { Image, Link, Typography, Box } from 'components';
 import { motion } from 'framer-motion';
 
-const ProductCard = ({ name, tagname, price, cover, className,  }) => {
+const ProductCard = ({ name, tagname, price, cover, className }) => {
     return (
         <Box className={className}>
             <Link to={`/collectives/product/${name}_${tagname}`} className="cursor-pointer w-full">

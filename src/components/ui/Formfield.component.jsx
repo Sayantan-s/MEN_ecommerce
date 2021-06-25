@@ -3,22 +3,19 @@ import { motion } from 'framer-motion';
 import React from 'react';
 import { forwardRef } from 'react';
 
-const FormField = (
-    {
-        as,
-        ElementConfig,
-        value,
-        onChange,
-        children,
-        className,
-        icon: Icon,
-        tertiary = true,
-        labelName,
-        half,
-        ...otherInpProps
-    },
-    fileRef
-) => {
+const FormField = ({
+    as,
+    ElementConfig,
+    value,
+    onChange,
+    children,
+    className,
+    icon: Icon,
+    tertiary = false,
+    labelName,
+    half,
+    ...otherInpProps
+}) => {
     let inputEle = null;
 
     const styles = 'w-full p-4 border-b-2 border-gray-200 font-semibold';
@@ -85,8 +82,8 @@ const FormField = (
                         {inputEle}
                         {Icon && (
                             <Icon
-                                className={`h-6 w-6 stroke-current text-gray-400 ${
-                                    tertiary ? 'order-1 ml-3' : 'order-2 mr-3'
+                                className={`h-6 w-6 stroke-current text-gray-300 stroke-1 ${
+                                    tertiary ? 'order-1 mr-3' : 'order-2 ml-3'
                                 }`}
                             />
                         )}

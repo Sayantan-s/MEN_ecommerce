@@ -24,7 +24,7 @@ const Navbar = () => {
 
     return (
         <header className="w-full bg-gray-50 fixed border-b-2 border-gray-200 z-50" ref={navBarRef}>
-            <Box 
+            <Box
                 isLayout
                 as={motion.nav}
                 className="flex items-center justify-between w-10/12 mx-auto">

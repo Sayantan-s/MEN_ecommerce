@@ -2,22 +2,25 @@ import React from 'react';
 import { Typography, Box, FormField, Button, Link } from 'components';
 import { motion } from 'framer-motion';
 import { useForm } from 'hooks';
-import { AtSymbolIcon, EyeIcon, UserCircleIcon, UserIcon } from '@heroicons/react/outline';
-import Profile from 'assets/icons/Profile';
 import User from 'assets/icons/User';
 import Mail from 'assets/icons/Mail';
 import Show from 'assets/icons/Show';
+import http from 'utils/http';
+import { useDispatch } from 'react-redux';
 
 const Register = () => {
+
+    const dispatch = useDispatch();
+
     const [form, onChangeHandler, onSubmitHandler] = useForm({
-        name: {
+        fullname: {
             as: 'input',
             ElementConfig: {
                 type: 'text',
                 placeholder: 'e.g. Jacob Doe'
             },
             value: '',
-            icon: Profile,
+            icon: User,
             labelName: 'Full Name'
         },
         username: {
@@ -62,6 +65,18 @@ const Register = () => {
         }
     });
 
+    const onSubmit = async (eve) =>
+        await onSubmitHandler(eve, async ({ confirmPassword,...formdata}) => {
+            dispatch(IS_AUTHENTICATING())
+            const res = await http({
+                method: 'POST',
+                url: '/auth/register',
+                data : formdata
+            });
+
+            console.log(res);
+        });
+
     return (
         <>
             <Typography as={motion.h3} className="my-2 text-gray-900 font-semibold">
@@ -76,11 +91,11 @@ const Register = () => {
                     Login
                 </Link>
             </Typography>
-            <Box as={motion.form} onSubmit={onSubmitHandler} className="mt-6">
+            <Box as={motion.form} onSubmit={onSubmit} className="mt-6">
                 {form.map(({ key, data }, id) => (
                     <FormField
                         key={key}
-                        half={key !== 'name' ? true : false}
+                        half={key !== 'fullname' ? true : false}
                         className={`float-left ${id !== 0 && id % 2 === 0 ? 'pl-2' : ''} ${
                             id !== 0 && id % 2 !== 0 ? 'pr-2' : ''
                         } ${id === form.length - 1 || id === form.length - 2 ? 'pb-6' : ''}`}

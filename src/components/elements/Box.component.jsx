@@ -12,4 +12,3 @@ const Box = ({ children, as, className, isLayout, ...otherProps }, ref) => {
 };
 
 export default forwardRef(Box);
- 

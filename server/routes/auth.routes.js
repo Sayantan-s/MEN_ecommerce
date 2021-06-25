@@ -1,4 +1,3 @@
-import { REFRESHTOKEN_SECRET } from '../config';
 import AuthUtils from '../helpers/auth_helper';
 import CustomError from '../helpers/custom_error_handler';
 import User from '../models/User.model';
@@ -21,23 +20,14 @@ router.route('/register').post(async (req, res, next) => {
 
         const user = await new User(fullname, username, email, hashedPassword).save();
 
-        const accessToken = await AuthUtils.generate_JWT({
+        const { accessToken, refreshToken } = await AuthUtils.createTokens({
             payload: {
                 _id: user._id,
                 username: user.username
             }
         });
 
-        const refreshToken = await AuthUtils.generate_JWT({
-            payload : {
-                _id: user._id,
-                username: user.username
-            },
-            expiry : '1yr',
-            SECRET : REFRESHTOKEN_SECRET
-        })
-
-        res.send({ accessToken, refreshToken });
+        res.status(201).send({ accessToken, refreshToken });
     } catch (error) {
         next(error);
     }
@@ -51,7 +41,7 @@ router.route('/login').post(async (req, res, next) => {
             return next(error);
         }
 
-        const user = await User.findOne({ email }, 'email password username _id');
+        const user = await User.findOne({ email }, 'password username _id');
 
         if (!!!user) {
             return next(CustomError.newError(401, 'Invalid email/password!'));
@@ -63,21 +53,12 @@ router.route('/login').post(async (req, res, next) => {
             return next(CustomError.newError(401, 'Invalid email/password!'));
         }
 
-        const accessToken = await AuthUtils.generate_JWT({
+        const { accessToken, refreshToken } = await AuthUtils.createTokens({
             payload: {
                 _id: user._id,
                 username: user.username
             }
         });
-
-        const refreshToken = await AuthUtils.generate_JWT({
-            payload : {
-                _id: user._id,
-                username: user.username
-            },
-            expiry : '1yr',
-            SECRET : REFRESHTOKEN_SECRET
-        })
 
         res.send({ accessToken, refreshToken });
     } catch (error) {
