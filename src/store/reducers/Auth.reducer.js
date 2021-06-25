@@ -7,8 +7,8 @@ import {
 const authState = {
     loading: false,
     isAuthenticated: false,
-    tokens : null,
-    error: false,
+    tokens: null,
+    error: false
 };
 
 const AuthReducer = (state = authState, { type, payload }) => {
@@ -18,7 +18,7 @@ const AuthReducer = (state = authState, { type, payload }) => {
                 ...state,
                 loading: true,
                 isAuthenticated: false,
-                tokens : null,
+                tokens: null,
                 error: false
             };
         case AUTHENTICATION_SUCCESSFULL:
@@ -26,7 +26,7 @@ const AuthReducer = (state = authState, { type, payload }) => {
                 ...state,
                 loading: false,
                 isAuthenticated: true,
-                tokens : payload,
+                tokens: payload,
                 error: false
             };
         case AUTHENTICATION_FAILED:
@@ -34,7 +34,7 @@ const AuthReducer = (state = authState, { type, payload }) => {
                 ...state,
                 loading: false,
                 isAuthenticated: true,
-                tokens : null,
+                tokens: null,
                 error: payload
             };
         default:

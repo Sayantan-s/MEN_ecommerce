@@ -10,10 +10,9 @@ import { Authorize_user } from 'store/actions/Auth.actions';
 import { useHistory } from 'react-router';
 
 const Register = () => {
-
     const dispatch = useDispatch();
 
-    const { isAuthenticated } = useSelector(state => state.AuthReducer);
+    const { isAuthenticated } = useSelector((state) => state.AuthReducer);
 
     const history = useHistory();
 
@@ -71,10 +70,9 @@ const Register = () => {
     });
 
     const onSubmit = (eve) =>
-        onSubmitHandler(eve, async ({ confirmPassword,...formdata}) => {
-            await dispatch(Authorize_user({ input_data : formdata }));
-            if(isAuthenticated)
-                return history.push('/');
+        onSubmitHandler(eve, async ({ confirmPassword, ...formdata }) => {
+            await dispatch(Authorize_user({ input_data: formdata }));
+            if (isAuthenticated) return history.push('/');
         });
 
     return (

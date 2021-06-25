@@ -15,7 +15,7 @@ const FormField = ({
     labelName,
     half,
     ...otherInpProps
-}) => {
+}, ref) => {
     let inputEle = null;
 
     const styles = 'w-full p-4 border-b-2 border-gray-200 font-semibold';
@@ -72,7 +72,7 @@ const FormField = ({
     }
 
     return (
-        <Box className={`my-2 ${half ? 'w-1/2' : 'w-full'} ${className}`}>
+        <Box className={`my-2 ${half ? 'w-1/2' : 'w-full'} ${className}`} ref={ref}>
             {labelName && <label className="text-gray-900 font-normal text-lg">{labelName}</label>}
             {as === 'dropdown' || as === 'select' || as === 'file' ? (
                 inputEle
@@ -82,14 +82,14 @@ const FormField = ({
                         {inputEle}
                         {Icon && (
                             <Icon
-                                className={`h-6 w-6 stroke-current text-gray-300 stroke-1 ${
+                                className={`h-6 w-6 stroke-current text-gray-900 stroke-0 ${
                                     tertiary ? 'order-1 mr-3' : 'order-2 ml-3'
                                 }`}
                             />
                         )}
                     </Box>
                 </>
-            )}
+            )} 
         </Box>
     );
 };
