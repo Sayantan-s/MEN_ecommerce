@@ -5,12 +5,17 @@ import { useForm } from 'hooks';
 import User from 'assets/icons/User';
 import Mail from 'assets/icons/Mail';
 import Show from 'assets/icons/Show';
-import http from 'utils/http';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Authorize_user } from 'store/actions/Auth.actions';
+import { useHistory } from 'react-router';
 
 const Register = () => {
 
     const dispatch = useDispatch();
+
+    const { isAuthenticated } = useSelector(state => state.AuthReducer);
+
+    const history = useHistory();
 
     const [form, onChangeHandler, onSubmitHandler] = useForm({
         fullname: {
@@ -65,16 +70,11 @@ const Register = () => {
         }
     });
 
-    const onSubmit = async (eve) =>
-        await onSubmitHandler(eve, async ({ confirmPassword,...formdata}) => {
-            dispatch(IS_AUTHENTICATING())
-            const res = await http({
-                method: 'POST',
-                url: '/auth/register',
-                data : formdata
-            });
-
-            console.log(res);
+    const onSubmit = (eve) =>
+        onSubmitHandler(eve, async ({ confirmPassword,...formdata}) => {
+            await dispatch(Authorize_user({ input_data : formdata }));
+            if(isAuthenticated)
+                return history.push('/');
         });
 
     return (

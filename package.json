@@ -22,8 +22,8 @@
         "react-scripts": "4.0.3",
         "react-slick": "^0.28.1",
         "redux": "^4.0.5",
+        "redux-thunk": "^2.3.0",
         "slick-carousel": "^1.8.1",
-        "thunk": "0.0.1",
         "web-vitals": "^1.0.1"
     },
     "scripts": {
