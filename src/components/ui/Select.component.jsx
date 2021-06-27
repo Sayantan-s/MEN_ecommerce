@@ -16,7 +16,7 @@ const Select = ({ className, data, value, onChange }) => {
         }
     };
 
-    const selectOptionAnimation = {
+    const selectOptionAnimation = { 
         from: {
             y: 20,
             opacity: 0

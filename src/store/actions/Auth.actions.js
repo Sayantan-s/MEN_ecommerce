@@ -26,20 +26,18 @@ const Authorize_user =
         try {
             dispatch(IS_AUTHENTICATING());
 
-            const data = await http({
+            const { data, status } = await http({
                 method: 'POST',
                 url: url,
                 data: input_data
             });
 
-            console.log(data);
-
-            if (data.status !== 200 && data.status === 201) {
-                return dispatch(IS_AUTHENTICATED());
+            if (status !== 200 && status === 201) {
+                return dispatch(IS_AUTHENTICATED(data));
             }
         } catch (error) {
-            const { message } = error.response;
-            dispatch(FAILED_TO_AUTHENTICATE(message));
+            console.log(error.response)
+            return dispatch(FAILED_TO_AUTHENTICATE("Failed to authenticate!"));
         }
     };
 

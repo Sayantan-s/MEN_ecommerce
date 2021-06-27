@@ -7,14 +7,14 @@ import Mail from 'assets/icons/Mail';
 import Show from 'assets/icons/Show';
 import { useDispatch, useSelector } from 'react-redux';
 import { Authorize_user } from 'store/actions/Auth.actions';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 
 const Register = () => {
     const dispatch = useDispatch();
 
     const { isAuthenticated } = useSelector((state) => state.AuthReducer);
 
-    const [Redirector, onRedirectHandler] = useRedirect({ redirectTo: '/' });
+    const history = useHistory();
 
     const [form, onChangeHandler, onSubmitHandler] = useForm({
         fullname: {
@@ -69,11 +69,13 @@ const Register = () => {
         }
     });
 
-    const onSubmit = (eve) =>
-        onSubmitHandler(eve, async ({ confirmPassword, ...formdata }) => {
-            await dispatch(Authorize_user({ input_data: formdata }));
-            if (isAuthenticated) return onRedirectHandler();
+    const onSubmit = (eve) => {
+        onSubmitHandler(eve, ({ confirmPassword, ...formdata }) => {
+            dispatch(Authorize_user({ input_data: formdata }));
         });
+
+        if (isAuthenticated) return history.push('/');
+    }
 
     return (
         <>
