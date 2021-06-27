@@ -3,19 +3,22 @@ import { motion } from 'framer-motion';
 import React from 'react';
 import { forwardRef } from 'react';
 
-const FormField = ({
-    as,
-    ElementConfig,
-    value,
-    onChange,
-    children,
-    className,
-    icon: Icon,
-    tertiary = false,
-    labelName,
-    half,
-    ...otherInpProps
-}, ref) => {
+const FormField = (
+    {
+        as,
+        ElementConfig,
+        value,
+        onChange,
+        children,
+        className,
+        icon: Icon,
+        tertiary = false,
+        labelName,
+        half,
+        ...otherInpProps
+    },
+    ref
+) => {
     let inputEle = null;
 
     const styles = 'w-full p-4 border-b-2 border-gray-200 font-semibold';
@@ -89,7 +92,7 @@ const FormField = ({
                         )}
                     </Box>
                 </>
-            )} 
+            )}
         </Box>
     );
 };

@@ -22,21 +22,24 @@ const FAILED_TO_AUTHENTICATE = (error) => ({
 
 const Authorize_user =
     ({ url = '/auth/register', input_data }) =>
-    async (dispatch, getState) => {
-        dispatch(IS_AUTHENTICATING());
+    async (dispatch) => {
+        try {
+            dispatch(IS_AUTHENTICATING());
 
-        const { status } = await http({
-            method: 'POST',
-            url: url,
-            data: input_data
-        });
+            const data = await http({
+                method: 'POST',
+                url: url,
+                data: input_data
+            });
 
-        if (status !== 200 && status === 201) {
-            return dispatch(IS_AUTHENTICATED());
-        }
+            console.log(data);
 
-        if (status === 409) {
-            return dispatch(FAILED_TO_AUTHENTICATE());
+            if (data.status !== 200 && data.status === 201) {
+                return dispatch(IS_AUTHENTICATED());
+            }
+        } catch (error) {
+            const { message } = error.response;
+            dispatch(FAILED_TO_AUTHENTICATE(message));
         }
     };
 

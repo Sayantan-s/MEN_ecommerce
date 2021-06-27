@@ -16,18 +16,22 @@ router.route('/register').post(async (req, res, next) => {
 
         const userExists = await User.exists({ email });
 
-        if (userExists) return next(CustomError.alreadyExists('You already have an account!'));
+        if (userExists) return res.status(400).json({ message: 'Email already in use!' }); //next(CustomError.alreadyExists('Email already in use!'));
 
         const user = await new User(fullname, username, email, hashedPassword).save();
 
-        const { accessToken, refreshToken } = await AuthUtils.createTokens({
-            payload: {
-                _id: user._id,
-                username: user.username
-            }
-        });
+        if (user) {
+            const { accessToken, refreshToken } = await AuthUtils.createTokens({
+                payload: {
+                    _id: user._id,
+                    username: user.username
+                }
+            });
 
-        res.status(201).send({ accessToken, refreshToken });
+            return res.status(201).send({ accessToken, refreshToken });
+        }
+
+        return next(CustomError.newError(400, 'Failed to register! Try again'));
     } catch (error) {
         next(error);
     }
@@ -60,7 +64,7 @@ router.route('/login').post(async (req, res, next) => {
             }
         });
 
-        res.send({ accessToken, refreshToken });
+        res.status(200).send({ accessToken, refreshToken });
     } catch (error) {
         next(error);
     }

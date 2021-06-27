@@ -23,7 +23,7 @@ app.use((req, res, next) => {
 
 app.use((err, req, res, next) => {
     const statusCode = err.status || 500;
-    return res.status(statusCode).send({
+    return res.status(statusCode).json({
         status: statusCode,
         message: err.message
     });
