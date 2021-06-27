@@ -2,19 +2,18 @@ import { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
 const useRedirect = ({ redirectTo }) => {
-    const [{ state, to }, setRedirect] = useState({
-        state: false,
-        to: null
-    });
+    const [state, setRedirect] = useState(false);
 
-    const onRedirectHandler = (_) =>
-        setRedirect((prev) => ({
-            ...prev,
-            state: true,
-            to: redirectTo
-        }));
+    const onRedirectHandler = (_) => setRedirect(true);
 
-    const Redirector = ({ children }) => <>{state && <Redirect to={to}>{children}</Redirect>}</>;
+    const Redirector = ({ children }) => (
+        <>
+            {state && <Redirect to={redirectTo} />}
+            {children}
+        </>
+    );
+
+    return [Redirector, onRedirectHandler];
 };
 
 export default useRedirect;

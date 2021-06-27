@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography, Box, FormField, Button, Link } from 'components';
 import { motion } from 'framer-motion';
-import { useForm } from 'hooks';
+import { useForm, useRedirect } from 'hooks';
 import User from 'assets/icons/User';
 import Mail from 'assets/icons/Mail';
 import Show from 'assets/icons/Show';
@@ -14,7 +14,7 @@ const Register = () => {
 
     const { isAuthenticated } = useSelector((state) => state.AuthReducer);
 
-    const history = useHistory();
+    const [Redirector, onRedirectHandler] = useRedirect({ redirectTo: '/' });
 
     const [form, onChangeHandler, onSubmitHandler] = useForm({
         fullname: {
@@ -72,7 +72,7 @@ const Register = () => {
     const onSubmit = (eve) =>
         onSubmitHandler(eve, async ({ confirmPassword, ...formdata }) => {
             await dispatch(Authorize_user({ input_data: formdata }));
-            if (isAuthenticated) return history.push('/');
+            if (isAuthenticated) return onRedirectHandler();
         });
 
     return (
@@ -146,8 +146,3 @@ const Register = () => {
 };
 
 export default Register;
-
-/*    ${key === 'name' ? 'w-1/2 mr-2 float-left'
-                                    : key === 'username' ? 'w-1/2 ml-2'
-                                    : ''}*/
-//${id !== 0 && id % 2 === 0 ? 'float-left' : ''}
