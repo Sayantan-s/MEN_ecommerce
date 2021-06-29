@@ -37,10 +37,28 @@ router
 
 router.route('/cart')
 .get(async(req, res, next) => {
+    const get_products_query = 'SELECT name, tagname FROM products WHERE _id = $1'
+
+    const { rows } = await db.query(get_products_query, [_id]);
+
 
 })
 .post(async (req, res, next) => {
-    
+    try {
+        const { user_id, _id, size, quantity } = req.body;
+
+        const columns = Object.keys(req.body);
+
+        console.log(req.body)
+
+        const insert_item_query = `INSERT INTO cart(${columns.map(each => each).join(',')}) VALUES(${new Array(columns.length).fill('$').map(x => x).join(',')})`
+
+        console.log(insert_item_query)
+
+
+    } catch (error) {
+        next(error)
+    }
 })
 
 router.route('/products/:id').get(async (req, res, next) => {

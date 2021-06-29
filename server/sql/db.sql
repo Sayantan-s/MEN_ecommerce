@@ -28,6 +28,18 @@ CREATE TABLE orders(
     UNIQUE(order_id)
 );
 
+CREATE TABLE cart(
+    _id uuid NOT NULL DEFAULT uuid_generate_v4(),
+    product_id uuid NOT NULL REFERENCES products(_id),
+    user_id uuid NOT NULL REFERENCES user(_id),
+    size VARCHAR(20) NOT NULL,
+    quantity NUMERIC NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY(_id),
+    UNIQUE(_id)
+);
+
 CREATE TABLE public.users(
     _id uuid NOT NULL DEFAULT uuid_generate_v4(),
     img TEXT,

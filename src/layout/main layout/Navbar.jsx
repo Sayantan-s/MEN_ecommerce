@@ -42,8 +42,8 @@ const Navbar = () => {
                     ))}
                 </div>
                 <Box className="flex">
-                    <IconDropDown icon={Wishlist} />
-                    <IconDropDown icon={Bag} />
+                    <IconDropDown icon={Wishlist} className="mx-2" />
+                    <IconDropDown icon={Bag} className="mx-2"/>
                     {isAuthenticated ? (
                         <>
                             <Link
