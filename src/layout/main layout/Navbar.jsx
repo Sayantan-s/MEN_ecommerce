@@ -35,7 +35,7 @@ const Navbar = () => {
                             type="transparent"
                             className="mx-4"
                             activeClassName="text-gray-700"
-                            exact={link === "Home" ? true : false}
+                            exact={link === 'Home' ? true : false}
                             to={link === 'Home' ? '/' : `/${link.toLowerCase()}`}>
                             {link}
                         </Link>

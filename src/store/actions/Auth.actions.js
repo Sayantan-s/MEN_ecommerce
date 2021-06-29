@@ -36,8 +36,8 @@ const Authorize_user =
                 return dispatch(IS_AUTHENTICATED(data));
             }
         } catch (error) {
-            console.log(error.response)
-            return dispatch(FAILED_TO_AUTHENTICATE("Failed to authenticate!"));
+            console.log(error.response);
+            return dispatch(FAILED_TO_AUTHENTICATE('Failed to authenticate!'));
         }
     };
 

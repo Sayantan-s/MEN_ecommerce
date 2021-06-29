@@ -75,7 +75,7 @@ const Register = () => {
         });
 
         if (isAuthenticated) return history.push('/');
-    }
+    };
 
     return (
         <>

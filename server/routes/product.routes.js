@@ -22,8 +22,6 @@ router
 
         const response = await db.query(check_query, [body.name, body.tagname]);
 
-        console.log(Boolean(response.rows.length));
-
         if (Boolean(response.rows.length)) {
             return next(CustomError.alreadyExists('Product already exists'));
         }
