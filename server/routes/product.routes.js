@@ -35,6 +35,14 @@ router
         res.status(201).send({ data: rows });
     });
 
+router.route('/cart')
+.get(async(req, res, next) => {
+
+})
+.post(async (req, res, next) => {
+    
+})
+
 router.route('/products/:id').get(async (req, res, next) => {
     console.log(req.params);
 

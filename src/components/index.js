@@ -6,6 +6,7 @@ import ProductCard from './ui/ProductCard.component';
 import FormField from './ui/Formfield.component';
 import Select from './ui/Select.component';
 import FileUpload from './ui/FileUpload.component';
+import IconDropDown from './ui/IconDropDown.component';
 
 import Box from './elements/Box.component';
 import Page from './elements/Page.component';
@@ -25,5 +26,6 @@ export {
     FormField,
     Select,
     FileUpload,
-    Search
+    Search,
+    IconDropDown
 };

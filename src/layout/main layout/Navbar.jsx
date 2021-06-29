@@ -1,12 +1,12 @@
 import Logo from 'assets/Logo';
 import { motion } from 'framer-motion';
 import React, { useRef } from 'react';
-import Bag from 'assets/icons/Bag';
-import { Box, Button, Link, Search } from 'components';
+import { Box, Button, IconDropDown, Link, Search } from 'components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { GOT_NAV_VALUE } from 'store/types/getNavValue';
 import Wishlist from 'assets/icons/Wishlist';
+import Bag from 'assets/icons/Bag';
 
 const Navbar = () => {
     const { isAuthenticated } = useSelector((state) => state.AuthReducer);
@@ -42,14 +42,8 @@ const Navbar = () => {
                     ))}
                 </div>
                 <Box className="flex">
-                    <Button className="relative mx-2">
-                        <Wishlist className="w-7 h-7 text-gray-900 stroke-2" />
-                        <div className="bg-red-400 rounded-full w-2 h-2 absolute top-1 -right-1" />
-                    </Button>
-                    <Button className="relative mx-2">
-                        <Bag className="w-7 h-7 text-gray-300 stroke-2" />
-                        <div className="bg-red-400 rounded-full w-2 h-2 absolute top-1 -right-1" />
-                    </Button>
+                    <IconDropDown icon={Wishlist} />
+                    <IconDropDown icon={Bag} />
                     {isAuthenticated ? (
                         <>
                             <Link
