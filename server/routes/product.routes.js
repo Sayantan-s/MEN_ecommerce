@@ -45,16 +45,24 @@ router.route('/cart')
 })
 .post(async (req, res, next) => {
     try {
-        const { user_id, _id, size, quantity } = req.body;
+
+        const { user_id } = req.body;
+
+        const check_query = `SELECT product_id FROM cart WHERE user_id = $1`;
+
+        const prevProducts = await db.query(check_query, [user_id]);
+
+        console.log(prevProducts)
 
         const columns = Object.keys(req.body);
 
-        console.log(req.body)
+        const values = Object.values(req.body);
+        
+        const insert_item_query = `INSERT INTO cart(${columns.map(each => each).join(',')}) VALUES(${new Array(columns.length).fill('$').map((x, id) => x + (id + 1)).join(',')}) RETURNING *`
 
-        const insert_item_query = `INSERT INTO cart(${columns.map(each => each).join(',')}) VALUES(${new Array(columns.length).fill('$').map(x => x).join(',')})`
+        const { rows } = await db.query(insert_item_query, values);
 
-        console.log(insert_item_query)
-
+        console.log(rows);
 
     } catch (error) {
         next(error)
@@ -99,7 +107,10 @@ router
     .get(async (req, res, next) => {
         try {
             const { rows } = await db.query(
-                `SELECT order_id, product_id, cover, name, tagname, catagory, description, size, gender, quantity, price, tags, orders.created_at, orders.updated_at FROM products
+                `SELECT 
+                order_id, product_id, cover, name, tagname, 
+                catagory, description, size, gender, quantity, price, 
+                tags, orders.created_at, orders.updated_at FROM products
                 JOIN orders ON orders.product_id = products._id ORDER BY orders.created_at`
             );
             return res.send({ data: rows });
