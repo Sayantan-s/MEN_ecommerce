@@ -22,7 +22,7 @@ router
 
         const response = await db.query(check_query, [body.name, body.tagname]);
 
-        if (Boolean(response.rows.length)) {
+        if (response.rows.length) {
             return next(CustomError.alreadyExists('Product already exists'));
         }
 
@@ -46,13 +46,24 @@ router.route('/cart')
 .post(async (req, res, next) => {
     try {
 
-        const { user_id } = req.body;
+        const { user_id, product_id } = req.body;
 
         const check_query = `SELECT product_id FROM cart WHERE user_id = $1`;
 
         const prevProducts = await db.query(check_query, [user_id]);
 
-        console.log(prevProducts)
+        console.log(prevProducts.rows)
+
+        if(prevProducts.rows.length){
+            const similarPrevProduct = prevProducts.rows.find(product => {
+                if(product.product_id === product_id) return product.product_id;
+            })
+
+            const update_query = `UPDATE cart 
+            SET `
+
+            console.log(similarPrevProduct.product_id)
+        }
 
         const columns = Object.keys(req.body);
 
