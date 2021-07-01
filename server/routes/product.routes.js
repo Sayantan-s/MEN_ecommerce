@@ -43,7 +43,7 @@ router
         const { rows } = await db.query(get_products_query, [_id]);
     })
     .post(async (req, res, next) => {
-        console.log(req.body)
+        console.log(req.body);
         try {
             const { user_id, product_id, quantity } = req.body;
 
@@ -54,10 +54,12 @@ router
             console.log(prevProducts.rows);
 
             if (prevProducts.rows.length) {
-                console.log("Hello")
-                const similarPrevProduct = prevProducts.rows.find((product) => product.product_id === product_id);
+                console.log('Hello');
+                const similarPrevProduct = prevProducts.rows.find(
+                    (product) => product.product_id === product_id
+                );
 
-                console.log(similarPrevProduct.product_id)
+                console.log(similarPrevProduct.product_id);
 
                 return;
 
