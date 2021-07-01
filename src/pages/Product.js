@@ -63,14 +63,13 @@ const Product = () => {
                 method: 'POST',
                 url: '/api/cart',
                 data: {
-                    user_id : 'd3d8ebe1-9418-47f3-bbdf-fb460360c023',
-                    product_id : _id,
+                    user_id: 'd3d8ebe1-9418-47f3-bbdf-fb460360c023',
+                    product_id: _id,
                     size: select.name,
                     quantity: counter
                 }
             });
-        }
-        else{
+        } else {
             console.log('Please add something as quantity!');
         }
     };

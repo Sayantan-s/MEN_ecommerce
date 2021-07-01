@@ -35,50 +35,65 @@ router
         res.status(201).send({ data: rows });
     });
 
-router.route('/cart')
-.get(async(req, res, next) => {
-    const get_products_query = 'SELECT name, tagname FROM products WHERE _id = $1'
+router
+    .route('/cart')
+    .get(async (req, res, next) => {
+        const get_products_query = 'SELECT name, tagname FROM products WHERE _id = $1';
 
-    const { rows } = await db.query(get_products_query, [_id]);
+        const { rows } = await db.query(get_products_query, [_id]);
+    })
+    .post(async (req, res, next) => {
+        console.log(req.body)
+        try {
+            const { user_id, product_id, quantity } = req.body;
 
+            const check_query = `SELECT product_id FROM cart WHERE user_id = $1`;
 
-})
-.post(async (req, res, next) => {
-    try {
+            const prevProducts = await db.query(check_query, [user_id]);
 
-        const { user_id, product_id } = req.body;
+            console.log(prevProducts.rows);
 
-        const check_query = `SELECT product_id FROM cart WHERE user_id = $1`;
+            if (prevProducts.rows.length) {
+                console.log("Hello")
+                const similarPrevProduct = prevProducts.rows.find((product) => product.product_id === product_id);
 
-        const prevProducts = await db.query(check_query, [user_id]);
+                console.log(similarPrevProduct.product_id)
 
-        console.log(prevProducts.rows)
+                return;
 
-        if(prevProducts.rows.length){
-            const similarPrevProduct = prevProducts.rows.find(product => {
-                if(product.product_id === product_id) return product.product_id;
-            })
+                /*if (similarPrevProduct.product_id) {
+                    const update_query = `UPDATE cart 
+                    SET quantity = quantity + $1
+                    WHERE product_id = $2 AND user_id = $3
+                    `;
+                    const updatePrevProducts = await db.query(update_query, [
+                        +quantity,
+                        similarPrevProduct.product_id,
+                        user_id
+                    ]);
 
-            const update_query = `UPDATE cart 
-            SET `
+                    return res.status(204).send({ message : `Product updated successFully` });
+                }*/
+            }
 
-            console.log(similarPrevProduct.product_id)
+            const columns = Object.keys(req.body);
+
+            const values = Object.values(req.body);
+
+            const insert_item_query = `INSERT INTO cart(${columns
+                .map((each) => each)
+                .join(',')}) VALUES(${new Array(columns.length)
+                .fill('$')
+                .map((x, id) => x + (id + 1))
+                .join(',')}) RETURNING *`;
+
+            const { rows } = await db.query(insert_item_query, values);
+
+            console.log(rows);
+        } catch (error) {
+            next(error);
         }
-
-        const columns = Object.keys(req.body);
-
-        const values = Object.values(req.body);
-        
-        const insert_item_query = `INSERT INTO cart(${columns.map(each => each).join(',')}) VALUES(${new Array(columns.length).fill('$').map((x, id) => x + (id + 1)).join(',')}) RETURNING *`
-
-        const { rows } = await db.query(insert_item_query, values);
-
-        console.log(rows);
-
-    } catch (error) {
-        next(error)
-    }
-})
+    });
 
 router.route('/products/:id').get(async (req, res, next) => {
     console.log(req.params);

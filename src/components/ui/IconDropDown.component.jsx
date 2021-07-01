@@ -2,9 +2,9 @@ import { Menu } from '@headlessui/react';
 import { motion } from 'framer-motion';
 import React from 'react';
 
-const IconDropDown = ({ icon : Icon, className }) => {
+const IconDropDown = ({ icon: Icon, className }) => {
     return (
-        <Menu as={motion.div} className={"relative inline-flex" + " " + className}>
+        <Menu as={motion.div} className={'relative inline-flex' + ' ' + className}>
             <Menu.Button className="focus:outline-none">
                 <Icon className="w-7 h-7 text-gray-900" />
             </Menu.Button>
