@@ -28,14 +28,15 @@ const Authorize_user =
 
             const { data, status } = await http({
                 method: 'POST',
-                url: url,
+                url,
                 data: input_data
             });
 
             if (status !== 200 && status === 201) {
                 dispatch(IS_AUTHENTICATED(data));
             }
-        } catch (error) {
+        } 
+        catch (error) {
             console.log(error.response);
             return dispatch(FAILED_TO_AUTHENTICATE('Failed to authenticate!'));
         }
