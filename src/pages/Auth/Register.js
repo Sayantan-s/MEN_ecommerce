@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography, Box, FormField, Button, Link } from 'components';
 import { motion } from 'framer-motion';
-import { useForm, useRedirect } from 'hooks';
+import { useForm } from 'hooks';
 import User from 'assets/icons/User';
 import Mail from 'assets/icons/Mail';
 import Show from 'assets/icons/Show';
@@ -70,11 +70,11 @@ const Register = () => {
     });
 
     const onSubmit = (eve) => {
-        onSubmitHandler(eve, ({ confirmPassword, ...formdata }) => {
-            dispatch(Authorize_user({ input_data: formdata }));
+        onSubmitHandler(eve, async ({ confirmPassword, ...formdata }) => {
+            await dispatch(Authorize_user({ input_data: formdata }));
+            console.log("Hello")
+            if(isAuthenticated) return history.push('/');
         });
-
-        if (isAuthenticated) return history.push('/');
     };
 
     return (

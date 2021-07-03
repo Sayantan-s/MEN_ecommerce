@@ -33,7 +33,7 @@ const Authorize_user =
             });
 
             if (status !== 200 && status === 201) {
-                return dispatch(IS_AUTHENTICATED(data));
+                dispatch(IS_AUTHENTICATED(data));
             }
         } catch (error) {
             console.log(error.response);
