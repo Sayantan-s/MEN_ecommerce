@@ -43,6 +43,7 @@ const Collections = () => {
                             {...data}
                             key={_id}
                             className="w-1/3 flex flex-col float-left p-5"
+                            height="large"
                         />
                     ))}
                 </Box>
