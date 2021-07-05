@@ -25,7 +25,7 @@ const useForm = (formState) => {
             }));
         };
 
-        const onSubmitHandler = async(eve, callback) => {
+        const onSubmitHandler = async (eve, callback) => {
             eve.preventDefault();
             let data = {};
             const formData = new FormData(eve.target);
@@ -36,7 +36,7 @@ const useForm = (formState) => {
                 };
             }
             callback(data);
-        }; 
+        };
 
         return [formArray, onChangeHandler, onSubmitHandler];
     }

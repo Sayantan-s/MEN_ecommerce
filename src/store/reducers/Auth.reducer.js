@@ -4,10 +4,11 @@ import {
     AUTHENTICATION_SUCCESSFULL
 } from 'store/types/isAuthenticated';
 
+const userMetaData = JSON.parse(localStorage.getItem('user_info'));
+
 const authState = {
     loading: false,
-    isAuthenticated: false,
-    tokens: null,
+    data: userMetaData,
     error: false
 };
 
@@ -17,24 +18,22 @@ const AuthReducer = (state = authState, { type, payload }) => {
             return {
                 ...state,
                 loading: true,
-                isAuthenticated: false,
-                tokens: null,
+                data: null,
                 error: false
             };
         case AUTHENTICATION_SUCCESSFULL:
+            localStorage.setItem('user_info', JSON.stringify(payload));
             return {
                 ...state,
                 loading: false,
-                isAuthenticated: true,
-                tokens: payload,
+                data: payload,
                 error: false
             };
         case AUTHENTICATION_FAILED:
             return {
                 ...state,
                 loading: false,
-                isAuthenticated: true,
-                tokens: null,
+                data: null,
                 error: payload
             };
         default:

@@ -28,11 +28,9 @@ router.route('/register').post(async (req, res, next) => {
                 }
             });
 
-            const expiry = await AuthUtils.verify_JWT({ token : accessToken })
+            const { exp } = await AuthUtils.verify_JWT({ token: accessToken });
 
-            console.log(expiry);
-
-            return res.status(201).send({ accessToken, refreshToken });
+            return res.status(201).send({ accessToken, refreshToken, role: 'user', expiry: exp });
         }
 
         return next(CustomError.newError(400, 'Failed to register! Try again'));

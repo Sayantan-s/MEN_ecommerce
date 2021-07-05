@@ -1,7 +1,5 @@
 class RefreshToken {
-    static async create(token) {
-        
-    }
+    static async create(token) {}
 }
 
 export default RefreshToken;

@@ -22,11 +22,7 @@ const Collections = () => {
                 <Typography className="font-bold font-body text-3xl text-gray-900" as={motion.pre}>
                     Man Shoes
                 </Typography>
-                <Button
-                    type="primary"
-                    p="py-1 px-2"
-                    fontWeight="font-normal"
-                    onClick={setFilter}>
+                <Button type="primary" p="py-1 px-2" fontWeight="font-normal" onClick={setFilter}>
                     <Filter className="w-5 h-5 stroke-current text-grey-100" />
                     <span className="ml-2">Filter</span>
                 </Button>

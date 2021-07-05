@@ -33,11 +33,10 @@ const Authorize_user =
             });
 
             if (status !== 200 && status === 201) {
-                console.log(data)
+                console.log(data);
                 return dispatch(IS_AUTHENTICATED(data));
             }
-        } 
-        catch (error) {
+        } catch (error) {
             console.log(error.response);
             return dispatch(FAILED_TO_AUTHENTICATE('Failed to authenticate!'));
         }
