@@ -1,10 +1,10 @@
 import http from 'utils/http';
 
-const {
+import {
     AUTHENTICATING,
     AUTHENTICATION_SUCCESSFULL,
     AUTHENTICATION_FAILED
-} = require('store/types/isAuthenticated');
+} from 'store/types/isAuthenticated';
 
 const IS_AUTHENTICATING = () => ({
     type: AUTHENTICATING
@@ -33,7 +33,8 @@ const Authorize_user =
             });
 
             if (status !== 200 && status === 201) {
-                dispatch(IS_AUTHENTICATED(data));
+                console.log(data)
+                return dispatch(IS_AUTHENTICATED(data));
             }
         } 
         catch (error) {

@@ -28,6 +28,10 @@ router.route('/register').post(async (req, res, next) => {
                 }
             });
 
+            const expiry = await AuthUtils.verify_JWT({ token : accessToken })
+
+            console.log(expiry);
+
             return res.status(201).send({ accessToken, refreshToken });
         }
 

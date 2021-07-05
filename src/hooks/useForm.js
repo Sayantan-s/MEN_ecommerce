@@ -35,7 +35,7 @@ const useForm = (formState) => {
                     [key]: value
                 };
             }
-            await callback(data);
+            callback(data);
         }; 
 
         return [formArray, onChangeHandler, onSubmitHandler];

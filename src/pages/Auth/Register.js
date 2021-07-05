@@ -70,10 +70,9 @@ const Register = () => {
     });
 
     const onSubmit = (eve) => {
-        onSubmitHandler(eve, async ({ confirmPassword, ...formdata }) => {
-            await dispatch(Authorize_user({ input_data: formdata }));
-            console.log("Hello")
-            if(isAuthenticated) return history.push('/');
+        onSubmitHandler(eve, ({ confirmPassword, ...formdata }) => {
+            dispatch(Authorize_user({ input_data : formdata }));
+            if(isAuthenticated) history.push('/');
         });
     };
 
