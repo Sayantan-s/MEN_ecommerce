@@ -4,8 +4,17 @@ import { motion } from 'framer-motion';
 import { useForm } from 'hooks';
 import User from 'assets/icons/User';
 import Show from 'assets/icons/Show';
+import { Authenticate_user } from 'store/actions/Auth.actions';
+import { useHistory } from 'react-router';
+import { useDispatch } from 'react-redux';
+
 
 const Login = () => {
+
+    const history = useHistory();
+
+    const dispatch = useDispatch();
+
     const [form, onChangeHandler, onSubmitHandler] = useForm({
         email: {
             as: 'input',
@@ -28,6 +37,15 @@ const Login = () => {
             labelName: 'Password'
         }
     });
+
+    const onSubmit = (eve) => {
+        onSubmitHandler(eve, (formdata) => {
+            dispatch(Authenticate_user({ 
+                input_data: formdata, 
+                url : '/auth/login' 
+            }, history));
+        });
+    };
     return (
         <>
             <Typography as={motion.h3} className="my-2 text-gray-900 ">
@@ -39,7 +57,7 @@ const Login = () => {
                     Signup
                 </Link>
             </Typography>
-            <Box as={motion.form} onSubmit={onSubmitHandler} className="mt-6">
+            <Box as={motion.form} onSubmit={onSubmit} className="mt-6">
                 {form.map(({ key, data }, id) => (
                     <FormField
                         key={key}

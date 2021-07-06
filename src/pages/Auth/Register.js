@@ -5,16 +5,12 @@ import { useForm } from 'hooks';
 import User from 'assets/icons/User';
 import Mail from 'assets/icons/Mail';
 import Show from 'assets/icons/Show';
-import { useDispatch, useSelector } from 'react-redux';
-import { Register_user } from 'store/actions/Auth.actions';
+import { useDispatch } from 'react-redux';
+import { Authenticate_user } from 'store/actions/Auth.actions';
 import { useHistory } from 'react-router-dom';
 
 const Register = () => {
     const dispatch = useDispatch();
-
-    const state = useSelector((state) => state.AuthReducer);
-
-    console.log(state)
 
     const history = useHistory();
 
@@ -73,7 +69,7 @@ const Register = () => {
 
     const onSubmit = (eve) => {
         onSubmitHandler(eve, ({ confirmPassword, ...formdata }) => {
-            dispatch(Register_user({ input_data: formdata }, history));
+            dispatch(Authenticate_user({ input_data: formdata }, history));
         });
     };
 

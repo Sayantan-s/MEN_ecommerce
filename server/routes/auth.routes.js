@@ -66,7 +66,9 @@ router.route('/login').post(async (req, res, next) => {
             }
         });
 
-        res.status(200).send({ accessToken, refreshToken });
+        const { exp } = await AuthUtils.verify_JWT({ token: accessToken });
+
+        res.status(200).send({ accessToken, refreshToken, role: 'user', expiry: exp });
     } catch (error) {
         next(error);
     }

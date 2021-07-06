@@ -2,6 +2,7 @@ import {
     AUTHENTICATING,
     AUTHENTICATION_FAILED,
     AUTHENTICATION_SUCCESSFULL,
+    LOGOUT_USER,
     USER_IS_AUTHENTICATED
 } from 'store/types/isAuthenticated';
 
@@ -45,7 +46,19 @@ const AuthReducer = (state = authState, { type, payload }) => {
                 isAuthenticated: userIsAuthenticated(),
                 data,
                 error : ''
+            };
+
+        case LOGOUT_USER:
+            localStorage.removeItem('user_info');
+
+            return{
+                ...state,
+                loading: false,
+                data: null,
+                isAuthenticated: false,
+                error: false
             }
+
         case AUTHENTICATION_FAILED:
             return {
                 ...state,

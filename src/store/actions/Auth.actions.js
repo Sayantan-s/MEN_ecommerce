@@ -3,7 +3,8 @@ import http from 'utils/http';
 import {
     AUTHENTICATING,
     AUTHENTICATION_SUCCESSFULL,
-    AUTHENTICATION_FAILED
+    AUTHENTICATION_FAILED,
+    LOGOUT_USER
 } from 'store/types/isAuthenticated';
 
 const IS_AUTHENTICATING = () => ({
@@ -20,7 +21,23 @@ const FAILED_TO_AUTHENTICATE = (error) => ({
     payload: error
 });
 
-const Register_user =
+const LOGOUT = () => ({
+    type : LOGOUT_USER
+})
+
+export const logout = history => {
+    return async dispatch => {
+        try{
+            await dispatch(LOGOUT());
+            history.push('/');
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
+}
+
+const Authenticate_user =
     ({ url = '/auth/register', input_data }, history) =>
     async (dispatch) => {
         try {
@@ -32,7 +49,7 @@ const Register_user =
                 data: input_data
             });
 
-            if (status !== 200 && status === 201) {
+            if ((url.includes('register') && status === 201) || (url.includes('login') && status === 200)) {
                 dispatch(IS_AUTHENTICATED(AUTHENTICATION_SUCCESSFULL, data));
                 history.push('/collectives');
             }
@@ -42,4 +59,4 @@ const Register_user =
         }
     };
 
-export { IS_AUTHENTICATING, IS_AUTHENTICATED, FAILED_TO_AUTHENTICATE, Register_user };
+export { IS_AUTHENTICATING, IS_AUTHENTICATED, FAILED_TO_AUTHENTICATE, Authenticate_user };

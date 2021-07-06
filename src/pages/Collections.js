@@ -33,12 +33,12 @@ const Collections = () => {
                     as={motion.aside}>
                     filter
                 </Box>
-                <Box className={`${filterToggle ? 'w-10/12' : 'w-full'}`}>
-                    {productData.data?.map(({ _id, ...data }) => (
+                <Box className={`${filterToggle ? 'w-10/12' : 'w-full'} flex flex-wrap`}>
+                    {productData.data?.map(({ _id, ...data }, id) => (
                         <ProductCard
                             {...data}
                             key={_id}
-                            className="w-1/3 flex flex-col float-left p-5"
+                            className={`w-1/3 relative ${id % 3 !== 0 ? 'pl-4' : '' } mb-8`}
                             height="large"
                         />
                     ))}
