@@ -21,7 +21,7 @@ const FAILED_TO_AUTHENTICATE = (error) => ({
 });
 
 const Authorize_user =
-    ({ url = '/auth/register', input_data }) =>
+    ({ url = '/auth/register', input_data }, history) =>
     async (dispatch) => {
         try {
             dispatch(IS_AUTHENTICATING());
@@ -34,7 +34,8 @@ const Authorize_user =
 
             if (status !== 200 && status === 201) {
                 console.log(data);
-                return dispatch(IS_AUTHENTICATED(data));
+                dispatch(IS_AUTHENTICATED(data));
+                history.push('/collectives');
             }
         } catch (error) {
             console.log(error.response);
