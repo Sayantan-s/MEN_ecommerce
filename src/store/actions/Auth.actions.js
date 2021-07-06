@@ -10,8 +10,8 @@ const IS_AUTHENTICATING = () => ({
     type: AUTHENTICATING
 });
 
-const IS_AUTHENTICATED = (data) => ({
-    type: AUTHENTICATION_SUCCESSFULL,
+const IS_AUTHENTICATED = (type, data) => ({
+    type,
     payload: data
 });
 
@@ -20,7 +20,7 @@ const FAILED_TO_AUTHENTICATE = (error) => ({
     payload: error
 });
 
-const Authorize_user =
+const Register_user =
     ({ url = '/auth/register', input_data }, history) =>
     async (dispatch) => {
         try {
@@ -33,8 +33,7 @@ const Authorize_user =
             });
 
             if (status !== 200 && status === 201) {
-                console.log(data);
-                dispatch(IS_AUTHENTICATED(data));
+                dispatch(IS_AUTHENTICATED(AUTHENTICATION_SUCCESSFULL, data));
                 history.push('/collectives');
             }
         } catch (error) {
@@ -43,4 +42,4 @@ const Authorize_user =
         }
     };
 
-export { IS_AUTHENTICATING, IS_AUTHENTICATED, FAILED_TO_AUTHENTICATE, Authorize_user };
+export { IS_AUTHENTICATING, IS_AUTHENTICATED, FAILED_TO_AUTHENTICATE, Register_user };

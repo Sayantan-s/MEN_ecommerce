@@ -52,7 +52,7 @@ const Navbar = () => {
                                 className="mx-2 text-gray-900">
                                 Admin
                             </Link>
-                            <Button type="primary" className="ml-1">
+                            <Button type="primary" className="ml-1" p="px-5 py-3">
                                 Logout
                             </Button>
                         </>
