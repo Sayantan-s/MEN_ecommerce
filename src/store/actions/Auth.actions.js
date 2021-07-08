@@ -54,7 +54,6 @@ const Authenticate_user =
                 history.push('/collectives');
             }
         } catch (error) {
-            console.log(error.response);
             return dispatch(FAILED_TO_AUTHENTICATE('Failed to authenticate!'));
         }
     };

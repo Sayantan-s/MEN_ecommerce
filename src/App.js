@@ -12,7 +12,9 @@ function App() {
 
     const { data, isAuthenticated } = useSelector(state => state.AuthReducer);
 
-    console.log(isAuthenticated)
+    const AuthState = useSelector(state => state.AuthReducer)
+
+    console.log(AuthState)
 
     const dispatch = useDispatch();
 
@@ -23,7 +25,7 @@ function App() {
 
     const userIsAuthenticated = () => {
         if(!data || (!data.accessToken || !data.expiry)) return false;
-        return new Date().getTime() / 1000 > data.expiry;
+        return new Date().getTime() / 1000 < data.expiry;
     }
 
     useEffect(() => {
@@ -44,12 +46,12 @@ function App() {
                         </Switch>
                     </AuthLayout>
                 </PrivateRoute>
-                <Route path="/admin/:path">
+                <PrivateRoute path="/admin/:path" redirect="/" path="/admin/:path">
                     <Switch>
                         <Route path="/admin/add-product" component={AddProduct} />
                         <Route path="/admin/products" component={AdminProduct} />
                     </Switch>
-                </Route>
+                </PrivateRoute>
             </AnimatedRoutes>
         </Layout>
     );
