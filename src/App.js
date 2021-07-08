@@ -1,7 +1,7 @@
 import { AnimatedRoutes } from 'animations';
 import { Layout, AuthLayout } from 'layout';
 import { Collections, Home, Login, Register, AddProduct, AdminProduct, Product } from 'pages';
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 import { IS_AUTHENTICATED } from 'store/actions/Auth.actions';
@@ -27,8 +27,8 @@ function App() {
         if(!data || (!data.accessToken || !data.expiry)) return false;
         return new Date().getTime() / 1000 < data.expiry;
     }
-
-    useEffect(() => {
+    
+    useLayoutEffect(() => {
         dispatch(IS_AUTHENTICATED(USER_IS_AUTHENTICATED, { data, userIsAuthenticated }))
     },[])
 

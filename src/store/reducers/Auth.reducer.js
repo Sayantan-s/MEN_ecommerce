@@ -11,7 +11,7 @@ const userMetaData = JSON.parse(localStorage.getItem('user_info'));
 const authState = {
     loading: false,
     data: userMetaData,
-    isAuthenticated: false,
+    isAuthenticated: userMetaData ? true : false,
     error: false
 };
 
