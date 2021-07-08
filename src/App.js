@@ -6,10 +6,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 import { IS_AUTHENTICATED } from 'store/actions/Auth.actions';
 import { USER_IS_AUTHENTICATED } from 'store/types/isAuthenticated';
+import { PrivateRoute } from 'components'
 
 function App() {
 
-    const { data } = useSelector(state => state.AuthReducer);
+    const { data, isAuthenticated } = useSelector(state => state.AuthReducer);
+
+    console.log(isAuthenticated)
 
     const dispatch = useDispatch();
 
@@ -33,14 +36,14 @@ function App() {
                 <Route exact path="/" component={Home} />
                 <Route exact path="/collectives" component={Collections} />
                 <Route path="/collectives/product/:id" component={Product} />
-                <Route path="/auth/:path">
+                <PrivateRoute path="/auth/:path" condition={!isAuthenticated} redirect="/">
                     <AuthLayout>
                         <Switch>
                             <Route path="/auth/login" component={Login} />
                             <Route path="/auth/register" component={Register} />
                         </Switch>
                     </AuthLayout>
-                </Route>
+                </PrivateRoute>
                 <Route path="/admin/:path">
                     <Switch>
                         <Route path="/admin/add-product" component={AddProduct} />

@@ -13,6 +13,7 @@ import Page from './elements/Page.component';
 import Typography from './elements/Typography.component';
 
 import Search from './ui/Search.component';
+import PrivateRoute from './utils/PrivateRoute.component'
 
 export {
     Link,
@@ -27,5 +28,6 @@ export {
     Select,
     FileUpload,
     Search,
-    IconDropDown
+    IconDropDown, 
+    PrivateRoute
 };
