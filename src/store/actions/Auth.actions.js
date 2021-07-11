@@ -22,20 +22,19 @@ const FAILED_TO_AUTHENTICATE = (error) => ({
 });
 
 const LOGOUT = () => ({
-    type : LOGOUT_USER
-})
+    type: LOGOUT_USER
+});
 
-export const logout = history => {
-    return async dispatch => {
-        try{
+export const logout = (history) => {
+    return async (dispatch) => {
+        try {
             await dispatch(LOGOUT());
             history.push('/');
+        } catch (err) {
+            console.log(err);
         }
-        catch(err){
-            console.log(err)
-        }
-    }
-}
+    };
+};
 
 const Authenticate_user =
     ({ url = '/auth/register', input_data }, history) =>
@@ -49,7 +48,10 @@ const Authenticate_user =
                 data: input_data
             });
 
-            if ((url.includes('register') && status === 201) || (url.includes('login') && status === 200)) {
+            if (
+                (url.includes('register') && status === 201) ||
+                (url.includes('login') && status === 200)
+            ) {
                 dispatch(IS_AUTHENTICATED(AUTHENTICATION_SUCCESSFULL, data));
                 history.push('/collectives');
             }

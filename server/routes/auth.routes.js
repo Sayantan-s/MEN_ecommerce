@@ -25,7 +25,7 @@ router.route('/register').post(async (req, res, next) => {
                 payload: {
                     _id: user._id,
                     username: user.username,
-                    role : 'user'
+                    role: 'user'
                 }
             });
 
@@ -64,7 +64,7 @@ router.route('/login').post(async (req, res, next) => {
             payload: {
                 _id: user._id,
                 username: user.username,
-                role : 'user'
+                role: 'user'
             }
         });
 

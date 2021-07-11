@@ -6,15 +6,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 import { IS_AUTHENTICATED } from 'store/actions/Auth.actions';
 import { USER_IS_AUTHENTICATED } from 'store/types/isAuthenticated';
-import { PrivateRoute } from 'components'
+import { PrivateRoute } from 'components';
 
 function App() {
+    const { data, isAuthenticated } = useSelector((state) => state.AuthReducer);
 
-    const { data, isAuthenticated } = useSelector(state => state.AuthReducer);
+    const AuthState = useSelector((state) => state.AuthReducer);
 
-    const AuthState = useSelector(state => state.AuthReducer)
-
-    console.log(AuthState)
+    console.log(AuthState);
 
     const dispatch = useDispatch();
 
@@ -24,13 +23,13 @@ function App() {
     }, []);
 
     const userIsAuthenticated = () => {
-        if(!data || (!data.accessToken || !data.expiry)) return false;
+        if (!data || !data.accessToken || !data.expiry) return false;
         return new Date().getTime() / 1000 < data.expiry;
-    }
-    
+    };
+
     useLayoutEffect(() => {
-        dispatch(IS_AUTHENTICATED(USER_IS_AUTHENTICATED, { data, userIsAuthenticated }))
-    },[])
+        dispatch(IS_AUTHENTICATED(USER_IS_AUTHENTICATED, { data, userIsAuthenticated }));
+    }, []);
 
     return (
         <Layout>

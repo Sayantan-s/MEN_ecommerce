@@ -12,7 +12,7 @@ const Collections = () => {
 
     useEffect(() => {
         (async () => {
-            const { data } = await http.get('api/products');
+            const { data } = await http.get('/products');
             setData(data);
         })();
     }, []);
@@ -38,7 +38,7 @@ const Collections = () => {
                         <ProductCard
                             {...data}
                             key={_id}
-                            className={`w-1/3 relative ${id % 3 !== 0 ? 'pl-4' : '' } mb-8`}
+                            className={`w-1/3 relative ${id % 3 !== 0 ? 'pl-4' : ''} mb-8`}
                             height="large"
                         />
                     ))}

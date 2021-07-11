@@ -21,7 +21,7 @@ const AuthReducer = (state = authState, { type, payload }) => {
             return {
                 ...state,
                 loading: true,
-                isAuthenticated : false,
+                isAuthenticated: false,
                 data: null,
                 error: false
             };
@@ -31,33 +31,32 @@ const AuthReducer = (state = authState, { type, payload }) => {
             return {
                 ...state,
                 loading: false,
-                isAuthenticated : true,
+                isAuthenticated: true,
                 data: payload,
                 error: false
             };
-        
-        case USER_IS_AUTHENTICATED:
 
+        case USER_IS_AUTHENTICATED:
             const { data, userIsAuthenticated } = payload;
 
-            return{
+            return {
                 ...state,
-                loading : false,
+                loading: false,
                 isAuthenticated: userIsAuthenticated(),
                 data,
-                error : ''
+                error: ''
             };
 
         case LOGOUT_USER:
             localStorage.removeItem('user_info');
 
-            return{
+            return {
                 ...state,
                 loading: false,
                 data: null,
                 isAuthenticated: false,
                 error: false
-            }
+            };
 
         case AUTHENTICATION_FAILED:
             return {

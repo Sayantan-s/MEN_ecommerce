@@ -23,7 +23,7 @@ const CarouselAdvert = () => {
 
     useEffect(() => {
         (async () => {
-            const { data } = await http.get('api/trendy-cloth');
+            const { data } = await http.get('/trendy-cloth');
             setTrend(data);
         })();
     }, []);

@@ -8,9 +8,7 @@ import { Authenticate_user } from 'store/actions/Auth.actions';
 import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
 
-
 const Login = () => {
-
     const history = useHistory();
 
     const dispatch = useDispatch();
@@ -40,10 +38,15 @@ const Login = () => {
 
     const onSubmit = (eve) => {
         onSubmitHandler(eve, (formdata) => {
-            dispatch(Authenticate_user({ 
-                input_data: formdata, 
-                url : '/auth/login' 
-            }, history));
+            dispatch(
+                Authenticate_user(
+                    {
+                        input_data: formdata,
+                        url: '/auth/login'
+                    },
+                    history
+                )
+            );
         });
     };
     return (

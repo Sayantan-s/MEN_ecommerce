@@ -12,7 +12,7 @@ const middlewares = [morgan('dev'), express.json(), cors({ origin: CLIENT })];
 
 app.use(middlewares);
 
-app.use('/auth', authRoute);
+app.use('/api/auth', authRoute);
 app.use('/api', productRoutes);
 
 app.use((req, res, next) => {

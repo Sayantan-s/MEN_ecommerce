@@ -8,7 +8,7 @@ import { GOT_NAV_VALUE } from 'store/types/getNavValue';
 import Wishlist from 'assets/icons/Wishlist';
 import Bag from 'assets/icons/Bag';
 import { logout } from 'store/actions/Auth.actions';
-import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
 
 const Navbar = () => {
     const { isAuthenticated } = useSelector((state) => state.AuthReducer);
@@ -20,7 +20,6 @@ const Navbar = () => {
     const navBarRef = useRef(null);
 
     const dispatch = useDispatch();
-
 
     useEffect(() => {
         dispatch({ type: GOT_NAV_VALUE, payload: navBarRef.current.offsetHeight });
@@ -57,7 +56,11 @@ const Navbar = () => {
                                 className="mx-2 text-gray-900">
                                 Admin
                             </Link>
-                            <Button type="primary" className="ml-1" p="px-5 py-3" onClick={() => dispatch(logout(history))}>
+                            <Button
+                                type="primary"
+                                className="ml-1"
+                                p="px-5 py-3"
+                                onClick={() => dispatch(logout(history))}>
                                 Logout
                             </Button>
                         </>

@@ -40,7 +40,7 @@ const Product = () => {
         (async () => {
             const {
                 data: { data }
-            } = await http.get(`/api/products/${id}`);
+            } = await http.get(`/products/${id}`);
             setLightBox(data.cover);
             setData(() => {
                 const newData = {
