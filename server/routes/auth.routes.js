@@ -16,7 +16,7 @@ router.route('/register').post(async (req, res, next) => {
 
         const userExists = await User.exists({ email });
 
-        if (userExists) return res.status(400).json({ message: 'Email already in use!' }); //next(CustomError.alreadyExists('Email already in use!'));
+        if (userExists) return next(CustomError.alreadyExists('Email already in use!'));
 
         const user = await new User(fullname, username, email, hashedPassword).save();
 
@@ -24,13 +24,14 @@ router.route('/register').post(async (req, res, next) => {
             const { accessToken, refreshToken } = await AuthUtils.createTokens({
                 payload: {
                     _id: user._id,
-                    username: user.username
+                    username: user.username,
+                    role : 'user'
                 }
             });
 
             const { exp } = await AuthUtils.verify_JWT({ token: accessToken });
 
-            return res.status(201).send({ accessToken, refreshToken, role: 'user', expiry: exp });
+            return res.status(201).send({ accessToken, refreshToken, expiry: exp });
         }
 
         return next(CustomError.newError(400, 'Failed to register! Try again'));
@@ -62,13 +63,14 @@ router.route('/login').post(async (req, res, next) => {
         const { accessToken, refreshToken } = await AuthUtils.createTokens({
             payload: {
                 _id: user._id,
-                username: user.username
+                username: user.username,
+                role : 'user'
             }
         });
 
         const { exp } = await AuthUtils.verify_JWT({ token: accessToken });
 
-        res.status(200).send({ accessToken, refreshToken, role: 'user', expiry: exp });
+        res.status(200).send({ accessToken, refreshToken, expiry: exp });
     } catch (error) {
         next(error);
     }

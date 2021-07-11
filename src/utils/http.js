@@ -7,15 +7,17 @@ const http = axios.create({
     }
 });
 
-http.interceptors.response.use(config => {
-    let userMetaData = window.localStorage.getItem('user_info');
-    if(userMetaData){
-        const { accessToken } = JSON.parse(userMetaData);
-        config.headers.Authorization = `Bearer ${accessToken}`;
-    }
-    return config;
-}, error => {
-    Promise.reject(error)
+http.interceptors.request.use(
+    config => {
+        let userMetaData = window.localStorage.getItem('user_info');
+        if(userMetaData){
+            const { accessToken } = JSON.parse(userMetaData);
+            config.headers.Authorization = `Bearer ${accessToken}`;
+        }
+        return config;
+    }, 
+    error => {
+        Promise.reject(error)
 })
 
 export default http;

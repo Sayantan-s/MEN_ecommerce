@@ -1,6 +1,7 @@
 import express from 'express';
 import CustomError from '../helpers/custom_error_handler';
 import { db } from '../helpers/init_postgres';
+import isAuth from '../middlewares/isAuth';
 
 const router = express.Router();
 
