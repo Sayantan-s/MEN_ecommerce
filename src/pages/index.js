@@ -10,4 +10,7 @@ import AdminProduct from './Admin/Admin-product';
 
 import PageNotFound from './Error/404';
 
-export { Collections, Home, Login, Register, PageNotFound, AddProduct, AdminProduct, Product };
+import Shipping from './Transactions/Shipping';
+import Payment from './Transactions/Payment';
+
+export { Collections, Home, Login, Register, PageNotFound, AddProduct, AdminProduct, Product, Shipping, Payment };

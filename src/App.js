@@ -1,6 +1,6 @@
 import { AnimatedRoutes } from 'animations';
 import { Layout, AuthLayout } from 'layout';
-import { Collections, Home, Login, Register, AddProduct, AdminProduct, Product } from 'pages';
+import { Collections, Home, Login, Register, AddProduct, AdminProduct, Product, Shipping, Payment } from 'pages';
 import { useEffect, useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
@@ -36,7 +36,9 @@ function App() {
             <AnimatedRoutes>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/collectives" component={Collections} />
-                <Route path="/collectives/product/:id" component={Product} />
+                <Route path="/collectives/product/:id" component={Product} /> 
+                <Route path="/shipping" component={Shipping} />
+                <Route path="/payment" component={Payment} />
                 <PrivateRoute path="/auth/:path" condition={!isAuthenticated} redirect="/">
                     <AuthLayout>
                         <Switch>
