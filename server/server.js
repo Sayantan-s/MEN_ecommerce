@@ -12,8 +12,9 @@ const middlewares = [morgan('dev'), express.json(), cors({ origin: CLIENT })];
 
 app.use(middlewares);
 
-app.use('/api/auth', authRoute);
 app.use('/api', productRoutes);
+app.use('/api/auth', authRoute);
+app.use('/api/utilities')
 
 app.use((req, res, next) => {
     const error = new Error('Page not found!');

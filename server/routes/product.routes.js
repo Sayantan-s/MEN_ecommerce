@@ -1,16 +1,20 @@
 import express from 'express';
 import CustomError from '../helpers/custom_error_handler';
 import { db } from '../helpers/init_postgres';
+import { PrismaClient } from '@prisma/client'
 import isAuth from '../middlewares/isAuth';
 
 const router = express.Router();
 
+const { products } = new PrismaClient();
+
 router
     .route('/products')
     .get(async (req, res, next) => {
-        const { rows } = await db.query('SELECT * FROM products');
 
-        res.status(200).send({ data: rows });
+        const data = await products.findMany();
+        
+        res.status(200).send({ data });
     })
     .post(async (req, res, next) => {
         const { body } = req;
