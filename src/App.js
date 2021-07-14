@@ -1,19 +1,16 @@
 import { AnimatedRoutes } from 'animations';
 import { Layout, AuthLayout } from 'layout';
 import { Collections, Home, Login, Register, AddProduct, AdminProduct, Product, Shipping, Payment } from 'pages';
-import { useEffect, useLayoutEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 import { IS_AUTHENTICATED } from 'store/actions/Auth.actions';
 import { USER_IS_AUTHENTICATED } from 'store/types/isAuthenticated';
 import { PrivateRoute } from 'components';
+import http from 'utils/http';
 
 function App() {
     const { data, isAuthenticated } = useSelector((state) => state.AuthReducer);
-
-    const AuthState = useSelector((state) => state.AuthReducer);
-
-    console.log(AuthState);
 
     const dispatch = useDispatch();
 
@@ -27,8 +24,12 @@ function App() {
         return new Date().getTime() / 1000 < data.expiry;
     };
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         dispatch(IS_AUTHENTICATED(USER_IS_AUTHENTICATED, { data, userIsAuthenticated }));
+        (async() => {
+            //const res = await http.get('/utilities/csrf');
+            //console.log(res)
+        })()
     }, []);
 
     return (
