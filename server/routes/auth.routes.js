@@ -2,8 +2,11 @@ import AuthUtils from '../helpers/auth_helper';
 import CustomError from '../helpers/custom_error_handler';
 import User from '../models/User.model';
 import { login_validator, register_validator } from '../validators/auth.validator';
+import { PrismaClient } from '@prisma/client'
 
 const router = require('express').Router();
+
+const { users, reftoken } = new PrismaClient();
 
 router.route('/register').post(async (req, res, next) => {
     try {
@@ -21,7 +24,7 @@ router.route('/register').post(async (req, res, next) => {
         const user = await new User(fullname, username, email, hashedPassword).save();
 
         if (user) {
-            const { accessToken, refreshToken } = await AuthUtils.createTokens({
+            const { accessToken } = await AuthUtils.createTokens({
                 payload: {
                     _id: user._id,
                     username: user.username,
@@ -29,9 +32,20 @@ router.route('/register').post(async (req, res, next) => {
                 }
             });
 
+            const createRefToken = await reftoken.create({
+                data : {
+                    token : AuthUtils.generate_refreshToken(),
+                    user_id : user._id
+                }
+            })
+
             const { exp } = await AuthUtils.verify_JWT({ token: accessToken });
 
-            return res.status(201).send({ accessToken, refreshToken, expiry: exp });
+            res.cookie('refresh', createRefToken.token, {
+                httpOnly : true
+            })
+
+            return res.status(201).send({ accessToken, expiry: exp });
         }
 
         return next(CustomError.newError(400, 'Failed to register! Try again'));
@@ -60,7 +74,7 @@ router.route('/login').post(async (req, res, next) => {
             return next(CustomError.newError(401, 'Invalid email/password!'));
         }
 
-        const { accessToken, refreshToken } = await AuthUtils.createTokens({
+        const { accessToken } = await AuthUtils.createTokens({
             payload: {
                 _id: user._id,
                 username: user.username,
@@ -70,7 +84,7 @@ router.route('/login').post(async (req, res, next) => {
 
         const { exp } = await AuthUtils.verify_JWT({ token: accessToken });
 
-        res.status(200).send({ accessToken, refreshToken, expiry: exp });
+        res.status(200).send({ accessToken, expiry: exp });
     } catch (error) {
         next(error);
     }
@@ -78,10 +92,6 @@ router.route('/login').post(async (req, res, next) => {
 
 router.route('/logout').delete(async (req, res, next) => {
     res.send({ message: 'Hello from logout' });
-});
-
-router.route('/refresh').post(async (req, res, next) => {
-    res.send({ message: 'Hello from refresh!' });
 });
 
 export default router;

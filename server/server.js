@@ -6,11 +6,12 @@ import productRoutes from './routes/product.routes';
 import utilsRoutes from './routes/utils.routes';
 import { connection } from './helpers/init_postgres';
 import cors from 'cors';
-import csrf from 'csurf';
+//import csrf from 'csurf';
+import parser from 'cookie-parser'
 
 const app = express();
 
-const middlewares = [morgan('dev'), express.json(), cors({ origin: CLIENT })];
+const middlewares = [morgan('dev'), express.json(), cors({ origin: CLIENT }), parser()];
 
 app.use(middlewares);
 
