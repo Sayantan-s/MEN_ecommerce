@@ -29,7 +29,7 @@
         "web-vitals": "^1.0.1"
     },
     "scripts": {
-        "start": "concurrently 'npm run dev' 'cd server && npm start && npx prisma studio'",
+        "start": "concurrently 'npm run dev' 'cd server && npm start' 'cd server && npx prisma studio'",
         "dev": "DISABLE_ESLINT_PLUGIN=true craco start",
         "build": "craco build",
         "test": "craco test",
