@@ -7,6 +7,7 @@ import FormField from './ui/Formfield.component';
 import Select from './ui/Select.component';
 import FileUpload from './ui/FileUpload.component';
 import IconDropDown from './ui/IconDropDown.component';
+import CartComponent from './ui/CartComponent.component';
 
 import Box from './elements/Box.component';
 import Page from './elements/Page.component';
@@ -29,5 +30,6 @@ export {
     FileUpload,
     Search,
     IconDropDown,
-    PrivateRoute
+    PrivateRoute,
+    CartComponent
 };

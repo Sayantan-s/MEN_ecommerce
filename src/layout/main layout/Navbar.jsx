@@ -1,7 +1,7 @@
 import Logo from 'assets/Logo';
 import { motion } from 'framer-motion';
-import React, { useRef } from 'react';
-import { Box, Button, IconDropDown, Link } from 'components';
+import React, { useRef, useState } from 'react';
+import { Box, Button, CartComponent, IconDropDown, Link } from 'components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { GOT_NAV_VALUE } from 'store/types/getNavValue';
@@ -10,9 +10,13 @@ import Bag from 'assets/icons/Bag';
 import { logout } from 'store/actions/Auth.actions';
 import { useHistory } from 'react-router-dom';
 import Heart from 'assets/icons/outline/Heart';
+import { Menu } from '@headlessui/react';
+import http from 'utils/http';
 
 const Navbar = () => {
     const { isAuthenticated } = useSelector((state) => state.AuthReducer);
+
+    const [cartData, setCartData] = useState([]);
 
     const NavLinks = ['Home', 'Collectives', 'Newbies'];
 
@@ -22,9 +26,20 @@ const Navbar = () => {
 
     const dispatch = useDispatch();
 
+    const fetchCart = async() => {
+        const { data } = await http.get('/cart?user_id=8cf4f1f5-2024-468e-855a-fb8d141c966f');
+
+        setCartData(data.data);
+    }
+
     useEffect(() => {
+        fetchCart();
         dispatch({ type: GOT_NAV_VALUE, payload: navBarRef.current.offsetHeight });
     }, []);
+
+
+    console.log(cartData)
+
 
     return (
         <header className="w-full bg-gray-50 fixed border-b-2 border-gray-200 z-50" ref={navBarRef}>
@@ -48,7 +63,15 @@ const Navbar = () => {
                 </div>
                 <Box className="flex">
                     <IconDropDown icon={Heart} className="mx-2" />
-                    <IconDropDown icon={Bag} className="mx-2" />
+                    <IconDropDown icon={Bag} className="mx-2">
+                        {
+                           cartData.map(({ id, products, ...data}) => (
+                               <Menu.Item as={motion.div} key={id}>
+                                   <CartComponent {...products} {...data} />
+                               </Menu.Item>
+                           ))
+                        }
+                    </IconDropDown>
                     {isAuthenticated ? (
                         <>
                             <Link
@@ -77,3 +100,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

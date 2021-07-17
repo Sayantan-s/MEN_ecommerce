@@ -7,7 +7,6 @@ import { Switch, Route } from 'react-router-dom';
 import { IS_AUTHENTICATED } from 'store/actions/Auth.actions';
 import { USER_IS_AUTHENTICATED } from 'store/types/isAuthenticated';
 import { PrivateRoute } from 'components';
-import http from 'utils/http';
 
 function App() {
     const { data, isAuthenticated } = useSelector((state) => state.AuthReducer);

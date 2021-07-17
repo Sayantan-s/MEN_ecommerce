@@ -43,18 +43,25 @@ router
 router
     .route('/cart')
     .get(async (req, res, next) => {
-        console.log(req.query)
         const { user_id } = req.query;
         try {
 
-            const data = await cart.findMany({
-                where : { user_id }
+            const cartData = await cart.findMany({
+                where : { user_id },
+                select : {
+                    id : true, quantity : true, size : true,
+                    products : {
+                        select : {
+                            name:true, tagname:true, price:true, cover:true
+                        }
+                    }
+                }
             })
 
-            res.send(data);
+            res.send({ data : cartData });
             
         } catch (error) {
-            next(CustomError.newError(400, 'Something went wrong!'))
+            next(CustomError.newError(400, error.message))
         }
     })
     .post(async (req, res, next) => {
@@ -66,8 +73,6 @@ router
                 where : { user_id }
             })
             
-            console.log(getCart);
-
             if(!getCart.length){
                 const addedProduct = await cart.create({
                     data : req.body
@@ -125,16 +130,24 @@ router.route('/products/:id').get(async (req, res, next) => {
 });
 
 router.get('/trendy-cloth', async (req, res, next) => {
-    const { rows } = await db.query(
-        `
-        SELECT cover, name, tagname, price, _id 
-        FROM products 
-        WHERE catagory = $1 
-        ORDER BY RANDOM() LIMIT 5`,
-        ['clothing']
-    );
 
-    res.status(200).send({ data: rows });
+    let data = await products.findMany({ 
+        where : {
+            catagory : 'clothing'
+        }
+    })
+
+    for(let i = 0; i< 5; i++){
+        for(let j = i; j< 5; j++ ){
+            const randomIndex = ~~(Math.random(6));
+            if(j === randomIndex + 1){
+                data = data.filter((_, id) => id !== j);
+                break;
+            }
+        }
+    }
+
+    res.status(200).send({ data });
 });
 
 router
