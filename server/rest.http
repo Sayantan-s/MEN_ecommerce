@@ -20,7 +20,9 @@ Content-Type: application/json
 
 
 ###
-POST http://localhost:5000/auth/refresh
+GET http://localhost:5000/api/cart?user_id=8cf4f1f5-2024-468e-855a-fb8d141c966f
+
+
 
  
 

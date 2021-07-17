@@ -9,6 +9,7 @@ import Wishlist from 'assets/icons/Wishlist';
 import Bag from 'assets/icons/Bag';
 import { logout } from 'store/actions/Auth.actions';
 import { useHistory } from 'react-router-dom';
+import Heart from 'assets/icons/outline/Heart';
 
 const Navbar = () => {
     const { isAuthenticated } = useSelector((state) => state.AuthReducer);
@@ -46,7 +47,7 @@ const Navbar = () => {
                     ))}
                 </div>
                 <Box className="flex">
-                    <IconDropDown icon={Wishlist} className="mx-2" />
+                    <IconDropDown icon={Heart} className="mx-2" />
                     <IconDropDown icon={Bag} className="mx-2" />
                     {isAuthenticated ? (
                         <>

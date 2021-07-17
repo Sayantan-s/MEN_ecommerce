@@ -1,12 +1,12 @@
 import express from 'express';
 import CustomError from '../helpers/custom_error_handler';
 import { db } from '../helpers/init_postgres';
-import { PrismaClient } from '@prisma/client'
+import { prisma, PrismaClient } from '@prisma/client'
 import isAuth from '../middlewares/isAuth';
 
 const router = express.Router();
 
-const { products } = new PrismaClient();
+const { products, cart } = new PrismaClient();
 
 router
     .route('/products')
@@ -43,83 +43,85 @@ router
 router
     .route('/cart')
     .get(async (req, res, next) => {
-        const get_products_query = 'SELECT name, tagname FROM products WHERE _id = $1';
+        console.log(req.query)
+        const { user_id } = req.query;
+        try {
 
-        const { rows } = await db.query(get_products_query, [_id]);
+            const data = await cart.findMany({
+                where : { user_id }
+            })
+
+            res.send(data);
+            
+        } catch (error) {
+            next(CustomError.newError(400, 'Something went wrong!'))
+        }
     })
     .post(async (req, res, next) => {
         console.log(req.body);
         try {
-            const { user_id, product_id, quantity } = req.body;
+            const { user_id, product_id, quantity,size } = req.body;
 
-            const check_query = `SELECT product_id FROM cart WHERE user_id = $1`;
+            const getCart = await cart.findMany({
+                where : { user_id }
+            })
+            
+            console.log(getCart);
 
-            const prevProducts = await db.query(check_query, [user_id]);
-
-            console.log(prevProducts.rows);
-
-            if (prevProducts.rows.length) {
-                console.log('Hello');
-                const similarPrevProduct = prevProducts.rows.find(
-                    (product) => product.product_id === product_id
-                );
-
-                console.log(similarPrevProduct.product_id);
-
-                return;
-
-                /*if (similarPrevProduct.product_id) {
-                    const update_query = `UPDATE cart 
-                    SET quantity = quantity + $1
-                    WHERE product_id = $2 AND user_id = $3
-                    `;
-                    const updatePrevProducts = await db.query(update_query, [
-                        +quantity,
-                        similarPrevProduct.product_id,
-                        user_id
-                    ]);
-
-                    return res.status(204).send({ message : `Product updated successFully` });
-                }*/
+            if(!getCart.length){
+                const addedProduct = await cart.create({
+                    data : req.body
+                })
+    
+                return res.status(201).send({ addedProduct, message : `Added ${addedProduct.id} to cart` });
             }
 
-            const columns = Object.keys(req.body);
+            const findProduct = getCart.find(product => (
+                product.user_id === user_id && product.product_id === product_id &&  product.size === size 
+            ))
 
-            const values = Object.values(req.body);
+            if(!!findProduct){
+                const updateProduct = await cart.update({
+                    where : { id: findProduct.id },
+                    data : {
+                        quantity : {
+                            increment : quantity
+                        }
+                    }
+                })
 
-            const insert_item_query = `INSERT INTO cart(${columns
-                .map((each) => each)
-                .join(',')}) VALUES(${new Array(columns.length)
-                .fill('$')
-                .map((x, id) => x + (id + 1))
-                .join(',')}) RETURNING *`;
+                return res.status(204).send({ updateProduct,  message : `Added ${quantity} more of ${updateProduct.product_id}`});
+            }
 
-            const { rows } = await db.query(insert_item_query, values);
+            const addedProduct = await cart.create({
+                data : req.body
+            })
 
-            console.log(rows);
-        } catch (error) {
-            next(error);
+            res.status(201).send({ addedProduct, message : `Added ${addedProduct.id} to cart` });
+        }
+        catch(err){
+            console.log(err)
         }
     });
 
 router.route('/products/:id').get(async (req, res, next) => {
-    console.log(req.params);
 
     const { id } = req.params;
 
     const [name, tagname] = id.split('_');
 
-    const query = `SELECT name, tagname, price, cover, otherimages, gender, description, catagory, _id
-    FROM products 
-    WHERE name = $1 AND tagname = $2`;
+    const data = await products.findFirst({
+        where : { name, tagname },
+        select : {
+            name:true, tagname:true, price:true, cover:true, otherimages:true, gender:true, description:true, catagory:true, id:true
+        }
+    })
 
-    const { rows } = await db.query(query, [name, tagname]);
-
-    if (!rows.length) {
+    if (!data) {
         return next(CustomError.alreadyExists('Product is not present'));
     }
 
-    res.status(200).send({ data: rows[0] });
+    res.status(200).send({ data });
 });
 
 router.get('/trendy-cloth', async (req, res, next) => {

@@ -9,8 +9,7 @@ import Typography from 'components/elements/Typography.component';
 import { motion } from 'framer-motion';
 import { useCounter, useSelect } from 'hooks';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
-import { HeartIcon as HeartFilled } from '@heroicons/react/solid';
-import { HeartIcon } from '@heroicons/react/outline';
+import Heart from 'assets/icons/outline/Heart';
 
 const Product = () => {
     const { id } = useParams();
@@ -55,20 +54,21 @@ const Product = () => {
 
     const handleLightBox = (img) => setLightBox(img);
 
-    const { otherimages, gender, catagory, name, tagname, price, description, _id } = productData;
+    const { otherimages, gender, catagory, name, tagname, price, description } = productData;
 
     const handleAddToCart = async () => {
         if (counter > 0) {
             const { data } = await http({
                 method: 'POST',
-                url: '/api/cart',
+                url: '/cart',
                 data: {
-                    user_id: 'd3d8ebe1-9418-47f3-bbdf-fb460360c023',
-                    product_id: _id,
+                    user_id: '8cf4f1f5-2024-468e-855a-fb8d141c966f',
+                    product_id: productData.id,
                     size: select.name,
                     quantity: counter
                 }
             });
+            console.log(data)
         } else {
             console.log('Please add something as quantity!');
         }
@@ -95,11 +95,7 @@ const Product = () => {
                     <Button
                         className="absolute right-0 bg-red-50 p-2 rounded-full"
                         onClick={() => setWishlisted(!isWishlisted)}>
-                        {isWishlisted ? (
-                            <HeartFilled className="w-8 h-8 text-red-500 fill-current" />
-                        ) : (
-                            <HeartIcon className="w-8 h-8 text-red-500 stroke-current" />
-                        )}
+                         <Heart className={`w-8 h-8 text-red-500 stroke-2 ${isWishlisted ? 'fill-current' : 'stroke-current'}`} />
                     </Button>
                     <Typography
                         as={motion.h5}
