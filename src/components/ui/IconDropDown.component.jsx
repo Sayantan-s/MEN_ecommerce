@@ -1,4 +1,5 @@
 import { Menu } from '@headlessui/react';
+import { Box } from 'components';
 import { motion } from 'framer-motion';
 import React from 'react';
 
@@ -6,22 +7,20 @@ const IconDropDown = ({ icon: Icon, className, onClick, children}) => {
 
     const dropdownAnimation = {
         from : {
-            height : 0
+            y : -30
         },
         to : {
-            height : 'auto'
+            y : '0'
         }
     }
 
     return (
         <motion.div onClick={onClick} className="">
-            <Menu as={motion.div} className="relative inline-block w-max">
-                <motion.div>
-                    <Menu.Button className={"flex items-center justify-center w-full text-sm font-medium text-white focus:outline-none" + " " + className}>
-                        <Icon className="w-7 h-7 text-gray-900 stroke-current" />
-                    </Menu.Button>
-                </motion.div>
-                <Menu.Items as={motion.div}
+            <Menu as={Box} className="relative inline-block w-max">
+                <Menu.Button className={"flex items-center justify-center w-full text-sm font-medium text-white focus:outline-none" + " " + className}>
+                    <Icon className="w-7 h-7 text-gray-900 stroke-current" />
+                </Menu.Button>
+                <Menu.Items as={Box}
                 variants={dropdownAnimation}
                 initial={'from'}
                 animate={'to'} 

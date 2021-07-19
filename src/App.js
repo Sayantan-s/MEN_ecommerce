@@ -1,6 +1,6 @@
 import { AnimatedRoutes } from 'animations';
 import { Layout, AuthLayout } from 'layout';
-import { Collections, Home, Login, Register, AddProduct, AdminProduct, Product, Shipping, Payment } from 'pages';
+import { Collections, Home, Login, Register, AddProduct, AdminProduct, Product, Shipping, Payment, Newbies } from 'pages';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
@@ -49,6 +49,7 @@ function App() {
                 <Route path="/collectives/product/:id" component={Product} /> 
                 <Route path="/shipping" component={Shipping} />
                 <Route path="/payment" component={Payment} />
+                <Route path="/newbies" component={Newbies} />
                 <PrivateRoute path="/auth/:path" condition={!isAuthenticated} redirect="/">
                     <AuthLayout>
                         <Switch>
@@ -64,7 +65,7 @@ function App() {
                     </Switch>
                 </PrivateRoute>
             </AnimatedRoutes>
-            <Toast icon={Tick}/>
+            <Toast icon={Tick} type="danger"/>
         </Layout>
     );
 }

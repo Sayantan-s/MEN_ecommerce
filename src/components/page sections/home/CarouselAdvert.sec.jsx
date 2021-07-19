@@ -5,6 +5,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 import { motion } from 'framer-motion';
 import http from 'utils/http';
+import { useHistory } from 'react-router-dom';
 
 const CarouselAdvert = () => {
     var settings = {
@@ -20,6 +21,8 @@ const CarouselAdvert = () => {
     };
 
     const [trendState, setTrend] = useState([]);
+
+    const history = useHistory();
 
     useEffect(() => {
         (async () => {
@@ -51,7 +54,7 @@ const CarouselAdvert = () => {
                     you a long-sleeve layer for cool conditions. Lightweight, stretchy fabric with
                     Dri-FIT Technology helps keep you comfortable while you train.
                 </Typography>
-                <Button type="primary" moreStyles="my-8">
+                <Button type="primary" moreStyles="my-8" onClick={() => history.push('/collectives')}>
                     Shop Now
                 </Button>
                 <Box className="w-full">

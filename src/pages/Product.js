@@ -18,7 +18,11 @@ const Product = () => {
 
     const [lightBox, setLightBox] = useState('');
 
-    const [isWishlisted, setWishlisted] = useState(false);
+    const [wishList, setWishlisted] = useState({
+        isWishlisted : false,
+        product_id : '',
+        user_id : ''
+    });
 
     const [counter, handleCount] = useCounter({
         start: 0,
@@ -68,11 +72,22 @@ const Product = () => {
                     quantity: counter
                 }
             });
-            console.log(data)
         } else {
             console.log('Please add something as quantity!');
         }
     };
+
+    const handleWishlist = _ => {
+        setWishlisted(prevState => ({
+            ...prevState,
+            isWishlisted : !prevState.isWishlisted,
+            product_id : !prevState.isWishlisted ? productData.id : '',
+            user_id : !prevState.user_id ? '8cf4f1f5-2024-468e-855a-fb8d141c966f' : ''
+        }))
+
+    }
+
+    console.log(wishList)
 
     return (
         <Page>
@@ -94,8 +109,8 @@ const Product = () => {
                 <ContentSection className="w-5/12 ml-10 relative">
                     <Button
                         className="absolute right-0 bg-red-50 p-2 rounded-full"
-                        onClick={() => setWishlisted(!isWishlisted)}>
-                         <Heart className={`w-8 h-8 text-red-500 stroke-2 ${isWishlisted ? 'fill-current' : 'stroke-current'}`} />
+                        onClick={handleWishlist}>
+                         <Heart className={`w-8 h-8 text-red-500 stroke-2 ${wishList.isWishlisted ? 'fill-current' : 'stroke-current'}`} />
                     </Button>
                     <Typography
                         as={motion.h5}
