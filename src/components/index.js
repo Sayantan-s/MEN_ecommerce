@@ -12,6 +12,7 @@ import CartComponent from './ui/CartComponent.component';
 import Box from './elements/Box.component';
 import Page from './elements/Page.component';
 import Typography from './elements/Typography.component';
+import Portals from './elements/Portals.component';
 
 import Search from './ui/Search.component';
 import PrivateRoute from './utils/PrivateRoute.component';
@@ -31,5 +32,6 @@ export {
     Search,
     IconDropDown,
     PrivateRoute,
-    CartComponent
+    CartComponent,
+    Portals
 };

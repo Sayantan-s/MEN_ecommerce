@@ -31,6 +31,14 @@ function App() {
         })()
     }, []);
 
+    useEffect(() => {
+        const portals = Object.values(document.querySelector('body').children).filter(node => node.className.includes('portals'));
+        portals.forEach(portal => {
+            if(portal.className.includes(portal.className)) console.log("Verified Portals")
+        })
+        console.log(portals);
+    },[])
+
     return (
         <Layout>
             <AnimatedRoutes>
