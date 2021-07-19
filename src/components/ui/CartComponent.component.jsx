@@ -4,7 +4,7 @@ import React from 'react'
 
 const CartComponent = ({ name, tagname, cover, size, price, quantity }) => {
     return (
-       <Link to="/collectives" className="flex p-4 hover:bg-gray-200">
+       <Link to="/collectives" className="flex p-4 hover:bg-gray-100">
            <Image src={cover} alt={name + "_" + tagname } className="w-40 h-32"/>
            <Box className="ml-3 w-full">
                 <Typography as={motion.h5}>

@@ -5,7 +5,6 @@ import { Box, Button, CartComponent, IconDropDown, Link } from 'components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { GOT_NAV_VALUE } from 'store/types/getNavValue';
-import Wishlist from 'assets/icons/Wishlist';
 import Bag from 'assets/icons/Bag';
 import { logout } from 'store/actions/Auth.actions';
 import { useHistory } from 'react-router-dom';
@@ -66,9 +65,11 @@ const Navbar = () => {
                     <IconDropDown icon={Bag} className="mx-2">
                         {
                            cartData.map(({ id, products, ...data}) => (
-                               <Menu.Item as={motion.div} key={id}>
-                                   <CartComponent {...products} {...data} />
-                               </Menu.Item>
+                                <motion.div key={id}>
+                                    <Menu.Item as={motion.div}>
+                                        <CartComponent {...products} {...data} />
+                                    </Menu.Item>
+                                </motion.div>
                            ))
                         }
                     </IconDropDown>
