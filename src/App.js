@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 import { IS_AUTHENTICATED } from 'store/actions/Auth.actions';
 import { USER_IS_AUTHENTICATED } from 'store/types/isAuthenticated';
-import { PrivateRoute } from 'components';
+import { PrivateRoute, Toast } from 'components';
+import Tick from 'assets/icons/outline/Tick';
 
 function App() {
     const { data, isAuthenticated } = useSelector((state) => state.AuthReducer);
@@ -15,7 +16,8 @@ function App() {
 
     useEffect(() => {
         const rootElement = document.getElementById('root');
-        rootElement.className = 'overflow-x-hidden font-body font-light text-gray-400 bg-gray-50';
+        rootElement.className = 'overflow-x-hidden text-gray-400 bg-gray-50';
+        document.querySelector('body').className = "font-body font-light"
     }, []);
 
     const userIsAuthenticated = () => {
@@ -62,6 +64,7 @@ function App() {
                     </Switch>
                 </PrivateRoute>
             </AnimatedRoutes>
+            <Toast icon={Tick}/>
         </Layout>
     );
 }

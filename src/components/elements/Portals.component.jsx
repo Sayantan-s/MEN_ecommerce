@@ -7,7 +7,7 @@ const Portals = ({ children, domNode = 'modal' }) => {
 
     let isPortalPresent;
 
-    useEffect(() => {
+    /*useEffect(() => {
         const portals = Object.values(document.querySelector('body').children).filter(node => node.className.includes('portals'));
         portals.forEach(portal => {
             isPortalPresent = true;
@@ -15,9 +15,9 @@ const Portals = ({ children, domNode = 'modal' }) => {
         })
 
         if(!isPortalPresent) throw new Error('Portal not present in index.html or you may have mispelt the portal name!');
-    },[])
+    },[])*/
 
-    return createPortal( children, domNode)
+    return createPortal( children, document.querySelector(`.toast`))
 }
 
 export default Portals
