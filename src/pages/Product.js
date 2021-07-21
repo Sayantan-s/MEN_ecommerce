@@ -124,15 +124,11 @@ const Product = () => {
                         {name} <span>{tagname}</span>
                     </Typography>
                     <Typography as={motion.h4} className="text-gray-900 mt-8 font-regular">
-                        <span>{price}</span>
+                        <span>${price}</span>
                         <span className="text-gray-300 line-through ml-4 font-normal text-2xl">
                             {(
                                 Number(
                                     price
-                                        ?.substr(1, price.length - 1)
-                                        .split('.')[0]
-                                        .split(',')
-                                        .join('')
                                 ) + 100
                             ).toFixed(2)}
                         </span>

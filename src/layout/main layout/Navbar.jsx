@@ -59,8 +59,8 @@ const Navbar = () => {
                     ))}
                 </div>
                 <Box className="flex">
-                    <IconDropDown icon={Heart} className="mx-2" />
-                    <IconDropDown icon={Bag} className="mx-2">
+                    <IconDropDown icon={Heart} className="mx-3" />
+                    <IconDropDown icon={Bag} className="mx-3">
                         {cartData.map(({ id, products, ...data }) => (
                             <motion.div key={id}>
                                 <Menu.Item as={motion.div}>
@@ -71,7 +71,7 @@ const Navbar = () => {
                     </IconDropDown>
                     {isAuthenticated ? (
                         <>
-                            <Link
+                            {/*<Link
                                 to="/admin/add-product"
                                 type="outline"
                                 className="mx-2 text-gray-900">
@@ -83,7 +83,24 @@ const Navbar = () => {
                                 p="px-5 py-3"
                                 onClick={() => dispatch(logout(history))}>
                                 Logout
-                            </Button>
+                            </Button> */}
+                            <IconDropDown avatar className="ml-3">
+                                <Box>
+                                    <Menu.Item as={Box}>
+                                        <Link to="/admin">Admin</Link>
+                                    </Menu.Item>
+                                </Box>
+                                <Box>
+                                    <Menu.Item as={Box}>
+                                        <Button>Logout</Button>
+                                    </Menu.Item>
+                                </Box>
+                                <Box>
+                                    <Menu.Item as={Box}>
+                                        <Button>Logout</Button>
+                                    </Menu.Item>
+                                </Box>
+                            </IconDropDown>   
                         </>
                     ) : (
                         <Link to="/auth/register" type="primary" className="mx-2">

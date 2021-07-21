@@ -44,7 +44,7 @@ const Footer = () => {
                                                 <Link
                                                     className="text-gray-400 mt-2"
                                                     key={link}
-                                                    to={`/${link}`}>
+                                                    to={`/collectives`}>
                                                     {link}
                                                 </Link>
                                             );

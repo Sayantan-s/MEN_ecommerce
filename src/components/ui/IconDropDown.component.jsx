@@ -1,9 +1,10 @@
 import { Menu } from '@headlessui/react';
-import { Box } from 'components';
+import { Box, Image } from 'components';
 import { motion } from 'framer-motion';
 import React from 'react';
+import jordan from '../../jordan.jpg' 
 
-const IconDropDown = ({ icon: Icon, className, onClick, children }) => {
+const IconDropDown = ({ icon: Icon, avatar , className, onClick, children }) => {
     const dropdownAnimation = {
         from: {
             y: -30
@@ -13,8 +14,10 @@ const IconDropDown = ({ icon: Icon, className, onClick, children }) => {
         }
     };
 
+    if(Icon && avatar) throw new Error("Both cannot be added in the dropdown!");
+
     return (
-        <motion.div onClick={onClick}>
+        <motion.div onClick={onClick} className="flex items-center">
             <Menu as={Box} className="relative inline-block w-max">
                 <Menu.Button
                     className={
@@ -22,7 +25,8 @@ const IconDropDown = ({ icon: Icon, className, onClick, children }) => {
                         ' ' +
                         className
                     }>
-                    <Icon className="w-7 h-7 text-gray-900 stroke-current" />
+                    {Icon && <Icon className={"w-7 h-7 text-gray-900 stroke-current"} />}
+                    {avatar && <Image className="w-10 h-10 rounded-full" src={jordan} alt="avatar_user" />}
                 </Menu.Button>
                 <Menu.Items
                     as={Box}
