@@ -19,9 +19,9 @@ const Product = () => {
     const [lightBox, setLightBox] = useState('');
 
     const [wishList, setWishlisted] = useState({
-        isWishlisted : false,
-        product_id : '',
-        user_id : ''
+        isWishlisted: false,
+        product_id: '',
+        user_id: ''
     });
 
     const [counter, handleCount] = useCounter({
@@ -77,17 +77,16 @@ const Product = () => {
         }
     };
 
-    const handleWishlist = _ => {
-        setWishlisted(prevState => ({
+    const handleWishlist = (_) => {
+        setWishlisted((prevState) => ({
             ...prevState,
-            isWishlisted : !prevState.isWishlisted,
-            product_id : !prevState.isWishlisted ? productData.id : '',
-            user_id : !prevState.user_id ? '8cf4f1f5-2024-468e-855a-fb8d141c966f' : ''
-        }))
+            isWishlisted: !prevState.isWishlisted,
+            product_id: !prevState.isWishlisted ? productData.id : '',
+            user_id: !prevState.user_id ? '8cf4f1f5-2024-468e-855a-fb8d141c966f' : ''
+        }));
+    };
 
-    }
-
-    console.log(wishList)
+    console.log(wishList);
 
     return (
         <Page>
@@ -110,7 +109,11 @@ const Product = () => {
                     <Button
                         className="absolute right-0 bg-red-50 p-2 rounded-full"
                         onClick={handleWishlist}>
-                         <Heart className={`w-8 h-8 text-red-500 stroke-2 ${wishList.isWishlisted ? 'fill-current' : 'stroke-current'}`} />
+                        <Heart
+                            className={`w-8 h-8 text-red-500 stroke-2 ${
+                                wishList.isWishlisted ? 'fill-current' : 'stroke-current'
+                            }`}
+                        />
                     </Button>
                     <Typography
                         as={motion.h5}

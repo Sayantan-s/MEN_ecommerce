@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import { ACCESSTOKEN_SECRET, REFRESHTOKEN_SECRET } from '../config';
 import jwt from 'jsonwebtoken';
-import crypto from 'crypto'
+import crypto from 'crypto';
 
 class AuthUtils {
     static async hashPassword(password) {
@@ -20,8 +20,8 @@ class AuthUtils {
         return jwt.verify(token, SECRET);
     }
 
-    static generate_refreshToken(){
-        return crypto.randomBytes(64).toString("hex");
+    static generate_refreshToken() {
+        return crypto.randomBytes(64).toString('hex');
     }
 
     static async createTokens({ payload }) {

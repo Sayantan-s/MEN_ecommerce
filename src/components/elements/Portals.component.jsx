@@ -1,9 +1,8 @@
-import { useEffect } from 'react'
-import { createPortal } from 'react-dom'
+import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 
 const Portals = ({ children, domNode = 'modal' }) => {
-
-    const portalClassName = `${domNode} portals`
+    const portalClassName = `${domNode} portals`;
 
     let isPortalPresent;
 
@@ -17,7 +16,7 @@ const Portals = ({ children, domNode = 'modal' }) => {
         if(!isPortalPresent) throw new Error('Portal not present in index.html or you may have mispelt the portal name!');
     },[])*/
 
-    return createPortal( children, document.querySelector(`.toast`))
-}
+    return createPortal(children, document.querySelector(`.toast`));
+};
 
-export default Portals
+export default Portals;

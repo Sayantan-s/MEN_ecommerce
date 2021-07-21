@@ -2,7 +2,7 @@ import AuthUtils from '../helpers/auth_helper';
 import CustomError from '../helpers/custom_error_handler';
 import User from '../models/User.model';
 import { login_validator, register_validator } from '../validators/auth.validator';
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@prisma/client';
 
 const router = require('express').Router();
 
@@ -21,35 +21,44 @@ router.route('/register').post(async (req, res, next) => {
 
         if (userExists) return next(CustomError.alreadyExists('Email already in use!'));
 
-        const user = await new User(fullname, username, email, hashedPassword).save();
+        const user = await users.create({
+            data :{
+                fullname,
+                username, 
+                email,
+                password : hashedPassword
+            }
 
-        if (user) {
-            const { accessToken } = await AuthUtils.createTokens({
+        })
+
+
+        if(!user) return next(CustomError.newError(400, 'Failed to register! Try again'));
+
+        const { accessToken } = await AuthUtils.createTokens({
                 payload: {
-                    _id: user._id,
+                    _id: user.id,
                     username: user.username,
                     role: 'user'
                 }
             });
 
-            const createRefToken = await reftoken.create({
-                data : {
-                    token : AuthUtils.generate_refreshToken(),
-                    user_id : user._id
+        const storeRefreshToken = await reftoken.create({
+                data: {
+                    token: AuthUtils.generate_refreshToken(),
+                    user_id: user.id
                 }
-            })
+            });
 
-            const { exp } = await AuthUtils.verify_JWT({ token: accessToken });
+        const { exp } = await AuthUtils.verify_JWT({ token: accessToken });
 
-            res.cookie('refresh', createRefToken.token, {
-                httpOnly : true
-            })
+        res.cookie('refresh-token', storeRefreshToken.token, {
+            httpOnly: true
+        });
 
-            return res.status(201).send({ accessToken, expiry: exp });
-        }
+        return res.status(201).send({ accessToken, expiry: exp });
 
-        return next(CustomError.newError(400, 'Failed to register! Try again'));
     } catch (error) {
+        console.log(error)
         next(error);
     }
 });
@@ -62,7 +71,14 @@ router.route('/login').post(async (req, res, next) => {
             return next(error);
         }
 
-        const user = await User.findOne({ email }, 'password username _id');
+        const user = await users.findFirst({
+            where : { email },
+            select : {
+                username : true,
+                password : true,
+                id : true 
+            }
+        })
 
         if (!!!user) {
             return next(CustomError.newError(401, 'Invalid email/password!'));
@@ -76,15 +92,27 @@ router.route('/login').post(async (req, res, next) => {
 
         const { accessToken } = await AuthUtils.createTokens({
             payload: {
-                _id: user._id,
+                _id: user.id,
                 username: user.username,
                 role: 'user'
             }
         });
 
+        const storeRefreshToken = await reftoken.create({
+            data : {
+                token : AuthUtils.generate_refreshToken(),
+                user_id : user.id
+            }
+        })
+
         const { exp } = await AuthUtils.verify_JWT({ token: accessToken });
 
+        res.cookie('refresh-token', storeRefreshToken.token, {
+            httpOnly : true
+        })
+
         res.status(200).send({ accessToken, expiry: exp });
+
     } catch (error) {
         next(error);
     }

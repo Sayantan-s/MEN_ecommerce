@@ -5,7 +5,7 @@ import { useForm } from 'hooks';
 import User from 'assets/icons/User';
 import Show from 'assets/icons/Show';
 import { Authenticate_user } from 'store/actions/Auth.actions';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 const Login = () => {

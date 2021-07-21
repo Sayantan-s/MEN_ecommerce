@@ -1,12 +1,8 @@
-import { Page } from 'components'
-import React from 'react'
+import { Page } from 'components';
+import React from 'react';
 
 const Newbies = () => {
-    return (
-       <Page>
-           NewBie
-       </Page>
-    )
-}
+    return <Page>NewBie</Page>;
+};
 
-export default Newbies
+export default Newbies;

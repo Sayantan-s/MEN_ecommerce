@@ -7,7 +7,7 @@ import utilsRoutes from './routes/utils.routes';
 import { connection } from './helpers/init_postgres';
 import cors from 'cors';
 //import csrf from 'csurf';
-import parser from 'cookie-parser'
+import parser from 'cookie-parser';
 
 const app = express();
 
@@ -17,7 +17,7 @@ app.use(middlewares);
 
 app.use('/api', productRoutes);
 app.use('/api/auth', authRoute);
-app.use('/api/utilities', utilsRoutes)
+app.use('/api/utilities', utilsRoutes);
 
 app.use((req, res, next) => {
     const error = new Error('Page not found!');

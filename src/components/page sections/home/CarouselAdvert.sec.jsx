@@ -54,7 +54,10 @@ const CarouselAdvert = () => {
                     you a long-sleeve layer for cool conditions. Lightweight, stretchy fabric with
                     Dri-FIT Technology helps keep you comfortable while you train.
                 </Typography>
-                <Button type="primary" moreStyles="my-8" onClick={() => history.push('/collectives')}>
+                <Button
+                    type="primary"
+                    moreStyles="my-8"
+                    onClick={() => history.push('/collectives')}>
                     Shop Now
                 </Button>
                 <Box className="w-full">

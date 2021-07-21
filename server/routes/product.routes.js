@@ -1,7 +1,7 @@
 import express from 'express';
 import CustomError from '../helpers/custom_error_handler';
 import { db } from '../helpers/init_postgres';
-import { prisma, PrismaClient } from '@prisma/client'
+import { prisma, PrismaClient } from '@prisma/client';
 import isAuth from '../middlewares/isAuth';
 
 const router = express.Router();
@@ -11,9 +11,8 @@ const { products, cart } = new PrismaClient();
 router
     .route('/products')
     .get(async (req, res, next) => {
-
         const data = await products.findMany();
-        
+
         res.status(200).send({ data });
     })
     .post(async (req, res, next) => {
@@ -45,82 +44,101 @@ router
     .get(async (req, res, next) => {
         const { user_id } = req.query;
         try {
-
             const cartData = await cart.findMany({
-                where : { user_id },
-                select : {
-                    id : true, quantity : true, size : true,
-                    products : {
-                        select : {
-                            name:true, tagname:true, price:true, cover:true
+                where: { user_id },
+                select: {
+                    id: true,
+                    quantity: true,
+                    size: true,
+                    products: {
+                        select: {
+                            name: true,
+                            tagname: true,
+                            price: true,
+                            cover: true
                         }
                     }
                 }
-            })
+            });
 
-            res.send({ data : cartData });
-            
+            res.send({ data: cartData });
         } catch (error) {
-            next(CustomError.newError(400, error.message))
+            next(CustomError.newError(400, error.message));
         }
     })
     .post(async (req, res, next) => {
         console.log(req.body);
         try {
-            const { user_id, product_id, quantity,size } = req.body;
+            const { user_id, product_id, quantity, size } = req.body;
 
             const getCart = await cart.findMany({
-                where : { user_id }
-            })
-            
-            if(!getCart.length){
+                where: { user_id }
+            });
+
+            if (!getCart.length) {
                 const addedProduct = await cart.create({
-                    data : req.body
-                })
-    
-                return res.status(201).send({ addedProduct, message : `Added ${addedProduct.id} to cart` });
+                    data: req.body
+                });
+
+                return res
+                    .status(201)
+                    .send({ addedProduct, message: `Added ${addedProduct.id} to cart` });
             }
 
-            const findProduct = getCart.find(product => (
-                product.user_id === user_id && product.product_id === product_id &&  product.size === size 
-            ))
+            const findProduct = getCart.find(
+                (product) =>
+                    product.user_id === user_id &&
+                    product.product_id === product_id &&
+                    product.size === size
+            );
 
-            if(!!findProduct){
+            if (!!findProduct) {
                 const updateProduct = await cart.update({
-                    where : { id: findProduct.id },
-                    data : {
-                        quantity : {
-                            increment : quantity
+                    where: { id: findProduct.id },
+                    data: {
+                        quantity: {
+                            increment: quantity
                         }
                     }
-                })
+                });
 
-                return res.status(204).send({ updateProduct,  message : `Added ${quantity} more of ${updateProduct.product_id}`});
+                return res
+                    .status(204)
+                    .send({
+                        updateProduct,
+                        message: `Added ${quantity} more of ${updateProduct.product_id}`
+                    });
             }
 
             const addedProduct = await cart.create({
-                data : req.body
-            })
+                data: req.body
+            });
 
-            res.status(201).send({ addedProduct, message : `Added ${addedProduct.id} to cart` });
-        }
-        catch(err){
-            console.log(err)
+            res.status(201).send({ addedProduct, message: `Added ${addedProduct.id} to cart` });
+        } catch (err) {
+            console.log(err);
         }
     });
 
 router.route('/products/:id').get(async (req, res, next) => {
-
     const { id } = req.params;
 
     const [name, tagname] = id.split('_');
 
     const data = await products.findFirst({
-        where : { name, tagname },
-        select : {
-            name:true, tagname:true, price:true, cover:true, otherimages:true, gender:true, description:true, catagory:true, id:true
+        where: { name, tagname },
+        select: {
+            name: true,
+            tagname: true,
+            price: true,
+            cover: true,
+            otherimages: true,
+            gender: true,
+            description: true,
+            catagory: true,
+            id: true
         }
-    })
+    });
 
     if (!data) {
         return next(CustomError.alreadyExists('Product is not present'));
@@ -130,17 +148,16 @@ router.route('/products/:id').get(async (req, res, next) => {
 });
 
 router.get('/trendy-cloth', async (req, res, next) => {
-
-    let data = await products.findMany({ 
-        where : {
-            catagory : 'clothing'
+    let data = await products.findMany({
+        where: {
+            catagory: 'clothing'
         }
-    })
+    });
 
-    for(let i = 0; i< 5; i++){
-        for(let j = i; j< 5; j++ ){
-            const randomIndex = ~~(Math.random(6));
-            if(j === randomIndex + 1){
+    for (let i = 0; i < 5; i++) {
+        for (let j = i; j < 5; j++) {
+            const randomIndex = ~~Math.random(6);
+            if (j === randomIndex + 1) {
                 data = data.filter((_, id) => id !== j);
                 break;
             }

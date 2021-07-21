@@ -14,4 +14,16 @@ import PageNotFound from './Error/404';
 import Shipping from './Transactions/Shipping';
 import Payment from './Transactions/Payment';
 
-export { Collections, Home, Login, Register, PageNotFound, AddProduct, AdminProduct, Product, Shipping, Payment, Newbies };
+export {
+    Collections,
+    Home,
+    Login,
+    Register,
+    PageNotFound,
+    AddProduct,
+    AdminProduct,
+    Product,
+    Shipping,
+    Payment,
+    Newbies
+};

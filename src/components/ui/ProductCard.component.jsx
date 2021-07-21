@@ -15,7 +15,7 @@ const ProductCard = ({ name, tagname, price, cover, className, height }) => {
                     {name} <span className="font-light">{tagname}</span>
                 </Typography>
                 <Typography as={motion.h6} className="font-normal">
-                    {price}
+                    $ {price}
                 </Typography>
             </Link>
         </Box>

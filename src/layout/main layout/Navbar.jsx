@@ -25,20 +25,18 @@ const Navbar = () => {
 
     const dispatch = useDispatch();
 
-    const fetchCart = async() => {
+    const fetchCart = async () => {
         const { data } = await http.get('/cart?user_id=8cf4f1f5-2024-468e-855a-fb8d141c966f');
 
         setCartData(data.data);
-    }
+    };
 
     useEffect(() => {
         fetchCart();
         dispatch({ type: GOT_NAV_VALUE, payload: navBarRef.current.offsetHeight });
     }, []);
 
-
-    console.log(cartData)
-
+    console.log(cartData);
 
     return (
         <header className="w-full bg-gray-50 fixed border-b-2 border-gray-200 z-50" ref={navBarRef}>
@@ -63,15 +61,13 @@ const Navbar = () => {
                 <Box className="flex">
                     <IconDropDown icon={Heart} className="mx-2" />
                     <IconDropDown icon={Bag} className="mx-2">
-                        {
-                           cartData.map(({ id, products, ...data}) => (
-                                <motion.div key={id}>
-                                    <Menu.Item as={motion.div}>
-                                        <CartComponent {...products} {...data} />
-                                    </Menu.Item>
-                                </motion.div>
-                           ))
-                        }
+                        {cartData.map(({ id, products, ...data }) => (
+                            <motion.div key={id}>
+                                <Menu.Item as={motion.div}>
+                                    <CartComponent {...products} {...data} />
+                                </Menu.Item>
+                            </motion.div>
+                        ))}
                     </IconDropDown>
                     {isAuthenticated ? (
                         <>
@@ -101,4 +97,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-

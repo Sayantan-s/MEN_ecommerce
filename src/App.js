@@ -1,6 +1,17 @@
 import { AnimatedRoutes } from 'animations';
 import { Layout, AuthLayout } from 'layout';
-import { Collections, Home, Login, Register, AddProduct, AdminProduct, Product, Shipping, Payment, Newbies } from 'pages';
+import {
+    Collections,
+    Home,
+    Login,
+    Register,
+    AddProduct,
+    AdminProduct,
+    Product,
+    Shipping,
+    Payment,
+    Newbies
+} from 'pages';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
@@ -17,7 +28,7 @@ function App() {
     useEffect(() => {
         const rootElement = document.getElementById('root');
         rootElement.className = 'overflow-x-hidden text-gray-400 bg-gray-50';
-        document.querySelector('body').className = "font-body font-light"
+        document.querySelector('body').className = 'font-body font-light';
     }, []);
 
     const userIsAuthenticated = () => {
@@ -27,26 +38,18 @@ function App() {
 
     useEffect(() => {
         dispatch(IS_AUTHENTICATED(USER_IS_AUTHENTICATED, { data, userIsAuthenticated }));
-        (async() => {
+        (async () => {
             //const res = await http.get('/utilities/csrf');
             //console.log(res)
-        })()
+        })();
     }, []);
-
-    useEffect(() => {
-        const portals = Object.values(document.querySelector('body').children).filter(node => node.className.includes('portals'));
-        portals.forEach(portal => {
-            if(portal.className.includes(portal.className)) console.log("Verified Portals")
-        })
-        console.log(portals);
-    },[])
 
     return (
         <Layout>
             <AnimatedRoutes>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/collectives" component={Collections} />
-                <Route path="/collectives/product/:id" component={Product} /> 
+                <Route path="/collectives/product/:id" component={Product} />
                 <Route path="/shipping" component={Shipping} />
                 <Route path="/payment" component={Payment} />
                 <Route path="/newbies" component={Newbies} />
@@ -65,7 +68,7 @@ function App() {
                     </Switch>
                 </PrivateRoute>
             </AnimatedRoutes>
-            <Toast icon={Tick} type="danger"/>
+            <Toast icon={Tick} type="danger" />
         </Layout>
     );
 }
