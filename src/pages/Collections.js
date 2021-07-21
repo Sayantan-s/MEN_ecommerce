@@ -18,7 +18,7 @@ const Collections = () => {
     }, []);
     return (
         <Page className="py-10">
-            <Box>
+            <Box className="mb-6">
                 <Typography className="font-bold font-body text-3xl text-gray-900" as={motion.pre}>
                     Man Shoes
                 </Typography>

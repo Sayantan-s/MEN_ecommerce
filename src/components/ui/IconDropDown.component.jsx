@@ -2,9 +2,9 @@ import { Menu } from '@headlessui/react';
 import { Box, Image } from 'components';
 import { motion } from 'framer-motion';
 import React from 'react';
-import jordan from '../../jordan.jpg' 
+import jordan from '../../jordan.jpg';
 
-const IconDropDown = ({ icon: Icon, avatar , className, onClick, children }) => {
+const IconDropDown = ({ icon: Icon, avatar, className, onClick, children }) => {
     const dropdownAnimation = {
         from: {
             y: -30
@@ -14,26 +14,26 @@ const IconDropDown = ({ icon: Icon, avatar , className, onClick, children }) => 
         }
     };
 
-    if(Icon && avatar) throw new Error("Both cannot be added in the dropdown!");
+    if (Icon && avatar) throw new Error('Both cannot be added in the dropdown!');
 
     return (
-        <motion.div onClick={onClick} className="flex items-center">
-            <Menu as={Box} className="relative inline-block w-max">
+        <motion.div onClick={onClick} className={className}>
+            <Menu as={Box} className="relative block">
                 <Menu.Button
                     className={
-                        'flex items-center justify-center w-full text-sm font-medium text-white focus:outline-none' +
-                        ' ' +
-                        className
+                        'flex items-center justify-center w-full text-sm font-medium text-white focus:outline-none'
                     }>
-                    {Icon && <Icon className={"w-7 h-7 text-gray-900 stroke-current"} />}
-                    {avatar && <Image className="w-10 h-10 rounded-full" src={jordan} alt="avatar_user" />}
+                    {Icon && <Icon className={'w-7 h-7 text-gray-900 stroke-current'} />}
+                    {avatar && (
+                        <Image className="w-10 h-10 rounded-full" src={jordan} alt="avatar_user" />
+                    )}
                 </Menu.Button>
                 <Menu.Items
                     as={Box}
                     variants={dropdownAnimation}
                     initial={'from'}
                     animate={'to'}
-                    className="absolute right-0 w-72 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-sm ring-1 ring-black ring-opacity-5 focus:outline-none overflow-y-scroll max-h-64 scrollbar">
+                    className="absolute right-0 w-72 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-sm ring-1 ring-black ring-opacity-5 focus:outline-none overflow-y-scroll max-h-64 scrollbar min-h-8">
                     {children}
                 </Menu.Items>
             </Menu>

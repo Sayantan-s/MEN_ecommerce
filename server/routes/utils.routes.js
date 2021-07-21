@@ -15,7 +15,7 @@ router.get('/refresh', async (req, res, next) => {
     try {
         const { token } = req.cookies;
 
-        console.log(token)
+        console.log(token);
 
         if (!token) return next(CustomError.newError(401, 'You are not authorized!'));
 

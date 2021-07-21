@@ -102,12 +102,10 @@ router
                     }
                 });
 
-                return res
-                    .status(204)
-                    .send({
-                        updateProduct,
-                        message: `Added ${quantity} more of ${updateProduct.product_id}`
-                    });
+                return res.status(204).send({
+                    updateProduct,
+                    message: `Added ${quantity} more of ${updateProduct.product_id}`
+                });
             }
 
             const addedProduct = await cart.create({

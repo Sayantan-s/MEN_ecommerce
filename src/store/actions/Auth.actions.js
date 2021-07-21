@@ -52,11 +52,11 @@ const Authenticate_user =
                 (url.includes('register') && status === 201) ||
                 (url.includes('login') && status === 200)
             ) {
-                console.log("Hello");
+                console.log('Hello');
                 dispatch(IS_AUTHENTICATED(AUTHENTICATION_SUCCESSFULL, data));
                 history.push('/collectives');
 
-                console.log(getState())
+                console.log(getState());
             }
         } catch (error) {
             return dispatch(FAILED_TO_AUTHENTICATE('Failed to authenticate!'));

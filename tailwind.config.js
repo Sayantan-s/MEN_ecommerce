@@ -23,6 +23,19 @@ module.exports = {
             regular: 500,
             semibold: 600,
             bold: 700
+        },
+        minHeight: {
+            xs: '2.5rem',
+            sm: '2.75rem',
+            md: '3rem',
+            lg: '3.5rem',
+            4: '4rem',
+            5: '5rem',
+            6: '6rem',
+            7: '7rem',
+            8: '8rem',
+            9: '9rem',
+            10: '10rem'
         }
     },
     variants: {
@@ -32,8 +45,5 @@ module.exports = {
             }
         }
     },
-    plugins: [require('@tailwindcss/line-clamp')],
-    corePlugins: {
-        //lineHeight: false,
-    }
+    plugins: [require('@tailwindcss/line-clamp')]
 };

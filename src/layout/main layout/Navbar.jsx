@@ -1,7 +1,7 @@
 import Logo from 'assets/Logo';
 import { motion } from 'framer-motion';
 import React, { useRef, useState } from 'react';
-import { Box, Button, CartComponent, IconDropDown, Link } from 'components';
+import { Box, Button, CartComponent, IconDropDown, Link, Typography } from 'components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { GOT_NAV_VALUE } from 'store/types/getNavValue';
@@ -11,6 +11,7 @@ import { useHistory } from 'react-router-dom';
 import Heart from 'assets/icons/outline/Heart';
 import { Menu } from '@headlessui/react';
 import http from 'utils/http';
+import HeartAdd from 'assets/icons/outline/HeartAdd';
 
 const Navbar = () => {
     const { isAuthenticated } = useSelector((state) => state.AuthReducer);
@@ -58,52 +59,66 @@ const Navbar = () => {
                         </Link>
                     ))}
                 </div>
-                <Box className="flex">
-                    <IconDropDown icon={Heart} className="mx-3" />
-                    <IconDropDown icon={Bag} className="mx-3">
-                        {cartData.map(({ id, products, ...data }) => (
-                            <motion.div key={id}>
-                                <Menu.Item as={motion.div}>
-                                    <CartComponent {...products} {...data} />
-                                </Menu.Item>
-                            </motion.div>
-                        ))}
+                <Box className="flex items-center relative">
+                    <IconDropDown icon={Heart}>
+                        {cartData.length ? (
+                            cartData.map(({ id, products, ...data }) => (
+                                <motion.div key={id}>
+                                    <Menu.Item as={motion.div}>
+                                        <CartComponent {...products} {...data} />
+                                    </Menu.Item>
+                                </motion.div>
+                            ))
+                        ) : (
+                            <Box className="text-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full p-4">
+                                <Link to="/collectives" className="flex justify-center">
+                                    <HeartAdd className="w-10 h-10 text-red-500 stroke-current"/>
+                                </Link>
+                                <Typography as={motion.h5} className="text-red-300 text-lg">
+                                    Create a wishlist
+                                </Typography>
+                            </Box>
+                        )}
+                    </IconDropDown>
+                    <IconDropDown icon={Bag} className="ml-4">
+                        {cartData.length ? (
+                            cartData.map(({ id, products, ...data }) => (
+                                <motion.div key={id}>
+                                    <Menu.Item as={motion.div}>
+                                        <CartComponent {...products} {...data} />
+                                    </Menu.Item>
+                                </motion.div>
+                            ))
+                        ) : (
+                            <Box className="text-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full p-4">
+                                <Typography as={motion.h5} className="text-gray-900">
+                                    Your cart is empty!
+                                </Typography>
+                                <Typography className="text-sm mt-1">
+                                    It's a good day to buy the items you saved for later!
+                                </Typography>
+                            </Box>
+                        )}
                     </IconDropDown>
                     {isAuthenticated ? (
                         <>
-                            {/*<Link
-                                to="/admin/add-product"
-                                type="outline"
-                                className="mx-2 text-gray-900">
-                                Admin
-                            </Link>
-                            <Button
-                                type="primary"
-                                className="ml-1"
-                                p="px-5 py-3"
-                                onClick={() => dispatch(logout(history))}>
-                                Logout
-                            </Button> */}
-                            <IconDropDown avatar className="ml-3">
+                            <IconDropDown avatar className="ml-4">
                                 <Box>
                                     <Menu.Item as={Box}>
-                                        <Link to="/admin">Admin</Link>
+                                        <Link to="/admin/add-product">Admin</Link>
                                     </Menu.Item>
                                 </Box>
                                 <Box>
                                     <Menu.Item as={Box}>
-                                        <Button>Logout</Button>
+                                        <Button onClick={() => dispatch(logout(history))}>
+                                            Logout
+                                        </Button>
                                     </Menu.Item>
                                 </Box>
-                                <Box>
-                                    <Menu.Item as={Box}>
-                                        <Button>Logout</Button>
-                                    </Menu.Item>
-                                </Box>
-                            </IconDropDown>   
+                            </IconDropDown>
                         </>
                     ) : (
-                        <Link to="/auth/register" type="primary" className="mx-2">
+                        <Link to="/auth/register" type="primary" className="ml-4">
                             Join us
                         </Link>
                     )}

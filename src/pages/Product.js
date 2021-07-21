@@ -89,7 +89,7 @@ const Product = () => {
     console.log(wishList);
 
     return (
-        <Page>
+        <Page className="flex items-center">
             <Box className="w-full h-full flex py-8">
                 <ImageSection className="w-7/12 flex">
                     <Image src={lightBox} alt="cover_img" className="w-full order-2 ml-4" />
@@ -126,11 +126,7 @@ const Product = () => {
                     <Typography as={motion.h4} className="text-gray-900 mt-8 font-regular">
                         <span>${price}</span>
                         <span className="text-gray-300 line-through ml-4 font-normal text-2xl">
-                            {(
-                                Number(
-                                    price
-                                ) + 100
-                            ).toFixed(2)}
+                            {(Number(price) + 100).toFixed(2)}
                         </span>
                     </Typography>
                     <Typography

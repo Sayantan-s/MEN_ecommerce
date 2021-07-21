@@ -22,32 +22,30 @@ router.route('/register').post(async (req, res, next) => {
         if (userExists) return next(CustomError.alreadyExists('Email already in use!'));
 
         const user = await users.create({
-            data :{
+            data: {
                 fullname,
-                username, 
+                username,
                 email,
-                password : hashedPassword
+                password: hashedPassword
             }
+        });
 
-        })
-
-
-        if(!user) return next(CustomError.newError(400, 'Failed to register! Try again'));
+        if (!user) return next(CustomError.newError(400, 'Failed to register! Try again'));
 
         const { accessToken } = await AuthUtils.createTokens({
-                payload: {
-                    _id: user.id,
-                    username: user.username,
-                    role: 'user'
-                }
-            });
+            payload: {
+                _id: user.id,
+                username: user.username,
+                role: 'user'
+            }
+        });
 
         const storeRefreshToken = await reftoken.create({
-                data: {
-                    token: AuthUtils.generate_refreshToken(),
-                    user_id: user.id
-                }
-            });
+            data: {
+                token: AuthUtils.generate_refreshToken(),
+                user_id: user.id
+            }
+        });
 
         const { exp } = await AuthUtils.verify_JWT({ token: accessToken });
 
@@ -56,9 +54,8 @@ router.route('/register').post(async (req, res, next) => {
         });
 
         return res.status(201).send({ accessToken, expiry: exp });
-
     } catch (error) {
-        console.log(error)
+        console.log(error);
         next(error);
     }
 });
@@ -72,13 +69,13 @@ router.route('/login').post(async (req, res, next) => {
         }
 
         const user = await users.findFirst({
-            where : { email },
-            select : {
-                username : true,
-                password : true,
-                id : true 
+            where: { email },
+            select: {
+                username: true,
+                password: true,
+                id: true
             }
-        })
+        });
 
         if (!!!user) {
             return next(CustomError.newError(401, 'Invalid email/password!'));
@@ -99,20 +96,19 @@ router.route('/login').post(async (req, res, next) => {
         });
 
         const storeRefreshToken = await reftoken.create({
-            data : {
-                token : AuthUtils.generate_refreshToken(),
-                user_id : user.id
+            data: {
+                token: AuthUtils.generate_refreshToken(),
+                user_id: user.id
             }
-        })
+        });
 
         const { exp } = await AuthUtils.verify_JWT({ token: accessToken });
 
         res.cookie('refresh-token', storeRefreshToken.token, {
-            httpOnly : true
-        })
+            httpOnly: true
+        });
 
         res.status(200).send({ accessToken, expiry: exp });
-
     } catch (error) {
         next(error);
     }
