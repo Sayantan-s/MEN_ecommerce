@@ -12,7 +12,7 @@ class AuthUtils {
         return await bcrypt.compare(password, hash);
     }
 
-    static generate_JWT({ payload, expiry = '10s', SECRET = ACCESSTOKEN_SECRET }) {
+    static generate_JWT({ payload, expiry = '10h', SECRET = ACCESSTOKEN_SECRET }) {
         return jwt.sign(payload, SECRET, { expiresIn: expiry });
     }
 

@@ -13,7 +13,11 @@ const Register = () => {
 
     const history = useHistory();
 
-    const [{ fullname, username, email, password, confirmPassword }, handleChange, onSubmitHandler] = useForm({
+    const [
+        { fullname, username, email, password, confirmPassword },
+        handleChange,
+        onSubmitHandler
+    ] = useForm({
         fullname: '',
         username: '',
         email: '',
