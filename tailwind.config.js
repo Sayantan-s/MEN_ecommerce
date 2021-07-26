@@ -25,6 +25,7 @@ module.exports = {
             bold: 700
         },
         minHeight: {
+            ...defaultTheme.minHeight,
             xs: '2.5rem',
             sm: '2.75rem',
             md: '3rem',

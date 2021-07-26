@@ -33,7 +33,7 @@ const IconDropDown = ({ icon: Icon, avatar, className, onClick, children }) => {
                     variants={dropdownAnimation}
                     initial={'from'}
                     animate={'to'}
-                    className="absolute right-0 w-72 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-sm ring-1 ring-black ring-opacity-5 focus:outline-none overflow-y-scroll max-h-64 scrollbar min-h-8">
+                    className="absolute right-0 w-72 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-sm ring-1 ring-black ring-opacity-5 focus:outline-none overflow-y-scroll max-h-64 scrollbar min-h-8 flex flex-col justify-between">
                     {children}
                 </Menu.Items>
             </Menu>

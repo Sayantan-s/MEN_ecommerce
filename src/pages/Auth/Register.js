@@ -1,18 +1,39 @@
-import React from 'react';
-import { Typography, Box, FormField, Button, Link } from 'components';
+import React, { useState } from 'react';
+import { Typography, Box, FormField, Button, Link, Input } from 'components';
 import { motion } from 'framer-motion';
-import { useForm } from 'hooks';
+import { useForm, useToggle } from 'hooks';
 import User from 'assets/icons/User';
 import Mail from 'assets/icons/Mail';
 import Show from 'assets/icons/Show';
 import { useDispatch } from 'react-redux';
 import { Authenticate_user } from 'store/actions/Auth.actions';
 import { useHistory } from 'react-router-dom';
+import EyeSlash from 'assets/icons/outline/EyeSlash';
+import Eye from 'assets/icons/outline/Eye';
 
 const Register = () => {
     const dispatch = useDispatch();
 
     const history = useHistory();
+
+    const [{  fullname, username, email, password, confirmPassword  }, setForm] = useState({
+        fullname : '',
+        username : '',
+        email: '',
+        password: '',
+        confirmPassword : ''
+    })
+
+    const handleChange = eve => {
+        const { value, name } = eve.target;
+
+        setForm(prevState => ({
+            ...prevState,
+            [name] : value
+        }))
+    }
+
+    const [toggle, handleToggle] = useToggle();
 
     const [form, onChangeHandler, onSubmitHandler] = useForm({
         fullname: {
@@ -88,17 +109,61 @@ const Register = () => {
                 </Link>
             </Typography>
             <Box as={motion.form} onSubmit={onSubmit} className="mt-6">
-                {form.map(({ key, data }, id) => (
-                    <FormField
-                        key={key}
-                        half={key !== 'fullname' ? true : false}
-                        className={`float-left ${id !== 0 && id % 2 === 0 ? 'pl-2' : ''} ${
-                            id !== 0 && id % 2 !== 0 ? 'pr-2' : ''
-                        } ${id === form.length - 1 || id === form.length - 2 ? 'pb-6' : ''}`}
-                        {...data}
-                        onChange={onChangeHandler}
+                <Box className="flex">
+                    <Input
+                        type="text"
+                        name="fullname"
+                        placeholder="e.g. sssamanta789@gmail.com"
+                        variant="normal"
+                        value={fullname}
+                        onChange={handleChange}
+                        labelName="Full name"
                     />
-                ))}
+                    <Input
+                        type="text"
+                        name="username"
+                        placeholder="e.g. JakeDoe67"
+                        variant="normal"
+                        value={username} 
+                        onChange={handleChange}
+                        labelName="Username"
+                    />
+                </Box>   
+                <Box className="flex">
+                    <Input
+                        type="email"
+                        name="email"
+                        placeholder="e.g. sssamanta789@gmail.com"
+                        variant="normal"
+                        value={email}
+                        onChange={handleChange}
+                        labelName="Email Address"
+                    />           
+                    <Input
+                        type={toggle ?  "text" : "password" }
+                        name="password"
+                        placeholder="e.g. Enter password with characters..."
+                        variant="normal"
+                        icon={toggle ? EyeSlash : Eye}
+                        after
+                        handlebutton={handleToggle}
+                        value={password}
+                        onChange={handleChange}
+                        labelName="Password"
+                    />
+                </Box>
+                    <Input
+                        type={toggle ?  "text" : "password" }
+                        name="password"
+                        placeholder="e.g. Enter password with characters..."
+                        variant="normal"
+                        icon={toggle ? EyeSlash : Eye}
+                        after
+                        handlebutton={handleToggle}
+                        value={password}
+                        onChange={handleChange}
+                        labelName="Password"
+                    />
                 <Button type="primary" className="w-full">
                     Sign in
                 </Button>

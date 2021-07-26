@@ -72,7 +72,7 @@ const Navbar = () => {
                         ) : (
                             <Box className="text-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full p-4">
                                 <Link to="/collectives" className="flex justify-center">
-                                    <HeartAdd className="w-10 h-10 text-red-500 stroke-current"/>
+                                    <HeartAdd className="w-10 h-10 text-red-500 stroke-current" />
                                 </Link>
                                 <Typography as={motion.h5} className="text-red-300 text-lg">
                                     Create a wishlist
@@ -110,6 +110,16 @@ const Navbar = () => {
                                 </Box>
                                 <Box>
                                     <Menu.Item as={Box}>
+                                        <Link to="/admin/add-product">Orders</Link>
+                                    </Menu.Item>
+                                </Box>
+                                <Box>
+                                    <Menu.Item as={Box}>
+                                        <Link to="/admin/add-product">Payments</Link>
+                                    </Menu.Item>
+                                </Box>
+                                <Box>
+                                    <Menu.Item as={Box}>
                                         <Button onClick={() => dispatch(logout(history))}>
                                             Logout
                                         </Button>
@@ -118,7 +128,7 @@ const Navbar = () => {
                             </IconDropDown>
                         </>
                     ) : (
-                        <Link to="/auth/register" type="primary" className="ml-4">
+                        <Link to="/auth/login" type="primary" className="ml-4">
                             Join us
                         </Link>
                     )}

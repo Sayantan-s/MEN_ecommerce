@@ -38,7 +38,7 @@ export const logout = (history) => {
 
 const Authenticate_user =
     ({ url = '/auth/register', input_data }, history) =>
-    async (dispatch, getState) => {
+    async (dispatch) => {
         try {
             dispatch(IS_AUTHENTICATING());
 
@@ -52,15 +52,20 @@ const Authenticate_user =
                 (url.includes('register') && status === 201) ||
                 (url.includes('login') && status === 200)
             ) {
-                console.log('Hello');
                 dispatch(IS_AUTHENTICATED(AUTHENTICATION_SUCCESSFULL, data));
                 history.push('/collectives');
-
-                console.log(getState());
             }
         } catch (error) {
             return dispatch(FAILED_TO_AUTHENTICATE('Failed to authenticate!'));
         }
     };
+
+const getNewAccessTokenOnRefresh = () => async (dispatch) => {
+    try {
+        const res = await http.get('/utilities/refresh');
+    } catch (err) {
+        return dispatch(FAILED_TO_AUTHENTICATE('Failed to authenticate!'));
+    }
+};
 
 export { IS_AUTHENTICATING, IS_AUTHENTICATED, FAILED_TO_AUTHENTICATE, Authenticate_user };

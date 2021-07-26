@@ -9,6 +9,7 @@ import FileUpload from './ui/FileUpload.component';
 import IconDropDown from './ui/IconDropDown.component';
 import CartComponent from './ui/CartComponent.component';
 import Toast from './ui/Toast.component';
+import Input from './ui/Input.component';
 
 import Box from './elements/Box.component';
 import Page from './elements/Page.component';
@@ -35,5 +36,6 @@ export {
     PrivateRoute,
     CartComponent,
     Portals,
-    Toast
+    Toast,
+    Input
 };

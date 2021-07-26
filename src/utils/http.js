@@ -21,4 +21,16 @@ http.interceptors.request.use(
     }
 );
 
+http.interceptors.request.use(
+    (response) => response,
+    (error) => {
+        const code = error && error.response ? error.response.status : 0;
+        if (code === 401) {
+            console.log(code + 'Hello');
+        }
+
+        return Promise.reject(error);
+    }
+);
+
 export default http;

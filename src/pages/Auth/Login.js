@@ -1,17 +1,35 @@
-import React from 'react';
-import { Typography, Box, FormField, Button, Link } from 'components';
+import React, { useState } from 'react';
+import { Typography, Box, FormField, Button, Link, Input } from 'components';
 import { motion } from 'framer-motion';
-import { useForm } from 'hooks';
+import { useForm, useToggle } from 'hooks';
 import User from 'assets/icons/User';
 import Show from 'assets/icons/Show';
 import { Authenticate_user } from 'store/actions/Auth.actions';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import EyeSlash from 'assets/icons/outline/EyeSlash';
+import Eye from 'assets/icons/outline/Eye';
 
 const Login = () => {
     const history = useHistory();
 
     const dispatch = useDispatch();
+
+    const [toggle, handleToggle] = useToggle();
+
+    const [{ email,password }, setForm] = useState({
+        email : '',
+        password : ''
+    })
+
+    const handleChange = eve => {
+        const { value, name } = eve.target;
+
+        setForm(prevState => ({
+            ...prevState,
+            [name] : value
+        }))
+    }
 
     const [form, onChangeHandler, onSubmitHandler] = useForm({
         email: {
@@ -61,15 +79,28 @@ const Login = () => {
                 </Link>
             </Typography>
             <Box as={motion.form} onSubmit={onSubmit} className="mt-6">
-                {form.map(({ key, data }, id) => (
-                    <FormField
-                        key={key}
-                        className={`${id === form.length - 1 ? 'pb-6' : ''}`}
-                        {...data}
-                        onChange={onChangeHandler}
-                    />
-                ))}
-                <Button type="primary" className="w-full">
+                <Input
+                    type="text"
+                    name="email"
+                    placeholder="e.g. sssamanta789@gmail.com"
+                    variant="normal"
+                    value={email}
+                    onChange={handleChange}
+                    labelName="Email Address"
+                />
+                <Input
+                    type={toggle ?  "text" : "password" }
+                    name="password"
+                    placeholder="e.g. Enter password with characters..."
+                    variant="normal"
+                    icon={toggle ? EyeSlash : Eye}
+                    after
+                    handlebutton={handleToggle}
+                    value={password}
+                    onChange={handleChange}
+                    labelName="Password"
+                />
+                <Button type="primary" className="w-full mt-10">
                     log in
                 </Button>
             </Box>
