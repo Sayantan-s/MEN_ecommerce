@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
-import { Typography, Box, FormField, Button, Link, Input } from 'components';
+import React from 'react';
+import { Typography, Box, Button, Link, Input } from 'components';
 import { motion } from 'framer-motion';
 import { useForm, useToggle } from 'hooks';
-import User from 'assets/icons/User';
-import Show from 'assets/icons/Show';
 import { Authenticate_user } from 'store/actions/Auth.actions';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -17,42 +15,11 @@ const Login = () => {
 
     const [toggle, handleToggle] = useToggle();
 
-    const [{ email,password }, setForm] = useState({
-        email : '',
-        password : ''
-    })
-
-    const handleChange = eve => {
-        const { value, name } = eve.target;
-
-        setForm(prevState => ({
-            ...prevState,
-            [name] : value
-        }))
-    }
-
-    const [form, onChangeHandler, onSubmitHandler] = useForm({
-        email: {
-            as: 'input',
-            ElementConfig: {
-                type: 'email',
-                placeholder: 'e.g. sssamanta789@gmail.com'
-            },
-            value: '',
-            icon: User,
-            labelName: 'Username or Email Address'
-        },
-        password: {
-            as: 'input',
-            ElementConfig: {
-                type: 'password',
-                placeholder: 'e.g. Enter password with characters...'
-            },
-            value: '',
-            icon: Show,
-            labelName: 'Password'
-        }
+    const [{ email, password }, handleChange, onSubmitHandler] = useForm({
+        email: '',
+        password: ''
     });
+
 
     const onSubmit = (eve) => {
         onSubmitHandler(eve, (formdata) => {
@@ -89,7 +56,7 @@ const Login = () => {
                     labelName="Email Address"
                 />
                 <Input
-                    type={toggle ?  "text" : "password" }
+                    type={toggle ? 'text' : 'password'}
                     name="password"
                     placeholder="e.g. Enter password with characters..."
                     variant="normal"
@@ -100,7 +67,7 @@ const Login = () => {
                     onChange={handleChange}
                     labelName="Password"
                 />
-                <Button type="primary" className="w-full mt-10">
+                <Button type="primary" className="w-full mt-12">
                     log in
                 </Button>
             </Box>

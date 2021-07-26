@@ -1,10 +1,7 @@
-import React, { useState } from 'react';
-import { Typography, Box, FormField, Button, Link, Input } from 'components';
+import React from 'react';
+import { Typography, Box, Button, Link, Input } from 'components';
 import { motion } from 'framer-motion';
 import { useForm, useToggle } from 'hooks';
-import User from 'assets/icons/User';
-import Mail from 'assets/icons/Mail';
-import Show from 'assets/icons/Show';
 import { useDispatch } from 'react-redux';
 import { Authenticate_user } from 'store/actions/Auth.actions';
 import { useHistory } from 'react-router-dom';
@@ -16,77 +13,16 @@ const Register = () => {
 
     const history = useHistory();
 
-    const [{  fullname, username, email, password, confirmPassword  }, setForm] = useState({
-        fullname : '',
-        username : '',
+    const [{ fullname, username, email, password, confirmPassword }, handleChange, onSubmitHandler] = useForm({
+        fullname: '',
+        username: '',
         email: '',
         password: '',
-        confirmPassword : ''
-    })
-
-    const handleChange = eve => {
-        const { value, name } = eve.target;
-
-        setForm(prevState => ({
-            ...prevState,
-            [name] : value
-        }))
-    }
-
-    const [toggle, handleToggle] = useToggle();
-
-    const [form, onChangeHandler, onSubmitHandler] = useForm({
-        fullname: {
-            as: 'input',
-            ElementConfig: {
-                type: 'text',
-                placeholder: 'e.g. Jacob Doe'
-            },
-            value: '',
-            icon: User,
-            labelName: 'Full Name'
-        },
-        username: {
-            as: 'input',
-            ElementConfig: {
-                type: 'text',
-                placeholder: 'e.g. JakeDoe67'
-            },
-            value: '',
-            icon: User,
-            labelName: 'Username'
-        },
-        email: {
-            as: 'input',
-            ElementConfig: {
-                type: 'email',
-                placeholder: 'e.g. sssamanta789@gmail.com'
-            },
-            value: '',
-            icon: Mail,
-            labelName: 'Email Address'
-        },
-        password: {
-            as: 'input',
-            ElementConfig: {
-                type: 'password',
-                placeholder: 'e.g. Enter password with characters...'
-            },
-            value: '',
-            icon: Show,
-            labelName: 'Password'
-        },
-        confirmPassword: {
-            as: 'input',
-            ElementConfig: {
-                type: 'password',
-                placeholder: 'e.g. 6 - 7 characters atleast...'
-            },
-            value: '',
-            icon: Show,
-            labelName: 'Confirm password'
-        }
+        confirmPassword: ''
     });
+
+    const [passtoggle, passhandleToggle] = useToggle();
+    const [confPasstoggle, confpasshandleToggle] = useToggle();
 
     const onSubmit = (eve) => {
         onSubmitHandler(eve, ({ confirmPassword, ...formdata }) => {
@@ -113,22 +49,24 @@ const Register = () => {
                     <Input
                         type="text"
                         name="fullname"
-                        placeholder="e.g. sssamanta789@gmail.com"
+                        placeholder="e.g. Jacob Doe"
                         variant="normal"
                         value={fullname}
                         onChange={handleChange}
                         labelName="Full name"
+                        styles={'mr-3'}
                     />
                     <Input
                         type="text"
                         name="username"
                         placeholder="e.g. JakeDoe67"
                         variant="normal"
-                        value={username} 
+                        value={username}
                         onChange={handleChange}
                         labelName="Username"
+                        styles={'ml-3'}
                     />
-                </Box>   
+                </Box>
                 <Box className="flex">
                     <Input
                         type="email"
@@ -138,33 +76,35 @@ const Register = () => {
                         value={email}
                         onChange={handleChange}
                         labelName="Email Address"
-                    />           
+                        styles={'mr-3'}
+                    />
                     <Input
-                        type={toggle ?  "text" : "password" }
+                        type={passtoggle ? 'text' : 'password'}
                         name="password"
                         placeholder="e.g. Enter password with characters..."
                         variant="normal"
-                        icon={toggle ? EyeSlash : Eye}
+                        icon={passtoggle ? EyeSlash : Eye}
                         after
-                        handlebutton={handleToggle}
+                        handlebutton={passhandleToggle}
                         value={password}
                         onChange={handleChange}
                         labelName="Password"
+                        styles={'ml-3'}
                     />
                 </Box>
-                    <Input
-                        type={toggle ?  "text" : "password" }
-                        name="password"
-                        placeholder="e.g. Enter password with characters..."
-                        variant="normal"
-                        icon={toggle ? EyeSlash : Eye}
-                        after
-                        handlebutton={handleToggle}
-                        value={password}
-                        onChange={handleChange}
-                        labelName="Password"
-                    />
-                <Button type="primary" className="w-full">
+                <Input
+                    type={confPasstoggle ? 'text' : 'password'}
+                    name="confirmPassword"
+                    placeholder="e.g. Confirm the above password..."
+                    variant="normal"
+                    icon={confPasstoggle ? EyeSlash : Eye}
+                    after
+                    handlebutton={confpasshandleToggle}
+                    value={confirmPassword}
+                    onChange={handleChange}
+                    labelName="Confirm Password"
+                />
+                <Button type="primary" className="w-full mt-12">
                     Sign in
                 </Button>
             </Box>

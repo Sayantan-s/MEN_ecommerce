@@ -10,6 +10,7 @@ const Input = ({
     handlebutton,
     variant,
     labelName,
+    styles,
     ...rest
 }) => {
     if (before && after) throw new Error('Cannot have two icons!');
@@ -18,14 +19,19 @@ const Input = ({
 
     const colorState = variant === 'success' ? 'green' : variant === 'danger' ? 'red' : 'gray';
 
+    const iconButtonHandle = (eve) => {
+        eve.preventDefault();
+        handlebutton();
+    };
+
     return (
         <>
-            <Box>
+            <Box className={`w-full ${styles}`}>
                 <label className="text-gray-900 font-normal text-lg">{labelName}</label>
                 <Box
                     className={`flex items-center w-full p-3 border-b-2 border-${colorState}-200 font-semibold focus-within:border-gray-300 mb-4 mt-2`}>
                     {before && (
-                        <Button onClick={handlebutton}>
+                        <Button onClick={iconButtonHandle}>
                             <Icon className={`w-5 h-5 text-${colorState}-400 stroke-current`} />
                         </Button>
                     )}
@@ -34,7 +40,7 @@ const Input = ({
                         className={`outline-none focus:outline-none w-full h-full bg-transparent ${textArea} placeholder-${colorState}-300`}
                     />
                     {after && (
-                        <Button onClick={handlebutton}>
+                        <Button onClick={iconButtonHandle}>
                             <Icon className={`w-5 h-5 text-${colorState}-400 stroke-current`} />
                         </Button>
                     )}
