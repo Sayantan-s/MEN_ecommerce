@@ -1,5 +1,6 @@
 import { ArrowRightIcon } from '@heroicons/react/solid';
-import { Page, Box, Typography, Button, Image, Input, Select } from 'components';
+import Camera from 'assets/icons/outline/Camera';
+import { Page, Box, Typography, Button, Image, Input, Select, FileUpload, Tagbox } from 'components';
 import { motion } from 'framer-motion';
 import { useForm, useSelect } from 'hooks';
 import React, { useState } from 'react';
@@ -12,10 +13,38 @@ const AddProduct = () => {
         description: ''
     });
 
+    const [ addTag, handleTag ] = useForm('');
+
+    const [tags, setTags] = useState([ 'Nike' ]);
+
+    const handleAddTag = eve => {
+        eve.preventDefault()
+        if(tags.length < 10){
+            setTags(prevState => ([
+                ...prevState,
+                addTag
+            ]))
+        }
+    }
+
+    const tagDeleteHandler = (eve, tagname) => {
+        eve.preventDefault()
+        console.log(tagname)
+        return tags.filter(tag => tag !== tagname);
+    }
+
+
     const [ data, select, onChange ] = useSelect([
         { id: 1, name: 'Clothing', disabled: false },
         { id: 2, name: 'Shoes', disabled: false },
         { id: 3, name: 'Accessories', disabled: false },
+        { id: 4, name: 'Others...', disabled: false }
+    ])
+
+    const [ genderData, genderSelect, genderOnChange ] = useSelect([
+        { id: 1, name: 'Unisex', disabled: false },
+        { id: 2, name: 'Men', disabled: false },
+        { id: 3, name: 'Women', disabled: false },
         { id: 4, name: 'Others...', disabled: false }
     ])
 
@@ -75,13 +104,24 @@ const AddProduct = () => {
                                 className="mr-4"
                             />
                             <Select 
-                                className="ml-4"
+                                className="ml-4 z-30"
                                 data={data}
                                 value={select}
                                 onChange={onChange}
                             />
                         </Box>
+                        <Box className="flex mt-2 mb-4 items-center">
+                            <FileUpload btnName={<Camera className="w-7 h-7 text-gray-100 stroke-current"/>} type="primary" className="mr-4"/>
+                            <FileUpload btnName="Upload side images" type="secondary" className="w-full h-full"/>
+                            <Select 
+                                className="ml-4 z-20"
+                                data={genderData}
+                                value={genderSelect}
+                                onChange={genderOnChange}
+                            />
+                        </Box>
                         <Input
+                            as="textarea"
                             name="description"
                             placeholder="e.g. Nike Air 6D..."
                             variant="normal"
@@ -89,6 +129,12 @@ const AddProduct = () => {
                             onChange={handleChange}
                             labelName="Product Name"
                             styles="mr-4"
+                        />
+                        <Tagbox 
+                            value={addTag}
+                            onChange={handleTag}
+                            tags={tags}
+                            onAddtag={handleAddTag}
                         />
                         <Button type="primary" className="w-full mt-12">
                             Add product

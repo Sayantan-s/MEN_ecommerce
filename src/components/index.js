@@ -10,6 +10,7 @@ import IconDropDown from './ui/IconDropDown.component';
 import CartComponent from './ui/CartComponent.component';
 import Toast from './ui/Toast.component';
 import Input from './ui/Input.component';
+import Tagbox from './ui/Tagbox.component';
 
 import Box from './elements/Box.component';
 import Page from './elements/Page.component';
@@ -37,5 +38,6 @@ export {
     CartComponent,
     Portals,
     Toast,
-    Input
+    Input,
+    Tagbox
 };

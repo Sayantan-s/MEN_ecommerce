@@ -1,7 +1,7 @@
 import { Button } from 'components';
 import React, { useRef } from 'react';
 
-const FileUpload = ({ onChange, ElementConfig, btnName, button, className, ...otherProps }) => {
+const FileUpload = ({ onChange, ElementConfig, btnName, className, ...otherProps }) => {
     const fileRef = useRef(null);
 
     const TriggerHanlder = (eve) => {
@@ -21,7 +21,7 @@ const FileUpload = ({ onChange, ElementConfig, btnName, button, className, ...ot
                 {...ElementConfig}
                 onChange={(eve) => onChangeHandler(eve, onChange())}
             />
-            <Button onClick={TriggerHanlder} type={button} className={'w-full'} {...otherProps}>
+            <Button onClick={TriggerHanlder} className={className} {...otherProps}>
                 {btnName}
             </Button>
         </>
