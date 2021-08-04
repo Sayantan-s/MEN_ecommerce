@@ -3,7 +3,13 @@ import { Box, Button, Input, Typography } from 'components'
 import { motion } from 'framer-motion'
 import React from 'react'
 
-const Tagbox = ({ value, onChange, tags = [], onAddtag, onDeleteTag }) => {
+const Tagbox = ({ value, onChange, tags = [], onAddtag, setTagger }) => {
+
+    const tagDeleteHandler = (eve, tagname) => {
+        eve.preventDefault()
+        console.log(tagname)
+        return setTagger(tags.filter(tag => tag !== tagname));
+    }
 
     return (
       <Box className="flex items-center">
@@ -11,7 +17,7 @@ const Tagbox = ({ value, onChange, tags = [], onAddtag, onDeleteTag }) => {
                 <Box className="w-full flex">
                     {
                         tags.map((tag,id) => (
-                            <Tags tagname={tag} className={id !== 0 && "ml-2"} onDelete={onDeleteTag}/>
+                            <Tags tagname={tag} className={id !== 0 && "ml-2"} onDelete={(eve) => tagDeleteHandler(eve, tag)}/>
                         ))
                     }
                 </Box>

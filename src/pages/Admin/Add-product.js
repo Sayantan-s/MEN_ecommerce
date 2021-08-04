@@ -13,7 +13,7 @@ const AddProduct = () => {
         description: ''
     });
 
-    const [ addTag, handleTag ] = useForm('');
+    const [ addTag, setAddTag,  handleTag ] = useForm('');
 
     const [tags, setTags] = useState([ 'Nike' ]);
 
@@ -25,12 +25,7 @@ const AddProduct = () => {
                 addTag
             ]))
         }
-    }
-
-    const tagDeleteHandler = (eve, tagname) => {
-        eve.preventDefault()
-        console.log(tagname)
-        return tags.filter(tag => tag !== tagname);
+        setAddTag('');
     }
 
 
@@ -135,6 +130,7 @@ const AddProduct = () => {
                             onChange={handleTag}
                             tags={tags}
                             onAddtag={handleAddTag}
+                            setTagger={setTags}
                         />
                         <Button type="primary" className="w-full mt-12">
                             Add product

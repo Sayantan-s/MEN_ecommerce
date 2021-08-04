@@ -22,7 +22,7 @@ const useForm = (formState) => {
 
     onChangeHandler = (eve) => setForm(eve.target.value);
 
-    return [form, onChangeHandler];
+    return [form, setForm, onChangeHandler];
 };
 
 export default useForm;
