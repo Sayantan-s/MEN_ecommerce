@@ -118,6 +118,14 @@ router
         }
     });
 
+router.route('/wishlist')
+.get(async(req, res, next) => {
+
+})
+.post(async(req, res, next) => {
+    
+})
+
 router.route('/products/:id').get(async (req, res, next) => {
     const { id } = req.params;
 
