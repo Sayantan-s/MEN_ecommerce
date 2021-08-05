@@ -17,8 +17,8 @@ router.route('/register').post(async (req, res, next) => {
         const hashedPassword = await AuthUtils.hashPassword(password);
 
         const userExists = await users.findUnique({
-           where : { email }
-        })
+            where: { email }
+        });
 
         if (userExists) return next(CustomError.alreadyExists('Email already in use!'));
 
@@ -54,7 +54,7 @@ router.route('/register').post(async (req, res, next) => {
             httpOnly: true
         });
 
-        return res.status(201).send({ accessToken, expiry: exp, user : user.id });
+        return res.status(201).send({ accessToken, expiry: exp, user: user.id });
     } catch (error) {
         console.log(error);
         next(error);
@@ -109,7 +109,7 @@ router.route('/login').post(async (req, res, next) => {
             httpOnly: true
         });
 
-        res.status(200).send({ accessToken, expiry: exp, user : user.id });
+        res.status(200).send({ accessToken, expiry: exp, user: user.id });
     } catch (error) {
         next(error);
     }

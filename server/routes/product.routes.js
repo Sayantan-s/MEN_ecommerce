@@ -46,6 +46,9 @@ router
         try {
             const cartData = await cart.findMany({
                 where: { user_id },
+                orderBy: {
+                    created_at: 'desc'
+                },
                 select: {
                     id: true,
                     quantity: true,
@@ -118,13 +121,16 @@ router
         }
     });
 
-router.route('/wishlist')
-.get(async(req, res, next) => {
+router
+    .route('/wishlist')
+    .get(async (req, res, next) => {})
+    .post(async (req, res, next) => {
+        console.log(req.body);
+    })
+    .delete(async(req, res, next) => {
+        console.log(req.body);
+    })
 
-})
-.post(async(req, res, next) => {
-    
-})
 
 router.route('/products/:id').get(async (req, res, next) => {
     const { id } = req.params;

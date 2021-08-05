@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Page, Image, Box, Select, Button } from 'components';
 import { Box as ImageSection } from 'components';
 import { Box as ContentSection } from 'components';
@@ -19,11 +19,7 @@ const Product = () => {
 
     const [lightBox, setLightBox] = useState('');
 
-    const [wishList, setWishlisted] = useState({
-        isWishlisted: false,
-        product_id: '',
-        user_id: ''
-    });
+    const [wishList, setWishlisted] = useState(false);
 
     const [counter, handleCount] = useCounter({
         start: 0,
@@ -40,23 +36,28 @@ const Product = () => {
         { id: 5, name: 'xxl', disabled: false }
     ]);
 
-    const userData = useSelector(state => state.AuthReducer)
+    const userData = useSelector((state) => state.AuthReducer);
+
+    const fetchProductById = useCallback(() => {
+            (async () => {
+                const {
+                    data: { data }
+                } = await http.get(`/products/${id}`);
+                setLightBox(data.cover);
+                setData(() => {
+                    const newData = {
+                        ...data,
+                        otherimages: [data.cover, ...data.otherimages]
+                    };
+                    delete newData.cover;
+                    return newData;
+                });
+            })();
+        },[]
+    )
 
     useEffect(() => {
-        (async () => {
-            const {
-                data: { data }
-            } = await http.get(`/products/${id}`);
-            setLightBox(data.cover);
-            setData(() => {
-                const newData = {
-                    ...data,
-                    otherimages: [data.cover, ...data.otherimages]
-                };
-                delete newData.cover;
-                return newData;
-            });
-        })();
+       fetchProductById()
     }, []);
 
     const handleLightBox = (img) => setLightBox(img);
@@ -81,15 +82,34 @@ const Product = () => {
     };
 
     const handleWishlist = (_) => {
-        setWishlisted((prevState) => ({
-            ...prevState,
-            isWishlisted: !prevState.isWishlisted,
-            product_id: !prevState.isWishlisted ? productData.id : '',
-            user_id: !prevState.user_id ? userData.data.user : ''
-        }));
+        setWishlisted(prevState => !prevState);
     };
-
-    console.log(wishList);
+    useEffect(() => {
+        if (wishList) {
+            (async () => {
+                const wishListPOST = await http({
+                    method: 'POST',
+                    url: '/wishlist',
+                    data: {
+                        user_id: userData.data.user,
+                        product_id: productData.id
+                    }
+                });
+            })();
+        } else if(!wishList) {
+            (async () => {
+                const wishListDELETE = await http({
+                    method: 'DELETE',
+                    url: '/wishlist',
+                    data: {
+                        user_id: userData.data.user,
+                        product_id: productData.id,
+                        id : 'HI'
+                    }
+                });
+            })();
+        }
+    }, [handleWishlist]);
 
     return (
         <Page className="flex items-center">
@@ -114,7 +134,7 @@ const Product = () => {
                         onClick={handleWishlist}>
                         <Heart
                             className={`w-8 h-8 text-red-500 stroke-2 ${
-                                wishList.isWishlisted ? 'fill-current' : 'stroke-current'
+                                wishList ? 'fill-current' : 'stroke-current'
                             }`}
                         />
                     </Button>

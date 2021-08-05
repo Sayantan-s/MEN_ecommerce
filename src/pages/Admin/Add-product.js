@@ -1,6 +1,16 @@
 import { ArrowRightIcon } from '@heroicons/react/solid';
 import Camera from 'assets/icons/outline/Camera';
-import { Page, Box, Typography, Button, Image, Input, Select, FileUpload, Tagbox } from 'components';
+import {
+    Page,
+    Box,
+    Typography,
+    Button,
+    Image,
+    Input,
+    Select,
+    FileUpload,
+    Tagbox
+} from 'components';
 import { motion } from 'framer-motion';
 import { useForm, useSelect } from 'hooks';
 import React, { useState } from 'react';
@@ -13,35 +23,31 @@ const AddProduct = () => {
         description: ''
     });
 
-    const [ addTag, setAddTag,  handleTag ] = useForm('');
+    const [addTag, setAddTag, handleTag] = useForm('');
 
-    const [tags, setTags] = useState([ 'Nike' ]);
+    const [tags, setTags] = useState(['Nike']);
 
-    const handleAddTag = eve => {
-        eve.preventDefault()
-        if(tags.length < 10){
-            setTags(prevState => ([
-                ...prevState,
-                addTag
-            ]))
+    const handleAddTag = (eve) => {
+        eve.preventDefault();
+        if (tags.length < 10) {
+            setTags((prevState) => [...prevState, addTag]);
         }
         setAddTag('');
-    }
+    };
 
-
-    const [ data, select, onChange ] = useSelect([
+    const [data, select, onChange] = useSelect([
         { id: 1, name: 'Clothing', disabled: false },
         { id: 2, name: 'Shoes', disabled: false },
         { id: 3, name: 'Accessories', disabled: false },
         { id: 4, name: 'Others...', disabled: false }
-    ])
+    ]);
 
-    const [ genderData, genderSelect, genderOnChange ] = useSelect([
+    const [genderData, genderSelect, genderOnChange] = useSelect([
         { id: 1, name: 'Unisex', disabled: false },
         { id: 2, name: 'Men', disabled: false },
         { id: 3, name: 'Women', disabled: false },
         { id: 4, name: 'Others...', disabled: false }
-    ])
+    ]);
 
     const [imgId, setId] = useState(5);
 
@@ -98,7 +104,7 @@ const AddProduct = () => {
                                 labelName="Price"
                                 className="mr-4"
                             />
-                            <Select 
+                            <Select
                                 className="ml-4 z-30"
                                 data={data}
                                 value={select}
@@ -106,9 +112,19 @@ const AddProduct = () => {
                             />
                         </Box>
                         <Box className="flex mt-2 mb-4 items-center">
-                            <FileUpload btnName={<Camera className="w-7 h-7 text-gray-100 stroke-current"/>} type="primary" className="mr-4"/>
-                            <FileUpload btnName="Upload side images" type="secondary" className="w-full h-full"/>
-                            <Select 
+                            <FileUpload
+                                btnName={
+                                    <Camera className="w-7 h-7 text-gray-100 stroke-current" />
+                                }
+                                type="primary"
+                                className="mr-4"
+                            />
+                            <FileUpload
+                                btnName="Upload side images"
+                                type="secondary"
+                                className="w-full h-full"
+                            />
+                            <Select
                                 className="ml-4 z-20"
                                 data={genderData}
                                 value={genderSelect}
@@ -125,7 +141,7 @@ const AddProduct = () => {
                             labelName="Product Name"
                             styles="mr-4"
                         />
-                        <Tagbox 
+                        <Tagbox
                             value={addTag}
                             onChange={handleTag}
                             tags={tags}

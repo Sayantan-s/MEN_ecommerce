@@ -27,7 +27,9 @@ const Input = ({
     return (
         <>
             <Box className={`w-full ${styles}`}>
-                <label className="text-gray-900 font-normal text-lg">{labelName}</label>
+                {labelName && (
+                    <label className="text-gray-900 font-normal text-lg">{labelName}</label>
+                )}
                 <Box
                     className={`flex items-center w-full p-3 border-b-2 border-${colorState}-200 font-semibold focus-within:border-gray-300 mb-4 mt-2`}>
                     {before && (

@@ -68,7 +68,7 @@ function App() {
                     </Switch>
                 </PrivateRoute>
             </AnimatedRoutes>
-            <Toast icon={Tick} type="danger" />
+           {0 && <Toast icon={Tick} type="danger" />}
         </Layout>
     );
 }
