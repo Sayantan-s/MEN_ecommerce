@@ -10,6 +10,7 @@ import { motion } from 'framer-motion';
 import { useCounter, useSelect } from 'hooks';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
 import Heart from 'assets/icons/outline/Heart';
+import { useSelector } from 'react-redux';
 
 const Product = () => {
     const { id } = useParams();
@@ -39,6 +40,8 @@ const Product = () => {
         { id: 5, name: 'xxl', disabled: false }
     ]);
 
+    const userData = useSelector(state => state.AuthReducer)
+
     useEffect(() => {
         (async () => {
             const {
@@ -66,7 +69,7 @@ const Product = () => {
                 method: 'POST',
                 url: '/cart',
                 data: {
-                    user_id: '8cf4f1f5-2024-468e-855a-fb8d141c966f',
+                    user_id: userData.data.user,
                     product_id: productData.id,
                     size: select.name,
                     quantity: counter
@@ -82,7 +85,7 @@ const Product = () => {
             ...prevState,
             isWishlisted: !prevState.isWishlisted,
             product_id: !prevState.isWishlisted ? productData.id : '',
-            user_id: !prevState.user_id ? '8cf4f1f5-2024-468e-855a-fb8d141c966f' : ''
+            user_id: !prevState.user_id ? userData.data.user : ''
         }));
     };
 

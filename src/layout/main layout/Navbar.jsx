@@ -26,8 +26,10 @@ const Navbar = () => {
 
     const dispatch = useDispatch();
 
+    const userData = useSelector(state => state.AuthReducer)
+
     const fetchCart = async () => {
-        const { data } = await http.get('/cart?user_id=8cf4f1f5-2024-468e-855a-fb8d141c966f');
+        const { data } = await http.get(`/cart?user_id=${userData.data.user}`);
 
         setCartData(data.data);
     };
