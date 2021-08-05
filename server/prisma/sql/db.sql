@@ -28,6 +28,13 @@ CREATE TABLE orders(
     PRIMARY KEY(order_id),
     UNIQUE(order_id)
 );
+CREATE TABLE wishlist (
+     _id uuid NOT NULL DEFAULT uuid_generate_v4(),
+     product_id uuid NOT NULL REFERENCES products(_id),
+     user_id uuid NOT NULL REFERENCES users(_id),
+     UNIQUE(_id),
+     PRIMARY KEY(_id)
+ );
 
 CREATE TABLE cart(
     _id uuid NOT NULL DEFAULT uuid_generate_v4()

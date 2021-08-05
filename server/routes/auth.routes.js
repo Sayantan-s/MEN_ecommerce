@@ -1,6 +1,5 @@
 import AuthUtils from '../helpers/auth_helper';
 import CustomError from '../helpers/custom_error_handler';
-import User from '../models/User.model';
 import { login_validator, register_validator } from '../validators/auth.validator';
 import { PrismaClient } from '@prisma/client';
 
@@ -17,7 +16,9 @@ router.route('/register').post(async (req, res, next) => {
 
         const hashedPassword = await AuthUtils.hashPassword(password);
 
-        const userExists = await User.exists({ email });
+        const userExists = await users.findUnique({
+           where : { email }
+        })
 
         if (userExists) return next(CustomError.alreadyExists('Email already in use!'));
 
@@ -53,7 +54,7 @@ router.route('/register').post(async (req, res, next) => {
             httpOnly: true
         });
 
-        return res.status(201).send({ accessToken, expiry: exp });
+        return res.status(201).send({ accessToken, expiry: exp, user : user.id });
     } catch (error) {
         console.log(error);
         next(error);
@@ -108,7 +109,7 @@ router.route('/login').post(async (req, res, next) => {
             httpOnly: true
         });
 
-        res.status(200).send({ accessToken, expiry: exp });
+        res.status(200).send({ accessToken, expiry: exp, user : user.id });
     } catch (error) {
         next(error);
     }

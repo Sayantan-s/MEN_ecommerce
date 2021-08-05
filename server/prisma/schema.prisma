@@ -20,20 +20,21 @@ model cart {
 }
 
 model products {
-  id          String    @id @default(dbgenerated("uuid_generate_v4()")) @map("_id") @db.Uuid
-  catagory    String    @db.VarChar(50)
-  name        String    @db.VarChar(150)
-  tagname     String    @db.VarChar(150)
-  price       Decimal   @db.Money
+  id          String     @id @default(dbgenerated("uuid_generate_v4()")) @map("_id") @db.Uuid
+  catagory    String     @db.VarChar(50)
+  name        String     @db.VarChar(150)
+  tagname     String     @db.VarChar(150)
+  price       Decimal    @db.Money
   description String
-  gender      String?   @default("unisex") @db.VarChar(20)
+  gender      String?    @default("unisex") @db.VarChar(20)
   cover       String
   otherimages String[]
-  admin       String?   @db.VarChar(100)
-  tags        String[]  @db.VarChar
-  created_at  DateTime? @default(now()) @db.Timestamptz(6)
-  updated_at  DateTime? @default(now()) @db.Timestamptz(6)
+  admin       String?    @db.VarChar(100)
+  tags        String[]   @db.VarChar
+  created_at  DateTime?  @default(now()) @db.Timestamptz(6)
+  updated_at  DateTime?  @default(now()) @db.Timestamptz(6)
   cart        cart[]
+  wishlist    wishlist[]
 }
 
 model reftoken {
@@ -43,13 +44,24 @@ model reftoken {
 }
 
 model users {
-  id         String    @id @default(dbgenerated("uuid_generate_v4()")) @map("_id") @db.Uuid
+  id         String     @id @default(dbgenerated("uuid_generate_v4()")) @map("_id") @db.Uuid
   img        String?
-  fullname   String    @db.VarChar(200)
-  username   String    @db.VarChar(20)
-  email      String    @unique @db.VarChar(150)
-  password   String    @db.VarChar(100)
-  created_at DateTime? @default(now()) @db.Timestamptz(6)
-  updated_at DateTime? @default(now()) @db.Timestamptz(6)
+  fullname   String     @db.VarChar(200)
+  username   String     @db.VarChar(20)
+  email      String     @unique @db.VarChar(150)
+  password   String     @db.VarChar(100)
+  created_at DateTime?  @default(now()) @db.Timestamptz(6)
+  updated_at DateTime?  @default(now()) @db.Timestamptz(6)
   cart       cart[]
+  wishlist   wishlist[]
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model wishlist {
+  id         String   @id @default(dbgenerated("uuid_generate_v4()")) @map("_id") @db.Uuid
+  product_id String   @db.Uuid
+  user_id    String   @db.Uuid
+  products   products @relation(fields: [product_id], references: [id])
+  users      users    @relation(fields: [user_id], references: [id])
+
 }
