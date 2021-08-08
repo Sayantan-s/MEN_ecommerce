@@ -31,7 +31,7 @@ const Input = ({
                     <label className="text-gray-900 font-normal text-lg">{labelName}</label>
                 )}
                 <Box
-                    className={`flex items-center w-full p-3 border-b-2 border-${colorState}-200 font-semibold focus-within:border-gray-300 mb-4 mt-2`}>
+                    className={`flex items-center w-full border-${colorState}-200 border-b-2 font-semibold focus-within:border-gray-300 mb-4 mt-2`}>
                     {before && (
                         <Button onClick={iconButtonHandle}>
                             <Icon className={`w-5 h-5 text-${colorState}-400 stroke-current`} />
@@ -39,7 +39,7 @@ const Input = ({
                     )}
                     <Component
                         {...rest}
-                        className={`outline-none focus:outline-none w-full h-full bg-transparent ${textArea} placeholder-${colorState}-300`}
+                        className={`outline-none p-4 focus:outline-none w-full h-full bg-transparent ${textArea} placeholder-${colorState}-300`}
                     />
                     {after && (
                         <Button onClick={iconButtonHandle}>

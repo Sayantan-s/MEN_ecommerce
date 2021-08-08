@@ -24,7 +24,7 @@ const Tagbox = ({ value, onChange, tags = [], onAddtag, setTagger }) => {
                 </Box>
                 <Input type="text" placeholder="e.g. jordan" value={value} onChange={onChange} />
             </Box>
-            <Button type="primary" className="ml-4 whitespace-nowrap" onClick={onAddtag}>
+            <Button type="primary" className="ml-4 whitespace-nowrap mt-7" onClick={onAddtag}>
                 Add tag
             </Button>
         </Box>

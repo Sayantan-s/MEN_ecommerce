@@ -105,7 +105,7 @@ const AddProduct = () => {
                                 className="mr-4"
                             />
                             <Select
-                                className="ml-4 z-30"
+                                className="ml-4 z-30 mt-4"
                                 data={data}
                                 value={select}
                                 onChange={onChange}
