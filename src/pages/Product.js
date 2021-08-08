@@ -38,26 +38,21 @@ const Product = () => {
 
     const userData = useSelector((state) => state.AuthReducer);
 
-    const fetchProductById = useCallback(() => {
-            (async () => {
-                const {
-                    data: { data }
-                } = await http.get(`/products/${id}`);
-                setLightBox(data.cover);
-                setData(() => {
-                    const newData = {
-                        ...data,
-                        otherimages: [data.cover, ...data.otherimages]
-                    };
-                    delete newData.cover;
-                    return newData;
-                });
-            })();
-        },[]
-    )
-
     useEffect(() => {
-       fetchProductById()
+        (async () => {
+            const {
+                data: { data }
+            } = await http.get(`/products/${id}`);
+            setLightBox(data.cover);
+            setData(() => {
+                const newData = {
+                    ...data,
+                    otherimages: [data.cover, ...data.otherimages]
+                };
+                delete newData.cover;
+                return newData;
+            });
+        })();
     }, []);
 
     const handleLightBox = (img) => setLightBox(img);
@@ -82,34 +77,34 @@ const Product = () => {
     };
 
     const handleWishlist = (_) => {
-        setWishlisted(prevState => !prevState);
+        setWishlisted((prevState) => !prevState);
+        (() => {
+            if (wishList) {
+                (async () => {
+                    const wishListADD = await http({
+                        method: 'POST',
+                        url: '/wishlist',
+                        data: {
+                            user_id: userData.data.user,
+                            product_id: productData.id
+                        }
+                    });
+                })();
+            } 
+            else if (!wishList) {
+                (async () => {
+                    const wishListREMOVE = await http({
+                        method: 'DELETE',
+                        url: '/wishlist',
+                        data: {
+                            user_id: userData.data.user,
+                            product_id: productData.id
+                        }
+                    });
+                })();
+            }
+        })()
     };
-    useEffect(() => {
-        if (wishList) {
-            (async () => {
-                const wishListPOST = await http({
-                    method: 'POST',
-                    url: '/wishlist',
-                    data: {
-                        user_id: userData.data.user,
-                        product_id: productData.id
-                    }
-                });
-            })();
-        } else if(!wishList) {
-            (async () => {
-                const wishListDELETE = await http({
-                    method: 'DELETE',
-                    url: '/wishlist',
-                    data: {
-                        user_id: userData.data.user,
-                        product_id: productData.id,
-                        id : 'HI'
-                    }
-                });
-            })();
-        }
-    }, [handleWishlist]);
 
     return (
         <Page className="flex items-center">

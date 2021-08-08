@@ -126,11 +126,12 @@ router
     .get(async (req, res, next) => {})
     .post(async (req, res, next) => {
         console.log(req.body);
+        console.log("Post")
     })
-    .delete(async(req, res, next) => {
+    .delete(async (req, res, next) => {
         console.log(req.body);
-    })
-
+        console.log("Delete")
+    });
 
 router.route('/products/:id').get(async (req, res, next) => {
     const { id } = req.params;

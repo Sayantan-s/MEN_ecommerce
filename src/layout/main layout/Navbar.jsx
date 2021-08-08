@@ -29,9 +29,10 @@ const Navbar = () => {
     const userData = useSelector((state) => state.AuthReducer);
 
     const fetchCart = async () => {
+      if(isAuthenticated){
         const { data } = await http.get(`/cart?user_id=${userData.data?.user}`);
-
         setCartData(data.data);
+      }
     };
 
     useEffect(() => {
@@ -40,6 +41,8 @@ const Navbar = () => {
     }, []);
 
     console.log(cartData);
+
+    console.log(isAuthenticated)
 
     return (
         <header className="w-full bg-gray-50 fixed border-b-2 border-gray-200 z-50" ref={navBarRef}>
