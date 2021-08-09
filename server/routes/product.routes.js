@@ -16,9 +16,11 @@ router
         res.status(200).send({ data });
     })
     .post(async (req, res, next) => {
-        const { body } = req;
+        const { body, file } = req;
 
-        const columns = Object.keys(body);
+        console.log(body);
+
+        /*const columns = Object.keys(body);
 
         const values = Object.values(body);
 
@@ -36,7 +38,7 @@ router
 
         const { rows } = await db.query(query, values);
 
-        res.status(201).send({ data: rows });
+        res.status(201).send({ data: rows });*/
     });
 
 router

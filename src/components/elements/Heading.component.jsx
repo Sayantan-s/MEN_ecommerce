@@ -1,50 +1,45 @@
+import { motion } from 'framer-motion';
 import React, { forwardRef } from 'react'
 
 const Heading = forwardRef(({
     level,
-    as: Component = `h${level}`,
-    size,weight,color,
+    as: Component = motion[`h${level}`],
+    className,
     ...rest
 }, ref
 ) => {
-    switch (as) {
-        case motion.h1:
+
+    let styles;
+
+    switch (level) {
+        case 1:
             styles = 'text-7xl font-bold';
             break;
-        case motion.h2:
+        case 2:
             styles = 'text-6xl font-bold';
             break;
-        case motion.h3:
+        case 3:
             styles = 'text-5xl font-semibold';
             break;
-        case motion.h4:
+        case 4:
             styles = 'text-3xl font-semibold';
             break;
-        case motion.h5:
+        case 5:
             styles = 'text-xl font-regular';
             break;
-        case motion.h6:
+        case 6:
             styles = 'text-md font-regular';
-            break;
-        case motion.p:
-            styles = 'text-base font-normal';
             break;
         default:
             styles = 'text-normal';
     }
-    const styles = {
-        1 : {
-            size : 7,
-            weight : 'bold'
-        }
-    }
     return (
-       <Component {...rest} ref={ref} className={`text-${size || styles[level].size}`} />
+       <Component {...rest} ref={ref} className={`${className} ${styles}`} />
     )
 })
 
 Heading.defaultProps = {
-
+    level : 1
 }
 
 export default Heading

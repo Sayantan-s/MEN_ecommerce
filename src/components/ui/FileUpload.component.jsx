@@ -1,16 +1,12 @@
 import { Button } from 'components';
 import React, { useRef } from 'react';
 
-const FileUpload = ({ onChange, ElementConfig, btnName, className, ...otherProps }) => {
+const FileUpload = ({ type, ElementConfig, btnName, className, ...otherProps }) => {
     const fileRef = useRef(null);
 
     const TriggerHanlder = (eve) => {
         eve.preventDefault();
         fileRef.current.click();
-    };
-    const onChangeHandler = (eve, cb) => {
-        const file = eve.target.files[0];
-        return cb(file);
     };
     return (
         <>
@@ -18,10 +14,9 @@ const FileUpload = ({ onChange, ElementConfig, btnName, className, ...otherProps
                 ref={fileRef}
                 type="file"
                 className={`hidden`}
-                {...ElementConfig}
-                onChange={(eve) => onChangeHandler(eve, onChange())}
+                {...otherProps}
             />
-            <Button onClick={TriggerHanlder} className={className} {...otherProps}>
+            <Button onClick={TriggerHanlder} className={className} type={type}>
                 {btnName}
             </Button>
         </>
