@@ -25,7 +25,7 @@ const AddProduct = () => {
         description: ''
     });
 
-    const { name, tagname, price, description } = form
+    const { name, tagname, price, description } = form;
 
     const [addTag, setAddTag, handleTag] = useForm('');
 
@@ -55,47 +55,45 @@ const AddProduct = () => {
 
     const [imgId, setId] = useState(5);
 
-    const [ coverImg, setCoverImgFile ] = useState('');
-    const [ otherImgs, setCoverImgs ] = useState([]);
+    const [coverImg, setCoverImgFile] = useState('');
+    const [otherImgs, setCoverImgs] = useState([]);
 
-    const handleFileInputCover = eve => {
+    const handleFileInputCover = (eve) => {
         const file = eve.target.files[0];
         const reader = new FileReader();
         reader.readAsDataURL(file);
-        reader.onloadend = () => setCoverImgFile(reader.result)
-    }
+        reader.onloadend = () => setCoverImgFile(reader.result);
+    };
 
-    const handleMultiple = eve => {
+    const handleMultiple = (eve) => {
         const files = Object.values(eve.target.files);
-        if(files.length !== 3 ){
-            return console.log(`Please add 3 images ${files.length > 3 ? "only": "atleast"} .`);
+        if (files.length !== 3) {
+            return console.log(`Please add 3 images ${files.length > 3 ? 'only' : 'atleast'} .`);
         }
-        files.forEach(file => {
+        files.forEach((file) => {
             const reader = new FileReader();
             reader.readAsDataURL(file);
-            reader.onloadend = () => setCoverImgs(prevState => ([
-                ...prevState,
-                reader.result
-            ]))
-        })
-    }
+            reader.onloadend = () => setCoverImgs((prevState) => [...prevState, reader.result]);
+        });
+    };
 
-    const formSubmitHandler = eve => onSubmitHandler(eve, async() => {
-        const postProductData = await http({
-            method : 'POST',
-            url : '/products',
-            data : {
-                ...form,
-                catagory : select,
-                gender : genderSelect,
-                tags,
-                cover : coverImg
-            }
-        })
-    })
-    
+    const formSubmitHandler = (eve) =>
+        onSubmitHandler(eve, async () => {
+            const postProductData = await http({
+                method: 'POST',
+                url: '/products',
+                data: {
+                    ...form,
+                    catagory: select.name,
+                    gender: genderSelect.name,
+                    tags,
+                    cover: coverImg,
+                    otherImgs
+                }
+            });
+        });
 
-    console.log(otherImgs)
+    console.log(otherImgs);
 
     return (
         <Page className="flex">
@@ -216,7 +214,10 @@ const AddProduct = () => {
                     <Box className="w-full mt-6">
                         <Box className="w-full flex">
                             <Image
-                                src={coverImg || `https://air.jordan.com/wp-content/uploads/2021/03/Zion_Zion1_Gallery_${imgId}.jpg`}
+                                src={
+                                    coverImg ||
+                                    `https://air.jordan.com/wp-content/uploads/2021/03/Zion_Zion1_Gallery_${imgId}.jpg`
+                                }
                                 alt="jordan_img"
                                 className="w-10/12 h-96"
                             />
@@ -235,12 +236,10 @@ const AddProduct = () => {
                             </Box>
                         </Box>
                         <Box>
-                        <Heading level={1}>
-                            {name}
-                        </Heading>
-                        <Heading level={1} as={motion.h2}>
-                            {tagname}
-                        </Heading>
+                            <Heading level={1}>{name}</Heading>
+                            <Heading level={1} as={motion.h2}>
+                                {tagname}
+                            </Heading>
                         </Box>
                     </Box>
                 </Box>

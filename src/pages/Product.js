@@ -90,8 +90,7 @@ const Product = () => {
                         }
                     });
                 })();
-            } 
-            else if (!wishList) {
+            } else if (!wishList) {
                 (async () => {
                     const wishListREMOVE = await http({
                         method: 'DELETE',
@@ -103,7 +102,7 @@ const Product = () => {
                     });
                 })();
             }
-        })()
+        })();
     };
 
     return (

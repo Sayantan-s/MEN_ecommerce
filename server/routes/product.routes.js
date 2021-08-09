@@ -1,8 +1,9 @@
 import express from 'express';
 import CustomError from '../helpers/custom_error_handler';
 import { db } from '../helpers/init_postgres';
-import { prisma, PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 import isAuth from '../middlewares/isAuth';
+import cloudinary from '../helpers/init_cloudinary';
 
 const router = express.Router();
 
@@ -16,29 +17,41 @@ router
         res.status(200).send({ data });
     })
     .post(async (req, res, next) => {
-        const { body, file } = req;
+        const { body } = req;
 
-        console.log(body);
+        console.log(req.body)
 
-        /*const columns = Object.keys(body);
+        try{
+            const { cover, otherImgs, ...data } = body;
 
-        const values = Object.values(body);
+            const checkProductPresence = await products.findFirst({
+                where : {
+                    name : data.name,
+                    tagname : data.tagname
+                }
+            })
 
-        const check_query = `SELECT * FROM products WHERE name = $1 AND tagname = $2`;
+            if(checkProductPresence){
+                return next(CustomError.alreadyExists('Product already exists')) 
+            }
 
-        const response = await db.query(check_query, [body.name, body.tagname]);
+            const uploadToCloudinaryCover = await cloudinary.uploader.upload(cover,{
+                upload_preset : 'product_cover'
+            })
 
-        if (response.rows.length) {
-            return next(CustomError.alreadyExists('Product already exists'));
+            const uploadToCloudinaryOtherImgs = otherImgs.map(img => {
+                cloudinary.uploader.upload(img,{
+                    upload_preset : 'product_imgs'
+                })
+            })
+
+            const uploadMultiple = await Promise.all(uploadToCloudinaryOtherImgs);
+
         }
 
-        const query = `INSERT INTO products(${columns.join(',')}) VALUES(${values.map(
-            (_, id) => `$${id + 1}`
-        )}) RETURNING *`;
-
-        const { rows } = await db.query(query, values);
-
-        res.status(201).send({ data: rows });*/
+        catch(e){
+            next(e);
+        }
     });
 
 router
@@ -128,11 +141,11 @@ router
     .get(async (req, res, next) => {})
     .post(async (req, res, next) => {
         console.log(req.body);
-        console.log("Post")
+        console.log('Post');
     })
     .delete(async (req, res, next) => {
         console.log(req.body);
-        console.log("Delete")
+        console.log('Delete');
     });
 
 router.route('/products/:id').get(async (req, res, next) => {

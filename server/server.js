@@ -11,7 +11,13 @@ import parser from 'cookie-parser';
 
 const app = express();
 
-const middlewares = [morgan('dev'), express.json(), cors({ origin: CLIENT }), parser()];
+const middlewares = [
+    morgan('dev'),
+    express.json({ limit: '50mb' }),
+    express.urlencoded({ limit: '50mb', extended: true }),
+    cors({ origin: CLIENT }),
+    parser()
+];
 
 app.use(middlewares);
 

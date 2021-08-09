@@ -10,12 +10,7 @@ const FileUpload = ({ type, ElementConfig, btnName, className, ...otherProps }) 
     };
     return (
         <>
-            <input
-                ref={fileRef}
-                type="file"
-                className={`hidden`}
-                {...otherProps}
-            />
+            <input ref={fileRef} type="file" className={`hidden`} {...otherProps} />
             <Button onClick={TriggerHanlder} className={className} type={type}>
                 {btnName}
             </Button>

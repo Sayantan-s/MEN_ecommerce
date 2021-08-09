@@ -35,7 +35,7 @@ const Register = () => {
     };
 
     return (
-        <>  
+        <>
             <Typography as={motion.h3} className="my-2 text-gray-900 font-semibold">
                 Welcome
             </Typography>
