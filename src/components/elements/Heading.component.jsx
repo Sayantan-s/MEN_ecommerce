@@ -34,7 +34,7 @@ const Heading = forwardRef(({
             styles = 'text-normal';
     }
     return (
-       <Component {...rest} ref={ref} className={`${className} ${styles}`} />
+       <Component {...rest} ref={ref} className={`${className} ${styles} text-gray-900`} />
     )
 })
 

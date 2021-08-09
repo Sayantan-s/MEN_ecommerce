@@ -11,6 +11,7 @@ import {
     FileUpload,
     Tagbox
 } from 'components';
+import Heading from 'components/elements/Heading.component';
 import { motion } from 'framer-motion';
 import { useForm, useSelect } from 'hooks';
 import React, { useState } from 'react';
@@ -65,10 +66,9 @@ const AddProduct = () => {
     }
 
     const handleMultiple = eve => {
-        console.log(eve)
         const files = Object.values(eve.target.files);
-        if(files.length !== 4 ){
-            return console.log(`Please add 4 images ${files.length > 4 ? "only": "atleast"} .`);
+        if(files.length !== 3 ){
+            return console.log(`Please add 3 images ${files.length > 3 ? "only": "atleast"} .`);
         }
         files.forEach(file => {
             const reader = new FileReader();
@@ -233,6 +233,14 @@ const AddProduct = () => {
                                     />
                                 ))}
                             </Box>
+                        </Box>
+                        <Box>
+                        <Heading level={1}>
+                            {name}
+                        </Heading>
+                        <Heading level={1} as={motion.h2}>
+                            {tagname}
+                        </Heading>
                         </Box>
                     </Box>
                 </Box>
