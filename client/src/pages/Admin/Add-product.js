@@ -14,7 +14,7 @@ import {
 import Heading from 'components/elements/Heading.component';
 import { motion } from 'framer-motion';
 import { useForm, useSelect } from 'hooks';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import http from 'utils/http';
 
 const AddProduct = () => {
@@ -53,10 +53,18 @@ const AddProduct = () => {
         { id: 4, name: 'Others...', disabled: false }
     ]);
 
-    const [imgId, setId] = useState(5);
-
     const [coverImg, setCoverImgFile] = useState('');
-    const [otherImgs, setCoverImgs] = useState([]);
+    const [otherImgs, setOtherImgs] = useState([]);
+
+    const [lightBox, setLightBox] = useState({
+        cover : 'https://air.jordan.com/wp-content/uploads/2021/03/Zion_Zion1_Gallery_5.jpg',
+        others : [
+            'https://air.jordan.com/wp-content/uploads/2021/03/Zion_Zion1_Gallery_4.jpg',
+            'https://air.jordan.com/wp-content/uploads/2021/03/Zion_Zion1_Gallery_5.jpg',
+            'https://air.jordan.com/wp-content/uploads/2021/03/Zion_Zion1_Gallery_6.jpg',
+            'https://air.jordan.com/wp-content/uploads/2021/03/Zion_Zion1_Gallery_8.jpg',
+        ]
+    });
 
     const handleFileInputCover = (eve) => {
         const file = eve.target.files[0];
@@ -68,14 +76,31 @@ const AddProduct = () => {
     const handleMultiple = (eve) => {
         const files = Object.values(eve.target.files);
         if (files.length !== 3) {
-            return console.log(`Please add 3 images ${files.length > 3 ? 'only' : 'atleast'} .`);
+            return console.log(`Please add 3 images ${files.length > 3 ? 'only' : 'please'} .`);
         }
         files.forEach((file) => {
             const reader = new FileReader();
             reader.readAsDataURL(file);
-            reader.onloadend = () => setCoverImgs((prevState) => [...prevState, reader.result]);
+            reader.onloadend = () =>  setOtherImgs((prevState) => [...prevState, reader.result]);
         });
     };
+
+    useEffect(() => {
+        if(coverImg){
+            setLightBox(prevState => ({
+                ...prevState,
+                cover : coverImg
+            }))
+        }
+
+        if(otherImgs.length){
+            setLightBox(prevState => ({
+                ...prevState,
+                others : otherImgs
+            }))
+        }
+
+    },[coverImg,otherImgs])
 
     const formSubmitHandler = (eve) =>
         onSubmitHandler(eve, async () => {
@@ -214,23 +239,23 @@ const AddProduct = () => {
                     <Box className="w-full mt-6">
                         <Box className="w-full flex">
                             <Image
-                                src={
-                                    coverImg ||
-                                    `https://air.jordan.com/wp-content/uploads/2021/03/Zion_Zion1_Gallery_${imgId}.jpg`
-                                }
+                                src={lightBox.cover}
                                 alt="jordan_img"
                                 className="w-10/12 h-96"
                             />
                             <Box className="w-2/12 ml-2 flex flex-col">
-                                {[4, 5, 6, 8].map((imgno, id) => (
+                                {lightBox.others.map((img, id) => (
                                     <Image
-                                        src={`https://air.jordan.com/wp-content/uploads/2021/03/Zion_Zion1_Gallery_${imgno}.jpg`}
+                                        src={img}
                                         alt={'jordan_img' + id}
                                         className={`w-full h-1/4 cursor-pointer ${
                                             id !== 0 && 'mt-2'
                                         }`}
                                         key={id}
-                                        onClick={() => setId(imgno)}
+                                        onClick={() => setLightBox(prevState => ({
+                                            ...prevState,
+                                            cover : img
+                                        }))}
                                     />
                                 ))}
                             </Box>

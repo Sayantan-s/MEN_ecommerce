@@ -1,4 +1,4 @@
-import { CLIENT, PORT } from './config';
+import { PORT } from './config';
 import express from 'express';
 import morgan from 'morgan';
 import authRoute from './routes/auth.routes';
@@ -15,10 +15,10 @@ const middlewares = [
     morgan('dev'),
     express.json({ limit: '50mb' }),
     express.urlencoded({ limit: '50mb', extended: true }),
-    cors({ origin: CLIENT }),
+    cors(),
     parser()
 ];
-
+ 
 app.use(middlewares);
 
 app.use('/api', productRoutes);
@@ -39,6 +39,6 @@ app.use((err, req, res, next) => {
     });
 });
 
-connection(() => {
-    app.listen(PORT, (_) => console.log('Server is live....' + PORT));
-});
+app.listen(PORT, (_) => console.log('Server is live....' + PORT));
+
+  
