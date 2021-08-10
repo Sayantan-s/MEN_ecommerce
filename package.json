@@ -1,75 +1,32 @@
 {
-    "name": "mern-ecomm",
-    "version": "0.1.0",
-    "private": true,
-    "dependencies": {
-        "@craco/craco": "^6.1.1",
-        "@headlessui/react": "^1.0.0",
-        "@heroicons/react": "^1.0.1",
-        "@tailwindcss/line-clamp": "^0.2.1",
-        "@testing-library/jest-dom": "^5.11.4",
-        "@testing-library/react": "^11.1.0",
-        "@testing-library/user-event": "^12.1.10",
-        "axios": "^0.21.1",
-        "cloudinary": "^1.26.3",
-        "concurrently": "^6.1.0",
-        "framer-motion": "^4.1.6",
-        "node-sass": "^4.14.1",
-        "react": "^17.0.2",
-        "react-dom": "^17.0.2",
-        "react-redux": "^7.2.3",
-        "react-router": "^5.2.0",
-        "react-router-dom": "^5.2.0",
-        "react-scripts": "4.0.3",
-        "react-slick": "^0.28.1",
-        "redux": "^4.0.5",
-        "redux-logger": "^3.0.6",
-        "redux-persist": "^6.0.0",
-        "redux-thunk": "^2.3.0",
-        "slick-carousel": "^1.8.1",
-        "web-vitals": "^1.0.1"
-    },
+    "name": "new-rest",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
     "scripts": {
-        "start": "concurrently 'npm run dev' 'cd server && npm start' 'cd server && npx prisma studio'",
-        "dev": "DISABLE_ESLINT_PLUGIN=true craco start",
-        "build": "craco build",
-        "test": "craco test",
-        "eject": "react-scripts eject",
-        "lint": "eslint --fix .",
-        "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
-        "serverdeps": "cd server && npm i"
+        "start": "concurrently 'npm run dev' 'cd client && npm start' 'npx prisma studio'",
+        "dev": "nodemon -r esm server",
+        "start:prod": "node -r esm server"
     },
-    "eslintConfig": {
-        "extends": [
-            "react-app",
-            "react-app/jest"
-        ]
-    },
-    "browserslist": {
-        "production": [
-            ">0.2%",
-            "not dead",
-            "not op_mini all"
-        ],
-        "development": [
-            "last 1 chrome version",
-            "last 1 firefox version",
-            "last 1 safari version"
-        ]
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@prisma/client": "^2.27.0",
+        "bcrypt": "^5.0.1",
+        "cookie-parser": "^1.4.5",
+        "cors": "^2.8.5",
+        "csurf": "^1.11.0",
+        "dotenv": "^8.2.0",
+        "esm": "^3.2.25",
+        "express": "^4.17.1",
+        "joi": "^17.4.0",
+        "jsonwebtoken": "^8.5.1",
+        "morgan": "^1.10.0",
+        "pg": "^8.6.0",
+        "prisma": "^2.27.0"
     },
     "devDependencies": {
-        "@tailwindcss/postcss7-compat": "^2.1.2",
-        "autoprefixer": "^9.8.6",
-        "babel-plugin-module-resolver": "^4.1.0",
-        "eslint": "^7.27.0",
-        "eslint-config-prettier": "^8.3.0",
-        "eslint-plugin-jsx-a11y": "^6.4.1",
-        "eslint-plugin-prettier": "^3.4.0",
-        "eslint-plugin-react": "^7.23.2",
-        "eslint-plugin-react-hooks": "^4.2.0",
-        "postcss": "^7.0.35",
-        "prettier": "^2.3.0",
-        "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.2"
-    },
-    "proxy": "http://localhost:5000"
+        "nodemon": "^2.0.7"
+    }
 }
