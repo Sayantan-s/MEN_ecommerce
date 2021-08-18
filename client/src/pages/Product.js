@@ -78,32 +78,33 @@ const Product = () => {
 
     const handleWishlist = (_) => {
         setWishlisted((prevState) => !prevState);
-        (() => {
-            if (wishList) {
-                (async () => {
-                    const wishListADD = await http({
-                        method: 'POST',
-                        url: '/wishlist',
-                        data: {
-                            user_id: userData.data.user,
-                            product_id: productData.id
-                        }
-                    });
-                })();
-            } else if (!wishList) {
-                (async () => {
-                    const wishListREMOVE = await http({
-                        method: 'DELETE',
-                        url: '/wishlist',
-                        data: {
-                            user_id: userData.data.user,
-                            product_id: productData.id
-                        }
-                    });
-                })();
-            }
-        })();
     };
+
+    useEffect(() => {
+        if (wishList) {
+            (async () => {
+                const wishListADD = await http({
+                    method: 'POST',
+                    url: '/wishlist',
+                    data: {
+                        user_id: userData.data.user,
+                        product_id: productData.id
+                    }
+                });
+            })();
+        } else if (!wishList && productData.id) {
+            (async () => {
+                const wishListREMOVE = await http({
+                    method: 'DELETE',
+                    url: '/wishlist',
+                    data: {
+                        user_id: userData.data.user,
+                        product_id: productData.id
+                    }
+                });
+            })();
+        }
+    },[wishList])
 
     return (
         <Page className="flex items-center">

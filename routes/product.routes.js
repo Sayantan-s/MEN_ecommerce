@@ -141,6 +141,7 @@ router
     .get(async (req, res, next) => {})
     .post(async (req, res, next) => {
         console.log(req.body);
+        const addToWishList = await 
         console.log('Post');
     })
     .delete(async (req, res, next) => {
