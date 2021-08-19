@@ -4,17 +4,32 @@ import { db } from '../helpers/init_postgres';
 import { PrismaClient } from '@prisma/client';
 import isAuth from '../middlewares/isAuth';
 import cloudinary from '../helpers/init_cloudinary';
+import redis from 'redis'
+import { promisify } from 'util'
 
 const router = express.Router();
 
 const { products, cart } = new PrismaClient();
 
+const clientUrl = 'redis://127.0.0.1:6379';
+
+const client = redis.createClient(clientUrl);
+
+client.get = promisify(client.get);
+
 router
     .route('/products')
     .get(async (req, res, next) => {
+
+        const getCache = await client.get('allProducts');
+
+        if(getCache) return res.status(200).send({ data : JSON.parse(getCache) })
+
         const data = await products.findMany();
 
         res.status(200).send({ data });
+
+        client.set('allProducts', JSON.stringify(data));
     })
     .post(async (req, res, next) => {
         const { body } = req;
