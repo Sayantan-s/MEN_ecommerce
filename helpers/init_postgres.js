@@ -1,4 +1,4 @@
-import { Pool } from 'pg';
+/*import { Pool } from 'pg';
 import { DB_DATABASE, DB_HOST, DB_PASSWORD, DB_PORT, DB_USER } from '../config';
 
 const db = new Pool({
@@ -31,4 +31,4 @@ process.on('SIGINT', async () => {
     process.exit(0);
 });
 
-export { connection, db };
+export { connection, db };*/

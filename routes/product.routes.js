@@ -1,11 +1,13 @@
 import express from 'express';
 import CustomError from '../helpers/custom_error_handler';
-import { db } from '../helpers/init_postgres';
-import { PrismaClient } from '@prisma/client';
+//import { db } from '../helpers/init_postgres';
+import prisma from '@prisma/client';
 import isAuth from '../middlewares/isAuth';
 import cloudinary from '../helpers/init_cloudinary';
 import redis from 'redis'
 import { promisify } from 'util'
+
+const { PrismaClient } = prisma;
 
 const router = express.Router();
 
@@ -14,6 +16,7 @@ const { products, cart, order } = new PrismaClient();
 const clientUrl = 'redis://127.0.0.1:6379';
 
 const client = redis.createClient(clientUrl);
+
 
 client.get = promisify(client.get);
 

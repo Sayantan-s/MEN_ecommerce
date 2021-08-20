@@ -1,10 +1,9 @@
-import { PORT } from './config/index';
+import { PORT } from './config';
 import express from 'express';
 import morgan from 'morgan';
 import authRoute from './routes/auth.routes';
 import productRoutes from './routes/product.routes';
 import utilsRoutes from './routes/utils.routes';
-import { connection } from './helpers/init_postgres';
 import cors from 'cors';
 //import csrf from 'csurf';
 import parser from 'cookie-parser';

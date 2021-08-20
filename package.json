@@ -3,16 +3,16 @@
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
+    "type": "module",
     "scripts": {
-        "client" : "cd client && npm start",
-        "dev" : "concurrently -n 'server,client' -c 'red,green'  \"npm run start-server\" \"npm run client\" \"npx prisma studio\"",
-        "start": "node server.js",
-        "start-server": "nodemon -r esm server",
+        "client": "cd client && npm start",
+        "dev": "concurrently -n 'server,client' -c 'red,green'  \"npm run start-server\" \"npm run client\" \"npx prisma studio\"",
+        "start": "node --experimental-modules --es-module-specifier-resolution=node server.js",
+        "start-server": "nodemon --experimental-modules --es-module-specifier-resolution=node server",
         "start:prod": "node -r esm server",
-        "heroku-postbuild" : "NPM_CONFIG_PRODUCTION=false npm i --prefix client && npm run build --prefix client"
+        "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm i --prefix client && npm run build --prefix client"
     },
     "keywords": [],
-    "type": "module",
     "author": "",
     "license": "ISC",
     "dependencies": {
@@ -34,6 +34,8 @@
         "redis": "^3.1.2"
     },
     "devDependencies": {
+        "@babel/core": "^7.15.0",
+        "@babel/preset-env": "^7.15.0",
         "nodemon": "^2.0.7"
     }
 }

@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-export const {
+const {
     PORT,
     ACCESSTOKEN_SECRET,
     REFRESHTOKEN_SECRET,
@@ -10,3 +10,12 @@ export const {
     CLOUDINARY_API_KEY,
     CLOUDINARY_API_SECRET
 } = process.env;
+
+export { 
+    PORT,
+    ACCESSTOKEN_SECRET,
+    REFRESHTOKEN_SECRET,
+    CLOUDINARY_CLOUD_NAME,
+    CLOUDINARY_API_KEY,
+    CLOUDINARY_API_SECRET
+ } 

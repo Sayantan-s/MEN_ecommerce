@@ -1,7 +1,9 @@
-import { PrismaClient } from '@prisma/client';
+import prisma from '@prisma/client';
 import express from 'express';
 import AuthUtils from '../helpers/auth_helper';
 import CustomError from '../helpers/custom_error_handler';
+
+const { PrismaClient } = prisma
 
 const router = express.Router();
 
@@ -24,7 +26,7 @@ router.get('/refresh', async (req, res, next) => {
             select: {
                 user_id: true
             }
-        });
+        }); 
 
         if (!userFromToken) return next(CustomError.newError(401, 'You are not authorized!'));
 
