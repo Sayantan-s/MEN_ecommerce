@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import { ACCESSTOKEN_SECRET, REFRESHTOKEN_SECRET } from '../config';
+import { ACCESSTOKEN_SECRET, REFRESHTOKEN_SECRET } from '../config/index';
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
 

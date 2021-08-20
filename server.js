@@ -1,4 +1,4 @@
-import { PORT } from './config';
+import { PORT } from './config/index';
 import express from 'express';
 import morgan from 'morgan';
 import authRoute from './routes/auth.routes';
