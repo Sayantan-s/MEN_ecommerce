@@ -4,9 +4,12 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "concurrently 'npm run dev' 'cd client && npm start' 'npx prisma studio'",
-        "dev": "nodemon -r esm server",
-        "start:prod": "node -r esm server"
+        "client" : "cd client && npm start",
+        "dev" : "concurrently -n 'server,client' -c 'red,green'  \"npm run start-server\" \"npm run client\" \"npx prisma studio\"",
+        "start": "node server.js",
+        "start-server": "nodemon -r esm server",
+        "start:prod": "node -r esm server",
+        "heroku-postbuild" : "NPM_CONFIG_PRODUCTION=false npm i --prefix client && npm run build --prefix client"
     },
     "keywords": [],
     "author": "",

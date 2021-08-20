@@ -9,7 +9,7 @@ import { promisify } from 'util'
 
 const router = express.Router();
 
-const { products, cart } = new PrismaClient();
+const { products, cart, order } = new PrismaClient();
 
 const clientUrl = 'redis://127.0.0.1:6379';
 
@@ -211,10 +211,13 @@ router.get('/trendy-cloth', async (req, res, next) => {
     res.status(200).send({ data });
 });
 
-router
+/*router
     .route('/orders')
     .get(async (req, res, next) => {
         try {
+
+            const data = order
+
             const { rows } = await db.query(
                 `SELECT 
                 order_id, product_id, cover, name, tagname, 
@@ -265,5 +268,6 @@ router
             next(error);
         }
     });
+    */
 
 export default router;

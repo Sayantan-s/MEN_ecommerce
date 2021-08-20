@@ -68,4 +68,4 @@ const getNewAccessTokenOnRefresh = () => async (dispatch) => {
     }
 };
 
-export { IS_AUTHENTICATING, IS_AUTHENTICATED, FAILED_TO_AUTHENTICATE, Authenticate_user };
+export { IS_AUTHENTICATING, IS_AUTHENTICATED, FAILED_TO_AUTHENTICATE, LOGOUT, Authenticate_user };

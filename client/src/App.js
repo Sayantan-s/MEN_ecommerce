@@ -15,7 +15,7 @@ import {
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
-import { IS_AUTHENTICATED } from 'store/actions/Auth.actions';
+import { IS_AUTHENTICATED, LOGOUT } from 'store/actions/Auth.actions';
 import { USER_IS_AUTHENTICATED } from 'store/types/isAuthenticated';
 import { PrivateRoute, Toast } from 'components';
 import Tick from 'assets/icons/outline/Tick';
@@ -38,6 +38,9 @@ function App() {
 
     useEffect(() => {
         dispatch(IS_AUTHENTICATED(USER_IS_AUTHENTICATED, { data, userIsAuthenticated }));
+        if(!userIsAuthenticated()){
+            dispatch(LOGOUT())
+        }
         (async () => {
             //const res = await http.get('/utilities/csrf');
             //console.log(res)

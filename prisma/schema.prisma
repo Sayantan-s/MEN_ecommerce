@@ -63,5 +63,4 @@ model wishlist {
   user_id    String   @db.Uuid
   products   products @relation(fields: [product_id], references: [id])
   users      users    @relation(fields: [user_id], references: [id])
-
 }
