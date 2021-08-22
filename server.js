@@ -23,7 +23,7 @@ app.use(middlewares);
 app.use('/api', productRoutes);
 app.use('/api/auth', authRoute);
 app.use('/api/utilities', utilsRoutes);
-app.use(express.static('client/build'));
+//app.use(express.static('client/build'));
 
 app.use((req, res, next) => {
     const error = new Error('Page not found!');

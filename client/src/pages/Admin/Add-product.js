@@ -57,12 +57,12 @@ const AddProduct = () => {
     const [otherImgs, setOtherImgs] = useState([]);
 
     const [lightBox, setLightBox] = useState({
-        cover : 'https://air.jordan.com/wp-content/uploads/2021/03/Zion_Zion1_Gallery_5.jpg',
-        others : [
+        cover: 'https://air.jordan.com/wp-content/uploads/2021/03/Zion_Zion1_Gallery_5.jpg',
+        others: [
             'https://air.jordan.com/wp-content/uploads/2021/03/Zion_Zion1_Gallery_4.jpg',
             'https://air.jordan.com/wp-content/uploads/2021/03/Zion_Zion1_Gallery_5.jpg',
             'https://air.jordan.com/wp-content/uploads/2021/03/Zion_Zion1_Gallery_6.jpg',
-            'https://air.jordan.com/wp-content/uploads/2021/03/Zion_Zion1_Gallery_8.jpg',
+            'https://air.jordan.com/wp-content/uploads/2021/03/Zion_Zion1_Gallery_8.jpg'
         ]
     });
 
@@ -81,26 +81,25 @@ const AddProduct = () => {
         files.forEach((file) => {
             const reader = new FileReader();
             reader.readAsDataURL(file);
-            reader.onloadend = () =>  setOtherImgs((prevState) => [...prevState, reader.result]);
+            reader.onloadend = () => setOtherImgs((prevState) => [...prevState, reader.result]);
         });
     };
 
     useEffect(() => {
-        if(coverImg){
-            setLightBox(prevState => ({
+        if (coverImg) {
+            setLightBox((prevState) => ({
                 ...prevState,
-                cover : coverImg
-            }))
+                cover: coverImg
+            }));
         }
 
-        if(otherImgs.length){
-            setLightBox(prevState => ({
+        if (otherImgs.length) {
+            setLightBox((prevState) => ({
                 ...prevState,
-                others : otherImgs
-            }))
+                others: otherImgs
+            }));
         }
-
-    },[coverImg,otherImgs])
+    }, [coverImg, otherImgs]);
 
     const formSubmitHandler = (eve) =>
         onSubmitHandler(eve, async () => {
@@ -238,11 +237,7 @@ const AddProduct = () => {
                     </Typography>
                     <Box className="w-full mt-6">
                         <Box className="w-full flex">
-                            <Image
-                                src={lightBox.cover}
-                                alt="jordan_img"
-                                className="w-10/12 h-96"
-                            />
+                            <Image src={lightBox.cover} alt="jordan_img" className="w-10/12 h-96" />
                             <Box className="w-2/12 ml-2 flex flex-col">
                                 {lightBox.others.map((img, id) => (
                                     <Image
@@ -252,10 +247,12 @@ const AddProduct = () => {
                                             id !== 0 && 'mt-2'
                                         }`}
                                         key={id}
-                                        onClick={() => setLightBox(prevState => ({
-                                            ...prevState,
-                                            cover : img
-                                        }))}
+                                        onClick={() =>
+                                            setLightBox((prevState) => ({
+                                                ...prevState,
+                                                cover: img
+                                            }))
+                                        }
                                     />
                                 ))}
                             </Box>

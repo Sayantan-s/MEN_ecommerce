@@ -42,11 +42,13 @@ const Authenticate_user =
         try {
             dispatch(IS_AUTHENTICATING());
 
-            const { data, status } = await http({
+            const { data, status, headers } = await http({
                 method: 'POST',
                 url,
                 data: input_data
             });
+
+            console.log(headers["x-access-token"])
 
             if (
                 (url.includes('register') && status === 201) ||
@@ -60,6 +62,10 @@ const Authenticate_user =
         }
     };
 
+const getAuthState = () => async(_, getState) => {
+    console.log(getState())
+}
+
 const getNewAccessTokenOnRefresh = () => async (dispatch) => {
     try {
         const res = await http.get('/utilities/refresh');
@@ -68,4 +74,4 @@ const getNewAccessTokenOnRefresh = () => async (dispatch) => {
     }
 };
 
-export { IS_AUTHENTICATING, IS_AUTHENTICATED, FAILED_TO_AUTHENTICATE, LOGOUT, Authenticate_user };
+export { IS_AUTHENTICATING, IS_AUTHENTICATED, FAILED_TO_AUTHENTICATE, LOGOUT, Authenticate_user, getAuthState };

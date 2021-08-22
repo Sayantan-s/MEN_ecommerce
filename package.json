@@ -9,7 +9,6 @@
         "dev": "concurrently -n 'server,client' -c 'red,green'  \"npm run start-server\" \"npm run client\" \"npx prisma studio\"",
         "start": "node --experimental-modules --es-module-specifier-resolution=node server.js",
         "start-server": "nodemon --experimental-modules --es-module-specifier-resolution=node server",
-        "start:prod": "node -r esm server",
         "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm i --prefix client && npm run build --prefix client"
     },
     "keywords": [],
@@ -29,6 +28,8 @@
         "joi": "^17.4.0",
         "jsonwebtoken": "^8.5.1",
         "morgan": "^1.10.0",
+        "passport": "^0.4.1",
+        "passport-local": "^1.0.0",
         "pg": "^8.6.0",
         "prisma": "^2.27.0",
         "redis": "^3.1.2"

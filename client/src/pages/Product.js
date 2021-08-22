@@ -104,7 +104,7 @@ const Product = () => {
                 });
             })();
         }
-    },[wishList])
+    }, [wishList]);
 
     return (
         <Page className="flex items-center">

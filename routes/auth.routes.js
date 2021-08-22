@@ -5,7 +5,7 @@ import express from 'express';
 import prisma from '@prisma/client';
 
 const { PrismaClient } = prisma
-
+ 
 const router = express.Router();
 
 const { users, reftoken } = new PrismaClient();
@@ -17,13 +17,13 @@ router.route('/register').post(async (req, res, next) => {
 
         if (error) return next(error);
 
-        const hashedPassword = await AuthUtils.hashPassword(password);
-
         const userExists = await users.findUnique({
             where: { email }
         });
 
         if (userExists) return next(CustomError.alreadyExists('Email already in use!'));
+
+        const hashedPassword = await AuthUtils.hashPassword(password);
 
         const user = await users.create({
             data: {
@@ -56,6 +56,8 @@ router.route('/register').post(async (req, res, next) => {
         res.cookie('refresh-token', storeRefreshToken.token, {
             httpOnly: true
         });
+
+        res.header('x-access-token', accessToken);
 
         return res.status(201).send({ accessToken, expiry: exp, user: user.id });
     } catch (error) {
@@ -111,6 +113,8 @@ router.route('/login').post(async (req, res, next) => {
         res.cookie('refresh-token', storeRefreshToken.token, {
             httpOnly: true
         });
+
+        res.header('x-access-token', accessToken);
 
         res.status(200).send({ accessToken, expiry: exp, user: user.id });
     } catch (error) {

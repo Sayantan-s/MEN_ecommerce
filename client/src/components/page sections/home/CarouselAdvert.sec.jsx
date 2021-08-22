@@ -63,7 +63,7 @@ const CarouselAdvert = () => {
                 <Box className="w-full">
                     <Slider {...settings} className="mt-6 w-144">
                         {trendState.data?.map(({ _id, ...data }) => (
-                            <div key={_id}>
+                            <div>
                                 <ProductCard {...data} className="w-80" />
                             </div>
                         ))}

@@ -1,11 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 const Text = () => {
-    return (
-        <div>
-            
-        </div>
-    )
-}
+    return <div></div>;
+};
 
-export default Text
+export default Text;
