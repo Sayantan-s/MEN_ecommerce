@@ -48,7 +48,7 @@ const Authenticate_user =
                 data: input_data
             });
 
-            console.log(headers["x-access-token"])
+            http.defaults.headers.common['Authorization'] = `Bearer ${headers["x-access-token"]}`;
 
             if (
                 (url.includes('register') && status === 201) ||

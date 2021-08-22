@@ -44,6 +44,8 @@ router.get('/refresh', async (req, res, next) => {
             }
         });
 
+        res.header('X-Access-Token', accessToken)
+
         res.send({ token: accessToken });
     } catch (error) {
         console.log(error);

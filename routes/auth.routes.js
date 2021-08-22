@@ -36,7 +36,7 @@ router.route('/register').post(async (req, res, next) => {
 
         if (!user) return next(CustomError.newError(400, 'Failed to register! Try again'));
 
-        const { accessToken } = await AuthUtils.createTokens({
+        const { accessToken, refreshToken } = await AuthUtils.createTokens({
             payload: {
                 _id: user.id,
                 username: user.username,
@@ -46,7 +46,7 @@ router.route('/register').post(async (req, res, next) => {
 
         const storeRefreshToken = await reftoken.create({
             data: {
-                token: AuthUtils.generate_refreshToken(),
+                token: refreshToken,
                 user_id: user.id
             }
         });
@@ -57,7 +57,7 @@ router.route('/register').post(async (req, res, next) => {
             httpOnly: true
         });
 
-        res.header('x-access-token', accessToken);
+        res.header('X-Access-Token', accessToken);
 
         return res.status(201).send({ accessToken, expiry: exp, user: user.id });
     } catch (error) {
@@ -93,7 +93,7 @@ router.route('/login').post(async (req, res, next) => {
             return next(CustomError.newError(401, 'Invalid email/password!'));
         }
 
-        const { accessToken } = await AuthUtils.createTokens({
+        const { accessToken, refreshToken } = await AuthUtils.createTokens({
             payload: {
                 _id: user.id,
                 username: user.username,
@@ -103,7 +103,7 @@ router.route('/login').post(async (req, res, next) => {
 
         const storeRefreshToken = await reftoken.create({
             data: {
-                token: AuthUtils.generate_refreshToken(),
+                token: refreshToken,
                 user_id: user.id
             }
         });
@@ -114,7 +114,7 @@ router.route('/login').post(async (req, res, next) => {
             httpOnly: true
         });
 
-        res.header('x-access-token', accessToken);
+        res.header('X-Access-Token', accessToken);
 
         res.status(200).send({ accessToken, expiry: exp, user: user.id });
     } catch (error) {
