@@ -1,4 +1,4 @@
-import joi from 'joi';
+const joi = require('joi');
 
 const register_validator = joi.object({
     img: joi.string(),
@@ -19,4 +19,4 @@ const login_validator = joi.object({
     password: joi.string().required()
 });
 
-export { register_validator, login_validator };
+module.exports = { register_validator, login_validator };

@@ -3,12 +3,11 @@
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
-    "type": "module",
     "scripts": {
         "client": "cd client && npm start",
         "dev": "concurrently -n 'server,client' -c 'red,green'  \"npm run start-server\" \"npm run client\" \"npx prisma studio\"",
-        "start": "node --experimental-modules --es-module-specifier-resolution=node server.js",
-        "start-server": "nodemon --experimental-modules --es-module-specifier-resolution=node server",
+        "start": "node server",
+        "start-server": "nodemon server",
         "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm i --prefix client && npm run build --prefix client"
     },
     "keywords": [],

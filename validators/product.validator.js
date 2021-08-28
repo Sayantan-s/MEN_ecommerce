@@ -1,5 +1,5 @@
-import Joi from 'joi';
+const Joi = require('joi');
 
 const product_validator = Joi.object({});
 
-export default product_validator;
+module.exports = product_validator;

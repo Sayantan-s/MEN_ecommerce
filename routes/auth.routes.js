@@ -1,13 +1,9 @@
-import AuthUtils from '../helpers/auth_helper';
-import CustomError from '../helpers/custom_error_handler';
-import { login_validator, register_validator } from '../validators/auth.validator';
-import express from 'express';
-import prisma from '@prisma/client';
-
-const { PrismaClient } = prisma
+const AuthUtils = require('../helpers/auth_helper');
+const CustomError = require('../helpers/custom_error_handler');
+const { login_validator, register_validator } = require('../validators/auth.validator');
+const router = require('express').Router();
+const { PrismaClient } = require('@prisma/client');
  
-const router = express.Router();
-
 const { users, reftoken } = new PrismaClient();
 
 router.route('/register').post(async (req, res, next) => {

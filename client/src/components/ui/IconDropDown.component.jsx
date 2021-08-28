@@ -2,7 +2,6 @@ import { Menu } from '@headlessui/react';
 import { Box, Image } from 'components';
 import { motion } from 'framer-motion';
 import React from 'react';
-import jordan from '../../jordan.jpg';
 
 const IconDropDown = ({ icon: Icon, avatar, className, onClick, children }) => {
     const dropdownAnimation = {
@@ -25,7 +24,7 @@ const IconDropDown = ({ icon: Icon, avatar, className, onClick, children }) => {
                     }>
                     {Icon && <Icon className={'w-7 h-7 text-gray-900 stroke-current'} />}
                     {avatar && (
-                        <Image className="w-10 h-10 rounded-full" src={jordan} alt="avatar_user" />
+                        <Image className="w-10 h-10 rounded-full" src={'/jordan.jpg'} alt="avatar_user" />
                     )}
                 </Menu.Button>
                 <Menu.Items

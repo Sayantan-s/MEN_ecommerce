@@ -1,19 +1,15 @@
-import express from 'express';
-import CustomError from '../helpers/custom_error_handler';
-//import { db } from '../helpers/init_postgres';
-import prisma from '@prisma/client';
-import isAuth from '../middlewares/isAuth';
-import cloudinary from '../helpers/init_cloudinary';
-import { promisify } from 'util'
-import client from '../helpers/init_redis';
+const router = require('express').Router();
+const CustomError = require('../helpers/custom_error_handler');
+const isAuth = require('../middlewares/isAuth');
+const cloudinary =  require('../helpers/init_cloudinary');
+const { promisify } =  require('util')
+const client = require('../helpers/init_redis');
 
-const { PrismaClient } = prisma;
-
-const router = express.Router();
+const { PrismaClient } = require('@prisma/client');
 
 const { products, cart, order } = new PrismaClient();
 
-client.get = promisify(client.get);
+client.get = promisify(client.get).bind(client);
 
 router
     .route('/products')
@@ -21,7 +17,11 @@ router
 
         const getCache = await client.get('allProducts');
 
+        console.log("GET FROM CACHE");
+
         if(getCache) return res.status(200).send({ data : JSON.parse(getCache) })
+
+        console.log("GET FROM MONGO");
 
         const data = await products.findMany();
 

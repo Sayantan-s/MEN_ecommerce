@@ -1,12 +1,9 @@
-import { PORT } from './config';
-import express from 'express';
-import morgan from 'morgan';
-import authRoute from './routes/auth.routes';
-import productRoutes from './routes/product.routes';
-import utilsRoutes from './routes/utils.routes';
-import cors from 'cors';
 //import csrf from 'csurf';
-import parser from 'cookie-parser';
+const { PORT }  = require('./config');
+const express = require('express');
+const morgan = require('morgan');
+const parser = require('cookie-parser');
+const cors = require('cors')
 
 const app = express();
 
@@ -20,9 +17,9 @@ const middlewares = [
  
 app.use(middlewares);
 
-app.use('/api', productRoutes);
-app.use('/api/auth', authRoute);
-app.use('/api/utilities', utilsRoutes);
+app.use('/api', require('./routes/product.routes'));
+app.use('/api/auth', require('./routes/auth.routes'));
+app.use('/api/utilities', require('./routes/utils.routes'));
 //app.use(express.static('client/build'));
 
 app.use((req, res, next) => {
