@@ -1,4 +1,4 @@
-import redis from 'redis';
+const redis = require('redis');
 
 const client = redis.createClient({
     host : '127.0.0.1',
@@ -15,4 +15,4 @@ client.on('end', () => console.log("Disconnected from redis..."));
 
 process.on("SIGINT",() => client.quit());
 
-export default client;
+module.exports = client;

@@ -13,11 +13,11 @@ router
     .route('/products')
     .get(async (req, res, next) => {
 
-        const getCache = await client.get('allProducts');
+        //const getCache = await client.get('allProducts');
 
-        console.log("GET FROM CACHE");
+        //console.log("GET FROM CACHE");
 
-        if(getCache) return res.status(200).send({ data : JSON.parse(getCache) })
+        //if(getCache) return res.status(200).send({ data : JSON.parse(getCache) })
 
         console.log("GET FROM MONGO");
 
@@ -25,7 +25,7 @@ router
 
         res.status(200).send({ data });
 
-        client.set('allProducts', JSON.stringify(data));
+        //client.set('allProducts', JSON.stringify(data));
     })
     .post(async (req, res, next) => {
         const { body } = req;

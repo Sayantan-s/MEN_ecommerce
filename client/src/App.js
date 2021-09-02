@@ -37,17 +37,10 @@ function App() {
     };
 
     useEffect(() => {
-
-        dispatch(getAuthState())
-
         dispatch(IS_AUTHENTICATED(USER_IS_AUTHENTICATED, { data, userIsAuthenticated }));
         if (!userIsAuthenticated()) {
             dispatch(LOGOUT());
         }
-        (async () => {
-            //const res = await http.get('/utilities/csrf');
-            //console.log(res)
-        })();
     }, []);
 
     return (

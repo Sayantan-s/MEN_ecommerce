@@ -24,7 +24,11 @@ const IconDropDown = ({ icon: Icon, avatar, className, onClick, children }) => {
                     }>
                     {Icon && <Icon className={'w-7 h-7 text-gray-900 stroke-current'} />}
                     {avatar && (
-                        <Image className="w-10 h-10 rounded-full" src={'/jordan.jpg'} alt="avatar_user" />
+                        <Image
+                            className="w-10 h-10 rounded-full"
+                            src={'/jordan.jpg'}
+                            alt="avatar_user"
+                        />
                     )}
                 </Menu.Button>
                 <Menu.Items

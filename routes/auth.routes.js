@@ -40,22 +40,14 @@ router.route('/register').post(async (req, res, next) => {
             }
         });
 
-        const storeRefreshToken = await reftoken.create({
-            data: {
-                token: refreshToken,
-                user_id: user.id
-            }
+        res.cookie('x-refresh', refreshToken, {
+            httpOnly: true,
+            maxAge : 365 * 24 * 60 * 60 * 1000
         });
 
-        const { exp } = await AuthUtils.verify_JWT({ token: accessToken });
+        res.header('x-access-token', accessToken);
 
-        res.cookie('refresh-token', storeRefreshToken.token, {
-            httpOnly: true
-        });
-
-        res.header('X-Access-Token', accessToken);
-
-        return res.status(201).send({ accessToken, expiry: exp, user: user.id });
+        return res.status(201).send({ message : "Your account has been created! "});
     } catch (error) {
         console.log(error);
         next(error);
@@ -97,22 +89,14 @@ router.route('/login').post(async (req, res, next) => {
             }
         });
 
-        const storeRefreshToken = await reftoken.create({
-            data: {
-                token: refreshToken,
-                user_id: user.id
-            }
+        res.cookie('x-refresh', refreshToken, {
+            httpOnly: true,
+            maxAge : 365 * 24 * 60 * 60 * 1000
         });
 
-        const { exp } = await AuthUtils.verify_JWT({ token: accessToken });
+        res.header('x-access-token', accessToken);
 
-        res.cookie('refresh-token', storeRefreshToken.token, {
-            httpOnly: true
-        });
-
-        res.header('X-Access-Token', accessToken);
-
-        res.status(200).send({ accessToken, expiry: exp, user: user.id });
+        res.status(200).send({ message : "You are successfully logged in!" });
     } catch (error) {
         next(error);
     }

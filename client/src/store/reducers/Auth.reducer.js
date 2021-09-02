@@ -26,13 +26,19 @@ const AuthReducer = (state = authState, { type, payload }) => {
                 error: false
             };
         case AUTHENTICATION_SUCCESSFULL:
+
+            const { decodedPayload } = payload
+
             localStorage.setItem('user_info', JSON.stringify(payload));
 
             return {
                 ...state,
                 loading: false,
-                isAuthenticated: true,
-                data: payload,
+                isAuthenticated:  new Date().getTime() / 1000 < decodedPayload.exp,
+                data: function(){
+                    console.log(this);
+                    return this.isAuthenticated ? payload : null;
+                },
                 error: false
             };
 

@@ -19,6 +19,7 @@ import Portals from './elements/Portals.component';
 
 import Search from './ui/Search.component';
 import PrivateRoute from './utils/PrivateRoute.component';
+import Heading from './elements/Heading.component';
 
 export {
     Link,
@@ -39,5 +40,6 @@ export {
     Portals,
     Toast,
     Input,
-    Tagbox
+    Tagbox,
+    Heading
 };

@@ -1,22 +1,20 @@
 import React, { forwardRef } from 'react';
 import { motion } from 'framer-motion';
 
-const Button = ({ as: Component = motion.button, type, size }) => {
+const Button = ({ as: Component = motion.button, className, variant , size, ...rest }) => {
     const ButtonType = {
-        primary: 'bg-blue-500 hover:bg-blue-700 text-white font-bold',
-        secondary: 'bg-blue-500 hover:bg-blue-700 text-white font-bold',
-        basic: 'bg-white hover:bg-gray-700 text-gray-700 font-bold',
-        delete: 'bg-red-300 hover:bg-red-500 text-white font-bold'
+        primary: 'bg-gray-800 hover:bg-blue-700 text-white font-bold',
+        secondary: 'bg-gray-50 hover:bg-gray-100 text-gray-800 font-bold',
+        outline: 'bg-white hover:bg-gray-700 text-gray-800 font-bold',
+        transparent: 'text-gray-800 font-bold'
     };
 
-    export const ButtonSize = {
+    const ButtonSize = {
         sm: 'py-2 px-4 text-xs',
         lg: 'py-3 px-6 text-lg'
     };
 
-    const classNames = ButtonType;
-
-    return <Component whileTap={{ scale: 0.99 }}></Component>;
+    return <Component whileTap={{ scale: 0.99 }} className={ButtonType + " " + ButtonSize + " " + className} {...rest} />;
 };
 
 export default forwardRef(Button);

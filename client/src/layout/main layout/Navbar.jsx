@@ -40,10 +40,6 @@ const Navbar = () => {
         dispatch({ type: GOT_NAV_VALUE, payload: navBarRef.current.offsetHeight });
     }, []);
 
-    console.log(cartData);
-
-    console.log(isAuthenticated);
-
     return (
         <header className="w-full bg-gray-50 fixed border-b-2 border-gray-200 z-50" ref={navBarRef}>
             <Box
