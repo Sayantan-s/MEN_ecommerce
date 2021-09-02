@@ -122,4 +122,4 @@ router.route('/logout').delete(async (req, res, next) => {
     res.send({ message: 'Hello from logout' });
 });
 
-export default router;
+module.exports = router;

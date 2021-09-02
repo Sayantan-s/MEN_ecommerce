@@ -1,11 +1,7 @@
-import prisma from '@prisma/client';
-import express from 'express';
-import AuthUtils from '../helpers/auth_helper';
-import CustomError from '../helpers/custom_error_handler';
-
-const { PrismaClient } = prisma
-
-const router = express.Router();
+const { PrismaClient } = require('@prisma/client');
+const router = require('express').Router();
+const AuthUtils = require('../helpers/auth_helper');
+const CustomError = require('../helpers/custom_error_handler');
 
 const { reftoken, users } = new PrismaClient();
 
@@ -52,4 +48,4 @@ router.get('/refresh', async (req, res, next) => {
     }
 });
 
-export default router;
+module.exports = router;

@@ -1,7 +1,7 @@
-import bcrypt from 'bcrypt';
-import { ACCESSTOKEN_SECRET } from '../config';
-import jwt from 'jsonwebtoken';
-import crypto from 'crypto';
+const bcrypt = require('bcrypt');
+const { ACCESSTOKEN_SECRET } = require('../config');
+const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
 
 class AuthUtils {
     static async hashPassword(password) {
@@ -33,4 +33,4 @@ class AuthUtils {
     }
 }
 
-export default AuthUtils;
+module.exports = AuthUtils;

@@ -1,5 +1,5 @@
-import { v2 as cloudinary } from 'cloudinary';
-import { CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET } from '../config/index'
+const cloudinary = require('cloudinary').v2;
+const { CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET } = require('../config')
 
 cloudinary.config({
     cloud_name: CLOUDINARY_CLOUD_NAME,
@@ -8,4 +8,4 @@ cloudinary.config({
     secure : true
 });
 
-export default cloudinary;
+module.exports = cloudinary;

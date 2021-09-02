@@ -1,5 +1,5 @@
-import AuthUtils from '../helpers/auth_helper';
-import CustomError from '../helpers/custom_error_handler';
+const AuthUtils = require('../helpers/auth_helper');
+const CustomError = require('../helpers/custom_error_handler');
 
 const isAuth = async (req, res, next) => {
     const headers = req.headers.authorization;
@@ -13,4 +13,4 @@ const isAuth = async (req, res, next) => {
     next();
 };
 
-export default isAuth;
+module.exports = isAuth;

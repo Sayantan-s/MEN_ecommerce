@@ -1,12 +1,10 @@
 const router = require('express').Router();
+const { PrismaClient } = require('@prisma/client');
 const CustomError = require('../helpers/custom_error_handler');
 const isAuth = require('../middlewares/isAuth');
 const cloudinary =  require('../helpers/init_cloudinary');
 const { promisify } =  require('util')
 const client = require('../helpers/init_redis');
-
-const { PrismaClient } = require('@prisma/client');
-
 const { products, cart, order } = new PrismaClient();
 
 client.get = promisify(client.get).bind(client);
@@ -268,4 +266,4 @@ router.get('/trendy-cloth', async (req, res, next) => {
     });
     */
 
-export default router;
+module.exports = router;

@@ -1,4 +1,4 @@
-import http from 'http';
+const http = require('http');
 
 class CustomError extends Error {
     constructor(status, msg) {
@@ -17,4 +17,4 @@ class CustomError extends Error {
     }
 }
 
-export default CustomError;
+module.exports = CustomError;
