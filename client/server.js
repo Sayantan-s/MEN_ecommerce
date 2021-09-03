@@ -4,6 +4,8 @@ import { renderToString } from 'react-dom/server';
 
 const app = express();
 
+
+
 app.get('*',(req,res) => {
     const App = renderToString(
         <h1>Hello from serverside!</h1>
