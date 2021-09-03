@@ -29,8 +29,6 @@ const AuthReducer = (state = authState, { type, payload }) => {
 
             const { decodedPayload } = payload
 
-            localStorage.setItem('user_info', JSON.stringify(payload));
-
             return {
                 ...state,
                 loading: false,
@@ -54,8 +52,6 @@ const AuthReducer = (state = authState, { type, payload }) => {
             };
 
         case LOGOUT_USER:
-            localStorage.removeItem('user_info');
-
             return {
                 ...state,
                 loading: false,
