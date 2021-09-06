@@ -50,20 +50,20 @@ const Authenticate_user =
 
             http.defaults.headers.common['Authorization'] = `Bearer ${headers['x-access-token']}`;
 
-            const decodedPayload = JSON.parse(atob(headers["x-access-token"].split(".")[1]));
+            const decodedPayload = JSON.parse(atob(headers['x-access-token'].split('.')[1]));
 
             if (
                 (url.includes('register') && status === 201) ||
                 (url.includes('login') && status === 200)
             ) {
-                dispatch(IS_AUTHENTICATED(AUTHENTICATION_SUCCESSFULL,{
-                    decodedPayload,
-                    ...data
-                }));
+                dispatch(
+                    IS_AUTHENTICATED(AUTHENTICATION_SUCCESSFULL, {
+                        decodedPayload,
+                        ...data
+                    })
+                );
                 history.push('/collectives');
             }
-
-
         } catch (error) {
             return dispatch(FAILED_TO_AUTHENTICATE('Failed to authenticate!'));
         }
@@ -77,10 +77,4 @@ const getNewAccessTokenOnRefresh = () => async (dispatch) => {
     }
 };
 
-export {
-    IS_AUTHENTICATING,
-    IS_AUTHENTICATED,
-    FAILED_TO_AUTHENTICATE,
-    LOGOUT,
-    Authenticate_user
-};
+export { IS_AUTHENTICATING, IS_AUTHENTICATED, FAILED_TO_AUTHENTICATE, LOGOUT, Authenticate_user };

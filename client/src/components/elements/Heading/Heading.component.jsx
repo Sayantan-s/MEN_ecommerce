@@ -14,8 +14,4 @@ const Heading = ({ level, as: Component = motion[`h${level}`], className = '', .
     <Component {...rest} ref={ref} className={`${defaultStyles[level]} ${className}`} />
 );
 
-Heading.defaultProps = {
-    level: 1
-};
-
 export default forwardRef(Heading);

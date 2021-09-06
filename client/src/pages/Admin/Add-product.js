@@ -9,9 +9,9 @@ import {
     Input,
     Select,
     FileUpload,
-    Tagbox
+    Tagbox,
+    Heading
 } from 'components';
-import Heading from 'components/elements/Heading.component';
 import { motion } from 'framer-motion';
 import { useForm, useSelect } from 'hooks';
 import React, { useEffect, useState } from 'react';
@@ -20,7 +20,7 @@ import http from 'utils/http';
 const AddProduct = () => {
     const [form, handleChange, onSubmitHandler] = useForm({
         name: '',
-        tagname: '',
+        tagname: '', 
         price: '',
         description: ''
     });

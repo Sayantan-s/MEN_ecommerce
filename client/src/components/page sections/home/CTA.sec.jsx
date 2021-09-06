@@ -4,9 +4,7 @@ import { Box, Image, Heading } from 'components';
 const Header = () => {
     return (
         <Box className="w-full">
-            <Heading
-                level={2}
-                className="text-center leading-none tracking-wide pt-8 uppercase">
+            <Heading level={2} className="text-center leading-none tracking-wide pt-8 uppercase">
                 INTRODUCING THE JORDAN ZION
                 <br />
                 Your Workhorse With Wings is here,
