@@ -10,8 +10,9 @@ const defaultStyles = {
     6: 'font-regular text-xl text-gray-800'
 };
 
-const Heading = ({ level, as: Component = motion[`h${level}`], className = '', ...rest }, ref) => (
+const Heading = ({ level = 1, as: Component = motion[`h${level}`], className = '', ...rest }, ref) => (
     <Component {...rest} ref={ref} className={`${defaultStyles[level]} ${className}`} />
 );
 
 export default forwardRef(Heading);
+ 
