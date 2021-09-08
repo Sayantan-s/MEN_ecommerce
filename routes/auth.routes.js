@@ -3,6 +3,8 @@ const CustomError = require('../helpers/custom_error_handler');
 const { login_validator, register_validator } = require('../validators/auth.validator');
 const router = require('express').Router();
 const { PrismaClient } = require('@prisma/client');
+const client = require("../helpers/init_redis");
+const { COOKIE_EXPIRATION } = require("../config");
  
 const { users, reftoken } = new PrismaClient();
 
@@ -32,26 +34,34 @@ router.route('/register').post(async (req, res, next) => {
 
         if (!user) return next(CustomError.newError(400, 'Failed to register! Try again'));
 
-        const { accessToken, refreshToken } = await AuthUtils.createTokens({
-            payload: {
-                _id: user.id,
-                username: user.username,
-                role: 'user'
+        const userMetaData = {
+            _id: user.id,
+            username: user.username,
+            role: 'user'
+        }
+
+        const { accessToken, refreshToken } = await AuthUtils.createTokens({ payload: userMetaData });
+
+        client.setex(
+            refreshToken, 
+            COOKIE_EXPIRATION, 
+            user.id, 
+            (err, reply) => {
+                if(err) return next(CustomError.newError(500, `Something went wrong!`))
+                res.cookie('x-refresh', refreshToken, {
+                    httpOnly: true,
+                    maxAge : COOKIE_EXPIRATION
+                });
+
+                res.header('x-access-token', accessToken);
+
+                res.status(201).send({ message : "Your account has been created!"});
             }
-        });
+        );
 
-        res.cookie('x-refresh', refreshToken, {
-            httpOnly: true,
-            maxAge : 365 * 24 * 60 * 60 * 1000
-        });
-
-        res.header('x-access-token', accessToken);
-
-        return res.status(201).send({ message : "Your account has been created! "});
     } catch (error) {
-        console.log(error);
         next(error);
-    }
+    } 
 });
 
 router.route('/login').post(async (req, res, next) => {
@@ -102,7 +112,9 @@ router.route('/login').post(async (req, res, next) => {
     }
 });
 
-router.route('/logout').delete(async (req, res, next) => {
+router
+.route('/logout')
+.delete(async (req, res, next) => {
     res.send({ message: 'Hello from logout' });
 });
 

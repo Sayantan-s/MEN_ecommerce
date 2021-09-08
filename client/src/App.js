@@ -23,6 +23,13 @@ import Tick from 'assets/icons/outline/Tick';
 function App() {
     const { data, isAuthenticated } = useSelector((state) => state.AuthReducer);
 
+    const state = useSelector((state) => state.AuthReducer);
+
+    console.log(state)
+
+    console.log(state.data)
+
+
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -31,7 +38,7 @@ function App() {
         document.querySelector('body').className = 'font-body font-light';
     }, []);
 
-    const userIsAuthenticated = () => {
+    /*const userIsAuthenticated = () => {
         if (!data || !data.accessToken || !data.expiry) return false;
         return new Date().getTime() / 1000 < data.expiry;
     };
@@ -41,7 +48,7 @@ function App() {
         if (!userIsAuthenticated()) {
             dispatch(LOGOUT());
         }
-    }, []);
+    }, []);*/
 
     return (
         <Layout>
