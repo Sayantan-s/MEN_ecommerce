@@ -20,7 +20,7 @@ import http from 'utils/http';
 const AddProduct = () => {
     const [form, handleChange, onSubmitHandler] = useForm({
         name: '',
-        tagname: '', 
+        tagname: '',
         price: '',
         description: ''
     });

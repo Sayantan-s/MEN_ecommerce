@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { IS_AUTHENTICATED } from 'store/actions/Auth.actions';
+import { IS_AUTHENTICATED, IS_AUTHENTICATING } from 'store/actions/Auth.actions';
 import { AUTHENTICATION_SUCCESSFULL } from 'store/types/isAuthenticated';
-import store from '../store/store'
+import store from '../store/store';
 
 const http = axios.create({
     baseURL: '/api',
@@ -10,52 +10,35 @@ const http = axios.create({
     }
 });
 
-http.interceptors.request.use(req => { 
-    console.log(store.getState());
-    const { AuthReducer : { isAuthenticated } } = store.getState();
-    if((req.url !== /register/i || req.url !== /login/i)){
-        (async() => {
-            const { headers, data } = await axios('/api/utilities/refresh');
-            http.defaults.headers.common["Authorization"] = `Bearer ${headers["x-access-token"]}`
-            const decodedMetaData = JSON.parse(atob(headers["x-access-token"].split('.')[1]))
-            store.dispatch(
-                IS_AUTHENTICATED(
-                    AUTHENTICATION_SUCCESSFULL,
-                    {
-                        decodedPayload : decodedMetaData,
+http.interceptors.request.use(
+    async (config) => {
+        const {
+            AuthReducer: { isAuthenticated }
+        } = store.getState();
+        if(isAuthenticated){
+            store.dispatch(IS_AUTHENTICATING());
+            const { headers, data, status } = await axios('/api/utilities/refresh');
+            if(status === 200){
+                config.headers['Authorization'] = `Bearer ${headers['x-access-token']}`;
+                const decodedMetaData = JSON.parse(atob(headers['x-access-token'].split('.')[1]));
+                store.dispatch(
+                    IS_AUTHENTICATED(AUTHENTICATION_SUCCESSFULL, {
+                        decodedPayload: decodedMetaData,
                         ...data
-                    }
-                )
-            )
-        })()
-    }
-    return req    
-})
-
-/*http.interceptors.request.use(
-    (config) => {
-        let userMetaData = window.localStorage.getItem('user_info');
-        if (userMetaData) {
-            const { accessToken } = JSON.parse(userMetaData);
-            config.headers.Authorization = `Bearer ${accessToken}`;
+                    })
+                );
+                console.log('REFRESHING TOKENS');
+            }
         }
-        return config; 
+        return config;
     },
-    (error) => {
-        Promise.reject(error);
-    }
-);*/
+    (error) => Promise.reject(error)
+);
 
-/*http.interceptors.request.use(
-    (response) => response,
-    (error) => {
-        const code = error && error.response ? error.response.status : 0;
-        if (code === 401) {
-            console.log(code + 'Hello');
-        }
+http.interceptors.response.use((response) => {
+    console.log(response);
 
-        return Promise.reject(error);
-    }
-);*/
+    return response;
+});
 
 export default http;

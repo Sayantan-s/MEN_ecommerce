@@ -2,16 +2,13 @@ import {
     AUTHENTICATING,
     AUTHENTICATION_FAILED,
     AUTHENTICATION_SUCCESSFULL,
-    LOGOUT_USER,
-    USER_IS_AUTHENTICATED
+    LOGOUT_USER
 } from 'store/types/isAuthenticated';
-
-const userMetaData = JSON.parse(localStorage.getItem('user_info'));
 
 const authState = {
     loading: false,
-    data: userMetaData,
-    isAuthenticated: userMetaData ? true : false,
+    data: null,
+    isAuthenticated: false,
     error: false
 };
 
@@ -36,13 +33,7 @@ const AuthReducer = (state = authState, { type, payload }) => {
             };
 
         case LOGOUT_USER:
-            return {
-                ...state,
-                loading: false,
-                data: null,
-                isAuthenticated: false,
-                error: false
-            };
+            return { ...authState };
 
         case AUTHENTICATION_FAILED:
             return {

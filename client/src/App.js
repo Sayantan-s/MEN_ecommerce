@@ -17,38 +17,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 import { IS_AUTHENTICATED, LOGOUT, getAuthState } from 'store/actions/Auth.actions';
 import { USER_IS_AUTHENTICATED } from 'store/types/isAuthenticated';
-import { PrivateRoute, Toast } from 'components';
+import { Box, PrivateRoute, Toast } from 'components';
 import Tick from 'assets/icons/outline/Tick';
 
 function App() {
-    const { data, isAuthenticated } = useSelector((state) => state.AuthReducer);
+    const { data, isAuthenticated, loading } = useSelector((state) => state.AuthReducer);
 
     const state = useSelector((state) => state.AuthReducer);
 
-    console.log(state)
-
-    console.log(state.data)
-
-
-    const dispatch = useDispatch();
+    console.log(state);
 
     useEffect(() => {
         const rootElement = document.getElementById('root');
         rootElement.className = 'overflow-x-hidden text-gray-400 bg-gray-50';
         document.querySelector('body').className = 'font-body font-light';
     }, []);
-
-    /*const userIsAuthenticated = () => {
-        if (!data || !data.accessToken || !data.expiry) return false;
-        return new Date().getTime() / 1000 < data.expiry;
-    };
-
-    useEffect(() => {
-        dispatch(IS_AUTHENTICATED(USER_IS_AUTHENTICATED, { data, userIsAuthenticated }));
-        if (!userIsAuthenticated()) {
-            dispatch(LOGOUT());
-        }
-    }, []);*/
 
     return (
         <Layout>

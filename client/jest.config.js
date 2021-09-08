@@ -1,5 +1,5 @@
-module.exports = async() => {
+module.exports = async () => {
     return {
-        verbose : true
-    }
-}
+        verbose: true
+    };
+};

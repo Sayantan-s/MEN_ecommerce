@@ -5,8 +5,9 @@ const router = require('express').Router();
 const { PrismaClient } = require('@prisma/client');
 const client = require("../helpers/init_redis");
 const { COOKIE_EXPIRATION } = require("../config");
+const isAuth = require('../middlewares/isAuth');
  
-const { users, reftoken } = new PrismaClient();
+const { users } = new PrismaClient();
 
 router.route('/register').post(async (req, res, next) => {
     try {
@@ -101,7 +102,7 @@ router.route('/login').post(async (req, res, next) => {
 
         res.cookie('x-refresh', refreshToken, {
             httpOnly: true,
-            maxAge : 365 * 24 * 60 * 60 * 1000
+            maxAge : COOKIE_EXPIRATION
         });
 
         res.header('x-access-token', accessToken);
@@ -114,8 +115,28 @@ router.route('/login').post(async (req, res, next) => {
 
 router
 .route('/logout')
-.delete(async (req, res, next) => {
-    res.send({ message: 'Hello from logout' });
+.delete(isAuth, async (req, res, next) => {
+    try{
+        const { id } = req.user;
+        const { ['x-refresh'] : token } = req.cookies
+        if (!token) {
+            const error = CustomError.newError(401, 'User not authorized!');
+            return next(error);
+        }
+        const doesUserExists = await users.findUnique({
+            where : { id }
+        })
+        if(doesUserExists){
+            client.del(token,(err,result) => {
+                if(err) return next(CustomError.newError(409, 'Something went wrong!'));
+                console.log(result);
+                res.clearCookie('x-refresh')
+                res.send({ message: 'You have been logged out!' });
+            })
+        }
+    } catch (error){
+        next(error);
+    }
 });
 
 module.exports = router;

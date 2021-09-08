@@ -27,11 +27,15 @@ const LOGOUT = () => ({
 
 export const logout = (history) => {
     return async (dispatch) => {
+        console.log('LOGGING USER OUT');
         try {
-            await dispatch(LOGOUT());
-            history.push('/');
+            const res = await http.delete('/auth/logout');
+            if(res.status === 200){
+                dispatch(LOGOUT());
+                history.push('/');
+            }
         } catch (err) {
-            console.log(err);
+            console.log(err.response);
         }
     };
 };
@@ -77,4 +81,11 @@ const getNewAccessTokenOnRefresh = () => async (dispatch) => {
     }
 };
 
-export { IS_AUTHENTICATING, IS_AUTHENTICATED, FAILED_TO_AUTHENTICATE, LOGOUT, Authenticate_user, getNewAccessTokenOnRefresh };
+export {
+    IS_AUTHENTICATING,
+    IS_AUTHENTICATED,
+    FAILED_TO_AUTHENTICATE,
+    LOGOUT,
+    Authenticate_user,
+    getNewAccessTokenOnRefresh
+};

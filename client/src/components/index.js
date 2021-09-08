@@ -19,7 +19,7 @@ import Portals from './elements/Portals.component';
 
 import Search from './ui/Search.component';
 import PrivateRoute from './utils/PrivateRoute.component';
-import Heading from './elements/Heading/Heading.component'
+import Heading from './elements/Heading/Heading.component';
 export {
     Link,
     Button,
@@ -29,7 +29,7 @@ export {
     Typography,
     Image,
     ProductCard,
-    FormField, 
+    FormField,
     Select,
     FileUpload,
     Search,

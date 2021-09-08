@@ -44,7 +44,7 @@ router.get('/refresh', async (req, res, next) => {
 
             res.header('x-access-token', accessToken);
 
-            res.status(200).send({ message : "Your account has been created!"});
+            res.status(200).send({ message : "Acesstokens are refreshed!"});
 
         })
     } catch (error) {

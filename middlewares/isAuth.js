@@ -8,9 +8,9 @@ const isAuth = async (req, res, next) => {
         return next(error);
     }
     const [_, token] = headers.split(' ');
-    const { role, username, _id } = await AuthUtils.verify_JWT({ token });
-    req.user = { role, username, _id };
+    const { role, username, id } = await AuthUtils.verify_JWT({ token });
+    req.user = { role, username, id };
     next();
-};
+}; 
 
 module.exports = isAuth;

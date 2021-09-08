@@ -10,14 +10,9 @@ const Newbies = () => {
             <Heading level={4}>Hello said everyOne</Heading>
             <Heading level={5}>Hello said everyOne</Heading>
             <Heading level={6}>Hello said everyOne</Heading>
-            <Box
-            className="bg-blur"
-            >
-               OYYYYEEEEE
-            </Box>
+            <Box className="bg-blur">OYYYYEEEEE</Box>
         </Page>
-    ); 
+    );
 };
 
 export default Newbies;
-   
