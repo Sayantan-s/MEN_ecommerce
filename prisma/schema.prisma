@@ -56,7 +56,6 @@ model users {
   wishlist   wishlist[]
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model wishlist {
   id         String   @id @default(dbgenerated("uuid_generate_v4()")) @map("_id") @db.Uuid
   product_id String   @db.Uuid

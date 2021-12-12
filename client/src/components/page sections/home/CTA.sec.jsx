@@ -13,7 +13,7 @@ const Header = () => {
             </Heading>
             <Image
                 className="w-full h-160 mb-16 mt-10"
-                src="https://air.jordan.com/wp-content/uploads/2021/04/SU21_JD_ZION1_ZW_AirBlog-Horiz-01.jpeg"
+                src="/jordan.jpg"
                 alt="nike"
             />
         </Box>
