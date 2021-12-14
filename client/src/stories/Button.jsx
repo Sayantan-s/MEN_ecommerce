@@ -1,50 +1,41 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import './button.css';
+import React, { forwardRef } from 'react';
+import { motion } from 'framer-motion';
 
-/**
- * Primary UI component for user interaction
- */
-export const Button = ({ primary, backgroundColor, size, label, ...props }) => {
-  const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
-  return (
-    <button
-      type="button"
-      className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
-      style={backgroundColor && { backgroundColor }}
-      {...props}
-    >
-      {label}
-    </button>
-  );
+const Button = ({
+    component = 'button',
+    as: Component = motion[component],
+    className,
+    variant,
+    size,
+    ...rest
+}) => {
+    const ButtonType = {
+        primary: 'bg-gray-800 hover:bg-blue-700 text-white font-bold',
+        secondary: 'bg-gray-50 hover:bg-gray-100 text-gray-800 font-bold',
+        outline: 'bg-white hover:bg-gray-700 text-gray-800 font-bold',
+        transparent: 'text-gray-800 font-bold'
+    };
+
+    const ButtonSize = {
+        sm: 'py-2 px-4 text-xs',
+        md: 'py-3 px-6 text-lg'
+    };
+
+    return (
+        <Component
+            whileTap={{ scale: 0.99 }}
+            className={ButtonType[variant] + ' ' + ButtonSize[size] + ' ' + className}
+            {...rest}
+        />
+    );
 };
+
+export default forwardRef(Button);
 
 Button.propTypes = {
-  /**
-   * Is this the principal call to action on the page?
-   */
-  primary: PropTypes.bool,
-  /**
-   * What background color to use
-   */
-  backgroundColor: PropTypes.string,
-  /**
-   * How large should the button be?
-   */
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  /**
-   * Button contents
-   */
-  label: PropTypes.string.isRequired,
-  /**
-   * Optional click handler
-   */
-  onClick: PropTypes.func,
+    component: PropTypes.oneOf(['a', 'button']),
+    className: PropTypes.string,
+    size: PropTypes.oneOf(['sm', 'md']),
+    variant: PropTypes.oneOf(['primary', 'secondary', 'outline', 'transparent'])
 };
-
-Button.defaultProps = {
-  backgroundColor: null,
-  primary: false,
-  size: 'medium',
-  onClick: undefined,
-};
+ 
