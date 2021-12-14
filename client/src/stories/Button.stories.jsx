@@ -6,9 +6,12 @@ export default {
     component: Button
 };
 
-export const Primary = () => (
-    <Button variant="primary" size="md">
-        Click me
-    </Button>
-);
- 
+const Template = (args) => <Button {...args} />;
+
+export const Primary = Template.bind({});
+
+Primary.args = {
+    size: 'md',
+    variant: 'primary',
+    children : 'Ayyyyooo!'
+};

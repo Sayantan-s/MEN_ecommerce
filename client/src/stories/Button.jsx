@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 const Button = ({
     component = 'button',
     as: Component = motion[component],
-    className,
+    className="",
     variant,
     size,
     ...rest
